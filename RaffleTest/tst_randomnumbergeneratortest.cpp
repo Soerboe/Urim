@@ -1,4 +1,3 @@
-//#include <QString>
 #include <QtTest>
 #include <memory>
 #include "autotest.h"
@@ -33,9 +32,10 @@ void RandomNumberGeneratorTest::cleanupTestCase()
 
 void RandomNumberGeneratorTest::shouldGenerateRandomInteger()
 {
+    RandomGenerator::pickSeed();
     RandomNumberGenerator generator;
     shared_ptr<NumberLot> numberLot = dynamic_pointer_cast<NumberLot> (generator.generate());
-    QVERIFY(numberLot >= 0 || numberLot < 0);
+    QVERIFY(numberLot->number() >= 0);
 }
 
 DECLARE_TEST(RandomNumberGeneratorTest)

@@ -2,12 +2,13 @@
 
 using namespace std;
 
-RandomNumberGenerator::RandomNumberGenerator()
+RandomNumberGenerator::RandomNumberGenerator(int min, int max)
+    : _rng(_seed),
+      _dist(min, max)
 {
 }
 
 shared_ptr<Lot> RandomNumberGenerator::generate()
 {
-    shared_ptr<Lot> lot(new NumberLot(0));
-    return lot;
+    return shared_ptr<Lot>(new NumberLot(_dist(_rng)));
 }

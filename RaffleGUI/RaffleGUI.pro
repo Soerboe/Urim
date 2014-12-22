@@ -18,3 +18,5 @@ LIBS += -L$$OUT_PWD/../RaffleLib/ -lRaffleLib
 
 #win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../QtQuickSampleLib/release/ -lQtQuickSampleLib
 #else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../QtQuickSampleLib/debug/ -lQtQuickSampleLib
+
+CONFIG += c++11

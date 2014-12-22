@@ -2,6 +2,7 @@
 #define RANDOMGENERATOR_H
 
 #include <memory>
+#include <random>
 #include "lot.h"
 
 class RandomGenerator
@@ -10,6 +11,12 @@ public:
     RandomGenerator();
 
     virtual std::shared_ptr<Lot> generate() = 0;
+
+    static std::random_device::result_type seed() {return _seed;}
+    static void pickSeed();
+
+protected:
+    static std::random_device::result_type _seed;
 };
 
 #endif // RANDOMGENERATOR_H

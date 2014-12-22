@@ -9,9 +9,10 @@ CONFIG   -= app_bundle
 TEMPLATE = app
 
 SOURCES += \
-    tst_randomnumbergeneratortest.cpp \
     main.cpp \
-    tst_lotviewer.cpp
+    tst_lotviewer.cpp \
+    tst_drawingsession.cpp \
+    tst_randomnumbergenerator.cpp
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 INCLUDEPATH += $$PWD/../RaffleLib

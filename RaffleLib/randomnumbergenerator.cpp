@@ -8,7 +8,7 @@ RandomNumberGenerator::RandomNumberGenerator(int min, int max)
 {
 }
 
-shared_ptr<Lot> RandomNumberGenerator::generate()
+std::shared_ptr<Lot> RandomNumberGenerator::operator ()()
 {
     return shared_ptr<Lot>(new NumberLot(_dist(_rng)));
 }

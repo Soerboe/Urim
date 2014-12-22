@@ -10,6 +10,8 @@ class Drawing
 public:
     Drawing();
 
+    void addLot(std::shared_ptr<Lot> lot);
+
 private:
     QList<std::shared_ptr<Lot> > _lots;
 };

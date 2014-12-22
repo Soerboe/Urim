@@ -8,13 +8,9 @@
 
 using namespace std;
 
-class TestLotViewer : public LotViewer {
+class DummyLotViewer : public LotViewer {
 public:
     QStringList textView;
-
-    void view(const Lot* lot) {
-        textView.append("Lot");
-    }
 
     void view(const NumberLot* numberLot) {
         textView.append("NumberLot");
@@ -39,7 +35,7 @@ void LotViewerTest::shouldCallCorrectViewer()
     lots.append(shared_ptr<Lot>(new NumberLot(0)));
     lots.append(shared_ptr<Lot>(new ColorLot));
 
-    TestLotViewer lotViewer;
+    DummyLotViewer lotViewer;
 
     foreach(shared_ptr<Lot> lot, lots) {
         lot->view(lotViewer);

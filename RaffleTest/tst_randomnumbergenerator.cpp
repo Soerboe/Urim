@@ -34,11 +34,11 @@ void RandomNumberGeneratorTest::shouldGenerateRandomInteger()
 {
     RandomGenerator::pickSeed();
     RandomNumberGenerator generator;
-    shared_ptr<NumberLot> numberLot = dynamic_pointer_cast<NumberLot> (generator.generate());
+    shared_ptr<NumberLot> numberLot = dynamic_pointer_cast<NumberLot> (generator());
     QVERIFY(numberLot->number() >= 0);
 }
 
 DECLARE_TEST(RandomNumberGeneratorTest)
 
-#include "tst_randomnumbergeneratortest.moc"
+#include "tst_randomnumbergenerator.moc"
 

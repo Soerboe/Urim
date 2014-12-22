@@ -10,7 +10,7 @@ class RandomGenerator
 public:
     RandomGenerator();
 
-    virtual std::shared_ptr<Lot> generate() = 0;
+    virtual std::shared_ptr<Lot> operator ()() = 0;
 
     static std::random_device::result_type seed() {return _seed;}
     static void pickSeed();

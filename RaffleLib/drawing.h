@@ -10,7 +10,8 @@ class Drawing
 public:
     Drawing();
 
-    void addLot(std::shared_ptr<Lot> lot);
+    void addLot(const std::shared_ptr<Lot> lot);
+    bool operator==(const Drawing& that);
 
 private:
     QList<std::shared_ptr<Lot> > _lots;

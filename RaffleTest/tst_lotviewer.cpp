@@ -33,7 +33,7 @@ void LotViewerTest::shouldCallCorrectViewer()
 {
     QList<shared_ptr<Lot> > lots;
     lots.append(shared_ptr<Lot>(new NumberLot(0)));
-    lots.append(shared_ptr<Lot>(new ColorLot));
+    lots.append(shared_ptr<Lot>(new ColorLot(Color())));
 
     DummyLotViewer lotViewer;
 

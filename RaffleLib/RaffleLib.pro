@@ -11,7 +11,8 @@ SOURCES += \
     lot.cpp \
     drawing.cpp \
     numberlot.cpp \
-    colorlot.cpp
+    colorlot.cpp \
+    randomcolorgenerator.cpp
 
 HEADERS += \
     randomgenerator.h \
@@ -21,7 +22,9 @@ HEADERS += \
     drawing.h \
     numberlot.h \
     lotviewer.h \
-    colorlot.h
+    colorlot.h \
+    color.h \
+    randomcolorgenerator.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

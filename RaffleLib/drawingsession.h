@@ -15,7 +15,7 @@ public:
 
     Drawing draw();
     void addGenerator(std::shared_ptr<RandomGenerator> generator);
-    QList<Drawing> drawings() {return _drawings;}
+    QList<Drawing> drawings() const {return _drawings;}
 
 private:
     QString _name;
@@ -23,6 +23,9 @@ private:
     QList<std::shared_ptr<RandomGenerator> > _generators;
     QList<Drawing> _drawings;
 
+    Drawing drawNonUnique();
+    Drawing drawUnique();
+    Drawing doDraw();
 };
 
 #endif // DRAWINGSESSION_H

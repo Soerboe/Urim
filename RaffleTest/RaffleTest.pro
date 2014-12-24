@@ -12,7 +12,8 @@ SOURCES += \
     main.cpp \
     tst_lotviewer.cpp \
     tst_drawingsession.cpp \
-    tst_randomnumbergenerator.cpp
+    tst_randomnumbergenerator.cpp \
+    tst_drawing.cpp
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 INCLUDEPATH += $$PWD/../RaffleLib

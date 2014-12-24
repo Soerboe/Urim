@@ -6,10 +6,12 @@
 class NumberLot : public Lot
 {
 public:
-    NumberLot(int number);
+    NumberLot(const int number);
     virtual void view(LotViewer &viewer);
+    virtual bool operator==(const Lot& that);
+    virtual bool operator!=(const Lot& that);
 
-    int number() {return _number;}
+    int number() const {return _number;}
 private:
     int _number;
 };

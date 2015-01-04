@@ -1,3 +1,3 @@
-#include "autotest.h"
+#include "testrunner.h"
 
-TEST_MAIN
+TESTRUNNER_MAIN

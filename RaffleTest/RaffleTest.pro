@@ -8,6 +8,9 @@ CONFIG   -= app_bundle
 
 TEMPLATE = app
 
+HEADERS += \
+    testrunner.h
+
 SOURCES += \
     main.cpp \
     tst_lotviewer.cpp \
@@ -24,6 +27,3 @@ LIBS += -L$$OUT_PWD/../RaffleLib/ -lRaffleLib
 #else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../QtQuickSampleLib/debug/ -lQtQuickSampleLib
 
 CONFIG += c++11
-
-HEADERS += \
-    autotest.h

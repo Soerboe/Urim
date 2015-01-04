@@ -1,5 +1,5 @@
 #include <QtTest>
-#include "autotest.h"
+#include "testrunner.h"
 #include "drawingsession.h"
 #include "randomnumbergenerator.h"
 
@@ -63,6 +63,6 @@ void DrawingSessionTest::shouldGetUniqueResults()
     QCOMPARE(session.drawings().size(), 3);
 }
 
-DECLARE_TEST(DrawingSessionTest)
+REGISTER_TEST(DrawingSessionTest)
 
 #include "tst_drawingsession.moc"

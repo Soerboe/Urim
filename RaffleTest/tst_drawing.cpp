@@ -1,5 +1,5 @@
 #include <QtTest>
-#include "autotest.h"
+#include "testrunner.h"
 #include "drawing.h"
 #include "numberlot.h"
 
@@ -24,7 +24,7 @@ void DrawingTest::shouldCompareEqual()
     QVERIFY(drawing1 == drawing2);
 }
 
-DECLARE_TEST(DrawingTest)
+REGISTER_TEST(DrawingTest)
 
 #include "tst_drawing.moc"
 

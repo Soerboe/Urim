@@ -1,6 +1,6 @@
 #include <QtTest>
 #include <memory>
-#include "autotest.h"
+#include "testrunner.h"
 #include "randomnumbergenerator.h"
 
 using namespace std;
@@ -38,7 +38,7 @@ void RandomNumberGeneratorTest::shouldGenerateRandomInteger()
     QVERIFY(numberLot->number() >= 0);
 }
 
-DECLARE_TEST(RandomNumberGeneratorTest)
+REGISTER_TEST(RandomNumberGeneratorTest)
 
 #include "tst_randomnumbergenerator.moc"
 

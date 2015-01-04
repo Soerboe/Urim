@@ -1,7 +1,7 @@
 #include <QString>
 #include <QtTest>
 #include <memory>
-#include "autotest.h"
+#include "testrunner.h"
 #include "lotviewer.h"
 #include "numberlot.h"
 #include "colorlot.h"
@@ -45,7 +45,7 @@ void LotViewerTest::shouldCallCorrectViewer()
     QVERIFY(lotViewer.textView.at(1) == "ColorLot");
 }
 
-DECLARE_TEST(LotViewerTest)
+REGISTER_TEST(LotViewerTest)
 
 #include "tst_lotviewer.moc"
 

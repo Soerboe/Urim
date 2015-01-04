@@ -1,9 +1,9 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    RaffleGUI \
-    RaffleTest \
-    RaffleLib
+    gui \
+    test \
+    lib
 
-RaffleGUI.depends = RaffleLib
-RaffleTest.depends = RaffleLib
+gui.depends = lib
+test.depends = lib

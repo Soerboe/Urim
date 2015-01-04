@@ -1,5 +1,4 @@
 QT       += testlib
-
 QT       -= gui
 
 TARGET = testrunner
@@ -20,9 +19,9 @@ SOURCES += \
     benchmarking.cpp
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
-INCLUDEPATH += $$PWD/../RaffleLib
+INCLUDEPATH += $$PWD/../lib
 
-LIBS += -L$$OUT_PWD/../RaffleLib/ -lRaffleLib
+LIBS += -L$$OUT_PWD/../lib/ -lLibrary
 
 #win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../QtQuickSampleLib/release/ -lQtQuickSampleLib
 #else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../QtQuickSampleLib/debug/ -lQtQuickSampleLib

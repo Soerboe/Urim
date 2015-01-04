@@ -1,6 +1,6 @@
 QT       -= gui
 
-TARGET = RaffleLib
+TARGET = Library
 TEMPLATE = lib
 CONFIG += staticlib
 

@@ -1,4 +1,5 @@
 #include "drawing.h"
+#include "lot.h"
 
 Drawing::Drawing()
 {

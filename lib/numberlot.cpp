@@ -1,5 +1,6 @@
 #include <typeinfo>
 #include "numberlot.h"
+#include "lotviewer.h"
 
 NumberLot::NumberLot(const int number)
     : _number(number)

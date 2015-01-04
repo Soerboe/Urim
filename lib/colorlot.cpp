@@ -1,4 +1,5 @@
 #include "colorlot.h"
+#include "lotviewer.h"
 
 ColorLot::ColorLot(const Color &color)
     : _color(color)

@@ -1,4 +1,5 @@
 #include "randomnumbergenerator.h"
+#include "numberlot.h"
 
 using namespace std;
 

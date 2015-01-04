@@ -1,5 +1,6 @@
 #include "drawingsession.h"
 #include "nomoreuniqueresultsexception.h"
+#include "randomgenerator.h"
 
 using namespace std;
 

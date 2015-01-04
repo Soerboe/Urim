@@ -1,9 +1,10 @@
 #ifndef DRAWINGSESSION_H
 #define DRAWINGSESSION_H
 
-#include <qstring.h>
+#include <QString>
 #include "drawing.h"
-#include "randomgenerator.h"
+
+class RandomGenerator;
 
 /**
  * @brief Trekningsrunde

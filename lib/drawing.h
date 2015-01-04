@@ -3,7 +3,8 @@
 
 #include <QList>
 #include <memory>
-#include "lot.h"
+
+class Lot;
 
 class Drawing
 {

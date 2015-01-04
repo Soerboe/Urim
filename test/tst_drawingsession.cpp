@@ -4,6 +4,7 @@
 #include "randomnumbergenerator.h"
 #include "randomcolorgenerator.h"
 #include "nomoreuniqueresultsexception.h"
+#include "numberlot.h"
 
 using namespace std;
 

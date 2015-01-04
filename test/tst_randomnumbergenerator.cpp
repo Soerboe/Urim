@@ -2,6 +2,7 @@
 #include <memory>
 #include "testrunner.h"
 #include "randomnumbergenerator.h"
+#include "numberlot.h"
 
 using namespace std;
 

@@ -4,7 +4,6 @@
 #include <random>
 #include <limits>
 #include "randomgenerator.h"
-#include "numberlot.h"
 
 class RandomNumberGenerator : public RandomGenerator
 {

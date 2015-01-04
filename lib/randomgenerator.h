@@ -3,7 +3,8 @@
 
 #include <memory>
 #include <random>
-#include "lot.h"
+
+class Lot;
 
 class RandomGenerator
 {

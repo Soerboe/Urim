@@ -1,7 +1,7 @@
 #ifndef LOT_H
 #define LOT_H
 
-#include "lotviewer.h"
+class LotViewer;
 
 class Lot
 {

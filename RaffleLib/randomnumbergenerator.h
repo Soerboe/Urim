@@ -12,6 +12,7 @@ public:
     RandomNumberGenerator(int min = 0, int max = std::numeric_limits<int>::max());
 
     virtual std::shared_ptr<Lot> operator ()();
+    virtual unsigned long numberOfUniqueResults();
 
 private:
     std::default_random_engine _rng;

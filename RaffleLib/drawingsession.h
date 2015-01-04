@@ -17,6 +17,8 @@ public:
     void addGenerator(std::shared_ptr<RandomGenerator> generator);
     QList<Drawing> drawings() const {return _drawings;}
 
+    unsigned long numberOfUniqueResults();
+
 private:
     QString _name;
     bool _uniqueResults;

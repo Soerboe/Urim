@@ -2,7 +2,7 @@ QT       += testlib
 
 QT       -= gui
 
-TARGET = main
+TARGET = testrunner
 CONFIG   += console
 CONFIG   -= app_bundle
 

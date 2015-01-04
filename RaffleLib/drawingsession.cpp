@@ -1,4 +1,5 @@
 #include "drawingsession.h"
+#include "nomoreuniqueresultsexception.h"
 
 using namespace std;
 
@@ -28,6 +29,10 @@ Drawing DrawingSession::drawUnique()
 {
     Drawing drawing;
 
+    if ((unsigned long) _drawings.size() >= numberOfUniqueResults()) {
+        throw NoMoreUniqueResultsException();
+    }
+
     do {
         drawing = doDraw();
     } while (_drawings.contains(drawing));
@@ -45,4 +50,14 @@ Drawing DrawingSession::doDraw()
     }
 
     return drawing;
+}
+
+unsigned long DrawingSession::numberOfUniqueResults()
+{
+    unsigned long count = 1;
+    foreach (shared_ptr<RandomGenerator> generator, _generators) {
+        count *= generator->numberOfUniqueResults();
+    }
+
+    return count;
 }

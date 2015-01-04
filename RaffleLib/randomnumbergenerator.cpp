@@ -12,3 +12,8 @@ std::shared_ptr<Lot> RandomNumberGenerator::operator ()()
 {
     return shared_ptr<Lot>(new NumberLot(_dist(_rng)));
 }
+
+unsigned long RandomNumberGenerator::numberOfUniqueResults()
+{
+    return _dist.max() - _dist.min() + 1;
+}

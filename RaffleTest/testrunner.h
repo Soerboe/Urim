@@ -76,7 +76,7 @@ public:
 
 #define REGISTER_TEST(className) static TestRunner::Test<className> test(false);
 #define REGISTER_SINGLE_TEST(className) static TestRunner::Test<className> test(true);
-#define TESTRUNNER_MAIN int main(int argc, char** argv) {TestRunner::run(argc, argv);}
+#define TESTRUNNER_MAIN int main(int argc, char** argv) {return TestRunner::run(argc, argv);}
 
 } // namespace
 

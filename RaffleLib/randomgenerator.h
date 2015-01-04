@@ -11,6 +11,7 @@ public:
     RandomGenerator();
 
     virtual std::shared_ptr<Lot> operator ()() = 0;
+    virtual unsigned long numberOfUniqueResults() = 0;
 
     static std::random_device::result_type seed() {return _seed;}
     static void pickSeed();

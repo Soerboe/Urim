@@ -24,7 +24,8 @@ HEADERS += \
     lotviewer.h \
     colorlot.h \
     color.h \
-    randomcolorgenerator.h
+    randomcolorgenerator.h \
+    nomoreuniqueresultsexception.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

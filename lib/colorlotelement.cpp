@@ -14,31 +14,30 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <typeinfo>
-#include "numberlot.h"
-#include "lotviewer.h"
+#include "colorlotelement.h"
+#include "lotelementviewer.h"
 
-NumberLot::NumberLot(const int number)
-    : _number(number)
+ColorLotElement::ColorLotElement(const Color &color)
+    : _color(color)
 {
 }
 
-void NumberLot::view(LotViewer &viewer)
+void ColorLotElement::view(LotElementViewer &viewer)
 {
     viewer.view(this);
 }
 
-bool NumberLot::operator==(const Lot& that)
+bool ColorLotElement::operator==(const LotElement& that)
 {
     try {
-        const NumberLot& thatNumberLot = dynamic_cast<const NumberLot&>(that);
-        return this->_number == thatNumberLot._number;
+        const ColorLotElement& thatColorLotElement = dynamic_cast<const ColorLotElement&>(that);
+        return this->_color == thatColorLotElement._color;
     } catch(std::bad_cast& e) {
         return false;
     }
 }
 
-bool NumberLot::operator!=(const Lot& that)
+bool ColorLotElement::operator!=(const LotElement& that)
 {
     return !(*this == that);
 }

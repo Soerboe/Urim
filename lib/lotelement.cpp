@@ -14,18 +14,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LOT_H
-#define LOT_H
+#include "lotelement.h"
 
-class LotViewer;
-
-class Lot
+LotElement::LotElement()
 {
-public:
-    Lot();
-    virtual void view(LotViewer& viewer) = 0;
-    virtual bool operator==(const Lot& that) = 0;
-    virtual bool operator!=(const Lot& that) = 0;
-};
+}
 
-#endif // LOT_H

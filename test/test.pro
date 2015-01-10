@@ -28,11 +28,11 @@ HEADERS += \
 
 SOURCES += \
     main.cpp \
-    tst_lotviewer.cpp \
     tst_drawingsession.cpp \
     tst_randomnumbergenerator.cpp \
     tst_drawing.cpp \
-    benchmarking.cpp
+    benchmarking.cpp \
+    tst_lotelementviewer.cpp
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 INCLUDEPATH += $$PWD/../lib

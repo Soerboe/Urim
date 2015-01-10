@@ -14,23 +14,18 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COLORLOT_H
-#define COLORLOT_H
+#ifndef LOTELEMENT_H
+#define LOTELEMENT_H
 
-#include "lot.h"
-#include "color.h"
+class LotElementViewer;
 
-class ColorLot : public Lot
+class LotElement
 {
 public:
-    ColorLot(const Color& color);
-    virtual void view(LotViewer &viewer);
-    virtual bool operator==(const Lot& that);
-    virtual bool operator!=(const Lot& that);
-
-    Color color() const {return _color;}
-private:
-    Color _color;
+    LotElement();
+    virtual void view(LotElementViewer& viewer) = 0;
+    virtual bool operator==(const LotElement& that) = 0;
+    virtual bool operator!=(const LotElement& that) = 0;
 };
 
-#endif // COLORLOT_H
+#endif // LOTELEMENT_H

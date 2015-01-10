@@ -14,9 +14,31 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "lot.h"
+#include <typeinfo>
+#include "numberlotelement.h"
+#include "lotelementviewer.h"
 
-Lot::Lot()
+NumberLotElement::NumberLotElement(const int number)
+    : _number(number)
 {
 }
 
+void NumberLotElement::view(LotElementViewer &viewer)
+{
+    viewer.view(this);
+}
+
+bool NumberLotElement::operator==(const LotElement& that)
+{
+    try {
+        const NumberLotElement& thatNumberLotElement = dynamic_cast<const NumberLotElement&>(that);
+        return this->_number == thatNumberLotElement._number;
+    } catch(std::bad_cast& e) {
+        return false;
+    }
+}
+
+bool NumberLotElement::operator!=(const LotElement& that)
+{
+    return !(*this == that);
+}

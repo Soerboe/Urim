@@ -63,7 +63,8 @@ Drawing DrawingSession::doDraw()
     Drawing drawing;
 
     foreach (shared_ptr<RandomGenerator> generator, _generators) {
-        drawing.addLot((*generator)());
+        shared_ptr<LotElement> lotElement = (*generator)();
+        drawing.addLotElement(lotElement);
     }
 
     return drawing;

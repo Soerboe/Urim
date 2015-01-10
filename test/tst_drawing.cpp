@@ -17,7 +17,7 @@
 #include <QtTest>
 #include "testrunner.h"
 #include "drawing.h"
-#include "numberlot.h"
+#include "numberlotelement.h"
 
 using namespace std;
 
@@ -32,10 +32,10 @@ private Q_SLOTS:
 void DrawingTest::shouldCompareEqual()
 {
     Drawing drawing1;
-    drawing1.addLot(shared_ptr<NumberLot> (new NumberLot(1337)));
+    drawing1.addLotElement(shared_ptr<NumberLotElement> (new NumberLotElement(1337)));
 
     Drawing drawing2;
-    drawing2.addLot(shared_ptr<NumberLot> (new NumberLot(1337)));
+    drawing2.addLotElement(shared_ptr<NumberLotElement> (new NumberLotElement(1337)));
 
     QVERIFY(drawing1 == drawing2);
 }

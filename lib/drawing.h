@@ -20,18 +20,18 @@
 #include <QList>
 #include <memory>
 
-class Lot;
+class LotElement;
 
 class Drawing
 {
 public:
     Drawing();
 
-    void addLot(const std::shared_ptr<Lot> lot);
+    void addLotElement(const std::shared_ptr<LotElement> lotElement);
     bool operator==(const Drawing& that);
 
 private:
-    QList<std::shared_ptr<Lot> > _lots;
+    QList<std::shared_ptr<LotElement> > _lotElements;
 };
 
 #endif // DRAWING_H

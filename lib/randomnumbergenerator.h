@@ -26,7 +26,7 @@ class RandomNumberGenerator : public RandomGenerator
 public:
     RandomNumberGenerator(int min = 0, int max = std::numeric_limits<int>::max());
 
-    virtual std::shared_ptr<Lot> operator ()();
+    virtual std::shared_ptr<LotElement> operator ()();
     virtual unsigned long numberOfUniqueResults();
 
 private:

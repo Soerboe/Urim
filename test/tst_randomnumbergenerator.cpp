@@ -18,7 +18,7 @@
 #include <memory>
 #include "testrunner.h"
 #include "randomnumbergenerator.h"
-#include "numberlot.h"
+#include "numberlotelement.h"
 
 using namespace std;
 
@@ -51,8 +51,8 @@ void RandomNumberGeneratorTest::shouldGenerateRandomInteger()
 {
     RandomGenerator::pickSeed();
     RandomNumberGenerator generator;
-    shared_ptr<NumberLot> numberLot = dynamic_pointer_cast<NumberLot> (generator());
-    QVERIFY(numberLot->number() >= 0);
+    shared_ptr<NumberLotElement> numberLotElement = dynamic_pointer_cast<NumberLotElement> (generator());
+    QVERIFY(numberLotElement->number() >= 0);
 }
 
 REGISTER_TEST(RandomNumberGeneratorTest)

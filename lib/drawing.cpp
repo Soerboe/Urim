@@ -15,25 +15,25 @@
 */
 
 #include "drawing.h"
-#include "lot.h"
+#include "lotelement.h"
 
 Drawing::Drawing()
 {
 }
 
-void Drawing::addLot(const std::shared_ptr<Lot> lot)
+void Drawing::addLotElement(const std::shared_ptr<LotElement> lotElement)
 {
-    _lots.append(lot);
+    _lotElements.append(lotElement);
 }
 
 bool Drawing::operator==(const Drawing &that)
 {
-    if (this->_lots.size() != that._lots.size()) {
+    if (this->_lotElements.size() != that._lotElements.size()) {
         return false;
     }
 
-    for(int i = 0; i < this->_lots.size(); ++i) {
-        if ((*this->_lots.at(i)) != (*that._lots.at(i))) {
+    for(int i = 0; i < this->_lotElements.size(); ++i) {
+        if ((*this->_lotElements.at(i)) != (*that._lotElements.at(i))) {
             return false;
         }
     }

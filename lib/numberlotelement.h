@@ -14,17 +14,22 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LOTVIEWER_H
-#define LOTVIEWER_H
+#ifndef NUMBERLOTELEMENT_H
+#define NUMBERLOTELEMENT_H
 
-class NumberLot;
-class ColorLot;
+#include "lotelement.h"
 
-class LotViewer
+class NumberLotElement : public LotElement
 {
 public:
-    virtual void view(const NumberLot* numberLot) = 0;
-    virtual void view(const ColorLot* colorLot) = 0;
+    NumberLotElement(const int number);
+    virtual void view(LotElementViewer &viewer);
+    virtual bool operator==(const LotElement& that);
+    virtual bool operator!=(const LotElement& that);
+
+    int number() const {return _number;}
+private:
+    int _number;
 };
 
-#endif // LOTVIEWER_H
+#endif // NUMBERLOTELEMENT_H

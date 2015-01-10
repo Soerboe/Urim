@@ -15,7 +15,7 @@
 */
 
 #include "randomnumbergenerator.h"
-#include "numberlot.h"
+#include "numberlotelement.h"
 
 using namespace std;
 
@@ -25,9 +25,9 @@ RandomNumberGenerator::RandomNumberGenerator(int min, int max)
 {
 }
 
-std::shared_ptr<Lot> RandomNumberGenerator::operator ()()
+std::shared_ptr<LotElement> RandomNumberGenerator::operator ()()
 {
-    return shared_ptr<Lot>(new NumberLot(_dist(_rng)));
+    return shared_ptr<LotElement>(new NumberLotElement(_dist(_rng)));
 }
 
 unsigned long RandomNumberGenerator::numberOfUniqueResults()

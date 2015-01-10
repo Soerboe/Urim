@@ -14,30 +14,17 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "colorlot.h"
-#include "lotviewer.h"
+#ifndef LOTELEMENTVIEWER_H
+#define LOTELEMENTVIEWER_H
 
-ColorLot::ColorLot(const Color &color)
-    : _color(color)
-{
-}
+class NumberLotElement;
+class ColorLotElement;
 
-void ColorLot::view(LotViewer &viewer)
+class LotElementViewer
 {
-    viewer.view(this);
-}
+public:
+    virtual void view(const NumberLotElement* numberLotElement) = 0;
+    virtual void view(const ColorLotElement* colorLotElement) = 0;
+};
 
-bool ColorLot::operator==(const Lot& that)
-{
-    try {
-        const ColorLot& thatColorLot = dynamic_cast<const ColorLot&>(that);
-        return this->_color == thatColorLot._color;
-    } catch(std::bad_cast& e) {
-        return false;
-    }
-}
-
-bool ColorLot::operator!=(const Lot& that)
-{
-    return !(*this == that);
-}
+#endif // LOTELEMENTVIEWER_H

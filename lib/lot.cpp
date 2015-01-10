@@ -14,24 +14,29 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DRAWING_H
-#define DRAWING_H
+#include "lot.h"
+#include "lotelement.h"
 
-#include <QList>
-#include <memory>
-
-class LotElement;
-
-class Drawing
+Lot::Lot()
 {
-public:
-    Drawing();
+}
 
-    void addLotElement(const std::shared_ptr<LotElement> lotElement);
-    bool operator==(const Drawing& that);
+void Lot::addLotElement(const std::shared_ptr<LotElement> lotElement)
+{
+    _lotElements.append(lotElement);
+}
 
-private:
-    QList<std::shared_ptr<LotElement> > _lotElements;
-};
+bool Lot::operator==(const Lot &that)
+{
+    if (this->_lotElements.size() != that._lotElements.size()) {
+        return false;
+    }
 
-#endif // DRAWING_H
+    for(int i = 0; i < this->_lotElements.size(); ++i) {
+        if ((*this->_lotElements.at(i)) != (*that._lotElements.at(i))) {
+            return false;
+        }
+    }
+
+    return true;
+}

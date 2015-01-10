@@ -24,24 +24,24 @@ SOURCES += \
     randomgenerator.cpp \
     randomnumbergenerator.cpp \
     drawingsession.cpp \
-    drawing.cpp \
     randomcolorgenerator.cpp \
     lotelement.cpp \
     colorlotelement.cpp \
-    numberlotelement.cpp
+    numberlotelement.cpp \
+    lot.cpp
 
 HEADERS += \
     randomgenerator.h \
     randomnumbergenerator.h \
     drawingsession.h \
-    drawing.h \
     color.h \
     randomcolorgenerator.h \
     nomoreuniqueresultsexception.h \
     lotelement.h \
     lotelementviewer.h \
     numberlotelement.h \
-    colorlotelement.h
+    colorlotelement.h \
+    lot.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

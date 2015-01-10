@@ -30,9 +30,9 @@ SOURCES += \
     main.cpp \
     tst_drawingsession.cpp \
     tst_randomnumbergenerator.cpp \
-    tst_drawing.cpp \
     benchmarking.cpp \
-    tst_lotelementviewer.cpp
+    tst_lotelementviewer.cpp \
+    tst_lot.cpp
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 INCLUDEPATH += $$PWD/../lib

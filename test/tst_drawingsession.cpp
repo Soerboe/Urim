@@ -52,13 +52,13 @@ class DrawingSessionTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
-    void shouldStoreDrawings();
+    void shouldStoreDrawnLots();
     void shouldGetUniqueResultsWithOneGenerator();
     void shouldReturnNumberOfUniqueResults();
     void shouldThrowExceptionWhenNoMoreUniqueResults();
 };
 
-void DrawingSessionTest::shouldStoreDrawings()
+void DrawingSessionTest::shouldStoreDrawnLots()
 {
     DrawingSession session;
     session.addGenerator(shared_ptr<RandomGenerator>(new RandomNumberGenerator(0, 10000)));
@@ -67,7 +67,7 @@ void DrawingSessionTest::shouldStoreDrawings()
         session.draw();
     }
 
-    QVERIFY(session.drawings().size() == 10);
+    QVERIFY(session.lots().size() == 10);
 }
 
 void DrawingSessionTest::shouldGetUniqueResultsWithOneGenerator()
@@ -82,7 +82,7 @@ void DrawingSessionTest::shouldGetUniqueResultsWithOneGenerator()
         session.draw();
     }
 
-    QCOMPARE(session.drawings().size(), 3);
+    QCOMPARE(session.lots().size(), 3);
 }
 void DrawingSessionTest::shouldReturnNumberOfUniqueResults()
 {

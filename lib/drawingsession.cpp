@@ -25,7 +25,7 @@ DrawingSession::DrawingSession(bool uniqueResults)
 {
 }
 
-Drawing DrawingSession::draw()
+Lot DrawingSession::draw()
 {
     return _uniqueResults ? drawUnique() : drawNonUnique();
 }
@@ -35,39 +35,39 @@ void DrawingSession::addGenerator(shared_ptr<RandomGenerator> generator)
     _generators.append(generator);
 }
 
-Drawing DrawingSession::drawNonUnique()
+Lot DrawingSession::drawNonUnique()
 {
-    Drawing drawing = doDraw();
-    _drawings.append(drawing);
-    return drawing;
+    Lot lot = doDraw();
+    _lots.append(lot);
+    return lot;
 }
 
-Drawing DrawingSession::drawUnique()
+Lot DrawingSession::drawUnique()
 {
-    Drawing drawing;
+    Lot lot;
 
-    if ((unsigned long) _drawings.size() >= numberOfUniqueResults()) {
+    if ((unsigned long) _lots.size() >= numberOfUniqueResults()) {
         throw NoMoreUniqueResultsException();
     }
 
     do {
-        drawing = doDraw();
-    } while (_drawings.contains(drawing));
+        lot = doDraw();
+    } while (_lots.contains(lot));
 
-    _drawings.append(drawing);
-    return drawing;
+    _lots.append(lot);
+    return lot;
 }
 
-Drawing DrawingSession::doDraw()
+Lot DrawingSession::doDraw()
 {
-    Drawing drawing;
+    Lot lot;
 
     foreach (shared_ptr<RandomGenerator> generator, _generators) {
         shared_ptr<LotElement> lotElement = (*generator)();
-        drawing.addLotElement(lotElement);
+        lot.addLotElement(lotElement);
     }
 
-    return drawing;
+    return lot;
 }
 
 unsigned long DrawingSession::numberOfUniqueResults()

@@ -16,12 +16,12 @@
 
 #include <QtTest>
 #include "testrunner.h"
-#include "drawing.h"
+#include "lot.h"
 #include "numberlotelement.h"
 
 using namespace std;
 
-class DrawingTest : public QObject
+class LotTest : public QObject
 {
     Q_OBJECT
 
@@ -29,19 +29,19 @@ private Q_SLOTS:
     void shouldCompareEqual();
 };
 
-void DrawingTest::shouldCompareEqual()
+void LotTest::shouldCompareEqual()
 {
-    Drawing drawing1;
-    drawing1.addLotElement(shared_ptr<NumberLotElement> (new NumberLotElement(1337)));
+    Lot lot1;
+    lot1.addLotElement(shared_ptr<NumberLotElement> (new NumberLotElement(1337)));
 
-    Drawing drawing2;
-    drawing2.addLotElement(shared_ptr<NumberLotElement> (new NumberLotElement(1337)));
+    Lot lot2;
+    lot2.addLotElement(shared_ptr<NumberLotElement> (new NumberLotElement(1337)));
 
-    QVERIFY(drawing1 == drawing2);
+    QVERIFY(lot1 == lot2);
 }
 
-REGISTER_TEST(DrawingTest)
+REGISTER_TEST(LotTest)
 
-#include "tst_drawing.moc"
+#include "tst_lot.moc"
 
 

@@ -18,7 +18,7 @@
 #define DRAWINGSESSION_H
 
 #include <QString>
-#include "drawing.h"
+#include "lot.h"
 
 class RandomGenerator;
 
@@ -30,9 +30,9 @@ class DrawingSession
 public:
     DrawingSession(bool uniqueResults = false);
 
-    Drawing draw();
+    Lot draw();
     void addGenerator(std::shared_ptr<RandomGenerator> generator);
-    QList<Drawing> drawings() const {return _drawings;}
+    QList<Lot> lots() const {return _lots;}
 
     unsigned long numberOfUniqueResults();
 
@@ -40,11 +40,11 @@ private:
     QString _name;
     bool _uniqueResults;
     QList<std::shared_ptr<RandomGenerator> > _generators;
-    QList<Drawing> _drawings;
+    QList<Lot> _lots;
 
-    Drawing drawNonUnique();
-    Drawing drawUnique();
-    Drawing doDraw();
+    Lot drawNonUnique();
+    Lot drawUnique();
+    Lot doDraw();
 };
 
 #endif // DRAWINGSESSION_H

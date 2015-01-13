@@ -14,19 +14,17 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mainview.h"
-#include <QApplication>
-#include "randomgenerator.h"
 #include "drawingcontroller.h"
+#include "lotviewer.h"
 
-int main(int argc, char *argv[])
+DrawingController::DrawingController()
 {
-    RandomGenerator::pickSeed();
-
-    QApplication a(argc, argv);
-    DrawingController controller;
-    MainView w(&controller);
-    w.show();
-
-    return a.exec();
 }
+
+void DrawingController::draw()
+{
+    Lot lot = _drawingSession->draw();
+    _lotViewer->view(lot);
+}
+
+

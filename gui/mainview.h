@@ -18,6 +18,7 @@
 #define MAINVIEW_H
 
 #include <QMainWindow>
+#include "drawingcontroller.h"
 
 namespace Ui {
 class MainView;
@@ -28,12 +29,17 @@ class MainView : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainView(QWidget *parent = 0);
+    explicit MainView(DrawingController* controller, QWidget *parent = 0);
     ~MainView();
 
 private:
     Ui::MainView *ui;
 
+    DrawingController* _drawingController;
+
+private slots:
+    void showDrawingSetup();
+    void drawClicked();
 };
 
 #endif // MAINVIEW_H

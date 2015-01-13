@@ -14,19 +14,26 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mainview.h"
-#include <QApplication>
-#include "randomgenerator.h"
-#include "drawingcontroller.h"
+#ifndef DRAWINGCONTROLLER_H
+#define DRAWINGCONTROLLER_H
 
-int main(int argc, char *argv[])
+#include "drawingsession.h"
+
+class LotViewer;
+
+class DrawingController
 {
-    RandomGenerator::pickSeed();
+public:
+    DrawingController();
 
-    QApplication a(argc, argv);
-    DrawingController controller;
-    MainView w(&controller);
-    w.show();
+    void draw();
 
-    return a.exec();
-}
+    void setDrawingSession(const std::shared_ptr<DrawingSession> drawingSession) {_drawingSession = drawingSession;}
+    void setLotViewer(const std::shared_ptr<LotViewer> lotViewer) {_lotViewer = lotViewer;}
+
+private:
+    std::shared_ptr<DrawingSession> _drawingSession;
+    std::shared_ptr<LotViewer> _lotViewer;
+};
+
+#endif // DRAWINGCONTROLLER_H

@@ -23,18 +23,23 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainview.cpp \
+    drawingsetupdialog.cpp \
+    drawingcontroller.cpp \
     lotelementview.cpp \
     numberlotelementview.cpp \
     lotviewer.cpp \
     colorlotelementview.cpp
 
 HEADERS  += mainview.h \
+    drawingsetupdialog.h \
+    drawingcontroller.h \
     lotelementview.h \
     numberlotelementview.h \
     lotviewer.h \
     colorlotelementview.h
 
-FORMS    += mainview.ui
+FORMS    += mainview.ui \
+    drawingsetupdialog.ui
 
 INCLUDEPATH += $$PWD/../lib
 

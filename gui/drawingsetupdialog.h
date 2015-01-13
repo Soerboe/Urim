@@ -14,19 +14,25 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mainview.h"
-#include <QApplication>
-#include "randomgenerator.h"
-#include "drawingcontroller.h"
+#ifndef PROFILEDIALOG_H
+#define PROFILEDIALOG_H
 
-int main(int argc, char *argv[])
-{
-    RandomGenerator::pickSeed();
+#include <QDialog>
 
-    QApplication a(argc, argv);
-    DrawingController controller;
-    MainView w(&controller);
-    w.show();
-
-    return a.exec();
+namespace Ui {
+class DrawingSetupDialog;
 }
+
+class DrawingSetupDialog : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit DrawingSetupDialog(QWidget *parent = 0);
+    ~DrawingSetupDialog();
+
+private:
+    Ui::DrawingSetupDialog *ui;
+};
+
+#endif // PROFILEDIALOG_H

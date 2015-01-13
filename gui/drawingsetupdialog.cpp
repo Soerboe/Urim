@@ -14,19 +14,17 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mainview.h"
-#include <QApplication>
-#include "randomgenerator.h"
-#include "drawingcontroller.h"
+#include "drawingsetupdialog.h"
+#include "ui_drawingsetupdialog.h"
 
-int main(int argc, char *argv[])
+DrawingSetupDialog::DrawingSetupDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::DrawingSetupDialog)
 {
-    RandomGenerator::pickSeed();
+    ui->setupUi(this);
+}
 
-    QApplication a(argc, argv);
-    DrawingController controller;
-    MainView w(&controller);
-    w.show();
-
-    return a.exec();
+DrawingSetupDialog::~DrawingSetupDialog()
+{
+    delete ui;
 }

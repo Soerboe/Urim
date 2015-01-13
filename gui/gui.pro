@@ -22,9 +22,17 @@ TARGET = GUI
 TEMPLATE = app
 
 SOURCES += main.cpp\
-        mainview.cpp
+        mainview.cpp \
+    lotelementview.cpp \
+    numberlotelementview.cpp \
+    lotviewer.cpp \
+    colorlotelementview.cpp
 
-HEADERS  += mainview.h
+HEADERS  += mainview.h \
+    lotelementview.h \
+    numberlotelementview.h \
+    lotviewer.h \
+    colorlotelementview.h
 
 FORMS    += mainview.ui
 

@@ -30,6 +30,9 @@ public:
     void addLotElement(const std::shared_ptr<LotElement> lotElement);
     bool operator==(const Lot& that);
 
+    std::shared_ptr<LotElement> at(const int& index) const;
+    size_t count() const;
+
 private:
     QList<std::shared_ptr<LotElement> > _lotElements;
 };

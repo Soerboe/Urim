@@ -40,3 +40,13 @@ bool Lot::operator==(const Lot &that)
 
     return true;
 }
+
+std::shared_ptr<LotElement> Lot::at(const int& index) const
+{
+    return _lotElements.at(index);
+}
+
+size_t Lot::count() const
+{
+    return _lotElements.count();
+}

@@ -67,7 +67,7 @@ void DrawingSessionTest::shouldStoreDrawnLots()
         session.draw();
     }
 
-    QVERIFY(session.lots().size() == 10);
+    QVERIFY(session.lotsCount() == 10);
 }
 
 void DrawingSessionTest::shouldGetUniqueResultsWithOneGenerator()
@@ -82,7 +82,7 @@ void DrawingSessionTest::shouldGetUniqueResultsWithOneGenerator()
         session.draw();
     }
 
-    QCOMPARE(session.lots().size(), 3);
+    QCOMPARE(session.lotsCount(), 3);
 }
 void DrawingSessionTest::shouldReturnNumberOfUniqueResults()
 {

@@ -72,6 +72,10 @@ Lot DrawingSession::doDraw()
 
 unsigned long DrawingSession::numberOfUniqueResults()
 {
+    if (_generators.isEmpty()) {
+        return 0;
+    }
+
     unsigned long count = 1;
     foreach (shared_ptr<RandomGenerator> generator, _generators) {
         count *= generator->numberOfUniqueResults();

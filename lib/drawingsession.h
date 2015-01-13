@@ -22,19 +22,16 @@
 
 class RandomGenerator;
 
-/**
- * @brief Trekningsrunde
- */
 class DrawingSession
 {
 public:
     DrawingSession(bool uniqueResults = false);
 
     Lot draw();
-    void addGenerator(std::shared_ptr<RandomGenerator> generator);
-    QList<Lot> lots() const {return _lots;}
-
     unsigned long numberOfUniqueResults();
+    int lotsCount() {return _lots.size();}
+
+    void addGenerator(std::shared_ptr<RandomGenerator> generator);
 
 private:
     QString _name;

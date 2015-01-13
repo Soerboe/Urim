@@ -28,11 +28,11 @@ class DummyLotElementViewer : public LotElementViewer {
 public:
     QStringList textView;
 
-    void view(const NumberLotElement* numberLotElement) {
+    void view(const NumberLotElement& numberLotElement, const int& id) {
         textView.append("NumberLotElement");
     }
 
-    void view(const ColorLotElement* colorLotElement) {
+    void view(const ColorLotElement& colorLotElement, const int& id) {
         textView.append("ColorLotElement");
     }
 };
@@ -52,9 +52,9 @@ void LotElementViewerTest::shouldCallCorrectViewer()
     lotElements.append(shared_ptr<LotElement>(new ColorLotElement(Color())));
 
     DummyLotElementViewer viewer;
-
+    int id = 0;
     foreach(shared_ptr<LotElement> lotElement, lotElements) {
-        lotElement->view(viewer);
+        lotElement->view(viewer, id++);
     }
 
     QVERIFY(viewer.textView.at(0) == "NumberLotElement");

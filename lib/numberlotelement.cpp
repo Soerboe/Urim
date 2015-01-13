@@ -18,14 +18,14 @@
 #include "numberlotelement.h"
 #include "lotelementviewer.h"
 
-NumberLotElement::NumberLotElement(const int number)
+NumberLotElement::NumberLotElement(const int& number)
     : _number(number)
 {
 }
 
-void NumberLotElement::view(LotElementViewer &viewer)
+void NumberLotElement::view(LotElementViewer &viewer, const int& id)
 {
-    viewer.view(this);
+    viewer.view(*this, id);
 }
 
 bool NumberLotElement::operator==(const LotElement& that)

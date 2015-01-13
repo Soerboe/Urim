@@ -22,9 +22,9 @@ ColorLotElement::ColorLotElement(const Color &color)
 {
 }
 
-void ColorLotElement::view(LotElementViewer &viewer)
+void ColorLotElement::view(LotElementViewer &viewer, const int& id)
 {
-    viewer.view(this);
+    viewer.view(*this, id);
 }
 
 bool ColorLotElement::operator==(const LotElement& that)

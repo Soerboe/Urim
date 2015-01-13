@@ -164,11 +164,8 @@
     </layout>
    </item>
   </layout>
-  <zorder>verticalLayoutWidget</zorder>
   <zorder>headingLabel</zorder>
   <zorder>graphicsView</zorder>
-  <zorder>horizontalLayoutWidget</zorder>
-  <zorder>horizontalLayoutWidget</zorder>
   <zorder>headingLabel</zorder>
  </widget>
  <resources/>

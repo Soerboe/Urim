@@ -21,6 +21,7 @@
 #include "lotelementviewer.h"
 #include "numberlotelement.h"
 #include "colorlotelement.h"
+#include "utils.h"
 
 using namespace std;
 
@@ -29,10 +30,12 @@ public:
     QStringList textView;
 
     void view(const NumberLotElement& numberLotElement, const int& id) {
+        ignore_unused(numberLotElement, id);
         textView.append("NumberLotElement");
     }
 
     void view(const ColorLotElement& colorLotElement, const int& id) {
+        ignore_unused(colorLotElement, id);
         textView.append("ColorLotElement");
     }
 };

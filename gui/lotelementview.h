@@ -31,10 +31,12 @@ public:
     ~LotElementView();
 
     virtual void update(const NumberLotElement& numberLotElement) {
+        ignore_unused(numberLotElement);
         // this method is supposed to be overridden in subclass views wanting NumberLotElements
     }
 
     virtual void update(const ColorLotElement& colorLotElement) {
+        ignore_unused(colorLotElement);
         // this method is supposed to be overridden in subclass views wanting ColorLotElements
     }
 

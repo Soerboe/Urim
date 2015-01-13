@@ -41,7 +41,8 @@ HEADERS += \
     lotelementviewer.h \
     numberlotelement.h \
     colorlotelement.h \
-    lot.h
+    lot.h \
+    utils.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

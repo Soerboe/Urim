@@ -26,6 +26,7 @@ class RandomGenerator
 {
 public:
     RandomGenerator();
+    virtual ~RandomGenerator();
 
     virtual std::shared_ptr<LotElement> operator ()() = 0;
     virtual unsigned long numberOfUniqueResults() = 0;

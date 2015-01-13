@@ -25,6 +25,10 @@ RandomGenerator::RandomGenerator()
 {
 }
 
+RandomGenerator::~RandomGenerator()
+{
+}
+
 void RandomGenerator::pickSeed()
 {
     try {

@@ -23,6 +23,7 @@ class ColorLotElement;
 class LotElementViewer
 {
 public:
+    virtual ~LotElementViewer() {}
     virtual void view(const NumberLotElement& numberLotElement, const int& id) = 0;
     virtual void view(const ColorLotElement& colorLotElement, const int& id) = 0;
 };

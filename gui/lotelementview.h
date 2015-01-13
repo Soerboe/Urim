@@ -28,7 +28,7 @@ class LotElementView : public QFrame
     Q_OBJECT
 public:
     explicit LotElementView(const QString& name = QString(), QWidget *parent = 0);
-    ~LotElementView();
+    virtual ~LotElementView();
 
     virtual void update(const NumberLotElement& numberLotElement) {
         ignore_unused(numberLotElement);

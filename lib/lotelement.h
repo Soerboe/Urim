@@ -23,6 +23,7 @@ class LotElement
 {
 public:
     LotElement();
+    virtual ~LotElement();
     virtual void view(LotElementViewer& viewer, const int& id) = 0;
     virtual bool operator==(const LotElement& that) = 0;
     virtual bool operator!=(const LotElement& that) = 0;

@@ -40,11 +40,11 @@ DEFINES += SRCDIR=\\\"$$PWD/\\\"
 INCLUDEPATH += $$PWD/../lib/
 DEPENDPATH += $$PWD/../lib/
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../lib/release/ -lLibrary
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../lib/debug/ -lLibrary
-else:unix: LIBS += -L$$OUT_PWD/../lib/ -lLibrary
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../lib/release/ -lUrimThummimLib
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../lib/debug/ -lUrimThummimLib
+else:unix: LIBS += -L$$OUT_PWD/../lib/ -lUrimThummimLib
 
-win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lib/release/Library.lib
-else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lib/debug/Library.lib
-else:unix: PRE_TARGETDEPS += $$OUT_PWD/../lib/libLibrary.a
+win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lib/release/UrimThummimLib.lib
+else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lib/debug/UrimThummimLib.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../lib/libUrimThummimLib.a
 

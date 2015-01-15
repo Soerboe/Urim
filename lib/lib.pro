@@ -16,7 +16,7 @@
 
 QT       -= gui
 
-TARGET = Library
+TARGET = UrimThummimLib
 TEMPLATE = lib
 CONFIG += staticlib
 

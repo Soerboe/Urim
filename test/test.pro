@@ -20,6 +20,7 @@ QT       -= gui
 TARGET = testrunner
 CONFIG   += console
 CONFIG   -= app_bundle
+CONFIG += c++11
 
 TEMPLATE = app
 
@@ -33,13 +34,17 @@ SOURCES += \
     benchmarking.cpp \
     tst_lotelementviewer.cpp \
     tst_lot.cpp
+
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
-INCLUDEPATH += $$PWD/../lib
+INCLUDEPATH += $$PWD/../lib/
+DEPENDPATH += $$PWD/../lib/
 
-LIBS += -L$$OUT_PWD/../lib/ -lLibrary
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../lib/release/ -lLibrary
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../lib/debug/ -lLibrary
+else:unix: LIBS += -L$$OUT_PWD/../lib/ -lLibrary
 
-#win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../QtQuickSampleLib/release/ -lQtQuickSampleLib
-#else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../QtQuickSampleLib/debug/ -lQtQuickSampleLib
+win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lib/release/Library.lib
+else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lib/debug/Library.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../lib/libLibrary.a
 
-CONFIG += c++11

@@ -30,6 +30,8 @@ public:
     int number() const {return _number;}
 private:
     int _number;
+
+    virtual void print(std::ostream& output) const;
 };
 
 #endif // NUMBERLOTELEMENT_H

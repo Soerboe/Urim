@@ -19,6 +19,7 @@
 
 #include <QList>
 #include <memory>
+#include <ostream>
 
 class LotElement;
 
@@ -32,6 +33,8 @@ public:
 
     std::shared_ptr<LotElement> at(const int& index) const;
     size_t count() const;
+
+    friend std::ostream& operator<< (std::ostream& output, const Lot& lot);
 
 private:
     QList<std::shared_ptr<LotElement> > _lotElements;

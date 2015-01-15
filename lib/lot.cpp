@@ -17,11 +17,13 @@
 #include "lot.h"
 #include "lotelement.h"
 
+using namespace std;
+
 Lot::Lot()
 {
 }
 
-void Lot::addLotElement(const std::shared_ptr<LotElement> lotElement)
+void Lot::addLotElement(const shared_ptr<LotElement> lotElement)
 {
     _lotElements.append(lotElement);
 }
@@ -41,7 +43,7 @@ bool Lot::operator==(const Lot &that)
     return true;
 }
 
-std::shared_ptr<LotElement> Lot::at(const int& index) const
+shared_ptr<LotElement> Lot::at(const int& index) const
 {
     return _lotElements.at(index);
 }
@@ -49,4 +51,18 @@ std::shared_ptr<LotElement> Lot::at(const int& index) const
 size_t Lot::count() const
 {
     return _lotElements.count();
+}
+
+ostream& operator<<(ostream& output, const Lot& lot)
+{
+    output << "Lot[";
+    for(int i = 0; i < lot._lotElements.size(); ++i) {
+        if (i > 0) {
+            output << ", ";
+        }
+        output << *(lot._lotElements.at(i));
+    }
+
+    output << "]";
+    return output;
 }

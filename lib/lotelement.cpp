@@ -16,6 +16,8 @@
 
 #include "lotelement.h"
 
+using namespace std;
+
 LotElement::LotElement()
 {
 }
@@ -24,3 +26,8 @@ LotElement::~LotElement()
 {
 }
 
+ostream& operator<<(std::ostream& output, const LotElement& lotElement)
+{
+    lotElement.print(output);
+    return output;
+}

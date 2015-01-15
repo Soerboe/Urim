@@ -42,3 +42,8 @@ bool NumberLotElement::operator!=(const LotElement& that)
 {
     return !(*this == that);
 }
+
+void NumberLotElement::print(std::ostream& output) const
+{
+    output << "Number: " << _number;
+}

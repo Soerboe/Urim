@@ -31,6 +31,8 @@ public:
     Color color() const {return _color;}
 private:
     Color _color;
+
+    virtual void print(std::ostream& output) const;
 };
 
 #endif // COLORLOTELEMENT_H

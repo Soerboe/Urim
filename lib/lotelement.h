@@ -17,6 +17,8 @@
 #ifndef LOTELEMENT_H
 #define LOTELEMENT_H
 
+#include <ostream>
+
 class LotElementViewer;
 
 class LotElement
@@ -27,6 +29,10 @@ public:
     virtual void view(LotElementViewer& viewer, const int& id) = 0;
     virtual bool operator==(const LotElement& that) = 0;
     virtual bool operator!=(const LotElement& that) = 0;
+
+    friend std::ostream& operator<< (std::ostream& output, const LotElement& lotElement);
+private:
+    virtual void print(std::ostream& output) const = 0;
 };
 
 #endif // LOTELEMENT_H

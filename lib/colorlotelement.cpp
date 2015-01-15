@@ -17,6 +17,8 @@
 #include "colorlotelement.h"
 #include "lotelementviewer.h"
 
+using namespace std;
+
 ColorLotElement::ColorLotElement(const Color &color)
     : _color(color)
 {
@@ -32,7 +34,7 @@ bool ColorLotElement::operator==(const LotElement& that)
     try {
         const ColorLotElement& thatColorLotElement = dynamic_cast<const ColorLotElement&>(that);
         return this->_color == thatColorLotElement._color;
-    } catch(std::bad_cast& e) {
+    } catch(bad_cast& e) {
         return false;
     }
 }
@@ -40,4 +42,10 @@ bool ColorLotElement::operator==(const LotElement& that)
 bool ColorLotElement::operator!=(const LotElement& that)
 {
     return !(*this == that);
+}
+
+void ColorLotElement::print(ostream& output) const
+{
+    output << "Color: " << _color.name.toStdString() << "(" <<
+              _color.red << ", " << _color.green << ", " << _color.blue << ")";
 }

@@ -16,12 +16,31 @@
 
 #include "colorlotelementview.h"
 #include "colorlotelement.h"
+#include <QPalette>
+#include "color.h"
 
-ColorLotElementView::ColorLotElementView()
+ColorLotElementView::ColorLotElementView(const QString name)
+    : LotElementView(name)
 {
+    _colorView = new QFrame;
+    _colorView->setAutoFillBackground(true);
+    _textView = new QLabel;
+    _layout->addWidget(_colorView);
+    _layout->addWidget(_textView);
+}
+
+ColorLotElementView::~ColorLotElementView()
+{
+    delete _colorView;
+    delete _textView;
 }
 
 void ColorLotElementView::update(const ColorLotElement& colorLotElement)
 {
-    // do somethind
+    Color color = colorLotElement.color();
+    QPalette palette = _colorView->palette();
+    palette.setColor(backgroundRole(), QColor(color.red, color.green, color.blue));
+    _colorView->setPalette(palette);
+
+    _textView->setText(color.name);
 }

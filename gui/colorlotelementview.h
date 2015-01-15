@@ -18,15 +18,22 @@
 #define COLORLOTELEMENTVIEW_H
 
 #include "lotelementview.h"
+#include <QFrame>
+#include <QLabel>
 
 class ColorLotElement;
 
 class ColorLotElementView : public LotElementView
 {
 public:
-    ColorLotElementView();
+    ColorLotElementView(const QString name = QString());
+    ~ColorLotElementView();
 
     void update(const ColorLotElement& colorLotElement);
+
+private:
+    QFrame* _colorView;
+    QLabel* _textView;
 };
 
 #endif // COLORLOTELEMENTVIEW_H

@@ -20,9 +20,13 @@
 #include <QString>
 
 struct Color {
-    Color() {
-
-    }
+    Color() {}
+    Color(const int red, const int green, const int blue, const QString name)
+        : red(red),
+          green(green),
+          blue(blue),
+          name(name)
+    {}
 
     bool operator==(const Color& that) {
         return
@@ -32,8 +36,8 @@ struct Color {
                 this->green == that.green;
     }
 
-    QString name;
     int red, green, blue;
+    QString name;
 };
 
 #endif // COLOR_H

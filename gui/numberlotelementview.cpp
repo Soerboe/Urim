@@ -20,16 +20,16 @@
 NumberLotElementView::NumberLotElementView(const QString& name)
     : LotElementView(name)
 {
-    _elementView = new QLabel();
-    _layout->addWidget(_elementView);
+    _view = new QLabel();
+    _layout->addWidget(_view);
 }
 
 NumberLotElementView::~NumberLotElementView()
 {
-    delete _elementView;
+    delete _view;
 }
 
 void NumberLotElementView::update(const NumberLotElement& numberLotElement)
 {
-    _elementView->setText(QString::number(numberLotElement.number()));
+    _view->setText(QString::number(numberLotElement.number()));
 }

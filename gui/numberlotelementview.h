@@ -25,13 +25,13 @@ class NumberLotElement;
 class NumberLotElementView : public LotElementView
 {
 public:
-    NumberLotElementView(const QString &name);
+    NumberLotElementView(const QString &name = QString());
     ~NumberLotElementView();
 
     void update(const NumberLotElement& numberLotElement);
 
 private:
-    QLabel* _elementView;
+    QLabel* _view;
 };
 
 #endif // NUMBERLOTELEMENTVIEW_H

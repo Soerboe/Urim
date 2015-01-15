@@ -33,17 +33,17 @@ void LotViewer::view(const Lot& lot)
 
 void LotViewer::view(const NumberLotElement& numberLotElement, const int& id)
 {
-    shared_ptr<LotElementView> view = _views.value(id);
+    LotElementView* view = _views.value(id);
     view->update(numberLotElement);
 }
 
 void LotViewer::view(const ColorLotElement& colorLotElement, const int& id)
 {
-    shared_ptr<LotElementView> view = _views.value(id);
+    LotElementView* view = _views.value(id);
     view->update(colorLotElement);
 }
 
-void LotViewer::addView(const int& id, const shared_ptr<LotElementView> view)
+void LotViewer::addView(const int& id, LotElementView* view)
 {
     _views.insert(id, view);
 }

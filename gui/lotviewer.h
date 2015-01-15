@@ -33,9 +33,11 @@ public:
     void view(const NumberLotElement& numberLotElement, const int& id);
     void view(const ColorLotElement& colorLotElement, const int& id);
 
-    void addView(const int& id, const std::shared_ptr<LotElementView> view);
+    void addView(const int& id, LotElementView* view);
 private:
-    QMap<int, std::shared_ptr<LotElementView> > _views;
+    // Save as raw pointers here. Since the views are added
+    // to a Qt widget, Qt will handle the memory management.
+    QMap<int, LotElementView*> _views;
 };
 
 #endif // LOTVIEWER_H

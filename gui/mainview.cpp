@@ -24,6 +24,10 @@
 #include "lotelementview.h"
 #include "lotviewer.h"
 #include "numberlotelementview.h"
+#include "randomcolorgenerator.h"
+#include "colorlotelementview.h"
+
+using namespace std;
 
 MainView::MainView(DrawingController* controller, QWidget *parent) :
     QMainWindow(parent),
@@ -33,14 +37,25 @@ MainView::MainView(DrawingController* controller, QWidget *parent) :
     ui->setupUi(this);
 
     // TODO remove this testing setup code
-    std::shared_ptr<DrawingSession> session(new DrawingSession(true));
-    session->addGenerator(std::shared_ptr<RandomGenerator> (new RandomNumberGenerator(1, 1000)));
+    shared_ptr<DrawingSession> session(new DrawingSession(true));
+    session->addGenerator(shared_ptr<RandomGenerator> (new RandomNumberGenerator(1, 2)));
+
+    vector<Color> colors;
+    colors.push_back(Color(255, 0, 0, "Rød"));
+    colors.push_back(Color(0, 255, 0, "Grønn"));
+    colors.push_back(Color(0, 0, 255, "Blå"));
+    shared_ptr<RandomColorGenerator> colorGenerator (new RandomColorGenerator(colors));
+    session->addGenerator(colorGenerator);
+
     _drawingController->setDrawingSession(session);
 
-    std::shared_ptr<LotViewer> viewer(new LotViewer);
-    std::shared_ptr<NumberLotElementView> view(new NumberLotElementView("test"));
+    shared_ptr<LotViewer> viewer(new LotViewer);
+    NumberLotElementView* view = new NumberLotElementView("Tall");
     viewer->addView(0, view);
-    ui->verticalLayout->addWidget(view.get());
+    ColorLotElementView* colorView = new ColorLotElementView("Farge");
+    viewer->addView(1, colorView);
+    ui->verticalLayout->addWidget(view);
+    ui->verticalLayout->addWidget(colorView);
     _drawingController->setLotViewer(viewer);
 
     connect(ui->drawButton, SIGNAL(clicked()), SLOT(drawClicked()));

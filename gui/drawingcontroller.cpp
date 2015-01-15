@@ -24,7 +24,9 @@ DrawingController::DrawingController()
 void DrawingController::draw()
 {
     Lot lot = _drawingSession->draw();
-    _lotViewer->view(lot);
+    if (_lotViewer) {
+        _lotViewer->view(lot);
+    }
 }
 
 

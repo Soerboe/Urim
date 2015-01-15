@@ -15,9 +15,18 @@
 */
 
 #include "randomcolorgenerator.h"
+#include "colorlotelement.h"
 
-RandomColorGenerator::RandomColorGenerator(const std::vector<Color> colors)
+using namespace std;
+
+RandomColorGenerator::RandomColorGenerator(const vector<Color> colors)
     : RandomNumberGenerator(0, colors.size() - 1),
       _colors(colors)
 {
+}
+
+shared_ptr<LotElement> RandomColorGenerator::operator ()()
+{
+    int index = generate();
+    return shared_ptr<ColorLotElement> (new ColorLotElement(_colors.at(index)));
 }

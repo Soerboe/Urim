@@ -49,7 +49,7 @@ void RandomNumberGeneratorTest::cleanupTestCase()
 
 void RandomNumberGeneratorTest::shouldGenerateRandomInteger()
 {
-    RandomGenerator::pickSeed();
+    RandomGenerator::init();
     RandomNumberGenerator generator;
     shared_ptr<NumberLotElement> numberLotElement = dynamic_pointer_cast<NumberLotElement> (generator());
     QVERIFY(numberLotElement->number() >= 0);

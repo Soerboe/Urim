@@ -21,7 +21,7 @@
 
 int main(int argc, char *argv[])
 {
-    RandomGenerator::pickSeed();
+    RandomGenerator::init();
 
     QApplication a(argc, argv);
     DrawingController controller;

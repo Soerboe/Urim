@@ -27,10 +27,12 @@ public:
     RandomNumberGenerator(int min = 0, int max = std::numeric_limits<int>::max());
 
     virtual std::shared_ptr<LotElement> operator ()();
-    virtual unsigned long numberOfUniqueResults();
+    virtual unsigned long numberOfUniqueResults() const;
+
+protected:
+    int generate();
 
 private:
-    std::default_random_engine _rng;
     std::uniform_int_distribution<int> _dist;
 };
 

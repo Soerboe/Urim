@@ -39,7 +39,7 @@ public:
         return shared_ptr<LotElement>(new NumberLotElement(result));
     }
 
-    virtual unsigned long numberOfUniqueResults() {return _numberOfUniqueResults;}
+    virtual unsigned long numberOfUniqueResults() const {return _numberOfUniqueResults;}
 
 private:
     unsigned int _index;

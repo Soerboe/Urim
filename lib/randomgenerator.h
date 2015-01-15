@@ -29,13 +29,13 @@ public:
     virtual ~RandomGenerator();
 
     virtual std::shared_ptr<LotElement> operator ()() = 0;
-    virtual unsigned long numberOfUniqueResults() = 0;
+    virtual unsigned long numberOfUniqueResults() const = 0;
 
-    static std::random_device::result_type seed() {return _seed;}
-    static void pickSeed();
+    static void init();
 
 protected:
-    static std::random_device::result_type _seed;
+    static std::default_random_engine _rng;
+
 };
 
 #endif // RANDOMGENERATOR_H

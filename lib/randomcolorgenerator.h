@@ -26,6 +26,8 @@ class RandomColorGenerator : public RandomNumberGenerator
 public:
     RandomColorGenerator(const std::vector<Color> colors);
 
+    virtual std::shared_ptr<LotElement> operator ()();
+
 private:
     std::vector<Color> _colors;
 };

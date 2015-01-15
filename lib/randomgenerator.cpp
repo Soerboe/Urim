@@ -19,7 +19,7 @@
 
 using namespace std;
 
-random_device::result_type RandomGenerator::_seed = 0;
+default_random_engine RandomGenerator::_rng;
 
 RandomGenerator::RandomGenerator()
 {
@@ -29,12 +29,15 @@ RandomGenerator::~RandomGenerator()
 {
 }
 
-void RandomGenerator::pickSeed()
+void RandomGenerator::init()
 {
+    int seed;
     try {
         random_device rnd;
-        _seed = rnd();
+        seed = rnd();
     } catch (exception& e) {
-        _seed = time(NULL);
+        seed = time(NULL);
     }
+
+    _rng = default_random_engine(seed);
 }

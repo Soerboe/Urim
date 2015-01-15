@@ -20,17 +20,21 @@
 using namespace std;
 
 RandomNumberGenerator::RandomNumberGenerator(int min, int max)
-    : _rng(_seed),
-      _dist(min, max)
+    : _dist(min, max)
 {
 }
 
-std::shared_ptr<LotElement> RandomNumberGenerator::operator ()()
+shared_ptr<LotElement> RandomNumberGenerator::operator ()()
 {
-    return shared_ptr<LotElement>(new NumberLotElement(_dist(_rng)));
+    return shared_ptr<LotElement>(new NumberLotElement(generate()));
 }
 
-unsigned long RandomNumberGenerator::numberOfUniqueResults()
+unsigned long RandomNumberGenerator::numberOfUniqueResults() const
 {
     return _dist.max() - _dist.min() + 1;
+}
+
+int RandomNumberGenerator::generate()
+{
+    return _dist(_rng);
 }

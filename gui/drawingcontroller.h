@@ -20,6 +20,7 @@
 #include "drawingsession.h"
 
 class LotViewer;
+class LotLogger;
 
 class DrawingController
 {
@@ -30,10 +31,12 @@ public:
 
     void setDrawingSession(const std::shared_ptr<DrawingSession> drawingSession) {_drawingSession = drawingSession;}
     void setLotViewer(const std::shared_ptr<LotViewer> lotViewer) {_lotViewer = lotViewer;}
+    void setLotLogger(const std::shared_ptr<LotLogger> lotLogger) {_lotLogger = lotLogger;}
 
 private:
     std::shared_ptr<DrawingSession> _drawingSession;
     std::shared_ptr<LotViewer> _lotViewer;
+    std::shared_ptr<LotLogger> _lotLogger;
 };
 
 #endif // DRAWINGCONTROLLER_H

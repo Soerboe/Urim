@@ -26,6 +26,7 @@
 #include "numberlotelementview.h"
 #include "randomcolorgenerator.h"
 #include "colorlotelementview.h"
+#include "lotlogger.h"
 
 using namespace std;
 
@@ -35,6 +36,12 @@ MainView::MainView(DrawingController* controller, QWidget *parent) :
     _drawingController(controller)
 {
     ui->setupUi(this);
+    ui->logWidget->setVisible(false);
+    QStringList headerLabels;
+    headerLabels << tr("No.") << tr("Time") << tr("Lot");
+    ui->logWidget->setColumnCount(headerLabels.size());
+    ui->logWidget->setHeaderLabels(headerLabels);
+    ui->logWidget->resizeColumnToContents(0);
 
     // TODO remove this testing setup code
     shared_ptr<DrawingSession> session(new DrawingSession(true));
@@ -61,7 +68,12 @@ MainView::MainView(DrawingController* controller, QWidget *parent) :
     ui->verticalLayout->addWidget(colorView);
     _drawingController->setLotViewer(viewer);
 
+    shared_ptr<LotLogger> logger(new LotLogger(ui->logWidget));
+    _drawingController->setLotLogger(logger);
+
+
     connect(ui->drawButton, SIGNAL(clicked()), SLOT(drawClicked()));
+    connect(ui->showLogCheckBox, SIGNAL(toggled(bool)), SLOT(showLogChecked(bool)));
     //QTimer::singleShot(0, this, SLOT(showDrawingSetup()));
 }
 
@@ -84,4 +96,9 @@ void MainView::showDrawingSetup()
 void MainView::drawClicked()
 {
     _drawingController->draw();
+}
+
+void MainView::showLogChecked(bool checked)
+{
+    ui->logWidget->setVisible(checked);
 }

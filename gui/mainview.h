@@ -40,6 +40,7 @@ private:
 private slots:
     void showDrawingSetup();
     void drawClicked();
+    void showLogChecked(bool checked);
 };
 
 #endif // MAINVIEW_H

@@ -35,7 +35,7 @@ public:
 
     void addView(const int& id, LotElementView* view);
 private:
-    // Save as raw pointers here. Since the views are added
+    // Store views as raw pointers. Since the views are added
     // to a Qt widget, Qt will handle the memory management.
     QMap<int, LotElementView*> _views;
 };

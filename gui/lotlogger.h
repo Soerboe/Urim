@@ -14,24 +14,25 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "drawingcontroller.h"
-#include "lotviewer.h"
-#include "lotlogger.h"
+#ifndef LOTLOGGER_H
+#define LOTLOGGER_H
 
-DrawingController::DrawingController()
+#include <memory>
+
+class Lot;
+class QTreeWidget;
+class DrawingSession;
+
+class LotLogger
 {
-}
+public:
+    LotLogger(QTreeWidget* view);
 
-void DrawingController::draw()
-{
-    Lot lot = _drawingSession->draw();
-    if (_lotViewer) {
-        _lotViewer->view(lot);
-    }
+    void log(const Lot& lot, const std::shared_ptr<DrawingSession> drawingsession);
 
-    if (_lotLogger) {
-        _lotLogger->log(lot, _drawingSession);
-    }
-}
+private:
+    // The view is managed by Qt
+    QTreeWidget* _view;
+};
 
-
+#endif // LOTLOGGER_H

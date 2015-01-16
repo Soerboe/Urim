@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     lotelementview.cpp \
     numberlotelementview.cpp \
     lotviewer.cpp \
-    colorlotelementview.cpp
+    colorlotelementview.cpp \
+    lotlogger.cpp
 
 HEADERS  += mainview.h \
     drawingsetupdialog.h \
@@ -36,7 +37,8 @@ HEADERS  += mainview.h \
     lotelementview.h \
     numberlotelementview.h \
     lotviewer.h \
-    colorlotelementview.h
+    colorlotelementview.h \
+    lotlogger.h
 
 FORMS    += mainview.ui \
     drawingsetupdialog.ui

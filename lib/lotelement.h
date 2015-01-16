@@ -31,8 +31,13 @@ public:
     virtual bool operator!=(const LotElement& that) = 0;
 
     friend std::ostream& operator<< (std::ostream& output, const LotElement& lotElement);
+
+    std::string name() const {return _name;}
+    void setName(const std::string& name) {_name = name;}
+
 private:
     virtual void print(std::ostream& output) const = 0;
+    std::string _name;
 };
 
 #endif // LOTELEMENT_H

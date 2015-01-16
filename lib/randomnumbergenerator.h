@@ -26,11 +26,11 @@ class RandomNumberGenerator : public RandomGenerator
 public:
     RandomNumberGenerator(int min = 0, int max = std::numeric_limits<int>::max());
 
-    virtual std::shared_ptr<LotElement> operator ()();
+    virtual std::shared_ptr<LotElement> generate();
     virtual unsigned long numberOfUniqueResults() const;
 
 protected:
-    int generate();
+    int doGenerate();
 
 private:
     std::uniform_int_distribution<int> _dist;

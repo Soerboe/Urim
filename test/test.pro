@@ -33,7 +33,8 @@ SOURCES += \
     tst_randomnumbergenerator.cpp \
     benchmarking.cpp \
     tst_lotelementviewer.cpp \
-    tst_lot.cpp
+    tst_lot.cpp \
+    tst_randomgenerator.cpp
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 

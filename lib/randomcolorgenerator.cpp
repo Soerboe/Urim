@@ -25,8 +25,8 @@ RandomColorGenerator::RandomColorGenerator(const vector<Color> colors)
 {
 }
 
-shared_ptr<LotElement> RandomColorGenerator::operator ()()
+shared_ptr<LotElement> RandomColorGenerator::generate()
 {
-    int index = generate();
+    int index = doGenerate();
     return shared_ptr<ColorLotElement> (new ColorLotElement(_colors.at(index)));
 }

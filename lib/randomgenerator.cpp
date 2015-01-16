@@ -16,6 +16,7 @@
 
 #include "randomgenerator.h"
 #include <time.h>
+#include "lotelement.h"
 
 using namespace std;
 
@@ -27,6 +28,13 @@ RandomGenerator::RandomGenerator()
 
 RandomGenerator::~RandomGenerator()
 {
+}
+
+shared_ptr<LotElement> RandomGenerator::operator ()()
+{
+    shared_ptr<LotElement> lotElement = generate();
+    lotElement->setName(_name);
+    return lotElement;
 }
 
 void RandomGenerator::init()

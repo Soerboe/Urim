@@ -24,9 +24,9 @@ RandomNumberGenerator::RandomNumberGenerator(int min, int max)
 {
 }
 
-shared_ptr<LotElement> RandomNumberGenerator::operator ()()
+shared_ptr<LotElement> RandomNumberGenerator::generate()
 {
-    return shared_ptr<LotElement>(new NumberLotElement(generate()));
+    return shared_ptr<LotElement>(new NumberLotElement(doGenerate()));
 }
 
 unsigned long RandomNumberGenerator::numberOfUniqueResults() const
@@ -34,7 +34,7 @@ unsigned long RandomNumberGenerator::numberOfUniqueResults() const
     return _dist.max() - _dist.min() + 1;
 }
 
-int RandomNumberGenerator::generate()
+int RandomNumberGenerator::doGenerate()
 {
     return _dist(_rng);
 }

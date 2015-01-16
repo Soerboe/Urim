@@ -33,7 +33,7 @@ public:
           _numberOfUniqueResults(numberOfUniqueResults)
     {}
 
-    virtual shared_ptr<LotElement> operator ()() {
+    virtual shared_ptr<LotElement> generate() {
         int result = _results.at(_index);
         _index = _index >= _results.size() -1 ? 0 : _index + 1;
         return shared_ptr<LotElement>(new NumberLotElement(result));

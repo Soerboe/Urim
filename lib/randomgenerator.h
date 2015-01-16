@@ -28,14 +28,20 @@ public:
     RandomGenerator();
     virtual ~RandomGenerator();
 
-    virtual std::shared_ptr<LotElement> operator ()() = 0;
+    std::shared_ptr<LotElement> operator ()();
     virtual unsigned long numberOfUniqueResults() const = 0;
+    virtual std::shared_ptr<LotElement> generate() = 0;
 
     static void init();
+
+    std::string name() const {return _name;}
+    void setName(const std::string& name) {_name = name;}
 
 protected:
     static std::default_random_engine _rng;
 
+private:
+    std::string _name;
 };
 
 #endif // RANDOMGENERATOR_H

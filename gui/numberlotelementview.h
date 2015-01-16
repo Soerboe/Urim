@@ -25,7 +25,7 @@ class NumberLotElement;
 class NumberLotElementView : public LotElementView
 {
 public:
-    NumberLotElementView(const QString &name = QString());
+    NumberLotElementView();
     ~NumberLotElementView();
 
     void update(const NumberLotElement& numberLotElement);

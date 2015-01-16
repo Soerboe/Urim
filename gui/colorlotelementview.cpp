@@ -19,8 +19,7 @@
 #include <QPalette>
 #include "color.h"
 
-ColorLotElementView::ColorLotElementView(const QString name)
-    : LotElementView(name)
+ColorLotElementView::ColorLotElementView()
 {
     _colorView = new QFrame;
     _colorView->setAutoFillBackground(true);
@@ -37,6 +36,8 @@ ColorLotElementView::~ColorLotElementView()
 
 void ColorLotElementView::update(const ColorLotElement& colorLotElement)
 {
+    _label->setText(QString(colorLotElement.name().c_str()) + ":");
+
     Color color = colorLotElement.color();
     QPalette palette = _colorView->palette();
     palette.setColor(backgroundRole(), QColor(color.red, color.green, color.blue));

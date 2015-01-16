@@ -16,15 +16,15 @@
 
 #include "lotelementview.h"
 #include <QLabel>
+#include <QHBoxLayout>
 
-LotElementView::LotElementView(const QString& name, QWidget *parent) :
-    QFrame(parent),
-    _name(name)
+LotElementView::LotElementView(QWidget *parent) :
+    QFrame(parent)
 {
     _layout = new QHBoxLayout(this);
     setLayout(_layout);
-    QLabel* label = new QLabel(_name + ":");
-    _layout->addWidget(label);
+    _label = new QLabel;
+    _layout->addWidget(_label);
 }
 
 LotElementView::~LotElementView()

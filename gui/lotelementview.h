@@ -23,11 +23,13 @@
 #include "colorlotelement.h"
 #include "utils.h"
 
+class QLabel;
+
 class LotElementView : public QFrame
 {
     Q_OBJECT
 public:
-    explicit LotElementView(const QString& name = QString(), QWidget *parent = 0);
+    explicit LotElementView(QWidget *parent = 0);
     virtual ~LotElementView();
 
     virtual void update(const NumberLotElement& numberLotElement) {
@@ -42,9 +44,8 @@ public:
 
 protected:
     QHBoxLayout* _layout;
+    QLabel* _label;
 
-private:
-    QString _name;
 };
 
 #endif // LOTELEMENTVIEW_H

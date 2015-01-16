@@ -17,8 +17,7 @@
 #include "numberlotelementview.h"
 #include "numberlotelement.h"
 
-NumberLotElementView::NumberLotElementView(const QString& name)
-    : LotElementView(name)
+NumberLotElementView::NumberLotElementView()
 {
     _view = new QLabel();
     _layout->addWidget(_view);
@@ -31,5 +30,6 @@ NumberLotElementView::~NumberLotElementView()
 
 void NumberLotElementView::update(const NumberLotElement& numberLotElement)
 {
+    _label->setText(QString(numberLotElement.name().c_str()) + ":");
     _view->setText(QString::number(numberLotElement.number()));
 }

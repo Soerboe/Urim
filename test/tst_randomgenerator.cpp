@@ -39,16 +39,9 @@ class RandomGeneratorTest : public QObject
 {
     Q_OBJECT
 
-//public:
-//    RandomGeneratorTest();
-
 private Q_SLOTS:
     void shouldAddNameToGeneratedLotElement();
 };
-
-//RandomGeneratorTest::RandomGeneratorTest()
-//{
-//}
 
 
 void RandomGeneratorTest::shouldAddNameToGeneratedLotElement()
@@ -56,7 +49,7 @@ void RandomGeneratorTest::shouldAddNameToGeneratedLotElement()
     DummyRandomGenerator generator;
     generator.setName("Dummy");
     shared_ptr<LotElement> lotElement = generator();
-    QVERIFY(lotElement->name() == "Dummy2");
+    QVERIFY(lotElement->name() == "Dummy");
 }
 
 REGISTER_TEST(RandomGeneratorTest)

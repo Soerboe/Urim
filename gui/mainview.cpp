@@ -38,21 +38,24 @@ MainView::MainView(DrawingController* controller, QWidget *parent) :
 
     // TODO remove this testing setup code
     shared_ptr<DrawingSession> session(new DrawingSession(true));
-    session->addGenerator(shared_ptr<RandomGenerator> (new RandomNumberGenerator(1, 2)));
+    shared_ptr<RandomGenerator> g1(new RandomNumberGenerator(1, 1000));
+    g1->setName("Nummer");
+    session->addGenerator(g1);
 
     vector<Color> colors;
     colors.push_back(Color(255, 0, 0, "Rød"));
     colors.push_back(Color(0, 255, 0, "Grønn"));
     colors.push_back(Color(0, 0, 255, "Blå"));
     shared_ptr<RandomColorGenerator> colorGenerator (new RandomColorGenerator(colors));
+    colorGenerator->setName("Farge");
     session->addGenerator(colorGenerator);
 
     _drawingController->setDrawingSession(session);
 
     shared_ptr<LotViewer> viewer(new LotViewer);
-    NumberLotElementView* view = new NumberLotElementView("Tall");
+    NumberLotElementView* view = new NumberLotElementView();
     viewer->addView(0, view);
-    ColorLotElementView* colorView = new ColorLotElementView("Farge");
+    ColorLotElementView* colorView = new ColorLotElementView();
     viewer->addView(1, colorView);
     ui->verticalLayout->addWidget(view);
     ui->verticalLayout->addWidget(colorView);

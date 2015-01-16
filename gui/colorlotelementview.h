@@ -26,7 +26,7 @@ class ColorLotElement;
 class ColorLotElementView : public LotElementView
 {
 public:
-    ColorLotElementView(const QString name = QString());
+    ColorLotElementView();
     ~ColorLotElementView();
 
     void update(const ColorLotElement& colorLotElement);

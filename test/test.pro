@@ -45,7 +45,7 @@ win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../lib/release/ -lUrim
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../lib/debug/ -lUrimThummimLib
 else:unix: LIBS += -L$$OUT_PWD/../lib/ -lUrimThummimLib
 
-win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lib/release/UrimThummimLib.lib
-else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lib/debug/UrimThummimLib.lib
+win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lib/release/libUrimThummimLib.a
+else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lib/debug/libUrimThummimLib.a
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../lib/libUrimThummimLib.a
 

@@ -16,6 +16,7 @@
 
 #include "colorlotelement.h"
 #include "lotelementviewer.h"
+#include <typeinfo>
 
 using namespace std;
 

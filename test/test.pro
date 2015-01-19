@@ -14,6 +14,8 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
+lessThan(QT_VERSION, 5.3): error("Requires Qt >= 5.3")
+
 QT       += testlib
 QT       -= gui
 

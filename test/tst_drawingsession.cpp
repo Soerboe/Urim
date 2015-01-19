@@ -110,15 +110,13 @@ void DrawingSessionTest::shouldThrowExceptionWhenNoMoreUniqueResults()
     session.addGenerator(numberGeneratorStub);
     session.addGenerator(anotherNumberGeneratorStub);
 
-    try {
+    auto drawLots = [&session]() {
         for (int i = 0; i < 7; ++i) {
             session.draw();
         }
+    };
 
-        QFAIL("Should have thrown NoMoreUniqueResultsException");
-
-    } catch(NoMoreUniqueResultsException& e) {
-    }
+    QVERIFY_EXCEPTION_THROWN(drawLots(), NoMoreUniqueResultsException);
 }
 
 REGISTER_TEST(DrawingSessionTest)

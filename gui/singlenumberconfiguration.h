@@ -17,6 +17,7 @@
 #ifndef SINGLENUMBERCONFIGURATION_H
 #define SINGLENUMBERCONFIGURATION_H
 
+#include <QObject>
 #include "drawingconfiguration.h"
 
 #define DEFAULT_MIN 1
@@ -24,12 +25,14 @@
 
 class SingleNumberConfiguration : public DrawingConfiguration
 {
+    Q_OBJECT
+
 public:
-    SingleNumberConfiguration();
+    SingleNumberConfiguration(QObject* parent = 0);
     ~SingleNumberConfiguration();
 
     std::shared_ptr<DrawingSession> createDrawingSession();
-    virtual std::shared_ptr<LotViewer> createViewer();
+    std::shared_ptr<LotViewer> createViewer();
     void configure();
 
 public:

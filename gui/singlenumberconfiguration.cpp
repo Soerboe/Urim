@@ -23,8 +23,8 @@
 
 using namespace std;
 
-SingleNumberConfiguration::SingleNumberConfiguration()
-    : DrawingConfiguration(DrawingSetupDialog::tr("Single number")),
+SingleNumberConfiguration::SingleNumberConfiguration(QObject* parent)
+    : DrawingConfiguration(tr("Single number"), parent),
       _min(DEFAULT_MIN),
       _max(DEFAULT_MAX)
 {
@@ -37,7 +37,7 @@ SingleNumberConfiguration::~SingleNumberConfiguration()
 shared_ptr<DrawingSession> SingleNumberConfiguration::createDrawingSession()
 {
     shared_ptr<RandomNumberGenerator> generator(new RandomNumberGenerator(_min, _max));
-    generator->setName(DrawingSetupDialog::tr("Number").toStdString());
+    generator->setName(tr("Number").toStdString());
     shared_ptr<DrawingSession> session(new DrawingSession());
     session->addGenerator(generator);
     return session;

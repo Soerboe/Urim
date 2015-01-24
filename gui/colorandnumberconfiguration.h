@@ -17,6 +17,7 @@
 #ifndef COLORANDNUMBERCONFIGURATION_H
 #define COLORANDNUMBERCONFIGURATION_H
 
+#include <QObject>
 #include "drawingconfiguration.h"
 #include "color.h"
 
@@ -25,12 +26,14 @@
 
 class ColorAndNumberConfiguration : public DrawingConfiguration
 {
+    Q_OBJECT
+
 public:
-    ColorAndNumberConfiguration();
+    ColorAndNumberConfiguration(QObject* parent = 0);
     ~ColorAndNumberConfiguration();
 
     std::shared_ptr<DrawingSession> createDrawingSession();
-    virtual std::shared_ptr<LotViewer> createViewer();
+    std::shared_ptr<LotViewer> createViewer();
     void configure();
 
 private:

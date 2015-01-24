@@ -25,8 +25,8 @@
 
 using namespace std;
 
-ColorAndNumberConfiguration::ColorAndNumberConfiguration()
-    : DrawingConfiguration(DrawingSetupDialog::tr("Color and number")),
+ColorAndNumberConfiguration::ColorAndNumberConfiguration(QObject* parent)
+    : DrawingConfiguration(tr("Color and number"), parent),
       _min(DEFAULT_MIN),
       _max(DEFAULT_MAX)
 {
@@ -41,9 +41,9 @@ shared_ptr<DrawingSession> ColorAndNumberConfiguration::createDrawingSession()
 {
     shared_ptr<DrawingSession> session(new DrawingSession());
     shared_ptr<RandomColorGenerator> colorGenerator(new RandomColorGenerator(_colors));
-    colorGenerator->setName(DrawingSetupDialog::tr("Color").toStdString());
+    colorGenerator->setName(tr("Color").toStdString());
     shared_ptr<RandomNumberGenerator> numberGenerator(new RandomNumberGenerator(_min, _max));
-    numberGenerator->setName(DrawingSetupDialog::tr("Number").toStdString());
+    numberGenerator->setName(tr("Number").toStdString());
     session->addGenerator(colorGenerator);
     session->addGenerator(numberGenerator);
     return session;
@@ -66,9 +66,9 @@ void ColorAndNumberConfiguration::configure()
 
 void ColorAndNumberConfiguration::initColors()
 {
-    _colors.push_back(Color(255, 0, 0, DrawingSetupDialog::tr("Red")));
-    _colors.push_back(Color(0, 153, 0, DrawingSetupDialog::tr("Green")));
-    _colors.push_back(Color(0, 0, 255, DrawingSetupDialog::tr("Blue")));
-    _colors.push_back(Color(255, 255, 0, DrawingSetupDialog::tr("Yellow")));
+    _colors.push_back(Color(255, 0, 0, tr("Red")));
+    _colors.push_back(Color(0, 153, 0, tr("Green")));
+    _colors.push_back(Color(0, 0, 255, tr("Blue")));
+    _colors.push_back(Color(255, 255, 0, tr("Yellow")));
 }
 

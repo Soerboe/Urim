@@ -17,16 +17,19 @@
 #ifndef DRAWINGCONFIGURATION_H
 #define DRAWINGCONFIGURATION_H
 
+#include <QObject>
 #include <QString>
 #include <memory>
 
 class DrawingSession;
 class LotViewer;
 
-class DrawingConfiguration
+class DrawingConfiguration : public QObject
 {
+    Q_OBJECT
+
 public:
-    DrawingConfiguration(const QString& name);
+    DrawingConfiguration(const QString& name, QObject* parent = 0);
     virtual ~DrawingConfiguration();
 
     virtual std::shared_ptr<DrawingSession> createDrawingSession() = 0;

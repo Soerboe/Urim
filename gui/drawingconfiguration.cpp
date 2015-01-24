@@ -16,8 +16,9 @@
 
 #include "drawingconfiguration.h"
 
-DrawingConfiguration::DrawingConfiguration(const QString& name)
-    : _name(name)
+DrawingConfiguration::DrawingConfiguration(const QString& name, QObject* parent)
+    : QObject(parent),
+      _name(name)
 {
 
 }

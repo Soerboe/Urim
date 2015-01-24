@@ -14,38 +14,26 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DRAWINGSETUPDIALOG_H
-#define DRAWINGSETUPDIALOG_H
+#ifndef DRAWINGSETUPCONTROLLER_H
+#define DRAWINGSETUPCONTROLLER_H
 
-#include <QDialog>
-#include "drawingsetupcontroller.h"
+#include <QList>
+#include <memory>
+#include "drawingconfiguration.h"
 
-class LotViewer;
-
-namespace Ui {
-class DrawingSetupDialog;
-}
-
-class DrawingSetupDialog : public QDialog
+class DrawingSetupController
 {
-    Q_OBJECT
-
 public:
-    explicit DrawingSetupDialog(DrawingSetupController* controller, QWidget *parent = 0);
-    ~DrawingSetupDialog();
-    int exec(bool canTerminateApp);
+    DrawingSetupController();
+    ~DrawingSetupController();
 
-    std::shared_ptr<DrawingSession> getDrawingSession();
-    std::shared_ptr<LotViewer> getViewer();
-
-private slots:
-    void createClicked();
+    std::shared_ptr<DrawingConfiguration> at(int index) const {return _drawingConfigurations.at(index);}
+    int countConfigurations() {return _drawingConfigurations.count();}
 
 private:
-    Ui::DrawingSetupDialog* ui;
-    DrawingSetupController* _controller;
+    QList<std::shared_ptr<DrawingConfiguration> > _drawingConfigurations;
 
-    void setupConfigurations();
+    void initDefaultDrawingConfigurations();
 };
 
-#endif // DRAWINGSETUPDIALOG_H
+#endif // DRAWINGSETUPCONTROLLER_H

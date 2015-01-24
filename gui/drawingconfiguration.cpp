@@ -14,20 +14,16 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mainview.h"
-#include <QApplication>
-#include "randomgenerator.h"
-#include "drawingcontroller.h"
-#include "drawingsetupcontroller.h"
+#include "drawingconfiguration.h"
 
-int main(int argc, char *argv[])
+DrawingConfiguration::DrawingConfiguration(const QString& name)
+    : _name(name)
 {
-    RandomGenerator::init();
 
-    QApplication a(argc, argv);
-    DrawingSetupController setupController;
-    DrawingSetupDialog setupDialog(&setupController);
-    DrawingController controller;
-    MainView w(&controller, &setupDialog);
-    return a.exec();
 }
+
+DrawingConfiguration::~DrawingConfiguration()
+{
+
+}
+

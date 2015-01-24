@@ -31,7 +31,11 @@ SOURCES += main.cpp\
     numberlotelementview.cpp \
     lotviewer.cpp \
     colorlotelementview.cpp \
-    lotlogger.cpp
+    lotlogger.cpp \
+    drawingconfiguration.cpp \
+    drawingsetupcontroller.cpp \
+    singlenumberconfiguration.cpp \
+    colorandnumberconfiguration.cpp
 
 HEADERS  += mainview.h \
     drawingsetupdialog.h \
@@ -40,7 +44,11 @@ HEADERS  += mainview.h \
     numberlotelementview.h \
     lotviewer.h \
     colorlotelementview.h \
-    lotlogger.h
+    lotlogger.h \
+    drawingconfiguration.h \
+    drawingsetupcontroller.h \
+    singlenumberconfiguration.h \
+    colorandnumberconfiguration.h
 
 FORMS    += mainview.ui \
     drawingsetupdialog.ui

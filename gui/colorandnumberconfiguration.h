@@ -14,38 +14,30 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DRAWINGSETUPDIALOG_H
-#define DRAWINGSETUPDIALOG_H
+#ifndef COLORANDNUMBERCONFIGURATION_H
+#define COLORANDNUMBERCONFIGURATION_H
 
-#include <QDialog>
-#include "drawingsetupcontroller.h"
+#include "drawingconfiguration.h"
+#include "color.h"
 
-class LotViewer;
+#define DEFAULT_MIN 1
+#define DEFAULT_MAX 1000
 
-namespace Ui {
-class DrawingSetupDialog;
-}
-
-class DrawingSetupDialog : public QDialog
+class ColorAndNumberConfiguration : public DrawingConfiguration
 {
-    Q_OBJECT
-
 public:
-    explicit DrawingSetupDialog(DrawingSetupController* controller, QWidget *parent = 0);
-    ~DrawingSetupDialog();
-    int exec(bool canTerminateApp);
+    ColorAndNumberConfiguration();
+    ~ColorAndNumberConfiguration();
 
-    std::shared_ptr<DrawingSession> getDrawingSession();
-    std::shared_ptr<LotViewer> getViewer();
-
-private slots:
-    void createClicked();
+    std::shared_ptr<DrawingSession> createDrawingSession();
+    virtual std::shared_ptr<LotViewer> createViewer();
+    void configure();
 
 private:
-    Ui::DrawingSetupDialog* ui;
-    DrawingSetupController* _controller;
+    int _min, _max;
+    std::vector<Color> _colors;
 
-    void setupConfigurations();
+    void initColors();
 };
 
-#endif // DRAWINGSETUPDIALOG_H
+#endif // COLORANDNUMBERCONFIGURATION_H

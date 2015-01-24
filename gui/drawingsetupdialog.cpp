@@ -17,14 +17,52 @@
 #include "drawingsetupdialog.h"
 #include "ui_drawingsetupdialog.h"
 
-DrawingSetupDialog::DrawingSetupDialog(QWidget *parent) :
+DrawingSetupDialog::DrawingSetupDialog(DrawingSetupController* controller, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::DrawingSetupDialog)
+    ui(new Ui::DrawingSetupDialog),
+    _controller(controller)
 {
     ui->setupUi(this);
+
+    setupConfigurations();
+
+    connect(ui->createButton, SIGNAL(clicked()), SLOT(createClicked()));
+    connect(ui->cancelButton, SIGNAL(clicked()), SLOT(reject()));
 }
 
 DrawingSetupDialog::~DrawingSetupDialog()
 {
     delete ui;
+}
+
+int DrawingSetupDialog::exec(bool quitInsteadOfCancel)
+{
+    ui->cancelButton->setText(quitInsteadOfCancel ? tr("Quit") : tr("Cancel"));
+    return QDialog::exec();
+}
+
+std::shared_ptr<DrawingSession> DrawingSetupDialog::getDrawingSession()
+{
+    int selectedConfiguration = ui->drawingTypeSelector->currentIndex() - 1;
+    return _controller->at(selectedConfiguration)->createDrawingSession();
+}
+
+std::shared_ptr<LotViewer> DrawingSetupDialog::getViewer()
+{
+    int selectedConfiguration = ui->drawingTypeSelector->currentIndex() - 1;
+    return _controller->at(selectedConfiguration)->createViewer();
+}
+
+void DrawingSetupDialog::createClicked()
+{
+    accept();
+}
+
+void DrawingSetupDialog::setupConfigurations()
+{
+    ui->drawingTypeSelector->addItem(tr("Choose a type of drawing:"));
+
+    for(int i = 0; i < _controller->countConfigurations(); ++i) {
+        ui->drawingTypeSelector->addItem(_controller->at(i)->name());
+    }
 }

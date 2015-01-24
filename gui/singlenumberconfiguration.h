@@ -14,38 +14,26 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DRAWINGSETUPDIALOG_H
-#define DRAWINGSETUPDIALOG_H
+#ifndef SINGLENUMBERCONFIGURATION_H
+#define SINGLENUMBERCONFIGURATION_H
 
-#include <QDialog>
-#include "drawingsetupcontroller.h"
+#include "drawingconfiguration.h"
 
-class LotViewer;
+#define DEFAULT_MIN 1
+#define DEFAULT_MAX 1000
 
-namespace Ui {
-class DrawingSetupDialog;
-}
-
-class DrawingSetupDialog : public QDialog
+class SingleNumberConfiguration : public DrawingConfiguration
 {
-    Q_OBJECT
+public:
+    SingleNumberConfiguration();
+    ~SingleNumberConfiguration();
+
+    std::shared_ptr<DrawingSession> createDrawingSession();
+    virtual std::shared_ptr<LotViewer> createViewer();
+    void configure();
 
 public:
-    explicit DrawingSetupDialog(DrawingSetupController* controller, QWidget *parent = 0);
-    ~DrawingSetupDialog();
-    int exec(bool canTerminateApp);
-
-    std::shared_ptr<DrawingSession> getDrawingSession();
-    std::shared_ptr<LotViewer> getViewer();
-
-private slots:
-    void createClicked();
-
-private:
-    Ui::DrawingSetupDialog* ui;
-    DrawingSetupController* _controller;
-
-    void setupConfigurations();
+    int _min, _max;
 };
 
-#endif // DRAWINGSETUPDIALOG_H
+#endif // SINGLENUMBERCONFIGURATION_H

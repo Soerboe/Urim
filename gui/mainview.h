@@ -19,6 +19,7 @@
 
 #include <QMainWindow>
 #include "drawingcontroller.h"
+#include "drawingsetupdialog.h"
 
 namespace Ui {
 class MainView;
@@ -29,13 +30,14 @@ class MainView : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainView(DrawingController* controller, QWidget *parent = 0);
+    explicit MainView(DrawingController* controller, DrawingSetupDialog* setupDialog, QWidget *parent = 0);
     ~MainView();
 
 private:
     Ui::MainView *ui;
 
     DrawingController* _drawingController;
+    DrawingSetupDialog* _setupDialog;
 
 private slots:
     void showDrawingSetup();

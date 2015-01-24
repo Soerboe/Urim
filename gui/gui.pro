@@ -53,6 +53,8 @@ HEADERS  += mainview.h \
 FORMS    += mainview.ui \
     drawingsetupdialog.ui
 
+TRANSLATIONS = translations/urimthummim_no.ts
+
 CONFIG += c++11
 
 INCLUDEPATH += $$PWD/../lib/

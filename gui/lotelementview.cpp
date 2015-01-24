@@ -31,3 +31,12 @@ LotElementView::~LotElementView()
 {
     delete _layout;
 }
+
+void LotElementView::setLabelText(const LotElement& lotElement)
+{
+    QString text(lotElement.name().c_str());
+    if (!text.isEmpty()) {
+        text.append(":");
+    }
+    _label->setText(text);
+}

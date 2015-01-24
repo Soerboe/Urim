@@ -36,7 +36,7 @@ ColorLotElementView::~ColorLotElementView()
 
 void ColorLotElementView::update(const ColorLotElement& colorLotElement)
 {
-    _label->setText(QString(colorLotElement.name().c_str()) + ":");
+    setLabelText(colorLotElement);
 
     Color color = colorLotElement.color();
     QPalette palette = _colorView->palette();

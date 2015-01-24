@@ -81,13 +81,21 @@ public:
     void view(const NumberLotElement& numberLotElement, const int& id)
     {
         ignore_unused(id);
-        addLotElement(QString(numberLotElement.name().c_str()) + ": " + QString::number(numberLotElement.number()));
+        QString label(numberLotElement.name().c_str());
+        if (!label.isEmpty()) {
+            label.append(": ");
+        }
+        addLotElement(label + QString::number(numberLotElement.number()));
     }
 
     void view(const ColorLotElement& colorLotElement, const int& id)
     {
         ignore_unused(id);
-        addLotElement(QString(colorLotElement.name().c_str()) + ": " + QString(colorLotElement.color().name));
+        QString label(colorLotElement.name().c_str());
+        if (!label.isEmpty()) {
+            label.append(": ");
+        }
+        addLotElement(label + QString(colorLotElement.color().name));
     }
 
 private:

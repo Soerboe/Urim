@@ -46,6 +46,8 @@ protected:
     QHBoxLayout* _layout;
     QLabel* _label;
 
+    void setLabelText(const LotElement& lotElement);
+
 };
 
 #endif // LOTELEMENTVIEW_H

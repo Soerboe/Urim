@@ -30,6 +30,6 @@ NumberLotElementView::~NumberLotElementView()
 
 void NumberLotElementView::update(const NumberLotElement& numberLotElement)
 {
-    _label->setText(QString(numberLotElement.name().c_str()) + ":");
+    setLabelText(numberLotElement);
     _view->setText(QString::number(numberLotElement.number()));
 }

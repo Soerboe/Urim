@@ -18,7 +18,7 @@
 #define LOTVIEWER_H
 
 #include "lotelementviewer.h"
-#include <QMap>
+#include <QList>
 #include <memory>
 #include "lot.h"
 
@@ -33,11 +33,13 @@ public:
     void view(const NumberLotElement& numberLotElement, const int& id);
     void view(const ColorLotElement& colorLotElement, const int& id);
 
-    void addView(const int& id, LotElementView* view);
+    void addView(LotElementView* view);
+    LotElementView* at(int i) {return _views.at(i);}
+    int countViews() const {return _views.count();}
 private:
     // Store views as raw pointers. Since the views are added
     // to a Qt widget, Qt will handle the memory management.
-    QMap<int, LotElementView*> _views;
+    QList<LotElementView*> _views;
 };
 
 #endif // LOTVIEWER_H

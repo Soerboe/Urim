@@ -43,7 +43,7 @@ void LotViewer::view(const ColorLotElement& colorLotElement, const int& id)
     view->update(colorLotElement);
 }
 
-void LotViewer::addView(const int& id, LotElementView* view)
+void LotViewer::addView(LotElementView* view)
 {
-    _views.insert(id, view);
+    _views.append(view);
 }

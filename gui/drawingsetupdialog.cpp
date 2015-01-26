@@ -16,6 +16,9 @@
 
 #include "drawingsetupdialog.h"
 #include "ui_drawingsetupdialog.h"
+#include <QMessageBox>
+
+using namespace std;
 
 DrawingSetupDialog::DrawingSetupDialog(DrawingSetupController* controller, QWidget *parent) :
     QDialog(parent),
@@ -23,11 +26,14 @@ DrawingSetupDialog::DrawingSetupDialog(DrawingSetupController* controller, QWidg
     _controller(controller)
 {
     ui->setupUi(this);
+    setWindowTitle(qApp->applicationName());
 
     setupConfigurations();
 
     connect(ui->createButton, SIGNAL(clicked()), SLOT(createClicked()));
     connect(ui->cancelButton, SIGNAL(clicked()), SLOT(reject()));
+    connect(ui->drawingTypeSelector, SIGNAL(currentIndexChanged(int)), SLOT(configurationChanged(int)));
+    connect(ui->configureButton, SIGNAL(clicked()), SLOT(configureClicked()));
 }
 
 DrawingSetupDialog::~DrawingSetupDialog()
@@ -41,13 +47,13 @@ int DrawingSetupDialog::exec(bool quitInsteadOfCancel)
     return QDialog::exec();
 }
 
-std::shared_ptr<DrawingSession> DrawingSetupDialog::getDrawingSession()
+shared_ptr<DrawingSession> DrawingSetupDialog::getDrawingSession()
 {
     int selectedConfiguration = ui->drawingTypeSelector->currentIndex() - 1;
     return _controller->at(selectedConfiguration)->createDrawingSession();
 }
 
-std::shared_ptr<LotViewer> DrawingSetupDialog::getViewer()
+shared_ptr<LotViewer> DrawingSetupDialog::getViewer()
 {
     int selectedConfiguration = ui->drawingTypeSelector->currentIndex() - 1;
     return _controller->at(selectedConfiguration)->createViewer();
@@ -55,7 +61,31 @@ std::shared_ptr<LotViewer> DrawingSetupDialog::getViewer()
 
 void DrawingSetupDialog::createClicked()
 {
-    accept();
+    int selectedConfiguration = ui->drawingTypeSelector->currentIndex() - 1;
+
+    if (selectedConfiguration == -1) {
+        QMessageBox::warning(this, tr("No type of drawing chosen"), tr("Please choose a type of drawing."));
+    } else {
+        shared_ptr<DrawingConfiguration> configuration = _controller->at(selectedConfiguration);
+        if (configuration->isValid()) {
+            accept();
+        }
+    }
+}
+
+void DrawingSetupDialog::configurationChanged(int index)
+{
+    bool configurationChoosen = index > 0;
+    ui->configureButton->setEnabled(configurationChoosen);
+    ui->createButton->setEnabled(configurationChoosen);
+}
+
+void DrawingSetupDialog::configureClicked()
+{
+    int selectedConfiguration = ui->drawingTypeSelector->currentIndex() - 1;
+    if (selectedConfiguration >= 0) {
+        _controller->at(selectedConfiguration)->configure();
+    }
 }
 
 void DrawingSetupDialog::setupConfigurations()

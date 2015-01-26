@@ -20,7 +20,7 @@
 #include <QString>
 
 struct Color {
-    Color() {}
+
     Color(const int red, const int green, const int blue, const QString name)
         : red(red),
           green(green),

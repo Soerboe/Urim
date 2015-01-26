@@ -20,6 +20,7 @@
 #include "drawingsession.h"
 #include "numberlotelementview.h"
 #include "lotviewer.h"
+#include "configuresinglenumberdialog.h"
 
 using namespace std;
 
@@ -53,5 +54,18 @@ shared_ptr<LotViewer> SingleNumberConfiguration::createViewer()
 
 void SingleNumberConfiguration::configure()
 {
-    // TODO
+    ConfigureSingleNumberDialog dialog(name());
+    dialog.init(_min, _max, _uniqueResults);
+    int retval = dialog.exec();
+
+    if (retval == QDialog::Accepted) {
+        _min = dialog.min();
+        _max = dialog.max();
+        _uniqueResults = dialog.uniqueResults();
+    }
+}
+
+bool SingleNumberConfiguration::isValid()
+{
+    return _min <= _max;
 }

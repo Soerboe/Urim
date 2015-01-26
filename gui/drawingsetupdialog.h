@@ -40,6 +40,8 @@ public:
 
 private slots:
     void createClicked();
+    void configurationChanged(int index);
+    void configureClicked();
 
 private:
     Ui::DrawingSetupDialog* ui;

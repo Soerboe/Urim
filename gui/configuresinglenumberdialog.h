@@ -14,34 +14,33 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COLORANDNUMBERCONFIGURATION_H
-#define COLORANDNUMBERCONFIGURATION_H
+#ifndef CONFIGURESINGLENUMBERDIALOG_H
+#define CONFIGURESINGLENUMBERDIALOG_H
 
 #include <QObject>
-#include "drawingconfiguration.h"
-#include "color.h"
+#include "configuredrawingdialog.h"
 
-#define DEFAULT_MIN 1
-#define DEFAULT_MAX 1000
+class QSpinBox;
 
-class ColorAndNumberConfiguration : public DrawingConfiguration
+class ConfigureSingleNumberDialog : public ConfigureDrawingDialog
 {
     Q_OBJECT
 
 public:
-    ColorAndNumberConfiguration(QObject* parent = 0);
-    ~ColorAndNumberConfiguration();
+    ConfigureSingleNumberDialog(const QString name);
+    ~ConfigureSingleNumberDialog();
 
-    std::shared_ptr<DrawingSession> createDrawingSession();
-    std::shared_ptr<LotViewer> createViewer();
-    void configure();
-    bool isValid();
+    void init(int min, int max, bool uniqueResults);
+    virtual bool validate();
+    virtual void prepareResults();
+
+    int min() {return _min;}
+    int max() {return _max;}
 
 private:
     int _min, _max;
-    std::vector<Color> _colors;
-
-    void initColors();
+    QSpinBox* _minSpin;
+    QSpinBox* _maxSpin;
 };
 
-#endif // COLORANDNUMBERCONFIGURATION_H
+#endif // CONFIGURESINGLENUMBERDIALOG_H

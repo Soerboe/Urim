@@ -35,8 +35,13 @@ public:
     virtual std::shared_ptr<DrawingSession> createDrawingSession() = 0;
     virtual std::shared_ptr<LotViewer> createViewer() = 0;
     virtual void configure() = 0;
+    virtual bool isValid() = 0;
 
     QString name() {return _name;}
+    bool uniqueResults() {return _uniqueResults;}
+
+protected:
+    bool _uniqueResults;
 
 private:
     QString _name;

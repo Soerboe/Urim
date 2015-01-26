@@ -52,7 +52,7 @@ void LotElementViewerTest::shouldCallCorrectViewer()
 {
     QList<shared_ptr<LotElement> > lotElements;
     lotElements.append(shared_ptr<LotElement>(new NumberLotElement(0)));
-    lotElements.append(shared_ptr<LotElement>(new ColorLotElement(Color())));
+    lotElements.append(shared_ptr<LotElement>(new ColorLotElement(Color(0, 0, 0, ""))));
 
     DummyLotElementViewer viewer;
     int id = 0;

@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
     RandomGenerator::init();
 
     QApplication a(argc, argv);
+    a.setApplicationName("Urim Thummim");
     DrawingSetupController setupController;
     DrawingSetupDialog setupDialog(&setupController);
     DrawingController controller;

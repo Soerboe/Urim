@@ -31,6 +31,7 @@ MainView::MainView(DrawingController* controller, DrawingSetupDialog* setupDialo
     _setupDialog(setupDialog)
 {
     ui->setupUi(this);
+    setWindowTitle(qApp->applicationName());
     ui->logWidget->setVisible(false);
     QStringList headerLabels;
     headerLabels << tr("No.") << tr("Time") << tr("Lot");

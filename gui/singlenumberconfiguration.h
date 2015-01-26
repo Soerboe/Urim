@@ -34,6 +34,7 @@ public:
     std::shared_ptr<DrawingSession> createDrawingSession();
     std::shared_ptr<LotViewer> createViewer();
     void configure();
+    bool isValid();
 
 public:
     int _min, _max;

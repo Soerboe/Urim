@@ -35,7 +35,9 @@ SOURCES += main.cpp\
     drawingconfiguration.cpp \
     drawingsetupcontroller.cpp \
     singlenumberconfiguration.cpp \
-    colorandnumberconfiguration.cpp
+    colorandnumberconfiguration.cpp \
+    configuredrawingdialog.cpp \
+    configuresinglenumberdialog.cpp
 
 HEADERS  += mainview.h \
     drawingsetupdialog.h \
@@ -48,10 +50,13 @@ HEADERS  += mainview.h \
     drawingconfiguration.h \
     drawingsetupcontroller.h \
     singlenumberconfiguration.h \
-    colorandnumberconfiguration.h
+    colorandnumberconfiguration.h \
+    configuredrawingdialog.h \
+    configuresinglenumberdialog.h
 
 FORMS    += mainview.ui \
-    drawingsetupdialog.ui
+    drawingsetupdialog.ui \
+    configuredrawingdialog.ui
 
 TRANSLATIONS = translations/urimthummim_no.ts
 

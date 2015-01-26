@@ -14,34 +14,36 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COLORANDNUMBERCONFIGURATION_H
-#define COLORANDNUMBERCONFIGURATION_H
+#ifndef CONFIGUREDRAWINGDIALOG_H
+#define CONFIGUREDRAWINGDIALOG_H
 
-#include <QObject>
-#include "drawingconfiguration.h"
-#include "color.h"
+#include <QDialog>
 
-#define DEFAULT_MIN 1
-#define DEFAULT_MAX 1000
+namespace Ui {
+class ConfigureDrawingDialog;
+}
 
-class ColorAndNumberConfiguration : public DrawingConfiguration
+class ConfigureDrawingDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    ColorAndNumberConfiguration(QObject* parent = 0);
-    ~ColorAndNumberConfiguration();
+    explicit ConfigureDrawingDialog(const QString name, QWidget* parent = 0);
+    ~ConfigureDrawingDialog();
 
-    std::shared_ptr<DrawingSession> createDrawingSession();
-    std::shared_ptr<LotViewer> createViewer();
-    void configure();
-    bool isValid();
+    void init(bool uniqueResults);
+    bool uniqueResults() {return _uniqueResults;}
+
+protected:
+    virtual bool validate() = 0;
+    virtual void prepareResults();
+    Ui::ConfigureDrawingDialog* ui;
+
+private slots:
+    void okClicked();
 
 private:
-    int _min, _max;
-    std::vector<Color> _colors;
-
-    void initColors();
+    bool _uniqueResults;
 };
 
-#endif // COLORANDNUMBERCONFIGURATION_H
+#endif // CONFIGUREDRAWINGDIALOG_H

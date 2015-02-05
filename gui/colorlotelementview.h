@@ -31,6 +31,9 @@ public:
 
     void update(const ColorLotElement& colorLotElement);
 
+    virtual int subviewHeight() {return _textView->height();}
+    virtual int subviewWidth() {return _textView->width();}
+
 private:
     QFrame* _colorView;
     QLabel* _textView;

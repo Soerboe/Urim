@@ -52,8 +52,8 @@ shared_ptr<DrawingSession> ColorAndNumberConfiguration::createDrawingSession()
 shared_ptr<LotViewer> ColorAndNumberConfiguration::createViewer()
 {
     shared_ptr<LotViewer> viewer(new LotViewer);
-    ColorLotElementView* colorView = new ColorLotElementView();
-    NumberLotElementView* numberView = new NumberLotElementView();
+    ColorLotElementView* colorView = buildColorLotElementView(_colors);
+    NumberLotElementView* numberView = buildNumberLotElementView(_min, _max);
     viewer->addView(colorView);
     viewer->addView(numberView);
     return viewer;

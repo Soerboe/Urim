@@ -34,4 +34,23 @@ void DrawingController::draw()
     }
 }
 
+void DrawingController::showLotView(bool visible)
+{
+    _lotView->setVisible(visible);
+}
+
+void DrawingController::showLotViewFullscreen(bool fullscreen)
+{
+    if (fullscreen) {
+        _lotView->showFullScreen();
+    } else {
+        _lotView->showNormal();
+    }
+}
+
+void DrawingController::updateLotView()
+{
+    _lotView->initializeViews();
+}
+
 

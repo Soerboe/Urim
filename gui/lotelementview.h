@@ -18,10 +18,13 @@
 #define LOTELEMENTVIEW_H
 
 #include <QFrame>
-#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QLabel>
 #include "numberlotelement.h"
 #include "colorlotelement.h"
 #include "utils.h"
+
+#define MAX_FONT_SIZE 500
 
 class QLabel;
 
@@ -42,9 +45,18 @@ public:
         // this method is supposed to be overridden in subclass views wanting ColorLotElements
     }
 
+    virtual int subviewHeight() = 0;
+    virtual int subviewWidth() = 0;
+    int calcMaxFontSize();
+    void calcLocalFontSize(const QString& text);
+
+    void setLongestResultText(const QString& value) {_longestResultText = value;}
+    QString labelText() const {return _label->text();}
+
 protected:
-    QHBoxLayout* _layout;
+    QVBoxLayout* _layout;
     QLabel* _label;
+    QString _longestResultText;
 
     void setLabelText(const LotElement& lotElement);
 

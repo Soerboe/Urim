@@ -47,7 +47,7 @@ shared_ptr<DrawingSession> SingleNumberConfiguration::createDrawingSession()
 shared_ptr<LotViewer> SingleNumberConfiguration::createViewer()
 {
     shared_ptr<LotViewer> viewer(new LotViewer);
-    NumberLotElementView* view = new NumberLotElementView();
+    NumberLotElementView* view = buildNumberLotElementView(_min, _max);
     viewer->addView(view);
     return viewer;
 }

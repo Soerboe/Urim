@@ -30,6 +30,9 @@ public:
 
     void update(const NumberLotElement& numberLotElement);
 
+    virtual int subviewHeight() {return _view->height();}
+    virtual int subviewWidth() {return _view->width();}
+
 private:
     QLabel* _view;
 };

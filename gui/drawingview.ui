@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainView</class>
- <widget class="QMainWindow" name="MainView">
+ <class>DrawingView</class>
+ <widget class="QMainWindow" name="DrawingView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -62,6 +62,19 @@
      <height>20</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuDrawing">
+    <property name="title">
+     <string>&amp;Drawing</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>&amp;View</string>
+    </property>
+    <addaction name="showFullscreenAction"/>
+   </widget>
+   <addaction name="menuDrawing"/>
+   <addaction name="menuView"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -70,8 +83,17 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="showFullscreenAction"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="showFullscreenAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show fullscreen</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

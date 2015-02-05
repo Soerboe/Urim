@@ -32,6 +32,8 @@ public:
     int lotsCount() {return _lots.size();}
 
     void addGenerator(std::shared_ptr<RandomGenerator> generator);
+    int generatorsCount() const {return _generators.size();}
+    std::shared_ptr<RandomGenerator> generatorsAt(int i) {return _generators.at(i);}
 
 private:
     QString _name;

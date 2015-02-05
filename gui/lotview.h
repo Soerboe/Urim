@@ -14,35 +14,36 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MAINVIEW_H
-#define MAINVIEW_H
+#ifndef LOTVIEW_H
+#define LOTVIEW_H
 
-#include <QMainWindow>
-#include "drawingcontroller.h"
-#include "drawingsetupdialog.h"
+#include <QWidget>
+
+class DrawingController;
 
 namespace Ui {
-class MainView;
+class LotView;
 }
 
-class MainView : public QMainWindow
+class LotView : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit MainView(DrawingController* controller, DrawingSetupDialog* setupDialog, QWidget *parent = 0);
-    ~MainView();
+    explicit LotView(DrawingController* controller, QWidget* parent = 0);
+    ~LotView();
+
+    void initializeViews();
+
+    virtual void showEvent(QShowEvent *);
+    virtual void resizeEvent(QResizeEvent*);
+    void calcFontSize();
 
 private:
-    Ui::MainView *ui;
+    Ui::LotView *ui;
+    DrawingController* _controller;
 
-    DrawingController* _drawingController;
-    DrawingSetupDialog* _setupDialog;
-
-private slots:
-    void showDrawingSetup();
-    void drawClicked();
-    void showLogChecked(bool checked);
+    void initFont();
 };
 
-#endif // MAINVIEW_H
+#endif // LOTVIEW_H

@@ -15,6 +15,8 @@
 */
 
 #include "drawingconfiguration.h"
+#include "numberlotelementview.h"
+#include "colorlotelementview.h"
 
 DrawingConfiguration::DrawingConfiguration(const QString& name, QObject* parent)
     : QObject(parent),
@@ -27,5 +29,30 @@ DrawingConfiguration::DrawingConfiguration(const QString& name, QObject* parent)
 DrawingConfiguration::~DrawingConfiguration()
 {
 
+}
+
+NumberLotElementView* DrawingConfiguration::buildNumberLotElementView(int min, int max)
+{
+    NumberLotElementView* view = new NumberLotElementView();
+    QString minText = QString::number(min);
+    QString maxText = QString::number(max);
+    view->setLongestResultText(minText.length() > maxText.length() ? minText : maxText);
+    return view;
+}
+
+ColorLotElementView* DrawingConfiguration::buildColorLotElementView(std::vector<Color>& colors)
+{
+    ColorLotElementView* view = new ColorLotElementView();
+    QString longestColorName;
+    for (unsigned int i = 0; i < colors.size(); ++i) {
+        QString colorName = colors.at(i).name;
+        if (colorName.length() > longestColorName.length()) {
+            longestColorName = colorName;
+        }
+    }
+
+    view->setLongestResultText(longestColorName);
+
+    return view;
 }
 

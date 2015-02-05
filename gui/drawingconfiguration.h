@@ -20,9 +20,12 @@
 #include <QObject>
 #include <QString>
 #include <memory>
+#include <color.h>
 
 class DrawingSession;
 class LotViewer;
+class NumberLotElementView;
+class ColorLotElementView;
 
 class DrawingConfiguration : public QObject
 {
@@ -42,6 +45,9 @@ public:
 
 protected:
     bool _uniqueResults;
+
+    NumberLotElementView* buildNumberLotElementView(int min, int max);
+    ColorLotElementView* buildColorLotElementView(std::vector<Color>& colors);
 
 private:
     QString _name;

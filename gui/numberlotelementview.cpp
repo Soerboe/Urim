@@ -20,6 +20,8 @@
 NumberLotElementView::NumberLotElementView()
 {
     _view = new QLabel();
+    _view->setAlignment(Qt::AlignBaseline | Qt::AlignHCenter);
+    _view->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     _layout->addWidget(_view);
 }
 

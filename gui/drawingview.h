@@ -14,24 +14,40 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "drawingview.h"
-#include <QApplication>
-#include "randomgenerator.h"
+#ifndef DRAWINGVIEW_H
+#define DRAWINGVIEW_H
+
+#include <QMainWindow>
 #include "drawingcontroller.h"
-#include "drawingsetupcontroller.h"
-#include "lotview.h"
+#include "drawingsetupdialog.h"
+#include <QCloseEvent>
 
-int main(int argc, char *argv[])
-{
-    RandomGenerator::init();
-
-    QApplication a(argc, argv);
-    a.setApplicationName("Urim Thummim");
-    DrawingSetupController setupController;
-    DrawingSetupDialog setupDialog(&setupController);
-    DrawingController controller;
-    LotView lotView(&controller);
-    controller.setLotView(&lotView);
-    DrawingView drawingView(&controller, &setupDialog, &lotView);
-    return a.exec();
+namespace Ui {
+class DrawingView;
 }
+
+class DrawingView : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    explicit DrawingView(DrawingController* controller, DrawingSetupDialog* setupDialog, QWidget* parent = 0);
+    ~DrawingView();
+
+protected:
+    void closeEvent(QCloseEvent *);
+
+private:
+    Ui::DrawingView *ui;
+
+    DrawingController* _drawingController;
+    DrawingSetupDialog* _setupDialog;
+
+private slots:
+    void showDrawingSetup();
+    void drawClicked();
+    void showLogChecked(bool checked);
+    void showFullscreenClicked(bool checked);
+};
+
+#endif // DRAWINGVIEW_H

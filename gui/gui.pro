@@ -24,7 +24,6 @@ TARGET = UrimThummim
 TEMPLATE = app
 
 SOURCES += main.cpp\
-        mainview.cpp \
     drawingsetupdialog.cpp \
     drawingcontroller.cpp \
     lotelementview.cpp \
@@ -37,9 +36,11 @@ SOURCES += main.cpp\
     singlenumberconfiguration.cpp \
     colorandnumberconfiguration.cpp \
     configuredrawingdialog.cpp \
-    configuresinglenumberdialog.cpp
+    configuresinglenumberdialog.cpp \
+    lotview.cpp \
+    drawingview.cpp
 
-HEADERS  += mainview.h \
+HEADERS  += \
     drawingsetupdialog.h \
     drawingcontroller.h \
     lotelementview.h \
@@ -52,11 +53,15 @@ HEADERS  += mainview.h \
     singlenumberconfiguration.h \
     colorandnumberconfiguration.h \
     configuredrawingdialog.h \
-    configuresinglenumberdialog.h
+    configuresinglenumberdialog.h \
+    lotview.h \
+    drawingview.h
 
-FORMS    += mainview.ui \
+FORMS    += \
     drawingsetupdialog.ui \
-    configuredrawingdialog.ui
+    configuredrawingdialog.ui \
+    lotview.ui \
+    drawingview.ui
 
 TRANSLATIONS = translations/urimthummim_no.ts
 
@@ -72,3 +77,4 @@ else:unix: LIBS += -L$$OUT_PWD/../lib/ -lUrimThummimLib
 win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lib/release/libUrimThummimLib.a
 else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lib/debug/libUrimThummimLib.a
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../lib/libUrimThummimLib.a
+

@@ -14,8 +14,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mainview.h"
-#include "ui_mainview.h"
+#include "drawingview.h"
+#include "ui_drawingview.h"
 #include <QTimer>
 #include "drawingsetupdialog.h"
 #include "lotlogger.h"
@@ -24,9 +24,9 @@
 
 using namespace std;
 
-MainView::MainView(DrawingController* controller, DrawingSetupDialog* setupDialog, QWidget *parent) :
+DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setupDialog, QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainView),
+    ui(new Ui::DrawingView),
     _drawingController(controller),
     _setupDialog(setupDialog)
 {
@@ -44,27 +44,35 @@ MainView::MainView(DrawingController* controller, DrawingSetupDialog* setupDialo
 
     connect(ui->drawButton, SIGNAL(clicked()), SLOT(drawClicked()));
     connect(ui->showLogCheckBox, SIGNAL(toggled(bool)), SLOT(showLogChecked(bool)));
+    connect(ui->showFullscreenAction, SIGNAL(toggled(bool)), SLOT(showFullscreenClicked(bool)));
 
     QTimer::singleShot(0, this, SLOT(showDrawingSetup()));
 }
 
-MainView::~MainView()
+DrawingView::~DrawingView()
 {
     delete ui;
 }
 
-void MainView::showDrawingSetup()
+void DrawingView::closeEvent(QCloseEvent* event)
+{
+    event->accept();
+    if (event->isAccepted()) {
+        qApp->quit();
+    }
+}
+
+void DrawingView::showDrawingSetup()
 {
     int status = _setupDialog->exec(true);
 
     if (status == QDialog::Accepted) {
         _drawingController->setDrawingSession(_setupDialog->getDrawingSession());
         shared_ptr<LotViewer> viewer = _setupDialog->getViewer();
-        for (int i = 0; i < viewer->countViews(); ++i) {
-            ui->verticalLayout->addWidget(viewer->at(i));
-        }
         _drawingController->setLotViewer(viewer);
+        _drawingController->updateLotView();
 
+        _drawingController->showLotView(true);
         this->show();
     } else {
         qApp->exit(0);
@@ -72,12 +80,18 @@ void MainView::showDrawingSetup()
 
 }
 
-void MainView::drawClicked()
+void DrawingView::drawClicked()
 {
     _drawingController->draw();
 }
 
-void MainView::showLogChecked(bool checked)
+void DrawingView::showLogChecked(bool checked)
 {
     ui->logWidget->setVisible(checked);
+}
+
+void DrawingView::showFullscreenClicked(bool checked)
+{
+    _drawingController->showLotViewFullscreen(checked);
+    this->show();
 }

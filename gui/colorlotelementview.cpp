@@ -18,14 +18,18 @@
 #include "colorlotelement.h"
 #include <QPalette>
 #include "color.h"
+#include <QVBoxLayout>
 
 ColorLotElementView::ColorLotElementView()
 {
     _colorView = new QFrame;
     _colorView->setAutoFillBackground(true);
     _textView = new QLabel;
+    _textView->setAlignment(Qt::AlignHCenter);
+    QVBoxLayout* layout = new QVBoxLayout();
+    layout->addWidget(_textView);
+    _colorView->setLayout(layout);
     _layout->addWidget(_colorView);
-    _layout->addWidget(_textView);
 }
 
 ColorLotElementView::~ColorLotElementView()

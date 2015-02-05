@@ -55,7 +55,8 @@ HEADERS  += \
     configuredrawingdialog.h \
     configuresinglenumberdialog.h \
     lotview.h \
-    drawingview.h
+    drawingview.h \
+    urimthummim.h
 
 FORMS    += \
     drawingsetupdialog.ui \

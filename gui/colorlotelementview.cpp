@@ -34,8 +34,6 @@ ColorLotElementView::ColorLotElementView()
 
 ColorLotElementView::~ColorLotElementView()
 {
-    delete _colorView;
-    delete _textView;
 }
 
 void ColorLotElementView::update(const ColorLotElement& colorLotElement)

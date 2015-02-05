@@ -20,13 +20,16 @@
 #include "drawingcontroller.h"
 #include "drawingsetupcontroller.h"
 #include "lotview.h"
+#include "urimthummim.h"
 
 int main(int argc, char *argv[])
 {
     RandomGenerator::init();
 
     QApplication a(argc, argv);
-    a.setApplicationName("Urim Thummim");
+    a.setApplicationName(APPLICATION_NAME);
+    a.setApplicationDisplayName(APPLICATION_NAME);
+    a.setApplicationVersion(APPLICATION_VERSION);
     DrawingSetupController setupController;
     DrawingSetupDialog setupDialog(&setupController);
     DrawingController controller;

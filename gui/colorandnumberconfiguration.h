@@ -37,6 +37,9 @@ public:
     void configure();
     bool isValid();
 
+protected:
+    virtual QString detailedSummary();
+
 private:
     int _min, _max;
     std::vector<Color> _colors;

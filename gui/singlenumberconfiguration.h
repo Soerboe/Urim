@@ -36,8 +36,12 @@ public:
     void configure();
     bool isValid();
 
-public:
+protected:
+    virtual QString detailedSummary();
+
+private:
     int _min, _max;
+    QString _label;
 };
 
 #endif // SINGLENUMBERCONFIGURATION_H

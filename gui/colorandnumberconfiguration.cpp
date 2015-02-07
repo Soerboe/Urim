@@ -69,6 +69,11 @@ bool ColorAndNumberConfiguration::isValid()
     return _min <= _max && _colors.size() > 0;
 }
 
+QString ColorAndNumberConfiguration::detailedSummary()
+{
+    return QString();
+}
+
 void ColorAndNumberConfiguration::initColors()
 {
     _colors.push_back(Color(255, 0, 0, tr("Red")));

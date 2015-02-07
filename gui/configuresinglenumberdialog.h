@@ -21,6 +21,7 @@
 #include "configuredrawingdialog.h"
 
 class QSpinBox;
+class QLineEdit;
 
 class ConfigureSingleNumberDialog : public ConfigureDrawingDialog
 {
@@ -30,17 +31,20 @@ public:
     ConfigureSingleNumberDialog(const QString name);
     ~ConfigureSingleNumberDialog();
 
-    void init(int min, int max, bool uniqueResults);
+    void init(int min, int max, QString label, bool uniqueResults);
     virtual bool validate();
     virtual void prepareResults();
 
     int min() {return _min;}
     int max() {return _max;}
+    QString label() {return _label;}
 
 private:
     int _min, _max;
+    QString _label;
     QSpinBox* _minSpin;
     QSpinBox* _maxSpin;
+    QLineEdit* _labelLabel;
 };
 
 #endif // CONFIGURESINGLENUMBERDIALOG_H

@@ -26,11 +26,8 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
          <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+          <enum>QFrame::Box</enum>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
@@ -71,14 +68,14 @@
                </font>
               </property>
               <property name="text">
-               <string>Setup Drawing</string>
+               <string>Create Lottery</string>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QLabel" name="headingInfoLabel">
               <property name="text">
-               <string>Bla bla bla...</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select a type of lottery and configure the lots.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
@@ -94,7 +91,7 @@
        <item>
         <widget class="QLineEdit" name="nameEdit">
          <property name="placeholderText">
-          <string>Drawing name (optional)</string>
+          <string>Lottery name (optional)</string>
          </property>
         </widget>
        </item>

@@ -28,7 +28,18 @@ DrawingConfiguration::DrawingConfiguration(const QString& name, QObject* parent)
 
 DrawingConfiguration::~DrawingConfiguration()
 {
+}
 
+QString DrawingConfiguration::summary()
+{
+    QString s;
+    s.append("<h1>" + _name + "</h1>");
+    s.append(detailedSummary());
+    s.append("<div>");
+    s.append(tr("Unique results") + ": ");
+    s.append(_uniqueResults ? tr("Yes") : tr("No"));
+    s.append("</div>");
+    return s;
 }
 
 NumberLotElementView* DrawingConfiguration::buildNumberLotElementView(int min, int max)

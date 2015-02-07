@@ -20,11 +20,16 @@
 #include <QLabel>
 #include <QSpinBox>
 #include <limits>
+#include <QLineEdit>
 
 ConfigureSingleNumberDialog::ConfigureSingleNumberDialog(const QString name)
     : ConfigureDrawingDialog(name)
 {
-    QHBoxLayout* layout = new QHBoxLayout();
+    QHBoxLayout* labelLayout = new QHBoxLayout();
+    labelLayout->addWidget(new QLabel(tr("Label:")));
+    _labelLabel = new QLineEdit();
+    labelLayout->addWidget(_labelLabel);
+    QHBoxLayout* minMaxLayout = new QHBoxLayout();
     QLabel* minLabel = new QLabel(tr("Minimum number:"));
     QLabel* maxLabel = new QLabel(tr("Maximum number:"));
     _minSpin = new QSpinBox();
@@ -35,11 +40,12 @@ ConfigureSingleNumberDialog::ConfigureSingleNumberDialog(const QString name)
     _maxSpin->setMinimum(INT_MIN);
     _maxSpin->setMaximum(INT_MAX);
     _maxSpin->setValue(10);
-    layout->addWidget(minLabel);
-    layout->addWidget(_minSpin);
-    layout->addWidget(maxLabel);
-    layout->addWidget(_maxSpin);
-    ui->mainLayout->insertLayout(0, layout);
+    minMaxLayout->addWidget(minLabel);
+    minMaxLayout->addWidget(_minSpin);
+    minMaxLayout->addWidget(maxLabel);
+    minMaxLayout->addWidget(_maxSpin);
+    ui->mainLayout->insertLayout(0, minMaxLayout);
+    ui->mainLayout->insertLayout(1, labelLayout);
     adjustSize();
 }
 
@@ -47,11 +53,12 @@ ConfigureSingleNumberDialog::~ConfigureSingleNumberDialog()
 {
 }
 
-void ConfigureSingleNumberDialog::init(int min, int max, bool uniqueResults)
+void ConfigureSingleNumberDialog::init(int min, int max, QString label, bool uniqueResults)
 {
     ConfigureDrawingDialog::init(uniqueResults);
     _minSpin->setValue(min);
     _maxSpin->setValue(max);
+    _labelLabel->setText(label);
 }
 
 bool ConfigureSingleNumberDialog::validate()
@@ -64,5 +71,6 @@ void ConfigureSingleNumberDialog::prepareResults()
     ConfigureDrawingDialog::prepareResults();
     _min = _minSpin->value();
     _max = _maxSpin->value();
+    _label = _labelLabel->text();
 }
 

@@ -40,6 +40,7 @@ public:
     virtual void configure() = 0;
     virtual bool isValid() = 0;
 
+    QString summary();
     QString name() {return _name;}
     bool uniqueResults() {return _uniqueResults;}
 
@@ -48,6 +49,7 @@ protected:
 
     NumberLotElementView* buildNumberLotElementView(int min, int max);
     ColorLotElementView* buildColorLotElementView(std::vector<Color>& colors);
+    virtual QString detailedSummary() = 0;
 
 private:
     QString _name;

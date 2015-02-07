@@ -21,6 +21,8 @@
 #include "lotlogger.h"
 #include "lotviewer.h"
 #include "lotelementview.h"
+#include "nomoreuniqueresultsexception.h"
+#include <QMessageBox>
 
 using namespace std;
 
@@ -82,7 +84,12 @@ void DrawingView::showDrawingSetup()
 
 void DrawingView::drawClicked()
 {
-    _drawingController->draw();
+    try {
+        _drawingController->draw();
+    } catch (NoMoreUniqueResultsException& e) {
+        QMessageBox::warning(this, tr("No more unique results"), tr("All unique lots have been drawn."));
+        ui->drawButton->setEnabled(false);
+    }
 }
 
 void DrawingView::showLogChecked(bool checked)

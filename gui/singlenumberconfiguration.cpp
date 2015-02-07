@@ -27,7 +27,8 @@ using namespace std;
 SingleNumberConfiguration::SingleNumberConfiguration(QObject* parent)
     : DrawingConfiguration(tr("Single number"), parent),
       _min(DEFAULT_MIN),
-      _max(DEFAULT_MAX)
+      _max(DEFAULT_MAX),
+      _label(tr("Number"))
 {
 }
 
@@ -38,8 +39,8 @@ SingleNumberConfiguration::~SingleNumberConfiguration()
 shared_ptr<DrawingSession> SingleNumberConfiguration::createDrawingSession()
 {
     shared_ptr<RandomNumberGenerator> generator(new RandomNumberGenerator(_min, _max));
-    generator->setName(tr("Number").toStdString());
-    shared_ptr<DrawingSession> session(new DrawingSession());
+    generator->setName(_label.toStdString());
+    shared_ptr<DrawingSession> session(new DrawingSession(_uniqueResults));
     session->addGenerator(generator);
     return session;
 }
@@ -55,12 +56,13 @@ shared_ptr<LotViewer> SingleNumberConfiguration::createViewer()
 void SingleNumberConfiguration::configure()
 {
     ConfigureSingleNumberDialog dialog(name());
-    dialog.init(_min, _max, _uniqueResults);
+    dialog.init(_min, _max, _label, _uniqueResults);
     int retval = dialog.exec();
 
     if (retval == QDialog::Accepted) {
         _min = dialog.min();
         _max = dialog.max();
+        _label = dialog.label();
         _uniqueResults = dialog.uniqueResults();
     }
 }
@@ -68,4 +70,20 @@ void SingleNumberConfiguration::configure()
 bool SingleNumberConfiguration::isValid()
 {
     return _min <= _max;
+}
+
+QString SingleNumberConfiguration::detailedSummary()
+{
+    QString s;
+    s.append("<h3>");
+    s.append(tr("Draw a singel number"));
+    s.append("</h3>");
+    s.append("<div>");
+    s.append(tr("Minimum number") + ": " + QString::number(_min));
+    s.append("</div><div>");
+    s.append(tr("Maximum number") + ": " + QString::number(_max));
+    s.append("</div><div>");
+    s.append(tr("Label") + ": " + _label);
+    s.append("</div>");
+    return s;
 }

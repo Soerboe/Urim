@@ -27,6 +27,9 @@ DrawingSetupDialog::DrawingSetupDialog(DrawingSetupController* controller, QWidg
 {
     ui->setupUi(this);
     setWindowTitle(qApp->applicationName());
+    ui->header->setStyleSheet("#header {border: 1px solid #ff8522;}");
+    ui->summary->setStyleSheet("#summary {border: 1px solid #ff8522;}");
+    ui->createButton->setStyleSheet("#createButton {background-color: #ff8522;}");
 
     setupConfigurations();
 
@@ -78,13 +81,21 @@ void DrawingSetupDialog::configurationChanged(int index)
     bool configurationChoosen = index > 0;
     ui->configureButton->setEnabled(configurationChoosen);
     ui->createButton->setEnabled(configurationChoosen);
+    if (index > 0) {
+        shared_ptr<DrawingConfiguration> configuration = _controller->at(index - 1);
+        ui->summary->setHtml(configuration->summary());
+    } else {
+        ui->summary->clear();
+    }
 }
 
 void DrawingSetupDialog::configureClicked()
 {
     int selectedConfiguration = ui->drawingTypeSelector->currentIndex() - 1;
     if (selectedConfiguration >= 0) {
-        _controller->at(selectedConfiguration)->configure();
+        shared_ptr<DrawingConfiguration> configuration = _controller->at(selectedConfiguration);
+        configuration->configure();
+        ui->summary->setHtml(configuration->summary());
     }
 }
 

@@ -14,13 +14,17 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-TEMPLATE = subdirs
+lessThan(QT_VERSION, 5.3): error("Requires Qt >= 5.3")
 
-SUBDIRS += \
-    testutils \
-    coretest \
-    guitest
+include(../core/core.pri)
+include(../gui/gui.pri)
 
-coretest.depends = testutils
-guitest.depends = testutils
- 
+QT += core gui widgets
+
+TARGET = UrimThummim
+TEMPLATE = app
+
+CONFIG += c++11
+
+SOURCES += main.cpp
+

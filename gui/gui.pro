@@ -16,66 +16,14 @@
 
 lessThan(QT_VERSION, 5.3): error("Requires Qt >= 5.3")
 
-QT       += core gui
+include(../core/core.pri)
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT += core gui widgets
 
-TARGET = UrimThummim
-TEMPLATE = app
-
-SOURCES += main.cpp\
-    drawingsetupdialog.cpp \
-    drawingcontroller.cpp \
-    lotelementview.cpp \
-    numberlotelementview.cpp \
-    lotviewer.cpp \
-    colorlotelementview.cpp \
-    lotlogger.cpp \
-    drawingconfiguration.cpp \
-    drawingsetupcontroller.cpp \
-    singlenumberconfiguration.cpp \
-    colorandnumberconfiguration.cpp \
-    configuredrawingdialog.cpp \
-    configuresinglenumberdialog.cpp \
-    lotview.cpp \
-    drawingview.cpp
-
-HEADERS  += \
-    drawingsetupdialog.h \
-    drawingcontroller.h \
-    lotelementview.h \
-    numberlotelementview.h \
-    lotviewer.h \
-    colorlotelementview.h \
-    lotlogger.h \
-    drawingconfiguration.h \
-    drawingsetupcontroller.h \
-    singlenumberconfiguration.h \
-    colorandnumberconfiguration.h \
-    configuredrawingdialog.h \
-    configuresinglenumberdialog.h \
-    lotview.h \
-    drawingview.h \
-    urimthummim.h
-
-FORMS    += \
-    drawingsetupdialog.ui \
-    configuredrawingdialog.ui \
-    lotview.ui \
-    drawingview.ui
-
-TRANSLATIONS = translations/urimthummim_no.ts
+TEMPLATE = lib
 
 CONFIG += c++11
 
-INCLUDEPATH += $$PWD/../lib/
-DEPENDPATH += $$PWD/../lib/
-
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../lib/release/ -lUrimThummimLib
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../lib/debug/ -lUrimThummimLib
-else:unix: LIBS += -L$$OUT_PWD/../lib/ -lUrimThummimLib
-
-win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lib/release/libUrimThummimLib.a
-else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lib/debug/libUrimThummimLib.a
-else:unix: PRE_TARGETDEPS += $$OUT_PWD/../lib/libUrimThummimLib.a
-
+HEADERS += $$PWD/*.h
+SOURCES += $$PWD/*.cpp
+FORMS += $$PWD/*.ui

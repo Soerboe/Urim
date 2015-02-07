@@ -14,13 +14,14 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-TEMPLATE = subdirs
+lessThan(QT_VERSION, 5.3): error("Requires Qt >= 5.3")
 
-SUBDIRS += \
-    testutils \
-    coretest \
-    guitest
+QT += core
+QT -= gui
 
-coretest.depends = testutils
-guitest.depends = testutils
- 
+TEMPLATE = lib
+
+CONFIG += c++11
+
+HEADERS += $$PWD/*.h
+SOURCES += $$PWD/*.cpp

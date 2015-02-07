@@ -14,13 +14,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-TEMPLATE = subdirs
+INCLUDEPATH += $$PWD
+DEPENDPATH += $$PWD
 
-SUBDIRS += \
-    testutils \
-    coretest \
-    guitest
-
-coretest.depends = testutils
-guitest.depends = testutils
- 
+HEADERS += $$PWD/*.h

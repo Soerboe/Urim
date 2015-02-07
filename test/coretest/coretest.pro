@@ -14,38 +14,21 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-QT       -= gui
+lessThan(QT_VERSION, 5.3): error("Requires Qt >= 5.3")
 
-TARGET = UrimThummimLib
-TEMPLATE = lib
-CONFIG += staticlib
+include(../testutils/testutils.pri)
+include(../../core/core.pri)
 
-SOURCES += \
-    randomgenerator.cpp \
-    randomnumbergenerator.cpp \
-    drawingsession.cpp \
-    randomcolorgenerator.cpp \
-    lotelement.cpp \
-    colorlotelement.cpp \
-    numberlotelement.cpp \
-    lot.cpp
+QT += testlib
+QT -= gui
 
-HEADERS += \
-    randomgenerator.h \
-    randomnumbergenerator.h \
-    drawingsession.h \
-    color.h \
-    randomcolorgenerator.h \
-    nomoreuniqueresultsexception.h \
-    lotelement.h \
-    lotelementviewer.h \
-    numberlotelement.h \
-    colorlotelement.h \
-    lot.h \
-    utils.h
-unix {
-    target.path = /usr/lib
-    INSTALLS += target
-}
-
+TARGET = coretester
+CONFIG += console
+CONFIG -= app_bundle
 CONFIG += c++11
+
+TEMPLATE = app
+
+SOURCES += *.cpp
+
+

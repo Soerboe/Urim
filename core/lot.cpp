@@ -50,7 +50,7 @@ void Lot::view(LotElementViewer& viewer)
     }
 }
 
-shared_ptr<LotElement> Lot::at(const int& index) const
+shared_ptr<LotElement> Lot::at(int index) const
 {
     return _lotElements.at(index);
 }

@@ -33,12 +33,12 @@ public:
     explicit LotView(QWidget* parent = 0);
     ~LotView();
 
-    virtual void view(const NumberLotElement& numberLotElement, const int& id) {
+    virtual void view(const NumberLotElement& numberLotElement, int id) {
         ignore_unused(numberLotElement, id);
         // this method is supposed to be overridden in subclass views expecting NumberLotElements
     }
 
-    virtual void view(const ColorLotElement& colorLotElement, const int& id) {
+    virtual void view(const ColorLotElement& colorLotElement, int id) {
         ignore_unused(colorLotElement, id);
         // this method is supposed to be overridden in subclass views expecting ColorLotElements
     }

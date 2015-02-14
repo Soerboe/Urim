@@ -31,7 +31,7 @@ public:
     explicit SingleNumberView(const QString& longestText, QWidget *parent = 0);
     ~SingleNumberView();
 
-    void view(const NumberLotElement& numberLotElement, const int& id);
+    void view(const NumberLotElement& numberLotElement, int id);
 
 protected:
     virtual void calcViewSize();

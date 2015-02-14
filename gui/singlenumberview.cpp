@@ -30,7 +30,7 @@ SingleNumberView::~SingleNumberView()
     delete ui;
 }
 
-void SingleNumberView::view(const NumberLotElement& numberLotElement, const int& id)
+void SingleNumberView::view(const NumberLotElement& numberLotElement, int id)
 {
     ignore_unused(id);
 

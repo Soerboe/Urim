@@ -35,7 +35,7 @@ ColorAndNumberView_POG::~ColorAndNumberView_POG()
     delete ui;
 }
 
-void ColorAndNumberView_POG::view(const NumberLotElement& numberLotElement, const int& id)
+void ColorAndNumberView_POG::view(const NumberLotElement& numberLotElement, int id)
 {
     ignore_unused(id);
 
@@ -43,7 +43,7 @@ void ColorAndNumberView_POG::view(const NumberLotElement& numberLotElement, cons
     calcViewSize();
 }
 
-void ColorAndNumberView_POG::view(const ColorLotElement& colorLotElement, const int& id)
+void ColorAndNumberView_POG::view(const ColorLotElement& colorLotElement, int id)
 {
     ignore_unused(id);
 

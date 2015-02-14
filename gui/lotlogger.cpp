@@ -78,7 +78,7 @@ public:
         _item.setText(2, text);
     }
 
-    void view(const NumberLotElement& numberLotElement, const int& id)
+    void view(const NumberLotElement& numberLotElement, int id)
     {
         ignore_unused(id);
         QString label(numberLotElement.name().c_str());
@@ -88,7 +88,7 @@ public:
         addLotElement(label + QString::number(numberLotElement.number()));
     }
 
-    void view(const ColorLotElement& colorLotElement, const int& id)
+    void view(const ColorLotElement& colorLotElement, int id)
     {
         ignore_unused(id);
         QString label(colorLotElement.name().c_str());

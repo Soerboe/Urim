@@ -22,8 +22,8 @@
 class NumberLotElement : public LotElement
 {
 public:
-    NumberLotElement(const int& number);
-    virtual void view(LotElementViewer &viewer, const int& id);
+    NumberLotElement(int number);
+    virtual void view(LotElementViewer &viewer, int id);
     virtual bool operator==(const LotElement& that);
     virtual bool operator!=(const LotElement& that);
 

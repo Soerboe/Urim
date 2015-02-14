@@ -29,12 +29,12 @@ class DummyLotElementViewer : public LotElementViewer {
 public:
     QStringList textView;
 
-    void view(const NumberLotElement& numberLotElement, const int& id) {
+    void view(const NumberLotElement& numberLotElement, int id) {
         ignore_unused(numberLotElement, id);
         textView.append("NumberLotElement");
     }
 
-    void view(const ColorLotElement& colorLotElement, const int& id) {
+    void view(const ColorLotElement& colorLotElement, int id) {
         ignore_unused(colorLotElement, id);
         textView.append("ColorLotElement");
     }

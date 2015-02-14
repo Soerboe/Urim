@@ -25,7 +25,7 @@ ColorLotElement::ColorLotElement(const Color &color)
 {
 }
 
-void ColorLotElement::view(LotElementViewer &viewer, const int& id)
+void ColorLotElement::view(LotElementViewer &viewer, int id)
 {
     viewer.view(*this, id);
 }

@@ -18,12 +18,12 @@
 #include "numberlotelement.h"
 #include "lotelementviewer.h"
 
-NumberLotElement::NumberLotElement(const int& number)
+NumberLotElement::NumberLotElement(int number)
     : _number(number)
 {
 }
 
-void NumberLotElement::view(LotElementViewer &viewer, const int& id)
+void NumberLotElement::view(LotElementViewer &viewer, int id)
 {
     viewer.view(*this, id);
 }

@@ -33,7 +33,7 @@ public:
     bool operator==(const Lot& that);
     void view(LotElementViewer& viewer);
 
-    std::shared_ptr<LotElement> at(const int& index) const;
+    std::shared_ptr<LotElement> at(int index) const;
     size_t count() const;
 
     friend std::ostream& operator<< (std::ostream& output, const Lot& lot);

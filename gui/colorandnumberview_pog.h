@@ -31,8 +31,8 @@ public:
     explicit ColorAndNumberView_POG(const QString& longestText, QWidget *parent = 0);
     ~ColorAndNumberView_POG();
 
-    virtual void view(const NumberLotElement& numberLotElement, const int& id);
-    virtual void view(const ColorLotElement& colorLotElement, const int& id);
+    virtual void view(const NumberLotElement& numberLotElement, int id);
+    virtual void view(const ColorLotElement& colorLotElement, int id);
 
 protected:
     virtual void calcViewSize();

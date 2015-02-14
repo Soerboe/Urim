@@ -14,36 +14,31 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "lotviewer.h"
-#include "numberlotelementview.h"
-#include "colorlotelementview.h"
+#ifndef LOTWINDOW_H
+#define LOTWINDOW_H
 
-using namespace std;
+#include <QWidget>
 
-LotViewer::LotViewer()
-{
+class LotView;
+
+namespace Ui {
+class LotWindow;
 }
 
-void LotViewer::view(const Lot& lot)
+class LotWindow : public QWidget
 {
-    for (unsigned int i = 0; i < lot.count(); ++i) {
-        lot.at(i)->view(*this, i);
-    }
-}
+    Q_OBJECT
 
-void LotViewer::view(const NumberLotElement& numberLotElement, const int& id)
-{
-    LotElementView* view = _views.value(id);
-    view->update(numberLotElement);
-}
+public:
+    explicit LotWindow(QWidget *parent = 0);
+    ~LotWindow();
 
-void LotViewer::view(const ColorLotElement& colorLotElement, const int& id)
-{
-    LotElementView* view = _views.value(id);
-    view->update(colorLotElement);
-}
+    void setView(LotView* view);
 
-void LotViewer::addView(LotElementView* view)
-{
-    _views.append(view);
-}
+private:
+    Ui::LotWindow *ui;
+
+    LotView* _lotView;
+};
+
+#endif // LOTWINDOW_H

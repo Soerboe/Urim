@@ -56,10 +56,10 @@ shared_ptr<DrawingSession> DrawingSetupDialog::getDrawingSession()
     return _controller->at(selectedConfiguration)->createDrawingSession();
 }
 
-shared_ptr<LotViewer> DrawingSetupDialog::getViewer()
+LotView* DrawingSetupDialog::getView()
 {
     int selectedConfiguration = ui->drawingTypeSelector->currentIndex() - 1;
-    return _controller->at(selectedConfiguration)->createViewer();
+    return _controller->at(selectedConfiguration)->createView();
 }
 
 void DrawingSetupDialog::createClicked()

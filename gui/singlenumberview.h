@@ -14,32 +14,32 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LOTVIEWER_H
-#define LOTVIEWER_H
+#ifndef SINGLENUMBERVIEW_H
+#define SINGLENUMBERVIEW_H
 
-#include "lotelementviewer.h"
-#include <QList>
-#include <memory>
-#include "lot.h"
+#include "lotviewtextasmain.h"
 
-class LotElementView;
+namespace Ui {
+class SingleNumberView;
+}
 
-class LotViewer : public LotElementViewer
+class SingleNumberView : public LotViewTextAsMain
 {
+    Q_OBJECT
+
 public:
-    LotViewer();
+    explicit SingleNumberView(const QString& longestText, QWidget *parent = 0);
+    ~SingleNumberView();
 
-    void view(const Lot& lot);
     void view(const NumberLotElement& numberLotElement, const int& id);
-    void view(const ColorLotElement& colorLotElement, const int& id);
 
-    void addView(LotElementView* view);
-    LotElementView* at(int i) {return _views.at(i);}
-    int countViews() const {return _views.count();}
+protected:
+    virtual void calcViewSize();
+
 private:
-    // Store views as raw pointers. Since the views are added
-    // to a Qt widget, Qt will handle the memory management.
-    QList<LotElementView*> _views;
+    Ui::SingleNumberView *ui;
+
+    void calcLocalFontSize(const QFont& font);
 };
 
-#endif // LOTVIEWER_H
+#endif // SINGLENUMBERVIEW_H

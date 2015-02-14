@@ -32,7 +32,7 @@ public:
     ~SingleNumberConfiguration();
 
     std::shared_ptr<DrawingSession> createDrawingSession();
-    std::shared_ptr<LotViewer> createViewer();
+    LotView* createView();
     void configure();
     bool isValid();
 

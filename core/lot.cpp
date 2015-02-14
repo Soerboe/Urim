@@ -43,6 +43,13 @@ bool Lot::operator==(const Lot &that)
     return true;
 }
 
+void Lot::view(LotElementViewer& viewer)
+{
+    for (int i = 0; i < _lotElements.size(); ++i) {
+        _lotElements.at(i)->view(viewer, i);
+    }
+}
+
 shared_ptr<LotElement> Lot::at(const int& index) const
 {
     return _lotElements.at(index);

@@ -14,27 +14,30 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef NUMBERLOTELEMENTVIEW_H
-#define NUMBERLOTELEMENTVIEW_H
+#include "lotwindow.h"
+#include "ui_lotwindow.h"
+#include "lotview.h"
 
-#include "lotelementview.h"
-#include <QLabel>
-
-class NumberLotElement;
-
-class NumberLotElementView : public LotElementView
+LotWindow::LotWindow(QWidget *parent) :
+    QWidget(parent, Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowMinMaxButtonsHint),
+    ui(new Ui::LotWindow),
+    _lotView(0)
 {
-public:
-    NumberLotElementView();
-    ~NumberLotElementView();
+    ui->setupUi(this);
+}
 
-    void update(const NumberLotElement& numberLotElement);
+LotWindow::~LotWindow()
+{
+    delete ui;
+}
 
-    virtual int subviewHeight() {return _view->height();}
-    virtual int subviewWidth() {return _view->width();}
+void LotWindow::setView(LotView* view)
+{
+    // TODO delete this after taking out?
+    ui->layout->takeAt(0);
 
-private:
-    QLabel* _view;
-};
+    view->setMinimumSize(200, 100);
+    ui->layout->addWidget(view);
+    _lotView = view;
+}
 
-#endif // NUMBERLOTELEMENTVIEW_H

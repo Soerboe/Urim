@@ -18,9 +18,8 @@
 #include "drawingsetupdialog.h"
 #include "randomnumbergenerator.h"
 #include "drawingsession.h"
-#include "numberlotelementview.h"
-#include "lotviewer.h"
 #include "configuresinglenumberdialog.h"
+#include "singlenumberview.h"
 
 using namespace std;
 
@@ -45,12 +44,11 @@ shared_ptr<DrawingSession> SingleNumberConfiguration::createDrawingSession()
     return session;
 }
 
-shared_ptr<LotViewer> SingleNumberConfiguration::createViewer()
+LotView* SingleNumberConfiguration::createView()
 {
-    shared_ptr<LotViewer> viewer(new LotViewer);
-    NumberLotElementView* view = buildNumberLotElementView(_min, _max);
-    viewer->addView(view);
-    return viewer;
+    QString minText = QString::number(_min);
+    QString maxText = QString::number(_max);
+    return new SingleNumberView(minText.length() > maxText.length() ? minText : maxText);
 }
 
 void SingleNumberConfiguration::configure()

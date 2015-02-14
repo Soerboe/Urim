@@ -36,7 +36,7 @@ public:
     int exec(bool canTerminateApp);
 
     std::shared_ptr<DrawingSession> getDrawingSession();
-    std::shared_ptr<LotViewer> getViewer();
+    LotView* getView();
 
 private slots:
     void createClicked();

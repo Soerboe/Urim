@@ -15,18 +15,20 @@
 */
 
 #include "drawingcontroller.h"
-#include "lotviewer.h"
+#include "lotview.h"
 #include "lotlogger.h"
 
-DrawingController::DrawingController()
+DrawingController::DrawingController(LotWindow* lotWindow)
+    : _lotWindow(lotWindow),
+      _lotView(0)
 {
 }
 
 void DrawingController::draw()
 {
     Lot lot = _drawingSession->draw();
-    if (_lotViewer) {
-        _lotViewer->view(lot);
+    if (_lotView) {
+        lot.view(*_lotView);
     }
 
     if (_lotLogger) {
@@ -34,23 +36,23 @@ void DrawingController::draw()
     }
 }
 
-void DrawingController::showLotView(bool visible)
+void DrawingController::showLotWindow(bool visible)
 {
-    _lotView->setVisible(visible);
+    _lotWindow->setVisible(visible);
 }
 
-void DrawingController::showLotViewFullscreen(bool fullscreen)
+void DrawingController::showLotWindowFullscreen(bool fullscreen)
 {
     if (fullscreen) {
-        _lotView->showFullScreen();
+        _lotWindow->showFullScreen();
     } else {
-        _lotView->showNormal();
+        _lotWindow->showNormal();
     }
 }
 
-void DrawingController::updateLotView()
+void DrawingController::setLotView(LotView* view)
 {
-    _lotView->initializeViews();
+    _lotView = view;
+    _lotWindow->setView(view);
 }
-
 

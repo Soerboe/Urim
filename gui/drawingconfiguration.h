@@ -20,12 +20,9 @@
 #include <QObject>
 #include <QString>
 #include <memory>
-#include <color.h>
 
 class DrawingSession;
-class LotViewer;
-class NumberLotElementView;
-class ColorLotElementView;
+class LotView;
 
 class DrawingConfiguration : public QObject
 {
@@ -36,7 +33,7 @@ public:
     virtual ~DrawingConfiguration();
 
     virtual std::shared_ptr<DrawingSession> createDrawingSession() = 0;
-    virtual std::shared_ptr<LotViewer> createViewer() = 0;
+    virtual LotView* createView() = 0;
     virtual void configure() = 0;
     virtual bool isValid() = 0;
 
@@ -47,8 +44,6 @@ public:
 protected:
     bool _uniqueResults;
 
-    NumberLotElementView* buildNumberLotElementView(int min, int max);
-    ColorLotElementView* buildColorLotElementView(std::vector<Color>& colors);
     virtual QString detailedSummary() = 0;
 
 private:

@@ -14,29 +14,21 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COLORLOTELEMENTVIEW_H
-#define COLORLOTELEMENTVIEW_H
+#ifndef LOTVIEWTEXTASMAIN_H
+#define LOTVIEWTEXTASMAIN_H
 
-#include "lotelementview.h"
-#include <QFrame>
-#include <QLabel>
+#include "lotview.h"
 
-class ColorLotElement;
-
-class ColorLotElementView : public LotElementView
+class LotViewTextAsMain : public LotView
 {
+    Q_OBJECT
+
 public:
-    ColorLotElementView();
-    ~ColorLotElementView();
+    explicit LotViewTextAsMain(const QString& longestText, QWidget* parent = 0);
+    ~LotViewTextAsMain();
 
-    void update(const ColorLotElement& colorLotElement);
-
-    virtual int subviewHeight() {return _textView->height();}
-    virtual int subviewWidth() {return _textView->width();}
-
-private:
-    QFrame* _colorView;
-    QLabel* _textView;
+protected:
+    QString _longestText;
 };
 
-#endif // COLORLOTELEMENTVIEW_H
+#endif // LOTVIEWTEXTASMAIN_H

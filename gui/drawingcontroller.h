@@ -18,33 +18,30 @@
 #define DRAWINGCONTROLLER_H
 
 #include "drawingsession.h"
-#include "lotview.h"
+#include "lotwindow.h"
 
-class LotViewer;
+class LotView;
 class LotLogger;
 
 class DrawingController
 {
 public:
-    DrawingController();
+    DrawingController(LotWindow* lotWindow);
 
     void draw();
-    void showLotView(bool visible);
-    void showLotViewFullscreen(bool fullscreen);
-    void updateLotView();
+    void showLotWindow(bool visible);
+    void showLotWindowFullscreen(bool fullscreen);
 
     void setDrawingSession(const std::shared_ptr<DrawingSession> drawingSession) {_drawingSession = drawingSession;}
-    void setLotViewer(const std::shared_ptr<LotViewer> lotViewer) {_lotViewer = lotViewer;}
     void setLotLogger(const std::shared_ptr<LotLogger> lotLogger) {_lotLogger = lotLogger;}
-    void setLotView(LotView* lotView) {_lotView = lotView;}
 
-    std::shared_ptr<LotViewer> lotViewer() const {return _lotViewer;}
     std::shared_ptr<DrawingSession> drawingSession() const {return _drawingSession;}
+    void setLotView(LotView* view);
 
 private:
+    LotWindow* _lotWindow;
     LotView* _lotView;
     std::shared_ptr<DrawingSession> _drawingSession;
-    std::shared_ptr<LotViewer> _lotViewer;
     std::shared_ptr<LotLogger> _lotLogger;
 };
 

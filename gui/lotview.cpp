@@ -15,81 +15,61 @@
 */
 
 #include "lotview.h"
-#include "ui_lotview.h"
-#include "lotelementview.h"
-#include "lotviewer.h"
 #include <memory>
-#include "drawingcontroller.h"
 #include <QResizeEvent>
-#include <QTimer>
-#include "randomgenerator.h"
 
 using namespace std;
 
-LotView::LotView(DrawingController* controller, QWidget *parent) :
-    QWidget(parent, Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowMinMaxButtonsHint),
-    ui(new Ui::LotView),
-    _controller(controller)
+LotView::LotView(QWidget* parent) :
+    QWidget(parent)
 {
-    ui->setupUi(this);
 }
 
 LotView::~LotView()
 {
-    delete ui;
-}
-
-void LotView::initializeViews()
-{
-    shared_ptr<LotViewer> viewer = _controller->lotViewer();
-    int count = viewer->countViews();
-
-    if (count == 1) {
-        LotElementView* view = viewer->at(0);
-        ui->gridLayout->addWidget(view, 0, 0);
-    } else if (count == 2) {
-        ui->gridLayout->addWidget(viewer->at(0), 0, 0);
-        ui->gridLayout->addWidget(viewer->at(1), 0, 1);
-    }
 }
 
 void LotView::showEvent(QShowEvent*)
 {
-    calcFontSize();
+    calcViewSize();
 }
 
 void LotView::resizeEvent(QResizeEvent*)
 {
-    calcFontSize();
+    calcViewSize();
 }
 
-void LotView::calcFontSize()
+int LotView::calcMaxFontSize(const QFont& originalFont, const QString& text, const QRect& boundingBox) const
 {
-    int maxFontSize = MAX_FONT_SIZE;
+    QFontMetrics originalMetrics(originalFont);
+    bool fontTooLarge = originalMetrics.width(text) >= boundingBox.width() || originalMetrics.height() >= boundingBox.height();
 
-    for (int i = 0; i < _controller->lotViewer()->countViews(); ++i) {
-        int localMax = _controller->lotViewer()->at(i)->calcMaxFontSize();
-        if (localMax < maxFontSize) {
-            maxFontSize = localMax;
+    int inc = 1;
+    int size = originalFont.pointSize();
+    QFont f = originalFont;
+
+    if (!fontTooLarge) {
+        // try to increase font size
+        for (int i = 1; i <= MAX_FONT_SIZE; i += inc) {
+            f.setPointSize(size + i);
+            QFontMetrics fm(f);
+            if (fm.width(text) >= boundingBox.width() || fm.height() >= boundingBox.height()) {
+                return size + i - inc;
+            }
         }
     }
 
-    if (maxFontSize <= 0) {
-        return;
+    if (fontTooLarge) {
+        for (int i = 1; i <= MAX_FONT_SIZE && size - i > 1; i += inc) {
+            // try to decrease font size
+            f.setPointSize(size - i);
+            QFontMetrics fm(f);
+            if (fm.width(text) < boundingBox.width() && fm.height() < boundingBox.height()) {
+                return size - i;
+            }
+        }
     }
 
-    QFont f = font();
-    f.setPointSize(maxFontSize);
-    setFont(f);
-
-    for (int i = 0; i < _controller->lotViewer()->countViews(); ++i) {
-        //TODO trenger en test paa at viewers og generators er likt antall
-        QString s(_controller->drawingSession()->generatorsAt(i)->name().c_str());
-        _controller->lotViewer()->at(i)->calcLocalFontSize(s);
-    }
+    return size; // should never get this far
 }
 
-void LotView::initFont()
-{
-    calcFontSize();
-}

@@ -14,37 +14,38 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COLORANDNUMBERCONFIGURATION_H
-#define COLORANDNUMBERCONFIGURATION_H
+#ifndef COLORANDNUMBERVIEW_BORDER_H
+#define COLORANDNUMBERVIEW_BORDER_H
 
-#include <QObject>
-#include "drawingconfiguration.h"
+#include "lotview.h"
 #include "color.h"
 
-#define DEFAULT_MIN 1
-#define DEFAULT_MAX 1000
+namespace Ui {
+class ColorAndNumberView_Border;
+}
 
-class ColorAndNumberConfiguration : public DrawingConfiguration
+class ColorAndNumberView_Border : public LotView
 {
     Q_OBJECT
 
 public:
-    ColorAndNumberConfiguration(QObject* parent = 0);
-    ~ColorAndNumberConfiguration();
+    explicit ColorAndNumberView_Border(QWidget *parent = 0);
+    ~ColorAndNumberView_Border();
 
-    std::shared_ptr<DrawingSession> createDrawingSession();
-    LotView* createView();
-    void configure();
-    bool isValid();
+    virtual void view(const NumberLotElement& numberLotElement, const int& id);
+    virtual void view(const ColorLotElement& colorLotElement, const int& id);
 
 protected:
-    virtual QString detailedSummary();
+    virtual void calcViewSize();
 
 private:
-    int _min, _max;
-    std::vector<Color> _colors;
+    Ui::ColorAndNumberView_Border *ui;
 
-    void initColors();
+    bool _drawn;
+    Color _borderColor;
+    int _borderThickness;
+
+    QString buildStyleSheet();
 };
 
-#endif // COLORANDNUMBERCONFIGURATION_H
+#endif // COLORANDNUMBERVIEW_BORDER_H

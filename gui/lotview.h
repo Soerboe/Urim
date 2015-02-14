@@ -18,32 +18,39 @@
 #define LOTVIEW_H
 
 #include <QWidget>
+#include "lotelementviewer.h"
+#include "utils.h"
+
+#define MAX_FONT_SIZE 500
 
 class DrawingController;
 
-namespace Ui {
-class LotView;
-}
-
-class LotView : public QWidget
+class LotView : public QWidget, public LotElementViewer
 {
     Q_OBJECT
 
 public:
-    explicit LotView(DrawingController* controller, QWidget* parent = 0);
+    explicit LotView(QWidget* parent = 0);
     ~LotView();
 
-    void initializeViews();
+    virtual void view(const NumberLotElement& numberLotElement, const int& id) {
+        ignore_unused(numberLotElement, id);
+        // this method is supposed to be overridden in subclass views expecting NumberLotElements
+    }
 
-    virtual void showEvent(QShowEvent *);
-    virtual void resizeEvent(QResizeEvent*);
-    void calcFontSize();
+    virtual void view(const ColorLotElement& colorLotElement, const int& id) {
+        ignore_unused(colorLotElement, id);
+        // this method is supposed to be overridden in subclass views expecting ColorLotElements
+    }
+
+protected:
+    virtual void calcViewSize() = 0;
+
+    int calcMaxFontSize(const QFont& originalFont, const QString& text, const QRect& boundingBox) const;
 
 private:
-    Ui::LotView *ui;
-    DrawingController* _controller;
-
-    void initFont();
+    void showEvent(QShowEvent*);
+    void resizeEvent(QResizeEvent*);
 };
 
 #endif // LOTVIEW_H

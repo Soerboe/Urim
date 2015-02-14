@@ -14,32 +14,33 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LOT_H
-#define LOT_H
+#ifndef COLORANDNUMBERVIEW_POG_H
+#define COLORANDNUMBERVIEW_POG_H
 
-#include <QList>
-#include <memory>
-#include <ostream>
+#include "lotviewtextasmain.h"
 
-class LotElement;
-class LotElementViewer;
+namespace Ui {
+class ColorAndNumberView_POG;
+}
 
-class Lot
+class ColorAndNumberView_POG : public LotViewTextAsMain
 {
+    Q_OBJECT
+
 public:
-    Lot();
+    explicit ColorAndNumberView_POG(const QString& longestText, QWidget *parent = 0);
+    ~ColorAndNumberView_POG();
 
-    void addLotElement(const std::shared_ptr<LotElement> lotElement);
-    bool operator==(const Lot& that);
-    void view(LotElementViewer& viewer);
+    virtual void view(const NumberLotElement& numberLotElement, const int& id);
+    virtual void view(const ColorLotElement& colorLotElement, const int& id);
 
-    std::shared_ptr<LotElement> at(const int& index) const;
-    size_t count() const;
-
-    friend std::ostream& operator<< (std::ostream& output, const Lot& lot);
+protected:
+    virtual void calcViewSize();
 
 private:
-    QList<std::shared_ptr<LotElement> > _lotElements;
+    Ui::ColorAndNumberView_POG *ui;
+
+    void calcLocalFontSize(const QFont& font);
 };
 
-#endif // LOT_H
+#endif // COLORANDNUMBERVIEW_POG_H

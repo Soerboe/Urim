@@ -19,8 +19,7 @@
 #include <QTimer>
 #include "drawingsetupdialog.h"
 #include "lotlogger.h"
-#include "lotviewer.h"
-#include "lotelementview.h"
+#include "lotview.h"
 #include "nomoreuniqueresultsexception.h"
 #include <QMessageBox>
 
@@ -70,11 +69,10 @@ void DrawingView::showDrawingSetup()
 
     if (status == QDialog::Accepted) {
         _drawingController->setDrawingSession(_setupDialog->getDrawingSession());
-        shared_ptr<LotViewer> viewer = _setupDialog->getViewer();
-        _drawingController->setLotViewer(viewer);
-        _drawingController->updateLotView();
+        LotView* lotView = _setupDialog->getView();
+        _drawingController->setLotView(lotView);
 
-        _drawingController->showLotView(true);
+        _drawingController->showLotWindow(true);
         this->show();
     } else {
         qApp->exit(0);
@@ -99,6 +97,6 @@ void DrawingView::showLogChecked(bool checked)
 
 void DrawingView::showFullscreenClicked(bool checked)
 {
-    _drawingController->showLotViewFullscreen(checked);
+    _drawingController->showLotWindowFullscreen(checked);
     this->show();
 }

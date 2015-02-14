@@ -14,24 +14,15 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "numberlotelementview.h"
-#include "numberlotelement.h"
+#include "lotviewtextasmain.h"
 
-NumberLotElementView::NumberLotElementView()
+LotViewTextAsMain::LotViewTextAsMain(const QString& longestText, QWidget* parent)
+    : LotView(parent),
+      _longestText(longestText)
 {
-    _view = new QLabel();
-    _view->setAlignment(Qt::AlignBaseline | Qt::AlignHCenter);
-    _view->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-    _layout->addWidget(_view);
 }
 
-NumberLotElementView::~NumberLotElementView()
+LotViewTextAsMain::~LotViewTextAsMain()
 {
-    delete _view;
 }
 
-void NumberLotElementView::update(const NumberLotElement& numberLotElement)
-{
-    setLabelText(numberLotElement);
-    _view->setText(QString::number(numberLotElement.number()));
-}

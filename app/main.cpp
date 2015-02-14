@@ -19,7 +19,7 @@
 #include "randomgenerator.h"
 #include "drawingcontroller.h"
 #include "drawingsetupcontroller.h"
-#include "lotview.h"
+#include "lotwindow.h"
 #include "urimthummim.h"
 
 int main(int argc, char *argv[])
@@ -32,9 +32,8 @@ int main(int argc, char *argv[])
     a.setApplicationVersion(APPLICATION_VERSION);
     DrawingSetupController setupController;
     DrawingSetupDialog setupDialog(&setupController);
-    DrawingController controller;
-    LotView lotView(&controller);
-    controller.setLotView(&lotView);
-    DrawingView drawingView(&controller, &setupDialog, &lotView);
+    LotWindow lotWindow;
+    DrawingController controller(&lotWindow);
+    DrawingView drawingView(&controller, &setupDialog, &lotWindow);
     return a.exec();
 }

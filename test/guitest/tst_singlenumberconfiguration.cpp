@@ -18,22 +18,21 @@
 #include <QtTest>
 #include "singlenumberconfiguration.h"
 #include "drawingsession.h"
-#include "lotviewer.h"
+
 
 class SingleNumberConfigurationTest : public QObject
 {
     Q_OBJECT
 
 private Q_SLOTS:
-    void shouldCreateSameNumberOfViewsAndGenerators();
+    void shouldCreateOneGenerator();
 };
 
-void SingleNumberConfigurationTest::shouldCreateSameNumberOfViewsAndGenerators()
+void SingleNumberConfigurationTest::shouldCreateOneGenerator()
 {
     SingleNumberConfiguration singleNumberConfiguration;
     std::shared_ptr<DrawingSession> session = singleNumberConfiguration.createDrawingSession();
-    std::shared_ptr<LotViewer> viewer = singleNumberConfiguration.createViewer();
-    QVERIFY(session->generatorsCount() == viewer->countViews());
+    QVERIFY(session->generatorsCount() == 1);
 }
 
 REGISTER_TEST(SingleNumberConfigurationTest)

@@ -21,6 +21,9 @@
 
 struct Color {
 
+    Color ()
+        : red(0), green(0), blue(0), name("Default color"){}
+
     Color(const int red, const int green, const int blue, const QString name)
         : red(red),
           green(green),

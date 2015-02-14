@@ -17,11 +17,9 @@
 #include "colorandnumberconfiguration.h"
 #include "randomnumbergenerator.h"
 #include "randomcolorgenerator.h"
-#include "numberlotelementview.h"
-#include "colorlotelementview.h"
-#include "drawingsetupdialog.h"
 #include "drawingsession.h"
-#include "lotviewer.h"
+#include "colorandnumberview_pog.h"
+#include "colorandnumberview_border.h"
 
 using namespace std;
 
@@ -49,14 +47,12 @@ shared_ptr<DrawingSession> ColorAndNumberConfiguration::createDrawingSession()
     return session;
 }
 
-shared_ptr<LotViewer> ColorAndNumberConfiguration::createViewer()
+LotView* ColorAndNumberConfiguration::createView()
 {
-    shared_ptr<LotViewer> viewer(new LotViewer);
-    ColorLotElementView* colorView = buildColorLotElementView(_colors);
-    NumberLotElementView* numberView = buildNumberLotElementView(_min, _max);
-    viewer->addView(colorView);
-    viewer->addView(numberView);
-    return viewer;
+    // TODO choose between: return new ColorAndNumberView_Border();
+    QString minText = QString::number(_min);
+    QString maxText = QString::number(_max);
+    return new ColorAndNumberView_POG(minText.length() > maxText.length() ? minText : maxText);
 }
 
 void ColorAndNumberConfiguration::configure()

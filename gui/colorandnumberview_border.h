@@ -32,8 +32,8 @@ public:
     explicit ColorAndNumberView_Border(QWidget *parent = 0);
     ~ColorAndNumberView_Border();
 
-    virtual void view(const NumberLotElement& numberLotElement, const int& id);
-    virtual void view(const ColorLotElement& colorLotElement, const int& id);
+    virtual void view(const NumberLotElement& numberLotElement, int id);
+    virtual void view(const ColorLotElement& colorLotElement, int id);
 
 protected:
     virtual void calcViewSize();

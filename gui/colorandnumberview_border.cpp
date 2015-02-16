@@ -34,7 +34,7 @@ ColorAndNumberView_Border::~ColorAndNumberView_Border()
     delete ui;
 }
 
-void ColorAndNumberView_Border::view(const NumberLotElement& numberLotElement, const int& id)
+void ColorAndNumberView_Border::view(const NumberLotElement& numberLotElement, int id)
 {
     ignore_unused(id);
 
@@ -48,7 +48,7 @@ void ColorAndNumberView_Border::view(const NumberLotElement& numberLotElement, c
     _drawn = true;
 }
 
-void ColorAndNumberView_Border::view(const ColorLotElement& colorLotElement, const int& id)
+void ColorAndNumberView_Border::view(const ColorLotElement& colorLotElement, int id)
 {
     ignore_unused(id);
 

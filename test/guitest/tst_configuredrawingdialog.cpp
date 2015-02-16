@@ -14,32 +14,23 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "lotwindow.h"
-#include "ui_lotwindow.h"
-#include "lotview.h"
+#include "testrunner.h"
+#include <QtTest>
+#include "configuredrawingdialog.h"
 
-LotWindow::LotWindow(QWidget *parent) :
-    QWidget(parent, Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowMinMaxButtonsHint),
-    ui(new Ui::LotWindow),
-    _lotView(0)
+class ConfigureDrawingDialogTest : public QObject
 {
-    ui->setupUi(this);
+    Q_OBJECT
+
+private Q_SLOTS:
+
+void shouldValidateAndPrepareResultsBeforeAccept()
+{
+
 }
 
-LotWindow::~LotWindow()
-{
-    delete ui;
-}
+};
 
-void LotWindow::setView(LotView* view)
-{
-    QLayoutItem* oldView = ui->layout->takeAt(0);
-    if (oldView) {
-        delete oldView;
-    }
+REGISTER_TEST(ConfigureDrawingDialogTest)
 
-    view->setMinimumSize(200, 100);
-    ui->layout->addWidget(view);
-    _lotView = view;
-}
-
+#include "tst_configuredrawingdialog.moc"

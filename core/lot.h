@@ -30,14 +30,15 @@ public:
     Lot();
 
     void addLotElement(const std::shared_ptr<LotElement> lotElement);
-    bool operator==(const Lot& that);
     void view(LotElementViewer& viewer);
 
     std::shared_ptr<LotElement> at(int index) const;
     size_t count() const;
+    size_t hash() const;
 
     friend std::ostream& operator<< (std::ostream& output, const Lot& lot);
-
+    friend bool operator== (const Lot& a, const Lot& b);
+    friend bool operator!= (const Lot& a, const Lot& b);
 private:
     QList<std::shared_ptr<LotElement> > _lotElements;
 };

@@ -18,6 +18,7 @@
 #include "testrunner.h"
 #include "lot.h"
 #include "numberlotelement.h"
+#include "colorlotelement.h"
 
 using namespace std;
 
@@ -26,10 +27,8 @@ class LotTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
-    void shouldCompareEqual();
-};
 
-void LotTest::shouldCompareEqual()
+void shouldCompareEqual()
 {
     Lot lot1;
     lot1.addLotElement(shared_ptr<NumberLotElement> (new NumberLotElement(1337)));
@@ -39,6 +38,43 @@ void LotTest::shouldCompareEqual()
 
     QVERIFY(lot1 == lot2);
 }
+
+void shouldNotCompareEqual()
+{
+    Lot lot1;
+    lot1.addLotElement(shared_ptr<NumberLotElement> (new NumberLotElement(1337)));
+
+    Lot lot2;
+    lot2.addLotElement(shared_ptr<NumberLotElement> (new NumberLotElement(1338)));
+
+    QVERIFY(lot1 != lot2);
+}
+
+void shouldHaveEqualHash()
+{
+    Lot lot1;
+    lot1.addLotElement(shared_ptr<NumberLotElement> (new NumberLotElement(1337)));
+    lot1.addLotElement(shared_ptr<ColorLotElement> (new ColorLotElement(Color(255, 0, 1, "Red"))));
+
+    Lot lot2;
+    lot2.addLotElement(shared_ptr<NumberLotElement> (new NumberLotElement(1337)));
+    lot2.addLotElement(shared_ptr<ColorLotElement> (new ColorLotElement(Color(255, 0, 1, "Red"))));
+
+    QVERIFY(lot1.hash() == lot2.hash());
+}
+
+void shouldHaveDifferentHash()
+{
+    Lot lot1;
+    lot1.addLotElement(shared_ptr<ColorLotElement> (new ColorLotElement(Color(255, 0, 1, "Red"))));
+
+    Lot lot2;
+    lot2.addLotElement(shared_ptr<ColorLotElement> (new ColorLotElement(Color(255, 0, 1, "Bed"))));
+
+    QVERIFY(lot1.hash() != lot2.hash());
+}
+
+};
 
 REGISTER_TEST(LotTest)
 

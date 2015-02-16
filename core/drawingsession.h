@@ -19,8 +19,16 @@
 
 #include <QString>
 #include "lot.h"
+#include <unordered_set>
 
 class RandomGenerator;
+
+namespace std {
+    template <>
+    struct hash<Lot> {
+        size_t operator () (const Lot &lot) const { return lot.hash(); }
+    };
+}
 
 class DrawingSession
 {
@@ -40,6 +48,7 @@ private:
     bool _uniqueResults;
     QList<std::shared_ptr<RandomGenerator> > _generators;
     QList<Lot> _lots;
+    std::unordered_set<Lot> _lotsSet;
 
     Lot drawNonUnique();
     Lot drawUnique();

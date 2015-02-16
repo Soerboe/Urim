@@ -30,6 +30,8 @@ public:
     virtual bool operator==(const LotElement& that) = 0;
     virtual bool operator!=(const LotElement& that) = 0;
 
+    virtual size_t hash() const = 0;
+
     friend std::ostream& operator<< (std::ostream& output, const LotElement& lotElement);
 
     std::string name() const {return _name;}

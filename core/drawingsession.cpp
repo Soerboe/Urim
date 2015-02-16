@@ -52,8 +52,9 @@ Lot DrawingSession::drawUnique()
 
     do {
         lot = doDraw();
-    } while (_lots.contains(lot));
+    } while (_lotsSet.find(lot) != _lotsSet.end());
 
+    _lotsSet.insert(lot);
     _lots.append(lot);
     return lot;
 }

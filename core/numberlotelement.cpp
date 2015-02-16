@@ -17,6 +17,7 @@
 #include <typeinfo>
 #include "numberlotelement.h"
 #include "lotelementviewer.h"
+#include <functional>
 
 NumberLotElement::NumberLotElement(int number)
     : _number(number)
@@ -41,6 +42,11 @@ bool NumberLotElement::operator==(const LotElement& that)
 bool NumberLotElement::operator!=(const LotElement& that)
 {
     return !(*this == that);
+}
+
+size_t NumberLotElement::hash() const
+{
+    return std::hash<int>()(_number);
 }
 
 void NumberLotElement::print(std::ostream& output) const

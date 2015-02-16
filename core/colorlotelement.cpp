@@ -45,6 +45,11 @@ bool ColorLotElement::operator!=(const LotElement& that)
     return !(*this == that);
 }
 
+size_t ColorLotElement::hash() const
+{
+    return _color.hash();
+}
+
 void ColorLotElement::print(ostream& output) const
 {
     output << "Color: " << _color.name.toStdString() << "(" <<

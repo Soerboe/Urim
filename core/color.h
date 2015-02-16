@@ -18,6 +18,7 @@
 #define COLOR_H
 
 #include <QString>
+#include "utils.h"
 
 struct Color {
 
@@ -37,6 +38,15 @@ struct Color {
                 this->red == that.red &&
                 this->blue == that.blue &&
                 this->green == that.green;
+    }
+
+    size_t hash () const {
+        size_t seed = 0x297d5cb0;
+        hash_combine_std(seed, red);
+        hash_combine_std(seed, green);
+        hash_combine_std(seed, blue);
+        hash_combine_std(seed, name.toStdString());
+        return seed;
     }
 
     int red, green, blue;

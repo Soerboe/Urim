@@ -27,6 +27,8 @@ public:
     virtual bool operator==(const LotElement& that);
     virtual bool operator!=(const LotElement& that);
 
+    virtual size_t hash() const;
+
     int number() const {return _number;}
 private:
     int _number;

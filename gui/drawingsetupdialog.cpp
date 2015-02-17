@@ -34,7 +34,7 @@ DrawingSetupDialog::DrawingSetupDialog(DrawingSetupController* controller, QWidg
     setupConfigurations();
 
     connect(ui->createButton, SIGNAL(clicked()), SLOT(createClicked()));
-    connect(ui->cancelButton, SIGNAL(clicked()), SLOT(reject()));
+    connect(ui->quitButton, SIGNAL(clicked()), SLOT(reject()));
     connect(ui->drawingTypeSelector, SIGNAL(currentIndexChanged(int)), SLOT(configurationChanged(int)));
     connect(ui->configureButton, SIGNAL(clicked()), SLOT(configureClicked()));
 }
@@ -42,12 +42,6 @@ DrawingSetupDialog::DrawingSetupDialog(DrawingSetupController* controller, QWidg
 DrawingSetupDialog::~DrawingSetupDialog()
 {
     delete ui;
-}
-
-int DrawingSetupDialog::exec(bool quitInsteadOfCancel)
-{
-    ui->cancelButton->setText(quitInsteadOfCancel ? tr("Quit") : tr("Cancel"));
-    return QDialog::exec();
 }
 
 shared_ptr<DrawingSession> DrawingSetupDialog::getDrawingSession()
@@ -60,6 +54,11 @@ LotView* DrawingSetupDialog::getView()
 {
     int selectedConfiguration = ui->drawingTypeSelector->currentIndex() - 1;
     return _controller->at(selectedConfiguration)->createView();
+}
+
+QString DrawingSetupDialog::getDrawingName()
+{
+    return ui->nameEdit->text();
 }
 
 void DrawingSetupDialog::createClicked()

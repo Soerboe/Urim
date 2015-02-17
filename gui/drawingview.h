@@ -39,15 +39,18 @@ protected:
 
 private:
     Ui::DrawingView *ui;
-
     DrawingController* _drawingController;
     DrawingSetupDialog* _setupDialog;
+
+    void setupLogger();
+    void clear();
 
 private slots:
     void showDrawingSetup();
     void drawClicked();
     void showLogChecked(bool checked);
     void showFullscreenClicked(bool checked);
+    void createNewDrawingClicked();
 };
 
 #endif // DRAWINGVIEW_H

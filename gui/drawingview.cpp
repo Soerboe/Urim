@@ -33,19 +33,14 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
 {
     ui->setupUi(this);
     setWindowTitle(qApp->applicationName());
-    ui->logWidget->setVisible(false);
-    QStringList headerLabels;
-    headerLabels << tr("No.") << tr("Time") << tr("Lot");
-    ui->logWidget->setColumnCount(headerLabels.size());
-    ui->logWidget->setHeaderLabels(headerLabels);
-    ui->logWidget->resizeColumnToContents(0);
+    setupLogger();
 
-    shared_ptr<LotLogger> logger(new LotLogger(ui->logWidget));
-    _drawingController->setLotLogger(logger);
+    ui->drawingNameView->hide();
 
     connect(ui->drawButton, SIGNAL(clicked()), SLOT(drawClicked()));
-    connect(ui->showLogCheckBox, SIGNAL(toggled(bool)), SLOT(showLogChecked(bool)));
     connect(ui->showFullscreenAction, SIGNAL(toggled(bool)), SLOT(showFullscreenClicked(bool)));
+    connect(ui->createNewDrawingAction, SIGNAL(triggered()), SLOT(createNewDrawingClicked()));
+    connect(ui->quitAction, SIGNAL(triggered()), SLOT(close()));
 
     QTimer::singleShot(0, this, SLOT(showDrawingSetup()));
 }
@@ -63,16 +58,40 @@ void DrawingView::closeEvent(QCloseEvent* event)
     }
 }
 
+void DrawingView::setupLogger()
+{
+    ui->logWidget->setVisible(false);
+    QStringList headerLabels;
+    headerLabels << tr("No.") << tr("Time") << tr("Lot");
+    ui->logWidget->setColumnCount(headerLabels.size());
+    ui->logWidget->setHeaderLabels(headerLabels);
+    ui->logWidget->resizeColumnToContents(0);
+
+    shared_ptr<LotLogger> logger(new LotLogger(ui->logWidget));
+    _drawingController->setLotLogger(logger);
+
+    connect(ui->showLogCheckBox, SIGNAL(toggled(bool)), SLOT(showLogChecked(bool)));
+}
+
+void DrawingView::clear()
+{
+    ui->logWidget->clear();
+}
+
 void DrawingView::showDrawingSetup()
 {
-    int status = _setupDialog->exec(true);
+    int status = _setupDialog->exec();
 
     if (status == QDialog::Accepted) {
         _drawingController->setDrawingSession(_setupDialog->getDrawingSession());
         LotView* lotView = _setupDialog->getView();
         _drawingController->setLotView(lotView);
-
         _drawingController->showLotWindow(true);
+
+        QString drawingName = _setupDialog->getDrawingName();
+        ui->drawingNameView->setText(drawingName);
+        ui->drawingNameView->setVisible(!drawingName.isEmpty());
+
         this->show();
     } else {
         qApp->exit(0);
@@ -99,4 +118,14 @@ void DrawingView::showFullscreenClicked(bool checked)
 {
     _drawingController->showLotWindowFullscreen(checked);
     this->show();
+}
+
+void DrawingView::createNewDrawingClicked()
+{
+    // ask for confirmation
+    clear();
+    // clear state of view
+    this->hide();
+    _drawingController->showLotWindow(false);
+    showDrawingSetup();
 }

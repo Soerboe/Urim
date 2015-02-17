@@ -33,10 +33,10 @@ class DrawingSetupDialog : public QDialog
 public:
     explicit DrawingSetupDialog(DrawingSetupController* controller, QWidget *parent = 0);
     ~DrawingSetupDialog();
-    int exec(bool canTerminateApp);
 
     std::shared_ptr<DrawingSession> getDrawingSession();
     LotView* getView();
+    QString getDrawingName();
 
 private slots:
     void createClicked();

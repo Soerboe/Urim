@@ -87,7 +87,7 @@ void DrawingSessionTest::shouldGetUniqueResultsWithOneGenerator()
 void DrawingSessionTest::shouldReturnNumberOfUniqueResults()
 {
     shared_ptr<RandomGenerator> generator1(new RandomNumberGenerator(1, 2));
-    vector<Color> colors = {Color(0, 0, 0, ""), Color(0, 0, 0, ""), Color(0, 0, 0, "")};
+    vector<Color> colors = {Color(), Color(), Color()};
     shared_ptr<RandomGenerator> generator2(new RandomColorGenerator(colors));
 
     DrawingSession session;

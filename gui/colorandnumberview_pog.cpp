@@ -27,7 +27,6 @@ ColorAndNumberView_POG::ColorAndNumberView_POG(const QString& longestText, QWidg
 {
     ui->setupUi(this);
     ui->colorView->setAutoFillBackground(true);
-    //ui->verticalLayout->setAlignment(ui->mainView, Qt::AlignHCenter);
 }
 
 ColorAndNumberView_POG::~ColorAndNumberView_POG()
@@ -77,7 +76,7 @@ void ColorAndNumberView_POG::calcLocalFontSize(const QFont& font)
 {
     QFont f = font;
     QRect boundingBox = ui->numberView->rect();
-    int size = f.pointSize() * 0.3;
+    int size = f.pointSize() * 0.4;
     bool tooLarge = true;
     for (; tooLarge && size > 1; --size) {
         f.setPointSize(size);

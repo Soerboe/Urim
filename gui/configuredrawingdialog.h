@@ -19,6 +19,9 @@
 
 #include <QDialog>
 
+class QSpinBox;
+class QLineEdit;
+
 namespace Ui {
 class ConfigureDrawingDialog;
 }
@@ -32,11 +35,10 @@ public:
     ~ConfigureDrawingDialog();
 
     void init(bool uniqueResults);
-    bool uniqueResults() {return _uniqueResults;}
+    bool uniqueResults();
 
 protected:
     virtual bool validate() = 0;
-    virtual void prepareResults();
     Ui::ConfigureDrawingDialog* ui;
 
 private slots:
@@ -44,6 +46,26 @@ private slots:
 
 private:
     bool _uniqueResults;
+};
+
+
+class ConfigureNumberWidget : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit ConfigureNumberWidget(QWidget* parent = 0);
+
+    void init(int min, int max, QString label);
+    bool validate();
+    int min();
+    int max();
+    QString label();
+
+private:
+    QSpinBox* _minSpin;
+    QSpinBox* _maxSpin;
+    QLineEdit* _label;
 };
 
 #endif // CONFIGUREDRAWINGDIALOG_H

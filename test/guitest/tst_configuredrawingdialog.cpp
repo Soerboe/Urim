@@ -24,7 +24,7 @@ class ConfigureDrawingDialogTest : public QObject
 
 private Q_SLOTS:
 
-void shouldValidateAndPrepareResultsBeforeAccept()
+void shouldValidateResultsBeforeAccept()
 {
 
 }

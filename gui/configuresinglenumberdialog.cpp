@@ -16,61 +16,23 @@
 
 #include "configuresinglenumberdialog.h"
 #include "ui_configuredrawingdialog.h"
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QSpinBox>
-#include <limits>
-#include <QLineEdit>
 
 ConfigureSingleNumberDialog::ConfigureSingleNumberDialog(const QString name)
-    : ConfigureDrawingDialog(name)
+    : ConfigureDrawingDialog(name),
+      _configureNumberWidget(new ConfigureNumberWidget)
 {
-    QHBoxLayout* labelLayout = new QHBoxLayout();
-    labelLayout->addWidget(new QLabel(tr("Label:")));
-    _labelLabel = new QLineEdit();
-    labelLayout->addWidget(_labelLabel);
-    QHBoxLayout* minMaxLayout = new QHBoxLayout();
-    QLabel* minLabel = new QLabel(tr("Minimum number:"));
-    QLabel* maxLabel = new QLabel(tr("Maximum number:"));
-    _minSpin = new QSpinBox();
-    _minSpin->setMinimum(INT_MIN);
-    _minSpin->setMaximum(INT_MAX);
-    _minSpin->setValue(1);
-    _maxSpin = new QSpinBox();
-    _maxSpin->setMinimum(INT_MIN);
-    _maxSpin->setMaximum(INT_MAX);
-    _maxSpin->setValue(10);
-    minMaxLayout->addWidget(minLabel);
-    minMaxLayout->addWidget(_minSpin);
-    minMaxLayout->addWidget(maxLabel);
-    minMaxLayout->addWidget(_maxSpin);
-    ui->mainLayout->insertLayout(0, minMaxLayout);
-    ui->mainLayout->insertLayout(1, labelLayout);
+    ui->mainLayout->insertWidget(0, _configureNumberWidget);
     adjustSize();
-}
-
-ConfigureSingleNumberDialog::~ConfigureSingleNumberDialog()
-{
 }
 
 void ConfigureSingleNumberDialog::init(int min, int max, QString label, bool uniqueResults)
 {
     ConfigureDrawingDialog::init(uniqueResults);
-    _minSpin->setValue(min);
-    _maxSpin->setValue(max);
-    _labelLabel->setText(label);
+    _configureNumberWidget->init(min, max, label);
 }
 
 bool ConfigureSingleNumberDialog::validate()
 {
-    return _minSpin->value() <= _maxSpin->value();
-}
-
-void ConfigureSingleNumberDialog::prepareResults()
-{
-    ConfigureDrawingDialog::prepareResults();
-    _min = _minSpin->value();
-    _max = _maxSpin->value();
-    _label = _labelLabel->text();
+    return _configureNumberWidget->validate();
 }
 

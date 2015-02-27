@@ -20,13 +20,17 @@
 #include "drawingsession.h"
 #include "colorandnumberview_pog.h"
 #include "colorandnumberview_border.h"
+#include "configurecolorandnumberdialog.h"
+#include "configurecolorwidget.h"
 
 using namespace std;
 
 ColorAndNumberConfiguration::ColorAndNumberConfiguration(QObject* parent)
     : DrawingConfiguration(tr("Color and number"), parent),
       _min(DEFAULT_MIN),
-      _max(DEFAULT_MAX)
+      _max(DEFAULT_MAX),
+      _numberLabel(tr("Number")),
+      _colorLabel(tr("Color"))
 {
     initColors();
 }
@@ -39,9 +43,9 @@ shared_ptr<DrawingSession> ColorAndNumberConfiguration::createDrawingSession()
 {
     shared_ptr<DrawingSession> session(new DrawingSession());
     shared_ptr<RandomColorGenerator> colorGenerator(new RandomColorGenerator(_colors));
-    colorGenerator->setName(tr("Color").toStdString());
+    colorGenerator->setName(_colorLabel.toStdString());
     shared_ptr<RandomNumberGenerator> numberGenerator(new RandomNumberGenerator(_min, _max));
-    numberGenerator->setName(tr("Number").toStdString());
+    numberGenerator->setName(_numberLabel.toStdString());
     session->addGenerator(colorGenerator);
     session->addGenerator(numberGenerator);
     return session;
@@ -57,7 +61,18 @@ LotView* ColorAndNumberConfiguration::createView()
 
 void ColorAndNumberConfiguration::configure()
 {
-    // TODO
+    ConfigureColorAndNumberDialog dialog(name());
+    dialog.init(_colors, _colorLabel, _min, _max, _numberLabel, _uniqueResults);
+    int retval = dialog.exec();
+
+    if (retval == QDialog::Accepted) {
+        _colors = dialog.colors();
+        _colorLabel = dialog.colorLabel();
+        _min = dialog.min();
+        _max = dialog.max();
+        _numberLabel = dialog.numberLabel();
+        _uniqueResults = dialog.uniqueResults();
+    }
 }
 
 bool ColorAndNumberConfiguration::isValid()
@@ -67,14 +82,39 @@ bool ColorAndNumberConfiguration::isValid()
 
 QString ColorAndNumberConfiguration::detailedSummary()
 {
-    return QString();
+    QString s;
+    s.append("<h3>");
+    s.append(tr("Draw a color and a number"));
+    s.append("</h3>");
+    s.append("<div>");
+    s.append(tr("Colors") + ": " + colorsToString());
+    s.append("</div><div>");
+    s.append(tr("Color label") + ": " + _colorLabel);
+    s.append("</div><div>");
+    s.append(tr("Minimum number") + ": " + QString::number(_min));
+    s.append("</div><div>");
+    s.append(tr("Maximum number") + ": " + QString::number(_max));
+    s.append("</div><div>");
+    s.append(tr("Number label") + ": " + _numberLabel);
+    s.append("</div>");
+    return s;
 }
 
 void ColorAndNumberConfiguration::initColors()
 {
-    _colors.push_back(Color(255, 0, 0, tr("Red")));
-    _colors.push_back(Color(0, 153, 0, tr("Green")));
-    _colors.push_back(Color(0, 0, 255, tr("Blue")));
-    _colors.push_back(Color(255, 255, 0, tr("Yellow")));
+    _colors.push_back(ConfigureColorWidget::getAvailableColor(tr("Red")));
+    _colors.push_back(ConfigureColorWidget::getAvailableColor(tr("Green")));
+    _colors.push_back(ConfigureColorWidget::getAvailableColor(tr("Blue")));
+    _colors.push_back(ConfigureColorWidget::getAvailableColor(tr("Yellow")));
+}
+
+QString ColorAndNumberConfiguration::colorsToString()
+{
+    QStringList s;
+    for(Color color : _colors) {
+        s.append(color.name);
+    }
+
+    return s.join(", ");
 }
 

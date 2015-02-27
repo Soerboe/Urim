@@ -29,7 +29,6 @@ DrawingSetupDialog::DrawingSetupDialog(DrawingSetupController* controller, QWidg
     setWindowTitle(qApp->applicationName());
     ui->header->setStyleSheet("#header {border: 1px solid #ff8522;}");
     ui->summary->setStyleSheet("#summary {border: 1px solid #ff8522;}");
-    ui->createButton->setStyleSheet("#createButton {background-color: #ff8522;}");
 
     setupConfigurations();
 

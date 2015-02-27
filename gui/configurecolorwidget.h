@@ -14,40 +14,44 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COLORANDNUMBERCONFIGURATION_H
-#define COLORANDNUMBERCONFIGURATION_H
+#ifndef CONFIGURECOLORWIDGET_H
+#define CONFIGURECOLORWIDGET_H
 
-#include <QObject>
-#include "drawingconfiguration.h"
+#include <QWidget>
 #include "color.h"
+#include <vector>
+#include <QLabel>
 
-#define DEFAULT_MIN 1
-#define DEFAULT_MAX 1000
+namespace Ui {
+class ConfigureColorWidget;
+}
 
-class ColorAndNumberConfiguration : public DrawingConfiguration
+class ConfigureColorWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    ColorAndNumberConfiguration(QObject* parent = 0);
-    ~ColorAndNumberConfiguration();
+    explicit ConfigureColorWidget(QWidget *parent = 0);
+    ~ConfigureColorWidget();
 
-    std::shared_ptr<DrawingSession> createDrawingSession();
-    LotView* createView();
-    void configure();
-    bool isValid();
+    void init(const std::vector<Color>& colors, QString& label);
+    bool validate();
 
-protected:
-    virtual QString detailedSummary();
+    QString colorLabel();
+    std::vector<Color> colors();
+
+    static Color getAvailableColor(QString name);
+
+private slots:
+    void selectClicked();
+    void deselectClicked();
 
 private:
-    int _min, _max;
-    QString _numberLabel;
-    QString _colorLabel;
-    std::vector<Color> _colors;
+    static std::vector<Color> _availableColors;
 
-    void initColors();
-    QString colorsToString();
+    Ui::ConfigureColorWidget *ui;
+
+    void initAvailableColors();
 };
 
-#endif // COLORANDNUMBERCONFIGURATION_H
+#endif // CONFIGURECOLORWIDGET_H

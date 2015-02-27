@@ -14,28 +14,34 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CONFIGURESINGLENUMBERDIALOG_H
-#define CONFIGURESINGLENUMBERDIALOG_H
+#ifndef CONFIGURECOLORANDNUMBERDIALOG_H
+#define CONFIGURECOLORANDNUMBERDIALOG_H
 
 #include "configuredrawingdialog.h"
+#include "color.h"
 
-class ConfigureSingleNumberDialog : public ConfigureDrawingDialog
+class ConfigureColorWidget;
+
+class ConfigureColorAndNumberDialog : public ConfigureDrawingDialog
 {
     Q_OBJECT
 
 public:
-    ConfigureSingleNumberDialog(const QString name);
+    ConfigureColorAndNumberDialog(const QString name);
 
-    void init(int min, int max, QString label, bool uniqueResults);
+    void init(const std::vector<Color>& colors, QString colorLabel, int min, int max, QString numberLabel, bool uniqueResults);
     virtual bool validate();
 
     int min() {return _configureNumberWidget->min();}
     int max() {return _configureNumberWidget->max();}
-    QString label() {return _configureNumberWidget->label();}
+    QString numberLabel() {return _configureNumberWidget->label();}
+
+    std::vector<Color> colors();
+    QString colorLabel();
 
 private:
+    ConfigureColorWidget* _configureColorWidget;
     ConfigureNumberWidget* _configureNumberWidget;
-
 };
 
-#endif // CONFIGURESINGLENUMBERDIALOG_H
+#endif // CONFIGURECOLORANDNUMBERDIALOG_H

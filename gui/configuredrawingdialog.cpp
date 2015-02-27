@@ -21,6 +21,7 @@
 #include <QLineEdit>
 #include <QLabel>
 #include <limits>
+#include <QSpacerItem>
 
 ConfigureDrawingDialog::ConfigureDrawingDialog(const QString name, QWidget* parent) :
     QDialog(parent),
@@ -65,6 +66,7 @@ ConfigureNumberWidget::ConfigureNumberWidget(QWidget* parent)
     labelLayout->addWidget(new QLabel(tr("Label:")));
     _label = new QLineEdit();
     labelLayout->addWidget(_label);
+    labelLayout->addItem(new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum));
     QHBoxLayout* minMaxLayout = new QHBoxLayout();
     QLabel* minLabel = new QLabel(tr("Minimum number:"));
     QLabel* maxLabel = new QLabel(tr("Maximum number:"));

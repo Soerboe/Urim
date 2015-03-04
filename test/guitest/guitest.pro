@@ -20,7 +20,7 @@ include(../testutils/testutils.pri)
 include(../../core/core.pri)
 include(../../gui/gui.pri)
 
-QT += testlib core gui widgets
+QT += testlib core gui widgets svg
 
 TARGET = guitester
 CONFIG += console

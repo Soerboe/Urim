@@ -39,6 +39,7 @@ public:
 
 protected:
     virtual bool validate() = 0;
+    virtual QString validationError() = 0;
     Ui::ConfigureDrawingDialog* ui;
 
 private slots:
@@ -58,6 +59,7 @@ public:
 
     void init(int min, int max, QString label);
     bool validate();
+    QString validationError();
     int min();
     int max();
     QString label();

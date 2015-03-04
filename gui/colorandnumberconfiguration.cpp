@@ -22,6 +22,7 @@
 #include "colorandnumberview_border.h"
 #include "configurecolorandnumberdialog.h"
 #include "configurecolorwidget.h"
+#include "colors.h"
 
 using namespace std;
 
@@ -102,10 +103,11 @@ QString ColorAndNumberConfiguration::detailedSummary()
 
 void ColorAndNumberConfiguration::initColors()
 {
-    _colors.push_back(ConfigureColorWidget::getAvailableColor(tr("Red")));
-    _colors.push_back(ConfigureColorWidget::getAvailableColor(tr("Green")));
-    _colors.push_back(ConfigureColorWidget::getAvailableColor(tr("Blue")));
-    _colors.push_back(ConfigureColorWidget::getAvailableColor(tr("Yellow")));
+    Colors colors;
+    _colors.push_back(colors.red());
+    _colors.push_back(colors.green());
+    _colors.push_back(colors.blue());
+    _colors.push_back(colors.yellow());
 }
 
 QString ColorAndNumberConfiguration::colorsToString()

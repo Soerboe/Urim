@@ -19,7 +19,7 @@ lessThan(QT_VERSION, 5.3): error("Requires Qt >= 5.3")
 include(../core/core.pri)
 include(../gui/gui.pri)
 
-QT += core gui widgets
+QT += core gui widgets svg
 
 TARGET = UrimThummim
 TEMPLATE = app

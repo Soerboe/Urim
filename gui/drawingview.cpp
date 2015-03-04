@@ -32,15 +32,18 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     _setupDialog(setupDialog)
 {
     ui->setupUi(this);
-    setWindowTitle(qApp->applicationName());
     setupLogger();
 
     ui->drawingNameView->hide();
 
+    ui->drawButton->hide();
+
     connect(ui->drawButton, SIGNAL(clicked()), SLOT(drawClicked()));
-    connect(ui->showFullscreenAction, SIGNAL(toggled(bool)), SLOT(showFullscreenClicked(bool)));
+    connect(ui->drawAction, SIGNAL(triggered()), SLOT(drawClicked()));
     connect(ui->createNewDrawingAction, SIGNAL(triggered()), SLOT(createNewDrawingClicked()));
     connect(ui->quitAction, SIGNAL(triggered()), SLOT(close()));
+    connect(ui->aboutAction, SIGNAL(triggered()), SLOT(showAbout()));
+    connect(ui->aboutQtAction, SIGNAL(triggered()), SLOT(showAboutQt()));
 
     QTimer::singleShot(0, this, SLOT(showDrawingSetup()));
 }
@@ -48,6 +51,17 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
 DrawingView::~DrawingView()
 {
     delete ui;
+}
+
+void DrawingView::setLotView(LotView* lotView)
+{
+    QLayoutItem* oldView = ui->lotContainer->layout()->takeAt(0);
+    if (oldView) {
+        delete oldView->widget();
+        delete oldView;
+    }
+
+    ui->lotContainer->layout()->addWidget(lotView);
 }
 
 void DrawingView::closeEvent(QCloseEvent* event)
@@ -70,7 +84,7 @@ void DrawingView::setupLogger()
     shared_ptr<LotLogger> logger(new LotLogger(ui->logWidget));
     _drawingController->setLotLogger(logger);
 
-    connect(ui->showLogCheckBox, SIGNAL(toggled(bool)), SLOT(showLogChecked(bool)));
+    connect(ui->showLogAction, SIGNAL(triggered(bool)), SLOT(showLogChecked(bool)));
 }
 
 void DrawingView::clear()
@@ -86,7 +100,6 @@ void DrawingView::showDrawingSetup()
         _drawingController->setDrawingSession(_setupDialog->getDrawingSession());
         LotView* lotView = _setupDialog->getView();
         _drawingController->setLotView(lotView);
-        _drawingController->showLotWindow(true);
 
         QString drawingName = _setupDialog->getDrawingName();
         ui->drawingNameView->setText(drawingName);
@@ -114,18 +127,35 @@ void DrawingView::showLogChecked(bool checked)
     ui->logWidget->setVisible(checked);
 }
 
-void DrawingView::showFullscreenClicked(bool checked)
-{
-    _drawingController->showLotWindowFullscreen(checked);
-    this->show();
-}
-
 void DrawingView::createNewDrawingClicked()
 {
-    // ask for confirmation
+    QMessageBox box(QMessageBox::Question,
+                    tr("Quit session"),
+                    tr("Quit current drawing session and create a new drawing?"),
+                    QMessageBox::Yes | QMessageBox::No,
+                    this);
+    box.setButtonText(QMessageBox::Yes, tr("Yes"));
+    box.setButtonText(QMessageBox::No, tr("No"));
+    if (box.exec() == QMessageBox::No) {
+        return;
+    }
+
     clear();
-    // clear state of view
+    // TODO clear state of view
     this->hide();
     _drawingController->showLotWindow(false);
     showDrawingSetup();
+}
+
+void DrawingView::showAbout()
+{
+    QString text;
+    text.append(qApp->applicationName()).append(" ");
+    text.append(tr("version")).append(" ").append(qApp->applicationVersion());
+    QMessageBox::about(this, qApp->applicationName(),  text);
+}
+
+void DrawingView::showAboutQt()
+{
+    QMessageBox::aboutQt(this);
 }

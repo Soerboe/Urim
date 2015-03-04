@@ -22,6 +22,8 @@
 #include "drawingsetupdialog.h"
 #include <QCloseEvent>
 
+class LotView;
+
 namespace Ui {
 class DrawingView;
 }
@@ -33,6 +35,8 @@ class DrawingView : public QMainWindow
 public:
     explicit DrawingView(DrawingController* controller, DrawingSetupDialog* setupDialog, QWidget* parent = 0);
     ~DrawingView();
+
+    void setLotView(LotView* lotView);
 
 protected:
     void closeEvent(QCloseEvent *);
@@ -49,8 +53,9 @@ private slots:
     void showDrawingSetup();
     void drawClicked();
     void showLogChecked(bool checked);
-    void showFullscreenClicked(bool checked);
     void createNewDrawingClicked();
+    void showAbout();
+    void showAboutQt();
 };
 
 #endif // DRAWINGVIEW_H

@@ -22,6 +22,7 @@
 
 class LotView;
 class LotLogger;
+class DrawingView;
 
 class DrawingController
 {
@@ -30,15 +31,16 @@ public:
 
     void draw();
     void showLotWindow(bool visible);
-    void showLotWindowFullscreen(bool fullscreen);
+    void setLotView(LotView* view);
 
+    std::shared_ptr<DrawingSession> drawingSession() const {return _drawingSession;}
+
+    void setDrawingView(DrawingView* view) {_drawingView = view;}
     void setDrawingSession(const std::shared_ptr<DrawingSession> drawingSession) {_drawingSession = drawingSession;}
     void setLotLogger(const std::shared_ptr<LotLogger> lotLogger) {_lotLogger = lotLogger;}
 
-    std::shared_ptr<DrawingSession> drawingSession() const {return _drawingSession;}
-    void setLotView(LotView* view);
-
 private:
+    DrawingView* _drawingView;
     LotWindow* _lotWindow;
     LotView* _lotView;
     std::shared_ptr<DrawingSession> _drawingSession;

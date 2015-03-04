@@ -36,3 +36,12 @@ bool ConfigureSingleNumberDialog::validate()
     return _configureNumberWidget->validate();
 }
 
+QString ConfigureSingleNumberDialog::validationError()
+{
+    if (!_configureNumberWidget->validate()) {
+        return _configureNumberWidget->validationError();
+    } else {
+        return QString();
+    }
+}
+

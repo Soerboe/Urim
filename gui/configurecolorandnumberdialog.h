@@ -31,6 +31,7 @@ public:
 
     void init(const std::vector<Color>& colors, QString colorLabel, int min, int max, QString numberLabel, bool uniqueResults);
     virtual bool validate();
+    virtual QString validationError();
 
     int min() {return _configureNumberWidget->min();}
     int max() {return _configureNumberWidget->max();}

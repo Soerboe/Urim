@@ -29,7 +29,7 @@ ConfigureDrawingDialog::ConfigureDrawingDialog(const QString name, QWidget* pare
     _uniqueResults(false)
 {
     ui->setupUi(this);
-    setWindowTitle(tr("Configure drawing: ") + name);
+    setWindowTitle(tr("Configure drawing:").append(" ") + name);
     connect(ui->okButton, SIGNAL(clicked()), SLOT(okClicked()));
     connect(ui->cancelButton, SIGNAL(clicked()), SLOT(reject()));
 }
@@ -54,7 +54,12 @@ void ConfigureDrawingDialog::okClicked()
     if (validate()) {
         accept();
     } else {
-        QMessageBox::warning(this, tr("Error"), tr("All fields must be filled out correctly"));
+        QString error = validationError();
+        if (error.isEmpty()) {
+            error = tr("All fields must be filled out correctly");
+        }
+
+        QMessageBox::warning(this, tr("Error"), error);
     }
 }
 
@@ -71,10 +76,12 @@ ConfigureNumberWidget::ConfigureNumberWidget(QWidget* parent)
     QLabel* minLabel = new QLabel(tr("Minimum number:"));
     QLabel* maxLabel = new QLabel(tr("Maximum number:"));
     _minSpin = new QSpinBox();
+    _minSpin->setObjectName("minSpin");
     _minSpin->setMinimum(INT_MIN);
     _minSpin->setMaximum(INT_MAX);
     _minSpin->setValue(1);
     _maxSpin = new QSpinBox();
+    _maxSpin->setObjectName("maxSpin");
     _maxSpin->setMinimum(INT_MIN);
     _maxSpin->setMaximum(INT_MAX);
     _maxSpin->setValue(10);
@@ -99,6 +106,15 @@ void ConfigureNumberWidget::init(int min, int max, QString label)
 bool ConfigureNumberWidget::validate()
 {
     return _minSpin->value() <= _maxSpin->value();
+}
+
+QString ConfigureNumberWidget::validationError()
+{
+    if (_minSpin->value() > _maxSpin->value()) {
+        return tr("Minimum value is larger than maximum value.");
+    } else {
+        return QString();
+    }
 }
 
 int ConfigureNumberWidget::min()

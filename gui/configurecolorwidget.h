@@ -36,18 +36,17 @@ public:
 
     void init(const std::vector<Color>& colors, QString& label);
     bool validate();
+    QString validationError();
 
     QString colorLabel();
     std::vector<Color> colors();
-
-    static Color getAvailableColor(QString name);
 
 private slots:
     void selectClicked();
     void deselectClicked();
 
 private:
-    static std::vector<Color> _availableColors;
+    std::vector<Color> _availableColors;
 
     Ui::ConfigureColorWidget *ui;
 

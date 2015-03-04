@@ -21,19 +21,27 @@
 #include "drawingsetupcontroller.h"
 #include "lotwindow.h"
 #include "urimthummim.h"
+#include <QLibraryInfo>
+#include <QTranslator>
 
 int main(int argc, char *argv[])
 {
     RandomGenerator::init();
 
-    QApplication a(argc, argv);
-    a.setApplicationName(APPLICATION_NAME);
-    a.setApplicationDisplayName(APPLICATION_NAME);
-    a.setApplicationVersion(APPLICATION_VERSION);
+    QApplication app(argc, argv);
+    app.setApplicationName(APPLICATION_NAME);
+    app.setApplicationDisplayName(APPLICATION_NAME);
+    app.setApplicationVersion(APPLICATION_VERSION);
+
+    QTranslator translator;
+    translator.load("gui_no.qm", ":/gui/translations");
+    app.installTranslator(&translator);
+
     DrawingSetupController setupController;
     DrawingSetupDialog setupDialog(&setupController);
     LotWindow lotWindow;
     DrawingController controller(&lotWindow);
-    DrawingView drawingView(&controller, &setupDialog, &lotWindow);
-    return a.exec();
+    DrawingView drawingView(&controller, &setupDialog);
+    controller.setDrawingView(&drawingView);
+    return app.exec();
 }

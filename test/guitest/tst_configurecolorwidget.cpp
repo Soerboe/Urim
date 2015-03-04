@@ -53,6 +53,24 @@ void shouldSelectColors() {
     QVERIFY(colors.size() > 0);
 }
 
+void shouldValidateFalseWhenNoSelectedColors() {
+    ConfigureColorWidget widget;
+    QTreeWidget* selectedColors = widget.findChild<QTreeWidget*>("selectedColorsWidget");
+    selectedColors->selectAll();
+    QToolButton* deselect = widget.findChild<QToolButton*>("deselectColorButton");
+    deselect->click();
+    QVERIFY(widget.validate() == false);
+}
+
+void shouldValidateTrueWhenColorSelected() {
+    ConfigureColorWidget widget;
+    QTreeWidget* availableColors = widget.findChild<QTreeWidget*>("availableColorsWidget");
+    availableColors->setCurrentItem(availableColors->topLevelItem(0));
+    QToolButton* select = widget.findChild<QToolButton*>("selectColorButton");
+    select->click();
+    QVERIFY(widget.validate() == true);
+}
+
 };
 
 REGISTER_TEST(ConfigureColorWidgetTest)

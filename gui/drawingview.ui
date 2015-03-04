@@ -10,6 +10,12 @@
     <height>300</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>200</width>
+    <height>100</height>
+   </size>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
@@ -25,12 +31,26 @@
      </widget>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="7,3,0">
       <item>
-       <widget class="QCheckBox" name="showLogCheckBox">
-        <property name="text">
-         <string>Show log of the drawn lots</string>
+       <widget class="QWidget" name="lotContainer" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>50</height>
+         </size>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <layout class="QVBoxLayout" name="layout"/>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
@@ -91,10 +111,25 @@
     <property name="title">
      <string>&amp;View</string>
     </property>
-    <addaction name="showFullscreenAction"/>
+    <addaction name="showLogAction"/>
+   </widget>
+   <widget class="QMenu" name="menu_Session">
+    <property name="title">
+     <string>&amp;Session</string>
+    </property>
+    <addaction name="drawAction"/>
+   </widget>
+   <widget class="QMenu" name="menu_Help">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="aboutAction"/>
+    <addaction name="aboutQtAction"/>
    </widget>
    <addaction name="menuDrawing"/>
+   <addaction name="menu_Session"/>
    <addaction name="menuView"/>
+   <addaction name="menu_Help"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -103,17 +138,10 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="showFullscreenAction"/>
+   <addaction name="drawAction"/>
+   <addaction name="showLogAction"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="showFullscreenAction">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Show fullscreen</string>
-   </property>
-  </action>
   <action name="createNewDrawingAction">
    <property name="text">
     <string>Create new drawing</string>
@@ -124,8 +152,52 @@
     <string>Quit</string>
    </property>
   </action>
+  <action name="drawAction">
+   <property name="icon">
+    <iconset resource="gui.qrc">
+     <normaloff>:/gui/icons/dice.svg</normaloff>:/gui/icons/dice.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Draw</string>
+   </property>
+   <property name="toolTip">
+    <string>Draw a lot</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Space</string>
+   </property>
+  </action>
+  <action name="showLogAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="gui.qrc">
+     <normaloff>:/gui/icons/list.svg</normaloff>:/gui/icons/list.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Show log</string>
+   </property>
+   <property name="toolTip">
+    <string>Show log of drawn lots</string>
+   </property>
+  </action>
+  <action name="aboutAction">
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+  </action>
+  <action name="aboutQtAction">
+   <property name="text">
+    <string>About Qt</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="gui.qrc"/>
+  <include location="gui.qrc"/>
+  <include location="gui.qrc"/>
+ </resources>
  <connections/>
 </ui>

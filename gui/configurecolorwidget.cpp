@@ -17,27 +17,9 @@
 #include "configurecolorwidget.h"
 #include "ui_configurecolorwidget.h"
 #include <QTreeWidgetItem>
+#include "colors.h"
 
 using namespace std;
-
-vector<Color> ConfigureColorWidget::_availableColors (
-    {
-        Color(220, 0, 0,     tr("Red")),
-        Color(0, 200, 0,     tr("Green")),
-        Color(0, 0, 255,     tr("Blue")),
-        Color(255, 255, 0,   tr("Yellow")),
-        Color(255, 255, 255, tr("White")),
-        Color(0, 0, 0,       tr("Black")),
-        Color(128, 128, 128, tr("Grey")),
-        Color(110, 0, 0,     tr("Dark red")),
-        Color(0, 0, 90,      tr("Dark blue")),
-        Color(0, 80, 0,      tr("Dark green")),
-        Color(255, 62, 150,  tr("Pink")),
-        Color(155, 48, 255,  tr("Purple")),
-        Color(255, 97, 3,    tr("Orange")),
-        Color(138, 54, 15,   tr("Brown"))
-    }
-);
 
 class ColorItem : public QTreeWidgetItem
 {
@@ -99,6 +81,15 @@ bool ConfigureColorWidget::validate()
     return ui->selectedColorsWidget->topLevelItemCount() > 0;
 }
 
+QString ConfigureColorWidget::validationError()
+{
+    if (ui->selectedColorsWidget->topLevelItemCount() <= 0) {
+        return tr("No colors selected.");
+    } else {
+        return QString();
+    }
+}
+
 QString ConfigureColorWidget::colorLabel()
 {
     return ui->colorLabel->text();
@@ -113,17 +104,6 @@ vector<Color> ConfigureColorWidget::colors()
     }
 
     return c;
-}
-
-Color ConfigureColorWidget::getAvailableColor(QString name)
-{
-    for (size_t i = 0; i < _availableColors.size(); ++i) {
-        if (_availableColors[i].name == name) {
-            return _availableColors[i];
-        }
-    }
-
-    return Color();
 }
 
 void ConfigureColorWidget::selectClicked()
@@ -144,6 +124,22 @@ void ConfigureColorWidget::deselectClicked()
 
 void ConfigureColorWidget::initAvailableColors()
 {
+    Colors colors;
+    _availableColors.push_back(colors.red());
+    _availableColors.push_back(colors.green());
+    _availableColors.push_back(colors.blue());
+    _availableColors.push_back(colors.yellow());
+    _availableColors.push_back(colors.white());
+    _availableColors.push_back(colors.black());
+    _availableColors.push_back(colors.grey());
+    _availableColors.push_back(colors.darkRed());
+    _availableColors.push_back(colors.darkBlue());
+    _availableColors.push_back(colors.darkGreen());
+    _availableColors.push_back(colors.pink());
+    _availableColors.push_back(colors.purple());
+    _availableColors.push_back(colors.orange());
+    _availableColors.push_back(colors.brown());
+
     foreach (Color c, _availableColors) {
         ui->availableColorsWidget->addTopLevelItem(new ColorItem(c));
     }

@@ -15,6 +15,7 @@
 */
 
 #include "drawingcontroller.h"
+#include "drawingview.h"
 #include "lotview.h"
 #include "lotlogger.h"
 
@@ -41,18 +42,10 @@ void DrawingController::showLotWindow(bool visible)
     _lotWindow->setVisible(visible);
 }
 
-void DrawingController::showLotWindowFullscreen(bool fullscreen)
-{
-    if (fullscreen) {
-        _lotWindow->showFullScreen();
-    } else {
-        _lotWindow->showNormal();
-    }
-}
-
 void DrawingController::setLotView(LotView* view)
 {
     _lotView = view;
-    _lotWindow->setView(view);
+    _drawingView->setLotView(view);
+    //_lotWindow->setView(view);
 }
 

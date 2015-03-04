@@ -18,7 +18,7 @@ lessThan(QT_VERSION, 5.3): error("Requires Qt >= 5.3")
 
 include(../core/core.pri)
 
-QT += core gui widgets
+QT += core gui widgets svg
 
 TEMPLATE = lib
 
@@ -27,3 +27,7 @@ CONFIG += c++11
 HEADERS += $$PWD/*.h
 SOURCES += $$PWD/*.cpp
 FORMS += $$PWD/*.ui
+
+RESOURCES += $$PWD/*.qrc
+
+TRANSLATIONS += translations/gui_no.ts

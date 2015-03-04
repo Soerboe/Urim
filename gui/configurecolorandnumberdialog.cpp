@@ -51,6 +51,17 @@ bool ConfigureColorAndNumberDialog::validate()
     return _configureColorWidget->validate() && _configureNumberWidget->validate();
 }
 
+QString ConfigureColorAndNumberDialog::validationError()
+{
+    if (!_configureColorWidget->validate()) {
+        return _configureColorWidget->validationError();
+    } else if (!_configureNumberWidget->validate()) {
+        return _configureNumberWidget->validationError();
+    } else {
+        return QString();
+    }
+}
+
 std::vector<Color> ConfigureColorAndNumberDialog::colors()
 {
     return _configureColorWidget->colors();

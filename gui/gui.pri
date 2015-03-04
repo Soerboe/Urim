@@ -22,3 +22,6 @@ DEPENDPATH += $$PWD
 HEADERS += $$PWD/*.h
 SOURCES += $$PWD/*.cpp
 FORMS += $$PWD/*.ui
+
+RESOURCES += $$PWD/*.qrc
+

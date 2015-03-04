@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/gui">
+        <file>icons/dice.svg</file>
+        <file>icons/list.svg</file>
+        <file>translations/gui_no.qm</file>
+    </qresource>
+</RCC>

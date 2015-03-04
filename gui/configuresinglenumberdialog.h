@@ -28,6 +28,7 @@ public:
 
     void init(int min, int max, QString label, bool uniqueResults);
     virtual bool validate();
+    virtual QString validationError();
 
     int min() {return _configureNumberWidget->min();}
     int max() {return _configureNumberWidget->max();}

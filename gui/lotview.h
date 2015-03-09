@@ -24,6 +24,7 @@
 #define MAX_FONT_SIZE 500
 
 class DrawingController;
+class LoadingWidget;
 
 class LotView : public QWidget, public LotElementViewer
 {
@@ -43,6 +44,9 @@ public:
         // this method is supposed to be overridden in subclass views expecting ColorLotElements
     }
 
+    void showLoading(bool visible);
+    virtual void showLot(bool visible) = 0;
+
 protected:
     virtual void calcViewSize() = 0;
 
@@ -50,7 +54,8 @@ protected:
 
 private:
     void showEvent(QShowEvent*);
-    void resizeEvent(QResizeEvent*);
+    void resizeEvent(QResizeEvent*event);
+    LoadingWidget* _loadingWidget;
 };
 
 #endif // LOTVIEW_H

@@ -36,6 +36,7 @@ public:
 
 protected:
     virtual void calcViewSize();
+    virtual void showLot(bool visible);
 
 private:
     Ui::ColorAndNumberView_POG *ui;

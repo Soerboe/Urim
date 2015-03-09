@@ -14,7 +14,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-lessThan(QT_VERSION, 5.3): error("Requires Qt >= 5.3")
+lessThan(QT_VERSION, 5.4): error("Requires Qt >= 5.4")
 
 QT += core
 QT -= gui

@@ -18,6 +18,7 @@
 #include "drawingview.h"
 #include "lotview.h"
 #include "lotlogger.h"
+#include <QTimer>
 
 DrawingController::DrawingController(LotWindow* lotWindow)
     : _lotWindow(lotWindow),
@@ -27,6 +28,15 @@ DrawingController::DrawingController(LotWindow* lotWindow)
 
 void DrawingController::draw()
 {
+    _lotView->showLoading(true);
+    _lotView->showLot(false);
+
+    QTimer::singleShot(1500, [this]() {
+        this->_lotView->showLot(true);
+        this->_lotView->showLoading(false);
+        this->_drawingView->enableDrawing(true);
+    });
+
     Lot lot = _drawingSession->draw();
     if (_lotView) {
         lot.view(*_lotView);

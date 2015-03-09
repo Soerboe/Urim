@@ -17,6 +17,7 @@
 #include "drawingsetupdialog.h"
 #include "ui_drawingsetupdialog.h"
 #include <QMessageBox>
+#include "urimthummim.h"
 
 using namespace std;
 
@@ -26,9 +27,12 @@ DrawingSetupDialog::DrawingSetupDialog(DrawingSetupController* controller, QWidg
     _controller(controller)
 {
     ui->setupUi(this);
-    setWindowTitle(qApp->applicationName());
-    ui->header->setStyleSheet("#header {border: 1px solid #ff8522;}");
-    ui->summary->setStyleSheet("#summary {border: 1px solid #ff8522;}");
+    setWindowTitle(tr("Setup drawing"));
+    QString style("#ID {border: 1px solid ");
+    style.append(IDENTITY_COLOR).append(";}");
+
+    ui->header->setStyleSheet(QString(style).replace("ID", "header"));
+    ui->summary->setStyleSheet(QString(style).replace("ID", "summary"));
 
     setupConfigurations();
 

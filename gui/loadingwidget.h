@@ -14,39 +14,31 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COLORANDNUMBERVIEW_BORDER_H
-#define COLORANDNUMBERVIEW_BORDER_H
+#ifndef LOADINGWIDGET_H
+#define LOADINGWIDGET_H
 
-#include "lotview.h"
-#include "color.h"
+#include <QWidget>
+#include <QMovie>
 
 namespace Ui {
-class ColorAndNumberView_Border;
+class LoadingWidget;
 }
 
-class ColorAndNumberView_Border : public LotView
+class LoadingWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit ColorAndNumberView_Border(QWidget *parent = 0);
-    ~ColorAndNumberView_Border();
+    explicit LoadingWidget(QWidget *parent = 0);
+    ~LoadingWidget();
 
-    virtual void view(const NumberLotElement& numberLotElement, int id);
-    virtual void view(const ColorLotElement& colorLotElement, int id);
-
-protected:
-    virtual void calcViewSize();
-    virtual void showLot(bool visible);
+    void showEvent(QShowEvent*);
+    void hideEvent(QHideEvent*);
+    void resizeEvent(QResizeEvent* event);
 
 private:
-    Ui::ColorAndNumberView_Border *ui;
-
-    bool _drawn;
-    Color _borderColor;
-    int _borderThickness;
-
-    QString buildStyleSheet();
+    Ui::LoadingWidget *ui;
+    QMovie _movie;
 };
 
-#endif // COLORANDNUMBERVIEW_BORDER_H
+#endif // LOADINGWIDGET_H

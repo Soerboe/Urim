@@ -35,6 +35,7 @@ public:
 
 protected:
     virtual void calcViewSize();
+    virtual void showLot(bool visible);
 
 private:
     Ui::SingleNumberView *ui;

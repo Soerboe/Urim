@@ -3,5 +3,9 @@
         <file>icons/dice.svg</file>
         <file>icons/list.svg</file>
         <file>translations/gui_no.qm</file>
+        <file>icons/loader256.gif</file>
+        <file>icons/loader128.gif</file>
+        <file>icons/loader64.gif</file>
+        <file>icons/loader32.gif</file>
     </qresource>
 </RCC>

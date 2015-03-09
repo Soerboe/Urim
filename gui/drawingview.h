@@ -37,6 +37,7 @@ public:
     ~DrawingView();
 
     void setLotView(LotView* lotView);
+    void enableDrawing(bool enabled);
 
 protected:
     void closeEvent(QCloseEvent *);

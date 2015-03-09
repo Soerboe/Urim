@@ -17,26 +17,41 @@
 #include "lotview.h"
 #include <memory>
 #include <QResizeEvent>
+#include "loadingwidget.h"
 
 using namespace std;
 
 LotView::LotView(QWidget* parent) :
     QWidget(parent)
 {
+    _loadingWidget = new LoadingWidget(this);
+    _loadingWidget->setVisible(false);
 }
 
 LotView::~LotView()
 {
+
+}
+
+void LotView::showLoading(bool visible)
+{
+    _loadingWidget->setVisible(visible);
+    if (visible) {
+        _loadingWidget->raise();
+    }
 }
 
 void LotView::showEvent(QShowEvent*)
 {
     calcViewSize();
+    showLot(false);
 }
 
-void LotView::resizeEvent(QResizeEvent*)
+void LotView::resizeEvent(QResizeEvent* event)
 {
     calcViewSize();
+    _loadingWidget->resize(event->size());
+    event->accept();
 }
 
 int LotView::calcMaxFontSize(const QFont& originalFont, const QString& text, const QRect& boundingBox) const

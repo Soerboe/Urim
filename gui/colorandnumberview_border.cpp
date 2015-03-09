@@ -89,6 +89,11 @@ void ColorAndNumberView_Border::calcViewSize()
     }
 }
 
+void ColorAndNumberView_Border::showLot(bool visible)
+{
+    ui->mainView->setVisible(visible);
+}
+
 QString ColorAndNumberView_Border::buildStyleSheet()
 {
     QString s("#mainView {border:");

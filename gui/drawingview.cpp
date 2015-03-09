@@ -34,8 +34,9 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     ui->setupUi(this);
     setupLogger();
 
-    ui->drawingNameView->hide();
+    ui->centralWidget->setStyleSheet("#centralWidget {background-color: #ffffff;}");
 
+    ui->drawingNameView->hide();
     ui->drawButton->hide();
 
     connect(ui->drawButton, SIGNAL(clicked()), SLOT(drawClicked()));
@@ -62,6 +63,12 @@ void DrawingView::setLotView(LotView* lotView)
     }
 
     ui->lotContainer->layout()->addWidget(lotView);
+}
+
+void DrawingView::enableDrawing(bool enabled)
+{
+    ui->drawAction->setEnabled(enabled);
+    ui->drawButton->setEnabled(enabled);
 }
 
 void DrawingView::closeEvent(QCloseEvent* event)
@@ -115,6 +122,7 @@ void DrawingView::showDrawingSetup()
 void DrawingView::drawClicked()
 {
     try {
+        enableDrawing(false);
         _drawingController->draw();
     } catch (NoMoreUniqueResultsException& e) {
         QMessageBox::warning(this, tr("No more unique results"), tr("All unique lots have been drawn."));

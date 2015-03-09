@@ -58,6 +58,12 @@ void SingleNumberView::calcViewSize()
     calcLocalFontSize(f);
 }
 
+void SingleNumberView::showLot(bool visible)
+{
+    ui->label->setVisible(visible);
+    ui->numberView->setVisible(visible);
+}
+
 void SingleNumberView::calcLocalFontSize(const QFont& font)
 {
     QFont f = font;

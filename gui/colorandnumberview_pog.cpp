@@ -27,6 +27,7 @@ ColorAndNumberView_POG::ColorAndNumberView_POG(const QString& longestText, QWidg
 {
     ui->setupUi(this);
     ui->colorView->setAutoFillBackground(true);
+    ui->colorView->raise();
 }
 
 ColorAndNumberView_POG::~ColorAndNumberView_POG()
@@ -70,6 +71,11 @@ void ColorAndNumberView_POG::calcViewSize()
     ui->colorView->setFixedHeight(ui->colorNameView->height() + ui->numberView->height());
 
     calcLocalFontSize(f);
+}
+
+void ColorAndNumberView_POG::showLot(bool visible)
+{
+    ui->mainView->setVisible(visible);
 }
 
 void ColorAndNumberView_POG::calcLocalFontSize(const QFont& font)

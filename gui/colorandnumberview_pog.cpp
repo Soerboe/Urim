@@ -23,7 +23,8 @@
 
 ColorAndNumberView_POG::ColorAndNumberView_POG(const QString& longestText, QWidget *parent) :
     LotViewTextAsMain(longestText, parent),
-    ui(new Ui::ColorAndNumberView_POG)
+    ui(new Ui::ColorAndNumberView_POG),
+    _init(false)
 {
     ui->setupUi(this);
     ui->colorView->setAutoFillBackground(true);
@@ -35,24 +36,38 @@ ColorAndNumberView_POG::~ColorAndNumberView_POG()
     delete ui;
 }
 
+void ColorAndNumberView_POG::updateView()
+{
+    if (!_init) {
+        return;
+    }
+
+    ui->numberView->setText(QString::number(_number));
+
+    QPalette palette = ui->colorView->palette();
+    palette.setColor(backgroundRole(), QColor(_color.red, _color.green, _color.blue));
+    ui->colorView->setPalette(palette);
+    ui->colorNameView->setText(_color.name);
+
+    calcViewSize();
+}
+
 void ColorAndNumberView_POG::view(const NumberLotElement& numberLotElement, int id)
 {
     ignore_unused(id);
 
-    ui->numberView->setText(QString::number(numberLotElement.number()));
-    calcViewSize();
+    _number = numberLotElement.number();
+    _init = true;
+    updateView();
 }
 
 void ColorAndNumberView_POG::view(const ColorLotElement& colorLotElement, int id)
 {
     ignore_unused(id);
 
-    Color color = colorLotElement.color();
-    QPalette palette = ui->colorView->palette();
-    palette.setColor(backgroundRole(), QColor(color.red, color.green, color.blue));
-    ui->colorView->setPalette(palette);
-
-    ui->colorNameView->setText(color.name);
+    _color = colorLotElement.color();
+    _init = true;
+    updateView();
 }
 
 void ColorAndNumberView_POG::calcViewSize()
@@ -76,6 +91,7 @@ void ColorAndNumberView_POG::calcViewSize()
 void ColorAndNumberView_POG::showLot(bool visible)
 {
     ui->mainView->setVisible(visible);
+    updateView();
 }
 
 void ColorAndNumberView_POG::calcLocalFontSize(const QFont& font)

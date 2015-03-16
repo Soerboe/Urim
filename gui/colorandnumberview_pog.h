@@ -18,6 +18,7 @@
 #define COLORANDNUMBERVIEW_POG_H
 
 #include "lotviewtextasmain.h"
+#include "color.h"
 
 namespace Ui {
 class ColorAndNumberView_POG;
@@ -34,12 +35,17 @@ public:
     virtual void view(const NumberLotElement& numberLotElement, int id);
     virtual void view(const ColorLotElement& colorLotElement, int id);
 
+    void updateView();
 protected:
     virtual void calcViewSize();
     virtual void showLot(bool visible);
 
 private:
     Ui::ColorAndNumberView_POG *ui;
+
+    bool _init;
+    Color _color;
+    int _number;
 
     void calcLocalFontSize(const QFont& font);
 };

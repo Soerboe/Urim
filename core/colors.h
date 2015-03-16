@@ -27,7 +27,7 @@ public:
     Color red() {      return Color(220, 0, 0,     tr("Red"));}
     Color green() {    return Color(0, 200, 0,     tr("Green"));}
     Color blue() {     return Color(0, 0, 255,     tr("Blue"));}
-    Color yellow() {   return Color(255, 255, 0,   tr("Yellow"));}
+    Color yellow() {   return Color(255, 255, 40,  tr("Yellow"));}
     Color white() {    return Color(255, 255, 255, tr("White"));}
     Color black() {    return Color(0, 0, 0,       tr("Black"));}
     Color grey() {     return Color(128, 128, 128, tr("Grey"));}

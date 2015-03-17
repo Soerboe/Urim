@@ -22,6 +22,7 @@
 #include "lotview.h"
 #include "nomoreuniqueresultsexception.h"
 #include <QMessageBox>
+#include "aboutbox.h"
 
 using namespace std;
 
@@ -157,10 +158,13 @@ void DrawingView::createNewDrawingClicked()
 
 void DrawingView::showAbout()
 {
-    QString text;
-    text.append(qApp->applicationName()).append(" ");
-    text.append(tr("version")).append(" ").append(qApp->applicationVersion());
-    QMessageBox::about(this, qApp->applicationName(),  text);
+    AboutBox about(this);
+    about.exec();
+
+//    QString text;
+//    text.append(qApp->applicationName()).append(" ");
+//    text.append(tr("version")).append(" ").append(qApp->applicationVersion());
+//    QMessageBox::about(this, qApp->applicationName(),  text);
 }
 
 void DrawingView::showAboutQt()

@@ -18,7 +18,7 @@
 #define URIMTHUMMIM
 
 #define APPLICATION_NAME "Urim Thummim"
-#define APPLICATION_VERSION "0.0.2"
+#define APPLICATION_VERSION "0.0.3"
 
 #define IDENTITY_COLOR "#ff8522"
 

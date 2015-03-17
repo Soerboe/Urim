@@ -2,6 +2,24 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="nb_NO">
 <context>
+    <name>AboutBox</name>
+    <message>
+        <location filename="../aboutbox.cpp" line="36"/>
+        <source>Version</source>
+        <translation>Versjon</translation>
+    </message>
+    <message>
+        <location filename="../aboutbox.cpp" line="43"/>
+        <source>&lt;p&gt;This program is free software: you can redistribute it and/or modify&lt;br/&gt;                        it under the terms of the GNU General Public License version 2 as&lt;br/&gt;                        published by the Free Software Foundation. See http://www.gnu.org/licenses/.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Dette programmet er fri programvare: du kan redistribuere det og/eller endre&lt;br/&gt;det ut fra betingelsene gitt i GNU General Public License versjon 2,&lt;br/&gt;publisert av Free Software Foundation. Se http://www.gnu.org/licenses/.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../aboutbox.cpp" line="49"/>
+        <source>About %1</source>
+        <translation>Om %1</translation>
+    </message>
+</context>
+<context>
     <name>ColorAndNumberConfiguration</name>
     <message>
         <location filename="../colorandnumberconfiguration.cpp" line="30"/>
@@ -173,7 +191,7 @@
     <message>
         <location filename="../configuredrawingdialog.ui" line="14"/>
         <source>Configure drawing</source>
-        <translation>Tilpass trekning</translation>
+        <translation>Tilpass loddtrekning</translation>
     </message>
     <message>
         <location filename="../configuredrawingdialog.ui" line="22"/>
@@ -193,7 +211,7 @@
     <message>
         <location filename="../configuredrawingdialog.cpp" line="32"/>
         <source>Configure drawing:</source>
-        <translation>Tilpass trekning:</translation>
+        <translation>Tilpass loddtrekning:</translation>
     </message>
     <message>
         <location filename="../configuredrawingdialog.cpp" line="62"/>
@@ -224,7 +242,7 @@
         <translation>Høyeste tall:</translation>
     </message>
     <message>
-        <location filename="../configuredrawingdialog.cpp" line="112"/>
+        <location filename="../configuredrawingdialog.cpp" line="114"/>
         <source>Minimum value is larger than maximum value.</source>
         <translation>Laveste tall er større enn høyeste tall.</translation>
     </message>
@@ -250,152 +268,187 @@
 <context>
     <name>DrawingSetupDialog</name>
     <message>
-        <location filename="../drawingsetupdialog.ui" line="71"/>
+        <location filename="../drawingsetupdialog.ui" line="49"/>
         <source>Create Lottery</source>
-        <translation>Opprett trekning</translation>
+        <translation>Opprett loddtrekning</translation>
     </message>
     <message>
-        <location filename="../drawingsetupdialog.ui" line="78"/>
+        <location filename="../drawingsetupdialog.ui" line="56"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select a type of lottery and configure the lots.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Velg en type trekning og tilpass loddene.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Velg en type loddtrekning og tilpass loddene.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../drawingsetupdialog.ui" line="72"/>
+        <source>Lottery name (optional)</source>
+        <translation>Navn på loddtrekning (valgfritt)</translation>
     </message>
     <message>
         <location filename="../drawingsetupdialog.ui" line="94"/>
-        <source>Lottery name (optional)</source>
-        <translation>Navn på trekning (valgfritt)</translation>
-    </message>
-    <message>
-        <location filename="../drawingsetupdialog.ui" line="116"/>
         <source>Configure</source>
-        <translation>Konfigurér</translation>
+        <translation>Tilpass</translation>
     </message>
     <message>
-        <location filename="../drawingsetupdialog.ui" line="125"/>
+        <location filename="../drawingsetupdialog.ui" line="103"/>
         <source>Summary:</source>
         <translation>Oppsummering:</translation>
     </message>
     <message>
-        <location filename="../drawingsetupdialog.ui" line="172"/>
+        <location filename="../drawingsetupdialog.ui" line="150"/>
         <source>Create</source>
         <translation>Opprett</translation>
     </message>
     <message>
-        <location filename="../drawingsetupdialog.ui" line="179"/>
+        <location filename="../drawingsetupdialog.ui" line="157"/>
         <source>Quit</source>
         <translation>Avslutt</translation>
     </message>
     <message>
-        <location filename="../drawingsetupdialog.cpp" line="68"/>
+        <location filename="../drawingsetupdialog.cpp" line="31"/>
+        <source>Setup drawing</source>
+        <translation>Oppsett av loddtrekning</translation>
+    </message>
+    <message>
+        <location filename="../drawingsetupdialog.cpp" line="77"/>
         <source>No type of drawing chosen</source>
-        <translation>Ingen trekning er valgt</translation>
+        <translation>Ingen loddtrekning er valgt</translation>
     </message>
     <message>
-        <location filename="../drawingsetupdialog.cpp" line="68"/>
+        <location filename="../drawingsetupdialog.cpp" line="77"/>
         <source>Please choose a type of drawing.</source>
-        <translation>Vennligst velg en type trekning.</translation>
+        <translation>Vennligst velg en type loddtrekning.</translation>
     </message>
     <message>
-        <location filename="../drawingsetupdialog.cpp" line="102"/>
+        <location filename="../drawingsetupdialog.cpp" line="111"/>
         <source>Choose a type of drawing:</source>
-        <translation>Velg en type trekning:</translation>
+        <translation>Velg en type loddtrekning:</translation>
     </message>
 </context>
 <context>
     <name>DrawingView</name>
     <message>
-        <location filename="../drawingview.ui" line="86"/>
+        <location filename="../drawingview.ui" line="127"/>
         <source>Draw</source>
         <translation>Trekk lodd</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="105"/>
+        <location filename="../drawingview.ui" line="148"/>
         <source>&amp;Drawing</source>
-        <translation>&amp;Trekning</translation>
+        <translation>&amp;Loddtrekning</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="112"/>
+        <location filename="../drawingview.ui" line="155"/>
         <source>&amp;View</source>
         <translation>&amp;Vis</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="118"/>
+        <location filename="../drawingview.ui" line="159"/>
+        <source>Show lot</source>
+        <translation>Vis lodd</translation>
+    </message>
+    <message>
+        <location filename="../drawingview.ui" line="167"/>
         <source>&amp;Session</source>
         <translation>&amp;Trekkerunde</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="124"/>
+        <location filename="../drawingview.ui" line="173"/>
         <source>&amp;Help</source>
         <translation>&amp;Hjelp</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="147"/>
+        <location filename="../drawingview.ui" line="196"/>
         <source>Create new drawing</source>
-        <translation>Opprett ny trekning</translation>
+        <translation>Opprett ny loddtrekning</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="152"/>
+        <location filename="../drawingview.ui" line="201"/>
         <source>Quit</source>
         <translation>Avslutt</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="161"/>
+        <location filename="../drawingview.ui" line="210"/>
         <source>&amp;Draw</source>
         <translation>&amp;Trekk lodd</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="164"/>
+        <location filename="../drawingview.ui" line="213"/>
         <source>Draw a lot</source>
         <translation>Trekk et lodd</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="179"/>
+        <location filename="../drawingview.ui" line="228"/>
         <source>Show log</source>
         <translation>Vis logg</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="182"/>
+        <location filename="../drawingview.ui" line="231"/>
         <source>Show log of drawn lots</source>
         <translation>Vis logg over trukne tall </translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="187"/>
+        <location filename="../drawingview.ui" line="236"/>
         <source>&amp;About</source>
         <translation>&amp;Om</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="192"/>
+        <location filename="../drawingview.ui" line="241"/>
         <source>About Qt</source>
         <translation>Om Qt</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="68"/>
+        <location filename="../drawingview.cpp" line="110"/>
         <source>No.</source>
         <translation>Nr.</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="68"/>
+        <location filename="../drawingview.cpp" line="110"/>
         <source>Time</source>
         <translation>Tidspunkt</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="68"/>
+        <location filename="../drawingview.cpp" line="110"/>
         <source>Lot</source>
         <translation>Lodd</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="111"/>
+        <location filename="../drawingview.cpp" line="124"/>
+        <source>In this window</source>
+        <translation>I dette vinduet</translation>
+    </message>
+    <message>
+        <location filename="../drawingview.cpp" line="133"/>
+        <source>Fullscreen on screen %1</source>
+        <translation>Fullskjerm på skjerm %1</translation>
+    </message>
+    <message>
+        <location filename="../drawingview.cpp" line="199"/>
         <source>No more unique results</source>
         <translation>Ingen flere unike lodd</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="111"/>
+        <location filename="../drawingview.cpp" line="199"/>
         <source>All unique lots have been drawn.</source>
         <translation>Alle unike lodd har blitt trukket.</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="135"/>
-        <source>version</source>
-        <translation>versjon</translation>
+        <location filename="../drawingview.cpp" line="212"/>
+        <source>Quit session</source>
+        <translation>Avbryt trekkerunde</translation>
+    </message>
+    <message>
+        <location filename="../drawingview.cpp" line="213"/>
+        <source>Quit current drawing session and create a new drawing?</source>
+        <translation>Avbryt nåværende trekkerunde og opprett ny loddtrekning?</translation>
+    </message>
+    <message>
+        <location filename="../drawingview.cpp" line="216"/>
+        <source>Yes</source>
+        <translation>Ja</translation>
+    </message>
+    <message>
+        <location filename="../drawingview.cpp" line="217"/>
+        <source>No</source>
+        <translation>Nei</translation>
     </message>
 </context>
 <context>

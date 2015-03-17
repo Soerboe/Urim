@@ -22,6 +22,7 @@
 #include "lotview.h"
 #include "nomoreuniqueresultsexception.h"
 #include <QMessageBox>
+#include "urimthummim.h"
 #include "aboutbox.h"
 
 using namespace std;
@@ -35,7 +36,9 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     ui->setupUi(this);
     setupLogger();
 
-    ui->centralWidget->setStyleSheet("#centralWidget {background-color: #ffffff;}");
+    QString style("#lotContainer {background-color: #ffffff; border: 1px solid ");
+    style.append(IDENTITY_COLOR).append(";}");
+    ui->lotContainer->setStyleSheet(style);
 
     ui->drawingNameView->hide();
     ui->drawButton->hide();
@@ -47,6 +50,7 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     connect(ui->aboutAction, SIGNAL(triggered()), SLOT(showAbout()));
     connect(ui->aboutQtAction, SIGNAL(triggered()), SLOT(showAboutQt()));
 
+    this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     QTimer::singleShot(0, this, SLOT(showDrawingSetup()));
 }
 
@@ -160,11 +164,6 @@ void DrawingView::showAbout()
 {
     AboutBox about(this);
     about.exec();
-
-//    QString text;
-//    text.append(qApp->applicationName()).append(" ");
-//    text.append(tr("version")).append(" ").append(qApp->applicationVersion());
-//    QMessageBox::about(this, qApp->applicationName(),  text);
 }
 
 void DrawingView::showAboutQt()

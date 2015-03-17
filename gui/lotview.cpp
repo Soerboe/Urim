@@ -59,7 +59,7 @@ int LotView::calcMaxFontSize(const QFont& originalFont, const QString& text, con
     QFontMetrics originalMetrics(originalFont);
     bool fontTooLarge = originalMetrics.width(text) >= boundingBox.width() || originalMetrics.height() >= boundingBox.height();
 
-    int inc = 1;
+    int inc = 2;
     int size = originalFont.pointSize();
     QFont f = originalFont;
 

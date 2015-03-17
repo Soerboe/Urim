@@ -21,7 +21,7 @@
 #include "lotelementviewer.h"
 #include "utils.h"
 
-#define MAX_FONT_SIZE 500
+#define MAX_FONT_SIZE 1000
 
 class DrawingController;
 class LoadingWidget;

@@ -39,7 +39,11 @@ protected:
 
 private:
     Ui::SingleNumberView *ui;
+    bool _init;
+    int _number;
+    QString _label;
 
+    void updateView();
     void calcLocalFontSize(const QFont& font);
 };
 

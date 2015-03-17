@@ -20,7 +20,8 @@
 
 SingleNumberView::SingleNumberView(const QString& longestText, QWidget *parent) :
     LotViewTextAsMain(longestText, parent),
-    ui(new Ui::SingleNumberView)
+    ui(new Ui::SingleNumberView),
+    _init(false)
 {
     ui->setupUi(this);
 }
@@ -34,20 +35,19 @@ void SingleNumberView::view(const NumberLotElement& numberLotElement, int id)
 {
     ignore_unused(id);
 
-    if (numberLotElement.name().length() > 0) {
-        ui->label->setText(QString(numberLotElement.name().c_str()).append(":"));
-    }
-
-    ui->numberView->setText(QString::number(numberLotElement.number()));
-
-    calcLocalFontSize(ui->numberView->font());
+    _number = numberLotElement.number();
+    _label = QString(numberLotElement.name().c_str());
+    _init = true;
+    updateView();
 }
 
 void SingleNumberView::calcViewSize()
 {
     QFont f = ui->numberView->font();
+    QRect rect = ui->mainView->rect();
+    rect.setHeight(rect.height() - ui->label->height());
 
-    int fontSize = calcMaxFontSize(f, _longestText, ui->numberView->rect());
+    int fontSize = calcMaxFontSize(f, _longestText, rect);
     if (fontSize <= 0) {
         return;
     }
@@ -62,12 +62,28 @@ void SingleNumberView::showLot(bool visible)
 {
     ui->label->setVisible(visible);
     ui->numberView->setVisible(visible);
+    updateView();
+}
+
+void SingleNumberView::updateView()
+{
+    if (!_init) {
+        return;
+    }
+
+    if (!_label.isEmpty()) {
+        ui->label->setText(QString(_label).append(":"));
+    }
+
+    ui->numberView->setText(QString::number(_number));
+
+    calcViewSize();
 }
 
 void SingleNumberView::calcLocalFontSize(const QFont& font)
 {
     QFont f = font;
-    QRect boundingBox = ui->numberView->rect();
+    QRect boundingBox = ui->mainView->rect();
     int size = f.pointSize() * 0.3;
     bool tooLarge = true;
     for (; tooLarge && size > 1; --size) {

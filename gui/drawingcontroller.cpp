@@ -19,6 +19,7 @@
 #include "lotview.h"
 #include "lotlogger.h"
 #include <QTimer>
+#include <QScreen>
 
 DrawingController::DrawingController(LotWindow* lotWindow)
     : _lotWindow(lotWindow),
@@ -26,18 +27,10 @@ DrawingController::DrawingController(LotWindow* lotWindow)
 {
 }
 
-void DrawingController::draw()
+void DrawingController::doDraw()
 {
-    _lotView->showLoading(true);
-    _lotView->showLot(false);
-
-    QTimer::singleShot(1500, [this]() {
-        this->_lotView->showLot(true);
-        this->_lotView->showLoading(false);
-        this->_drawingView->enableDrawing(true);
-    });
-
     Lot lot = _drawingSession->draw();
+
     if (_lotView) {
         lot.view(*_lotView);
     }
@@ -45,17 +38,63 @@ void DrawingController::draw()
     if (_lotLogger) {
         _lotLogger->log(lot, _drawingSession);
     }
+
+    _lotView->showLot(true);
+    _lotView->showLoading(false);
+    _drawingView->enableDrawing(true);
+}
+
+void DrawingController::draw()
+{
+    _lotView->showLoading(true);
+    _lotView->showLot(false);
+
+    QTimer::singleShot(1500, this, SLOT(doDraw()));
 }
 
 void DrawingController::showLotWindow(bool visible)
 {
-    _lotWindow->setVisible(visible);
+    if (visible) {
+        _lotWindow->showFullScreen();
+    } else {
+        _lotWindow->setVisible(false);
+    }
 }
 
-void DrawingController::setLotView(LotView* view)
+void DrawingController::showLot(bool visible)
 {
+    _lotView->showLot(visible);
+}
+
+void DrawingController::moveLotView(const QScreen* screen)
+{
+    LotView* view = 0;
+
+    if (_lotWindow->hasView()) {
+        view = _lotWindow->takeView();
+    } else if (_drawingView->hasLotView()) {
+        view = _drawingView->takeLotView();
+    }
+
+    if (screen) {
+        _lotWindow->move(screen->geometry().x(), screen->geometry().y());
+    }
+
+    setLotView(view, screen);
+}
+
+void DrawingController::setLotView(LotView* view, const QScreen* screen)
+{
+    if (!view) {
+        return;
+    }
+
     _lotView = view;
-    _drawingView->setLotView(view);
-    //_lotWindow->setView(view);
+
+    if (screen) {
+        _lotWindow->setView(view);
+    } else {
+        _drawingView->setLotView(view);
+    }
 }
 

@@ -19,25 +19,33 @@
 
 #include "drawingsession.h"
 #include "lotwindow.h"
+#include <QObject>
 
 class LotView;
 class LotLogger;
 class DrawingView;
 
-class DrawingController
+class DrawingController : public QObject
 {
+    Q_OBJECT
+
 public:
     DrawingController(LotWindow* lotWindow);
 
     void draw();
     void showLotWindow(bool visible);
-    void setLotView(LotView* view);
+    void showLot(bool visible);
+    void setLotView(LotView* view, const QScreen* screen = 0);
+    void moveLotView(const QScreen* screen = 0);
 
     std::shared_ptr<DrawingSession> drawingSession() const {return _drawingSession;}
 
     void setDrawingView(DrawingView* view) {_drawingView = view;}
     void setDrawingSession(const std::shared_ptr<DrawingSession> drawingSession) {_drawingSession = drawingSession;}
     void setLotLogger(const std::shared_ptr<LotLogger> lotLogger) {_lotLogger = lotLogger;}
+
+private slots:
+    void doDraw();
 
 private:
     DrawingView* _drawingView;

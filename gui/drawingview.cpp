@@ -23,7 +23,9 @@
 #include "nomoreuniqueresultsexception.h"
 #include <QMessageBox>
 #include "urimthummim.h"
+#include <QScreen>
 #include "aboutbox.h"
+#include <QDesktopWidget>
 
 using namespace std;
 
@@ -31,7 +33,8 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     QMainWindow(parent),
     ui(new Ui::DrawingView),
     _drawingController(controller),
-    _setupDialog(setupDialog)
+    _setupDialog(setupDialog),
+    _lotView(0)
 {
     ui->setupUi(this);
     setupLogger();
@@ -39,6 +42,8 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     QString style("#lotContainer {background-color: #ffffff; border: 1px solid ");
     style.append(IDENTITY_COLOR).append(";}");
     ui->lotContainer->setStyleSheet(style);
+
+    setupShowLotViewMenu();
 
     ui->drawingNameView->hide();
     ui->drawButton->hide();
@@ -68,6 +73,20 @@ void DrawingView::setLotView(LotView* lotView)
     }
 
     ui->lotContainer->layout()->addWidget(lotView);
+    _lotView = lotView;
+}
+
+LotView* DrawingView::takeLotView()
+{
+    QLayoutItem* oldView = ui->lotContainer->layout()->takeAt(0);
+    LotView* view = _lotView;
+    _lotView = 0;
+    return view;
+}
+
+bool DrawingView::hasLotView()
+{
+    return _lotView != 0;
 }
 
 void DrawingView::enableDrawing(bool enabled)
@@ -99,9 +118,56 @@ void DrawingView::setupLogger()
     connect(ui->showLogAction, SIGNAL(triggered(bool)), SLOT(showLogChecked(bool)));
 }
 
+void DrawingView::setupShowLotViewMenu()
+{
+    QActionGroup* showLotViewActions = new QActionGroup(this);
+    QAction* thisWindowAction = new QAction(tr("In this window"), this);
+    thisWindowAction->setCheckable(true);
+    thisWindowAction->setData(-1);
+    showLotViewActions->addAction(thisWindowAction);
+    ui->showLotViewMenu->addAction(thisWindowAction);
+
+    QList<QScreen*> screens = qApp->screens();
+    if (screens.size() > 0) {
+        for (int screenIndex = 0; screenIndex < screens.size(); ++screenIndex) {
+            QAction* monitorAction = new QAction(tr("Fullscreen on screen %1").arg(screenIndex + 1), this);
+            monitorAction->setCheckable(true);
+            monitorAction->setData(screenIndex);
+            showLotViewActions->addAction(monitorAction);
+            ui->showLotViewMenu->addAction(monitorAction);
+        }
+    }
+
+    connect(showLotViewActions, SIGNAL(triggered(QAction*)), SLOT(moveLotView(QAction*)));
+
+    // TODO get this from QSettings
+    thisWindowAction->setChecked(true);
+}
+
 void DrawingView::clear()
 {
     ui->logWidget->clear();
+}
+
+void DrawingView::moveLotView(QAction* action)
+{
+    QScreen* screen = 0;
+    int screenIndex = action->data().toInt();
+    if (screenIndex >= 0) {
+        screen = qApp->screens().at(screenIndex);
+    }
+
+    bool inThisWindow = !screen;
+
+    _drawingController->moveLotView(screen);
+    _drawingController->showLotWindow(!inThisWindow);
+    ui->lotContainer->setVisible(inThisWindow);
+    ui->showLogAction->setChecked(!inThisWindow);
+    ui->logWidget->setVisible(!inThisWindow);
+    ui->drawButton->setVisible(!inThisWindow);
+    if (_drawingController->drawingSession()->lotsCount() > 0) {
+        _drawingController->showLot(true);
+    }
 }
 
 void DrawingView::showDrawingSetup()

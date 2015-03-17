@@ -34,6 +34,8 @@ public:
     ~LotWindow();
 
     void setView(LotView* view);
+    LotView* takeView();
+    bool hasView();
 
 private:
     Ui::LotWindow *ui;

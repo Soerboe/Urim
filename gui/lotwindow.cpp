@@ -19,11 +19,15 @@
 #include "lotview.h"
 
 LotWindow::LotWindow(QWidget *parent) :
-    QWidget(parent, Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowMinMaxButtonsHint),
+    QWidget(parent),
     ui(new Ui::LotWindow),
     _lotView(0)
 {
     ui->setupUi(this);
+    QString style("#LotWindow {background-color: #ffffff;}");
+    setStyleSheet(style);
+    setAttribute(Qt::WA_ShowWithoutActivating);
+    setFocusPolicy(Qt::NoFocus);
 }
 
 LotWindow::~LotWindow()
@@ -42,5 +46,18 @@ void LotWindow::setView(LotView* view)
     view->setMinimumSize(200, 100);
     ui->layout->addWidget(view);
     _lotView = view;
+}
+
+LotView* LotWindow::takeView()
+{
+    QLayoutItem* oldView = ui->layout->takeAt(0);
+    LotView* view = _lotView;
+    _lotView = 0;
+    return view;
+}
+
+bool LotWindow::hasView()
+{
+    return _lotView != 0;
 }
 

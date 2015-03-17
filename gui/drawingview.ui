@@ -143,36 +143,42 @@
      <height>20</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuDrawing">
+   <widget class="QMenu" name="drawingMenu">
     <property name="title">
      <string>&amp;Drawing</string>
     </property>
     <addaction name="createNewDrawingAction"/>
     <addaction name="quitAction"/>
    </widget>
-   <widget class="QMenu" name="menuView">
+   <widget class="QMenu" name="viewMenu">
     <property name="title">
      <string>&amp;View</string>
     </property>
+    <widget class="QMenu" name="showLotViewMenu">
+     <property name="title">
+      <string>Show lot</string>
+     </property>
+    </widget>
     <addaction name="showLogAction"/>
+    <addaction name="showLotViewMenu"/>
    </widget>
-   <widget class="QMenu" name="menu_Session">
+   <widget class="QMenu" name="sessionMenu">
     <property name="title">
      <string>&amp;Session</string>
     </property>
     <addaction name="drawAction"/>
    </widget>
-   <widget class="QMenu" name="menu_Help">
+   <widget class="QMenu" name="helpMenu">
     <property name="title">
      <string>&amp;Help</string>
     </property>
     <addaction name="aboutAction"/>
     <addaction name="aboutQtAction"/>
    </widget>
-   <addaction name="menuDrawing"/>
-   <addaction name="menu_Session"/>
-   <addaction name="menuView"/>
-   <addaction name="menu_Help"/>
+   <addaction name="drawingMenu"/>
+   <addaction name="sessionMenu"/>
+   <addaction name="viewMenu"/>
+   <addaction name="helpMenu"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">

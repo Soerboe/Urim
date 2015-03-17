@@ -37,6 +37,8 @@ public:
     ~DrawingView();
 
     void setLotView(LotView* lotView);
+    LotView* takeLotView();
+    bool hasLotView();
     void enableDrawing(bool enabled);
 
 protected:
@@ -46,11 +48,14 @@ private:
     Ui::DrawingView *ui;
     DrawingController* _drawingController;
     DrawingSetupDialog* _setupDialog;
+    LotView* _lotView;
 
     void setupLogger();
+    void setupShowLotViewMenu();
     void clear();
 
 private slots:
+    void moveLotView(QAction*);
     void showDrawingSetup();
     void drawClicked();
     void showLogChecked(bool checked);

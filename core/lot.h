@@ -17,7 +17,7 @@
 #ifndef LOT_H
 #define LOT_H
 
-#include <QList>
+#include <vector>
 #include <memory>
 #include <ostream>
 
@@ -40,7 +40,7 @@ public:
     friend bool operator== (const Lot& a, const Lot& b);
     friend bool operator!= (const Lot& a, const Lot& b);
 private:
-    QList<std::shared_ptr<LotElement> > _lotElements;
+    std::vector<std::shared_ptr<LotElement> > _lotElements;
 };
 
 #endif // LOT_H

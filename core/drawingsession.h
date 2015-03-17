@@ -20,6 +20,7 @@
 #include <QString>
 #include "lot.h"
 #include <unordered_set>
+#include <QList>
 
 class RandomGenerator;
 

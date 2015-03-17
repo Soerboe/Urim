@@ -26,12 +26,12 @@ Lot::Lot()
 
 void Lot::addLotElement(const shared_ptr<LotElement> lotElement)
 {
-    _lotElements.append(lotElement);
+    _lotElements.push_back(lotElement);
 }
 
 void Lot::view(LotElementViewer& viewer)
 {
-    for (int i = 0; i < _lotElements.size(); ++i) {
+    for (size_t i = 0; i < _lotElements.size(); ++i) {
         _lotElements.at(i)->view(viewer, i);
     }
 }
@@ -43,13 +43,13 @@ shared_ptr<LotElement> Lot::at(int index) const
 
 size_t Lot::count() const
 {
-    return _lotElements.count();
+    return _lotElements.size();
 }
 
 size_t Lot::hash() const
 {
     size_t seed = 0x1f73a8ce;
-    for (int i = 0; i < _lotElements.size(); ++i) {
+    for (size_t i = 0; i < _lotElements.size(); ++i) {
         hash_combine_custom(seed, *_lotElements.at(i));
     }
 
@@ -62,7 +62,7 @@ bool operator==(const Lot& a, const Lot& b)
         return false;
     }
 
-    for(int i = 0; i < a._lotElements.size(); ++i) {
+    for(size_t i = 0; i < a._lotElements.size(); ++i) {
         if ((*a._lotElements.at(i)) != (*b._lotElements.at(i))) {
             return false;
         }
@@ -79,7 +79,7 @@ bool operator!=(const Lot& a, const Lot& b)
 ostream& operator<<(ostream& output, const Lot& lot)
 {
     output << "Lot[";
-    for(int i = 0; i < lot._lotElements.size(); ++i) {
+    for(size_t i = 0; i < lot._lotElements.size(); ++i) {
         if (i > 0) {
             output << ", ";
         }

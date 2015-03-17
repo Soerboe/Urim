@@ -18,6 +18,7 @@
 #include "ui_drawingsetupdialog.h"
 #include <QMessageBox>
 #include "urimthummim.h"
+#include <QSvgWidget>
 
 using namespace std;
 
@@ -31,8 +32,12 @@ DrawingSetupDialog::DrawingSetupDialog(DrawingSetupController* controller, QWidg
     QString style("#ID {border: 1px solid ");
     style.append(IDENTITY_COLOR).append(";}");
 
-    ui->header->setStyleSheet(QString(style).replace("ID", "header"));
     ui->summary->setStyleSheet(QString(style).replace("ID", "summary"));
+
+    QSvgWidget* svg = new QSvgWidget(":/gui/icons/lots.svg");
+    svg->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    svg->setFixedSize(64, 64);
+    ui->headerLayout->insertWidget(0, svg);
 
     setupConfigurations();
 

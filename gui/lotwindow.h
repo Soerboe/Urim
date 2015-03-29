@@ -37,10 +37,13 @@ public:
     LotView* takeView();
     bool hasView();
 
+    void setDrawingName(QString name) {_drawingName = name;}
+
 private:
     Ui::LotWindow *ui;
 
     LotView* _lotView;
+    QString _drawingName;
 };
 
 #endif // LOTWINDOW_H

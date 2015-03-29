@@ -95,6 +95,12 @@ void DrawingView::enableDrawing(bool enabled)
     ui->drawButton->setEnabled(enabled);
 }
 
+void DrawingView::setDrawingName(QString drawingName)
+{
+    ui->drawingNameView->setText(drawingName);
+    ui->drawingNameView->setVisible(!drawingName.isEmpty());
+}
+
 void DrawingView::closeEvent(QCloseEvent* event)
 {
     event->accept();
@@ -177,12 +183,9 @@ void DrawingView::showDrawingSetup()
     if (status == QDialog::Accepted) {
         _drawingController->setDrawingSession(_setupDialog->getDrawingSession());
         LotView* lotView = _setupDialog->getView();
-        _drawingController->setLotView(lotView);
-
         QString drawingName = _setupDialog->getDrawingName();
-        ui->drawingNameView->setText(drawingName);
-        ui->drawingNameView->setVisible(!drawingName.isEmpty());
-
+        _drawingController->setLotView(lotView);
+        _drawingController->setDrawingName(drawingName);
         this->show();
     } else {
         qApp->exit(0);

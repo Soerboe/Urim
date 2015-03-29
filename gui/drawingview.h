@@ -40,6 +40,7 @@ public:
     LotView* takeLotView();
     bool hasLotView();
     void enableDrawing(bool enabled);
+    void setDrawingName(QString drawingName);
 
 protected:
     void closeEvent(QCloseEvent *);

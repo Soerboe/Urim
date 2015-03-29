@@ -83,6 +83,12 @@ void DrawingController::moveLotView(const QScreen* screen)
     setLotView(view, screen);
 }
 
+void DrawingController::setDrawingName(QString drawingName)
+{
+    _lotWindow->setDrawingName(drawingName);
+    _drawingView->setDrawingName(drawingName);
+}
+
 void DrawingController::setLotView(LotView* view, const QScreen* screen)
 {
     if (!view) {

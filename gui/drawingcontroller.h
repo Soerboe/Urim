@@ -54,6 +54,7 @@ private:
     LotView* _lotView;
     std::shared_ptr<DrawingSession> _drawingSession;
     std::shared_ptr<LotLogger> _lotLogger;
+    void delay(int n);
 };
 
 #endif // DRAWINGCONTROLLER_H

@@ -198,9 +198,9 @@ void DrawingView::drawClicked()
     try {
         enableDrawing(false);
         _drawingController->draw();
+        enableDrawing(true);
     } catch (NoMoreUniqueResultsException& e) {
         QMessageBox::warning(this, tr("No more unique results"), tr("All unique lots have been drawn."));
-        ui->drawButton->setEnabled(false);
     }
 }
 

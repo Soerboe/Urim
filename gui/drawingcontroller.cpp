@@ -18,8 +18,11 @@
 #include "drawingview.h"
 #include "lotview.h"
 #include "lotlogger.h"
+#include "nomoreuniqueresultsexception.h"
 #include <QTimer>
 #include <QScreen>
+#include <QTime>
+#include <QCoreApplication>
 
 DrawingController::DrawingController(LotWindow* lotWindow)
     : _lotWindow(lotWindow),
@@ -39,9 +42,14 @@ void DrawingController::doDraw()
         _lotLogger->log(lot, _drawingSession);
     }
 
-    _lotView->showLot(true);
-    _lotView->showLoading(false);
-    _drawingView->enableDrawing(true);
+}
+
+void DrawingController::delay(int n = 1000)
+{
+    QTime endTime = QTime::currentTime().addMSecs(n);
+    while (QTime::currentTime() < endTime) {
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    }
 }
 
 void DrawingController::draw()
@@ -49,7 +57,16 @@ void DrawingController::draw()
     _lotView->showLoading(true);
     _lotView->showLot(false);
 
-    QTimer::singleShot(1500, this, SLOT(doDraw()));
+    delay(1500);
+    try {
+        doDraw();
+    } catch (NoMoreUniqueResultsException& e) {
+        _lotView->showLoading(false);
+        throw e;
+    }
+
+    _lotView->showLot(true);
+    _lotView->showLoading(false);
 }
 
 void DrawingController::showLotWindow(bool visible)

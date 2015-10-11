@@ -17,6 +17,7 @@
 #include "randomgenerator.h"
 #include <time.h>
 #include "lotelement.h"
+#include <qdebug.h>
 
 using namespace std;
 
@@ -40,12 +41,15 @@ shared_ptr<LotElement> RandomGenerator::operator ()()
 void RandomGenerator::init()
 {
     int seed;
-    try {
-        random_device rnd;
-        seed = rnd();
-    } catch (exception& e) {
+//    random_device on under gcc on Windows is not working
+//    try {
+//        random_device rnd;
+//        seed = rnd();
+//    } catch (exception& e) {
         seed = time(NULL);
-    }
+//    }
+
+    qDebug() << "Seed for RNG:" << seed << "\n";
 
     _rng = default_random_engine(seed);
 }

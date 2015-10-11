@@ -92,7 +92,7 @@
     <message>
         <location filename="../../core/colors.h" line="31"/>
         <source>White</source>
-        <translation>Hvis</translation>
+        <translation>Hvit</translation>
     </message>
     <message>
         <location filename="../../core/colors.h" line="32"/>

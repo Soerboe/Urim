@@ -79,6 +79,10 @@ void DrawingView::setLotView(LotView* lotView)
 LotView* DrawingView::takeLotView()
 {
     QLayoutItem* oldView = ui->lotContainer->layout()->takeAt(0);
+    if (oldView) {
+        delete oldView;
+    }
+
     LotView* view = _lotView;
     _lotView = 0;
     return view;
@@ -146,13 +150,26 @@ void DrawingView::setupShowLotViewMenu()
 
     connect(showLotViewActions, SIGNAL(triggered(QAction*)), SLOT(moveLotView(QAction*)));
 
-    // TODO get this from QSettings
     thisWindowAction->setChecked(true);
 }
 
 void DrawingView::clear()
 {
     ui->logWidget->clear();
+    setDrawingName("");
+    enableDrawing(true);
+    ui->showLotViewMenu->actions()[0]->setChecked(true);
+
+    ui->drawingNameView->hide();
+    setupComponentVisibility(false);
+}
+
+void DrawingView::setupComponentVisibility(bool showLotInWindow)
+{
+    ui->lotContainer->setVisible(!showLotInWindow);
+    ui->showLogAction->setChecked(showLotInWindow);
+    ui->logWidget->setVisible(showLotInWindow);
+    ui->drawButton->setVisible(showLotInWindow);
 }
 
 void DrawingView::moveLotView(QAction* action)
@@ -163,17 +180,11 @@ void DrawingView::moveLotView(QAction* action)
         screen = qApp->screens().at(screenIndex);
     }
 
-    bool inThisWindow = !screen;
-
-    _drawingController->moveLotView(screen);
-    _drawingController->showLotWindow(!inThisWindow);
-    ui->lotContainer->setVisible(inThisWindow);
-    ui->showLogAction->setChecked(!inThisWindow);
-    ui->logWidget->setVisible(!inThisWindow);
-    ui->drawButton->setVisible(!inThisWindow);
-    if (_drawingController->drawingSession()->lotsCount() > 0) {
-        _drawingController->showLot(true);
-    }
+    _drawingController->moveLotView(screenIndex, screen);
+    _drawingController->showLotWindow(screen != 0);
+    setupComponentVisibility(screen != 0);
+    bool lotsDrawn = _drawingController->drawingSession()->lotsCount() > 0;
+    _drawingController->showLot(lotsDrawn);
 }
 
 void DrawingView::showDrawingSetup()
@@ -223,7 +234,6 @@ void DrawingView::createNewDrawingClicked()
     }
 
     clear();
-    // TODO clear state of view
     this->hide();
     _drawingController->showLotWindow(false);
     showDrawingSetup();

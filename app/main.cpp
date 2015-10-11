@@ -39,8 +39,7 @@ int main(int argc, char *argv[])
 
     DrawingSetupController setupController;
     DrawingSetupDialog setupDialog(&setupController);
-    LotWindow lotWindow;
-    DrawingController controller(&lotWindow);
+    DrawingController controller;
     DrawingView drawingView(&controller, &setupDialog);
     controller.setDrawingView(&drawingView);
     return app.exec();

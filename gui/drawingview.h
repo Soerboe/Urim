@@ -55,6 +55,8 @@ private:
     void setupShowLotViewMenu();
     void clear();
 
+    void setupComponentVisibility(bool inThisWindow);
+
 private slots:
     void moveLotView(QAction*);
     void showDrawingSetup();

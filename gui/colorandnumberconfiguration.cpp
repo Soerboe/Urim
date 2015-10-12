@@ -42,7 +42,7 @@ ColorAndNumberConfiguration::~ColorAndNumberConfiguration()
 
 shared_ptr<DrawingSession> ColorAndNumberConfiguration::createDrawingSession()
 {
-    shared_ptr<DrawingSession> session(new DrawingSession());
+    shared_ptr<DrawingSession> session(new DrawingSession(_uniqueResults));
     shared_ptr<RandomColorGenerator> colorGenerator(new RandomColorGenerator(_colors));
     colorGenerator->setName(_colorLabel.toStdString());
     shared_ptr<RandomNumberGenerator> numberGenerator(new RandomNumberGenerator(_min, _max));

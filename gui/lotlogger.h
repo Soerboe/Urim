@@ -18,11 +18,29 @@
 #define LOTLOGGER_H
 
 #include <memory>
+#include <vector>
+#include <QString>
+#include <QDateTime>
 
 class Lot;
 class QTreeWidget;
 class DrawingSession;
-class QString;
+
+class LogItem {
+public:
+    QString index() {return _index;}
+    void setIndex(int index) {_index = QString::number(index);}
+
+    QString time() {return _time;}
+    void setTime(QDateTime time) {_time = time.toString("hh:mm:ss");}
+
+    QString text() {return _text;}
+    void setText(QString text) {_text = text;}
+private:
+    QString _index;
+    QString _time;
+    QString _text;
+};
 
 class LotLogger
 {
@@ -31,10 +49,14 @@ public:
 
     void log(const Lot& lot, const std::shared_ptr<DrawingSession> session);
     void logMessage(const QString message);
+    void clear();
 
 private:
     // The view is managed by Qt
     QTreeWidget* _view;
+    std::vector<LogItem> _log;
+
+    void updateView();
 };
 
 #endif // LOTLOGGER_H

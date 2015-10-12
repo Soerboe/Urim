@@ -19,7 +19,6 @@
 #include "lotelement.h"
 #include "lotelementviewer.h"
 #include <QTreeWidgetItem>
-#include <QDateTime>
 #include "numberlotelement.h"
 #include "colorlotelement.h"
 #include "utils.h"
@@ -27,55 +26,29 @@
 
 using namespace std;
 
-class LogItem : public QTreeWidgetItem
-{
-public:
-    LogItem(QTreeWidget* parent = 0)
-        : QTreeWidgetItem(parent)
-    {
-    }
-
-private:
-    bool operator< (const QTreeWidgetItem &other) const
-    {
-        int column = treeWidget()->sortColumn();
-        if (column == 0) {
-            bool okX, okY;
-            int x = QString(text(column)).toInt(&okX);
-            int y = QString(other.text(column)).toInt(&okY);
-            if (okX && okY) {
-                return x < y;
-            }
-        }
-
-        // fallback to string compare
-        return text(column).toLower() < other.text(column).toLower();
-    }
-};
-
 class LogItemBuilder : public LotElementViewer
 {
 public:
-    LogItem* create()
+    LogItem create()
     {
         QDateTime time = QDateTime::currentDateTime();
-        _item.setText(1, time.toString("hh:mm:ss"));
-        return new LogItem(_item);
+        _item.setTime(time);
+        return LogItem(_item);
     }
 
     void setIndex(int index)
     {
-        _item.setText(0, QString::number(index));
+        _item.setIndex(index);
     }
 
     void addText(QString s) {
-        QString text = _item.text(2);
+        QString text = _item.text();
         if (!text.isEmpty()) {
             text.append(", ");
         }
 
         text.append(s);
-        _item.setText(2, text);
+        _item.setText(text);
     }
 
     void view(const NumberLotElement& numberLotElement, int id)
@@ -116,12 +89,34 @@ void LotLogger::log(const Lot& lot, const shared_ptr<DrawingSession> session)
         lot.at(i)->view(builder, i);
     }
 
-    _view->addTopLevelItem(builder.create());
+    _log.push_back(builder.create());
+    updateView();
 }
 
 void LotLogger::logMessage(const QString message)
 {
     LogItemBuilder builder;
     builder.addText(message);
-    _view->addTopLevelItem(builder.create());
+    _log.push_back(builder.create());
+    updateView();
+}
+
+void LotLogger::clear()
+{
+    _log.clear();
+}
+
+void LotLogger::updateView()
+{
+    _view->clear();
+
+    for(vector<LogItem>::reverse_iterator rit = _log.rbegin();
+        rit != _log.rend();
+        ++rit) {
+        QTreeWidgetItem* item = new QTreeWidgetItem();
+        item->setText(0, (*rit).index());
+        item->setText(1, (*rit).time());
+        item->setText(2, (*rit).text());
+        _view->addTopLevelItem(item);
+    }
 }

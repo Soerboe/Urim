@@ -204,6 +204,7 @@ void DrawingView::showDrawingSetup()
     if (status == QDialog::Accepted) {
         _drawingController->setLotView(_setupDialog->getView());
         _drawingController->setDrawingName(_setupDialog->getDrawingName());
+        _drawingController->lotLogger()->clear();
         startNewDrawingSession(true);
         this->show();
     } else {

@@ -22,13 +22,15 @@
 class Lot;
 class QTreeWidget;
 class DrawingSession;
+class QString;
 
 class LotLogger
 {
 public:
     LotLogger(QTreeWidget* view);
 
-    void log(const Lot& lot, const std::shared_ptr<DrawingSession> drawingsession);
+    void log(const Lot& lot, const std::shared_ptr<DrawingSession> session);
+    void logMessage(const QString message);
 
 private:
     // The view is managed by Qt

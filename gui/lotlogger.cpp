@@ -68,7 +68,7 @@ public:
         _item.setText(0, QString::number(index));
     }
 
-    void addLotElement(QString s) {
+    void addText(QString s) {
         QString text = _item.text(2);
         if (!text.isEmpty()) {
             text.append(", ");
@@ -85,7 +85,7 @@ public:
         if (!label.isEmpty()) {
             label.append(": ");
         }
-        addLotElement(label + QString::number(numberLotElement.number()));
+        addText(label + QString::number(numberLotElement.number()));
     }
 
     void view(const ColorLotElement& colorLotElement, int id)
@@ -95,7 +95,7 @@ public:
         if (!label.isEmpty()) {
             label.append(": ");
         }
-        addLotElement(label + QString(colorLotElement.color().name));
+        addText(label + QString(colorLotElement.color().name));
     }
 
 private:
@@ -108,13 +108,20 @@ LotLogger::LotLogger(QTreeWidget* view)
 {
 }
 
-void LotLogger::log(const Lot& lot, const shared_ptr<DrawingSession> drawingsession)
+void LotLogger::log(const Lot& lot, const shared_ptr<DrawingSession> session)
 {
     LogItemBuilder builder;
-    builder.setIndex(drawingsession->lotsCount());
+    builder.setIndex(session->lotsCount());
     for (unsigned int i = 0; i < lot.count(); ++i) {
         lot.at(i)->view(builder, i);
     }
 
+    _view->addTopLevelItem(builder.create());
+}
+
+void LotLogger::logMessage(const QString message)
+{
+    LogItemBuilder builder;
+    builder.addText(message);
     _view->addTopLevelItem(builder.create());
 }

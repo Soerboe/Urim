@@ -46,6 +46,7 @@ public:
     void setDrawingView(DrawingView* view) {_drawingView = view;}
     void setDrawingSession(const std::shared_ptr<DrawingSession> drawingSession) {_drawingSession = drawingSession;}
     void setLotLogger(const std::shared_ptr<LotLogger> lotLogger) {_lotLogger = lotLogger;}
+    std::shared_ptr<LotLogger> lotLogger() const {return _lotLogger;}
 
 private slots:
     void doDraw();

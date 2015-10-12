@@ -45,11 +45,15 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
 
     setupShowLotViewMenu();
 
+    _sessionIdView = new QLabel;
+    statusBar()->addPermanentWidget(_sessionIdView);
+
     ui->drawingNameView->hide();
     ui->drawButton->hide();
 
     connect(ui->drawButton, SIGNAL(clicked()), SLOT(drawClicked()));
     connect(ui->drawAction, SIGNAL(triggered()), SLOT(drawClicked()));
+    connect(ui->startNewSessionAction, SIGNAL(triggered()), SLOT(startNewDrawingSession()));
     connect(ui->createNewDrawingAction, SIGNAL(triggered()), SLOT(createNewDrawingClicked()));
     connect(ui->quitAction, SIGNAL(triggered()), SLOT(close()));
     connect(ui->aboutAction, SIGNAL(triggered()), SLOT(showAbout()));
@@ -113,6 +117,11 @@ void DrawingView::closeEvent(QCloseEvent* event)
     }
 }
 
+void DrawingView::updateSessionIdView(const std::shared_ptr<DrawingSession> session)
+{
+    _sessionIdView->setText(tr("Session %1").arg(session->id()));
+}
+
 void DrawingView::setupLogger()
 {
     ui->logWidget->setVisible(false);
@@ -121,6 +130,7 @@ void DrawingView::setupLogger()
     ui->logWidget->setColumnCount(headerLabels.size());
     ui->logWidget->setHeaderLabels(headerLabels);
     ui->logWidget->resizeColumnToContents(0);
+    ui->logWidget->sortByColumn(1, Qt::DescendingOrder);
 
     shared_ptr<LotLogger> logger(new LotLogger(ui->logWidget));
     _drawingController->setLotLogger(logger);
@@ -192,16 +202,13 @@ void DrawingView::showDrawingSetup()
     int status = _setupDialog->exec();
 
     if (status == QDialog::Accepted) {
-        _drawingController->setDrawingSession(_setupDialog->getDrawingSession());
-        LotView* lotView = _setupDialog->getView();
-        QString drawingName = _setupDialog->getDrawingName();
-        _drawingController->setLotView(lotView);
-        _drawingController->setDrawingName(drawingName);
+        _drawingController->setLotView(_setupDialog->getView());
+        _drawingController->setDrawingName(_setupDialog->getDrawingName());
+        startNewDrawingSession(true);
         this->show();
     } else {
         qApp->exit(0);
     }
-
 }
 
 void DrawingView::drawClicked()
@@ -213,6 +220,19 @@ void DrawingView::drawClicked()
     } catch (NoMoreUniqueResultsException& e) {
         QMessageBox::warning(this, tr("No more unique results"), tr("All unique lots have been drawn."));
     }
+}
+
+void DrawingView::startNewDrawingSession(bool newDrawing)
+{
+    shared_ptr<DrawingSession> session = _setupDialog->getDrawingSession();
+    if (!newDrawing && _drawingController->drawingSession()) {
+        session->setId(_drawingController->drawingSession()->id() + 1);
+    }
+    _drawingController->setDrawingSession(session);
+    updateSessionIdView(session);
+    _drawingController->lotLogger()->logMessage(tr("Session %1 started").arg(session->id()));
+    _drawingController->showLot(false);
+    enableDrawing(true);
 }
 
 void DrawingView::showLogChecked(bool checked)

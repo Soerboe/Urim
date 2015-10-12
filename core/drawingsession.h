@@ -44,7 +44,11 @@ public:
     int generatorsCount() const {return _generators.size();}
     std::shared_ptr<RandomGenerator> generatorsAt(int i) {return _generators.at(i);}
 
+    int id() const {return _id;}
+    void setId(int id) {_id = id;}
+
 private:
+    int _id;
     QString _name;
     bool _uniqueResults;
     QList<std::shared_ptr<RandomGenerator> > _generators;

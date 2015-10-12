@@ -21,7 +21,8 @@
 using namespace std;
 
 DrawingSession::DrawingSession(bool uniqueResults)
-    : _uniqueResults(uniqueResults)
+    : _id(1),
+      _uniqueResults(uniqueResults)
 {
 }
 

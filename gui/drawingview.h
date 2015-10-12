@@ -23,6 +23,7 @@
 #include <QCloseEvent>
 
 class LotView;
+class QLabel;
 
 namespace Ui {
 class DrawingView;
@@ -50,7 +51,9 @@ private:
     DrawingController* _drawingController;
     DrawingSetupDialog* _setupDialog;
     LotView* _lotView;
+    QLabel* _sessionIdView;
 
+    void updateSessionIdView(const std::shared_ptr<DrawingSession> session);
     void setupLogger();
     void setupShowLotViewMenu();
     void clear();
@@ -61,6 +64,7 @@ private slots:
     void moveLotView(QAction*);
     void showDrawingSetup();
     void drawClicked();
+    void startNewDrawingSession(bool newDrawing = false);
     void showLogChecked(bool checked);
     void createNewDrawingClicked();
     void showAbout();

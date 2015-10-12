@@ -215,10 +215,14 @@ void DrawingView::drawClicked()
 {
     try {
         enableDrawing(false);
+        statusBar()->showMessage(tr("Drawing a lot..."));
         _drawingController->draw();
+        statusBar()->clearMessage();
         enableDrawing(true);
-    } catch (NoMoreUniqueResultsException& e) {
-        QMessageBox::warning(this, tr("No more unique results"), tr("All unique lots have been drawn."));
+    } catch (NoMoreUniqueResultsException&) {
+        QString s = tr("No more unique results");
+        QMessageBox::warning(this, s, tr("All unique lots have been drawn."));
+        statusBar()->showMessage(s);
     }
 }
 

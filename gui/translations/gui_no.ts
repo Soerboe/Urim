@@ -336,125 +336,182 @@
         <translation>&amp;Loddtrekning</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="155"/>
+        <location filename="../drawingview.ui" line="156"/>
         <source>&amp;View</source>
         <translation>&amp;Vis</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="159"/>
+        <location filename="../drawingview.ui" line="160"/>
         <source>Show lot</source>
         <translation>Vis lodd</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="167"/>
+        <location filename="../drawingview.ui" line="168"/>
         <source>&amp;Session</source>
         <translation>&amp;Trekkerunde</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="173"/>
+        <location filename="../drawingview.ui" line="175"/>
         <source>&amp;Help</source>
         <translation>&amp;Hjelp</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="196"/>
+        <location filename="../drawingview.ui" line="198"/>
         <source>Create new drawing</source>
         <translation>Opprett ny loddtrekning</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="201"/>
+        <location filename="../drawingview.ui" line="203"/>
         <source>Quit</source>
         <translation>Avslutt</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="210"/>
+        <location filename="../drawingview.ui" line="212"/>
         <source>&amp;Draw</source>
         <translation>&amp;Trekk lodd</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="213"/>
+        <location filename="../drawingview.ui" line="215"/>
         <source>Draw a lot</source>
         <translation>Trekk et lodd</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="228"/>
+        <location filename="../drawingview.ui" line="230"/>
         <source>Show log</source>
         <translation>Vis logg</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="231"/>
+        <location filename="../drawingview.ui" line="233"/>
         <source>Show log of drawn lots</source>
         <translation>Vis logg over trukne tall </translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="236"/>
+        <location filename="../drawingview.ui" line="238"/>
         <source>&amp;About</source>
         <translation>&amp;Om</translation>
     </message>
     <message>
-        <location filename="../drawingview.ui" line="241"/>
+        <location filename="../drawingview.ui" line="243"/>
         <source>About Qt</source>
         <translation>Om Qt</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="110"/>
+        <location filename="../drawingview.ui" line="248"/>
+        <source>Start new session</source>
+        <translation>Start ny trekkerunde</translation>
+    </message>
+    <message>
+        <location filename="../drawingview.ui" line="253"/>
+        <source>Save log</source>
+        <translation>Lagre logg</translation>
+    </message>
+    <message>
+        <location filename="../drawingview.cpp" line="131"/>
         <source>No.</source>
         <translation>Nr.</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="110"/>
+        <location filename="../drawingview.cpp" line="131"/>
         <source>Time</source>
         <translation>Tidspunkt</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="110"/>
         <source>Lot</source>
-        <translation>Lodd</translation>
+        <translation type="vanished">Lodd</translation>
     </message>
     <message>
         <location filename="../drawingview.cpp" line="124"/>
+        <source>Session %1</source>
+        <translation>Trekkerunde %1</translation>
+    </message>
+    <message>
+        <location filename="../drawingview.cpp" line="131"/>
+        <source>Event</source>
+        <translation>Hendelse</translation>
+    </message>
+    <message>
+        <location filename="../drawingview.cpp" line="147"/>
         <source>In this window</source>
         <translation>I dette vinduet</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="133"/>
+        <location filename="../drawingview.cpp" line="156"/>
         <source>Fullscreen on screen %1</source>
         <translation>Fullskjerm på skjerm %1</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="199"/>
+        <location filename="../drawingview.cpp" line="220"/>
+        <source>Save log to file</source>
+        <translation>Lagre logg til fil</translation>
+    </message>
+    <message>
+        <location filename="../drawingview.cpp" line="220"/>
+        <source>Log files (*.log)</source>
+        <translation>Logg-filer (*.log)</translation>
+    </message>
+    <message>
+        <location filename="../drawingview.cpp" line="233"/>
+        <source>Error</source>
+        <translation>Feil</translation>
+    </message>
+    <message>
+        <location filename="../drawingview.cpp" line="233"/>
+        <source>Could not save log to file</source>
+        <translation>En feil oppstod ved lagring av logg til fil</translation>
+    </message>
+    <message>
+        <location filename="../drawingview.cpp" line="241"/>
+        <source>Drawing a lot...</source>
+        <translation>Trekker et lodd...</translation>
+    </message>
+    <message>
+        <location filename="../drawingview.cpp" line="246"/>
         <source>No more unique results</source>
         <translation>Ingen flere unike lodd</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="199"/>
+        <location filename="../drawingview.cpp" line="247"/>
         <source>All unique lots have been drawn.</source>
         <translation>Alle unike lodd har blitt trukket.</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="212"/>
+        <location filename="../drawingview.cpp" line="260"/>
+        <source>Session %1 started</source>
+        <translation>Trekkerunde %1 startet</translation>
+    </message>
+    <message>
+        <location filename="../drawingview.cpp" line="273"/>
         <source>Quit session</source>
         <translation>Avbryt trekkerunde</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="213"/>
+        <location filename="../drawingview.cpp" line="274"/>
         <source>Quit current drawing session and create a new drawing?</source>
         <translation>Avbryt nåværende trekkerunde og opprett ny loddtrekning?</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="216"/>
+        <location filename="../drawingview.cpp" line="277"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="217"/>
+        <location filename="../drawingview.cpp" line="278"/>
         <source>No</source>
         <translation>Nei</translation>
     </message>
 </context>
 <context>
+    <name>LotLogger</name>
+    <message>
+        <location filename="../lotlogger.cpp" line="96"/>
+        <source>Lot drawn: </source>
+        <translation>Trukket lodd: </translation>
+    </message>
+</context>
+<context>
     <name>LotWindow</name>
     <message>
-        <location filename="../lotwindow.ui" line="14"/>
+        <location filename="../lotwindow.ui" line="20"/>
         <source>Lotview</source>
         <translation>Loddvisning</translation>
     </message>

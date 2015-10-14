@@ -50,11 +50,15 @@ public:
     void log(const Lot& lot, const std::shared_ptr<DrawingSession> session);
     void logMessage(const QString message);
     void clear();
+    void setHeaderLabels(QStringList list) {_headerLabels = list;}
+
+    bool saveToFile(QString filename);
 
 private:
     // The view is managed by Qt
     QTreeWidget* _view;
     std::vector<LogItem> _log;
+    QStringList _headerLabels;
 
     void updateView();
 };

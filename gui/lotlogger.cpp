@@ -23,6 +23,8 @@
 #include "colorlotelement.h"
 #include "utils.h"
 #include "drawingsession.h"
+#include <QFile>
+#include <QTextStream>
 
 using namespace std;
 
@@ -104,6 +106,33 @@ void LotLogger::logMessage(const QString message)
 void LotLogger::clear()
 {
     _log.clear();
+}
+
+bool LotLogger::saveToFile(QString filename)
+{
+    QFile file(filename);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        return false;
+    }
+
+    QTextStream out(&file);
+    out.setCodec("UTF-8");
+    if (_headerLabels.size() > 0) {
+        for (QString s : _headerLabels) {
+            out << s << "\t";
+        }
+        out << "\n";
+    }
+
+    for(vector<LogItem>::reverse_iterator rit = _log.rbegin();
+        rit != _log.rend();
+        ++rit) {
+        out << (*rit).index() << "\t"
+            << (*rit).time() << "\t"
+            << (*rit).text() << "\n";
+    }
+
+    return true;
 }
 
 void LotLogger::updateView()

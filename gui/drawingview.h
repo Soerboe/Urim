@@ -63,6 +63,7 @@ private:
 private slots:
     void moveLotView(QAction*);
     void showDrawingSetup();
+    void saveLogToFile();
     void drawClicked();
     void startNewDrawingSession(bool newDrawing = false);
     void showLogChecked(bool checked);

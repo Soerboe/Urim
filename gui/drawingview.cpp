@@ -26,6 +26,7 @@
 #include <QScreen>
 #include "aboutbox.h"
 #include <QDesktopWidget>
+#include <QFileDialog>
 
 using namespace std;
 
@@ -55,6 +56,7 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     connect(ui->drawAction, SIGNAL(triggered()), SLOT(drawClicked()));
     connect(ui->startNewSessionAction, SIGNAL(triggered()), SLOT(startNewDrawingSession()));
     connect(ui->createNewDrawingAction, SIGNAL(triggered()), SLOT(createNewDrawingClicked()));
+    connect(ui->saveLogAction, SIGNAL(triggered()), SLOT(saveLogToFile()));
     connect(ui->quitAction, SIGNAL(triggered()), SLOT(close()));
     connect(ui->aboutAction, SIGNAL(triggered()), SLOT(showAbout()));
     connect(ui->aboutQtAction, SIGNAL(triggered()), SLOT(showAboutQt()));
@@ -134,6 +136,7 @@ void DrawingView::setupLogger()
 
     shared_ptr<LotLogger> logger(new LotLogger(ui->logWidget));
     _drawingController->setLotLogger(logger);
+    logger->setHeaderLabels(headerLabels);
 
     connect(ui->showLogAction, SIGNAL(triggered(bool)), SLOT(showLogChecked(bool)));
 }
@@ -209,6 +212,25 @@ void DrawingView::showDrawingSetup()
         this->show();
     } else {
         qApp->exit(0);
+    }
+}
+
+void DrawingView::saveLogToFile()
+{
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save log to file"), QString(), tr("Log files (*.log)"));
+
+    if (filename.isNull()) {
+        return;
+    }
+
+    if (!filename.endsWith(".log")) {
+        filename.append(".log");
+    }
+
+    bool saved = _drawingController->lotLogger()->saveToFile(filename);
+
+    if (!saved) {
+        QMessageBox::warning(this, tr("Error"), tr("Could not save log to file"));
     }
 }
 

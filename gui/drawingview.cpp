@@ -128,7 +128,7 @@ void DrawingView::setupLogger()
 {
     ui->logWidget->setVisible(false);
     QStringList headerLabels;
-    headerLabels << tr("No.") << tr("Time") << tr("Lot");
+    headerLabels << tr("No.") << tr("Time") << tr("Event");
     ui->logWidget->setColumnCount(headerLabels.size());
     ui->logWidget->setHeaderLabels(headerLabels);
     ui->logWidget->resizeColumnToContents(0);

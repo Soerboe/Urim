@@ -21,6 +21,7 @@
 #include <vector>
 #include <QString>
 #include <QDateTime>
+#include <QCoreApplication>
 
 class Lot;
 class QTreeWidget;
@@ -44,6 +45,8 @@ private:
 
 class LotLogger
 {
+    Q_DECLARE_TR_FUNCTIONS(LotLogger)
+
 public:
     LotLogger(QTreeWidget* view);
 

@@ -31,10 +31,17 @@ using namespace std;
 class LogItemBuilder : public LotElementViewer
 {
 public:
+    LogItemBuilder(QString eventPrefix = 0) :
+        _eventPrefix(eventPrefix)
+    {}
+
     LogItem create()
     {
         QDateTime time = QDateTime::currentDateTime();
         _item.setTime(time);
+        if (!_eventPrefix.isEmpty()) {
+            _item.setText(_eventPrefix + _item.text());
+        }
         return LogItem(_item);
     }
 
@@ -75,6 +82,7 @@ public:
 
 private:
     LogItem _item;
+    QString _eventPrefix;
 };
 
 
@@ -85,7 +93,7 @@ LotLogger::LotLogger(QTreeWidget* view)
 
 void LotLogger::log(const Lot& lot, const shared_ptr<DrawingSession> session)
 {
-    LogItemBuilder builder;
+    LogItemBuilder builder(tr("Lot drawn: "));
     builder.setIndex(session->lotsCount());
     for (unsigned int i = 0; i < lot.count(); ++i) {
         lot.at(i)->view(builder, i);

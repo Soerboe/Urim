@@ -39,12 +39,10 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
 {
     ui->setupUi(this);
     setupLogger();
-
-    QString style("#lotContainer {background-color: #ffffff; border: 1px solid ");
-    style.append(IDENTITY_COLOR).append(";}");
-    ui->lotContainer->setStyleSheet(style);
-
     setupShowLotViewMenu();
+
+    QString style("#lotContainer {background-color: #ffffff;}");
+    ui->lotContainer->setStyleSheet(style);
 
     _sessionIdView = new QLabel;
     statusBar()->addPermanentWidget(_sessionIdView);

@@ -44,7 +44,7 @@ void LotView::showLoading(bool visible)
 void LotView::showEvent(QShowEvent*)
 {
     calcViewSize();
-    showLot(false);
+//    showLot(false);
 }
 
 void LotView::resizeEvent(QResizeEvent* event)

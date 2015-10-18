@@ -23,8 +23,7 @@
 
 ColorAndNumberView_POG::ColorAndNumberView_POG(const QString& longestText, QWidget *parent) :
     LotViewTextAsMain(longestText, parent),
-    ui(new Ui::ColorAndNumberView_POG),
-    _init(false)
+    ui(new Ui::ColorAndNumberView_POG)
 {
     ui->setupUi(this);
     ui->colorView->setAutoFillBackground(true);
@@ -36,17 +35,15 @@ ColorAndNumberView_POG::~ColorAndNumberView_POG()
     delete ui;
 }
 
-void ColorAndNumberView_POG::updateView()
+void ColorAndNumberView_POG::updateView(bool updateColorView)
 {
-    if (!_init) {
-        return;
-    }
-
     ui->numberView->setText(QString::number(_number));
 
-    QPalette palette = ui->colorView->palette();
-    palette.setColor(backgroundRole(), QColor(_color.red, _color.green, _color.blue));
-    ui->colorView->setPalette(palette);
+    if (updateColorView) {
+        QPalette palette = ui->colorView->palette();
+        palette.setColor(backgroundRole(), QColor(_color.red, _color.green, _color.blue));
+        ui->colorView->setPalette(palette);
+    }
     ui->colorNameView->setText(_color.name);
 
     calcViewSize();
@@ -57,7 +54,6 @@ void ColorAndNumberView_POG::view(const NumberLotElement& numberLotElement, int 
     ignore_unused(id);
 
     _number = numberLotElement.number();
-    _init = true;
     updateView();
 }
 
@@ -66,7 +62,6 @@ void ColorAndNumberView_POG::view(const ColorLotElement& colorLotElement, int id
     ignore_unused(id);
 
     _color = colorLotElement.color();
-    _init = true;
     updateView();
 }
 
@@ -88,10 +83,26 @@ void ColorAndNumberView_POG::calcViewSize()
     calcLocalFontSize(f);
 }
 
+/* Hackish way of hiding/showing lot.
+ * Done so font size is correctly calculated first time */
 void ColorAndNumberView_POG::showLot(bool visible)
 {
-    ui->mainView->setVisible(visible);
-    updateView();
+    QPalette textPalette = ui->numberView->palette();
+
+    if (!visible) {
+        QPalette colorPalette = ui->colorView->palette();
+        colorPalette.setColor(backgroundRole(), backgroundColor());
+        ui->colorView->setPalette(colorPalette);
+
+        textPalette.setColor(foregroundRole(), backgroundColor());
+    } else {
+        textPalette.setColor(foregroundRole(), foregroundColor());
+    }
+
+    ui->colorNameView->setPalette(textPalette);
+    ui->numberView->setPalette(textPalette);
+
+   updateView(visible);
 }
 
 void ColorAndNumberView_POG::calcLocalFontSize(const QFont& font)

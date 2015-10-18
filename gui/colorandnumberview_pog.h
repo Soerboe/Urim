@@ -35,7 +35,7 @@ public:
     virtual void view(const NumberLotElement& numberLotElement, int id);
     virtual void view(const ColorLotElement& colorLotElement, int id);
 
-    void updateView();
+    void updateView(bool updateColorView = true);
 protected:
     virtual void calcViewSize();
     virtual void showLot(bool visible);
@@ -43,11 +43,11 @@ protected:
 private:
     Ui::ColorAndNumberView_POG *ui;
 
-    bool _init;
     Color _color;
     int _number;
 
     void calcLocalFontSize(const QFont& font);
+
 };
 
 #endif // COLORANDNUMBERVIEW_POG_H

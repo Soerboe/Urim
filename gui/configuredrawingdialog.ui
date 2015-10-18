@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>360</width>
-    <height>88</height>
+    <height>177</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,38 @@
    <item>
     <layout class="QVBoxLayout" name="mainLayout">
      <item>
-      <widget class="QCheckBox" name="uniqueResults">
-       <property name="text">
-        <string>Draw unique lots per drawing session</string>
+      <widget class="QTabWidget" name="tabWidget">
+       <property name="currentIndex">
+        <number>0</number>
        </property>
+       <widget class="QWidget" name="setupTab">
+        <attribute name="title">
+         <string>Setup</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <layout class="QVBoxLayout" name="setupLayout">
+           <item>
+            <widget class="QCheckBox" name="uniqueResults">
+             <property name="text">
+              <string>Draw unique lots per drawing session</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="viewsTab">
+        <attribute name="title">
+         <string>Views</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <layout class="QVBoxLayout" name="viewsLayout"/>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </item>
      <item>

@@ -54,16 +54,23 @@ shared_ptr<DrawingSession> ColorAndNumberConfiguration::createDrawingSession()
 
 LotView* ColorAndNumberConfiguration::createView()
 {
-    // TODO choose between: return new ColorAndNumberView_Border();
     QString minText = QString::number(_min);
     QString maxText = QString::number(_max);
-    return new ColorAndNumberView_POG(minText.length() > maxText.length() ? minText : maxText);
+    switch (_viewIndex) {
+    case 1:
+        return new ColorAndNumberView_Border();
+    case 0:
+    default:
+        return new ColorAndNumberView_POG(minText.length() > maxText.length() ? minText : maxText);
+
+    }
+
 }
 
 void ColorAndNumberConfiguration::configure()
 {
     ConfigureColorAndNumberDialog dialog(name());
-    dialog.init(_colors, _colorLabel, _min, _max, _numberLabel, _uniqueResults);
+    dialog.init(_colors, _colorLabel, _min, _max, _numberLabel, _uniqueResults, _viewIndex);
     int retval = dialog.exec();
 
     if (retval == QDialog::Accepted) {
@@ -73,6 +80,7 @@ void ColorAndNumberConfiguration::configure()
         _max = dialog.max();
         _numberLabel = dialog.numberLabel();
         _uniqueResults = dialog.uniqueResults();
+        _viewIndex = dialog.viewIndex();
     }
 }
 

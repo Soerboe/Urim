@@ -19,6 +19,8 @@
 
 #include "configuredrawingdialog.h"
 
+class LotViewSelector;
+
 class ConfigureSingleNumberDialog : public ConfigureDrawingDialog
 {
     Q_OBJECT
@@ -36,6 +38,7 @@ public:
 
 private:
     ConfigureNumberWidget* _configureNumberWidget;
+    LotViewSelector* _lotViewSelector;
 
 };
 

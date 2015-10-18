@@ -19,6 +19,7 @@
 
 #include "configuredrawingdialog.h"
 #include "color.h"
+#include "lotviewselector.h"
 
 class ConfigureColorWidget;
 
@@ -29,7 +30,7 @@ class ConfigureColorAndNumberDialog : public ConfigureDrawingDialog
 public:
     ConfigureColorAndNumberDialog(const QString name);
 
-    void init(const std::vector<Color>& colors, QString colorLabel, int min, int max, QString numberLabel, bool uniqueResults);
+    void init(const std::vector<Color>& colors, QString colorLabel, int min, int max, QString numberLabel, bool uniqueResults, int viewIndex);
     virtual bool validate();
     virtual QString validationError();
 
@@ -39,10 +40,14 @@ public:
 
     std::vector<Color> colors();
     QString colorLabel();
+    int viewIndex() {return _lotViewSelector->selectedViewIndex();}
 
 private:
     ConfigureColorWidget* _configureColorWidget;
     ConfigureNumberWidget* _configureNumberWidget;
+    LotViewSelector* _lotViewSelector;
+
+    void setupViewsTab();
 };
 
 #endif // CONFIGURECOLORANDNUMBERDIALOG_H

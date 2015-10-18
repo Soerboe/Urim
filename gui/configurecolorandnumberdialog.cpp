@@ -18,6 +18,13 @@
 #include "ui_configuredrawingdialog.h"
 #include "configurecolorwidget.h"
 #include <QGroupBox>
+#include <QRadioButton>
+#include "colorandnumberview_pog.h"
+#include "colorandnumberview_border.h"
+#include "colors.h"
+#include "colorlotelement.h"
+#include "numberlotelement.h"
+#include "lotviewselector.h"
 
 ConfigureColorAndNumberDialog::ConfigureColorAndNumberDialog(const QString name)
     : ConfigureDrawingDialog(name),
@@ -28,22 +35,49 @@ ConfigureColorAndNumberDialog::ConfigureColorAndNumberDialog(const QString name)
     QVBoxLayout* colorLayout = new QVBoxLayout();
     colorLayout->addWidget(_configureColorWidget);
     colorGroup->setLayout(colorLayout);
-    ui->mainLayout->insertWidget(0, colorGroup);
+    ui->setupLayout->insertWidget(0, colorGroup);
 
     QGroupBox* numberGroup = new QGroupBox(tr("Number"));
     QVBoxLayout* numberLayout = new QVBoxLayout();
     numberLayout->addWidget(_configureNumberWidget);
     numberGroup->setLayout(numberLayout);
-    ui->mainLayout->insertWidget(1, numberGroup);
+    ui->setupLayout->insertWidget(1, numberGroup);
+
+    setupViewsTab();
 
     adjustSize();
 }
 
-void ConfigureColorAndNumberDialog::init(const std::vector<Color>& colors, QString colorLabel, int min, int max, QString numberLabel, bool uniqueResults)
+void ConfigureColorAndNumberDialog::setupViewsTab()
+{
+    _lotViewSelector = new LotViewSelector();
+    ColorAndNumberView_POG* pogView = new ColorAndNumberView_POG("1000");
+    Colors colors;
+    pogView->view(ColorLotElement(colors.red()), 0);
+    pogView->view(NumberLotElement(712), 0);
+    _lotViewSelector->addView(pogView);
+
+    ColorAndNumberView_Border* borderView = new ColorAndNumberView_Border();
+    borderView->view(ColorLotElement(colors.red()), 0);
+    borderView->view(NumberLotElement(712), 0);
+    _lotViewSelector->addView(borderView);
+
+    ui->viewsLayout->insertWidget(0, _lotViewSelector);
+}
+
+void ConfigureColorAndNumberDialog::init(
+        const std::vector<Color>& colors,
+        QString colorLabel,
+        int min,
+        int max,
+        QString numberLabel,
+        bool uniqueResults,
+        int viewIndex)
 {
     ConfigureDrawingDialog::init(uniqueResults);
     _configureColorWidget->init(colors, colorLabel);
     _configureNumberWidget->init(min, max, numberLabel);
+    _lotViewSelector->init(viewIndex);
 }
 
 bool ConfigureColorAndNumberDialog::validate()

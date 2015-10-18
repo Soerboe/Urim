@@ -35,9 +35,9 @@ public:
     virtual void view(const NumberLotElement& numberLotElement, int id);
     virtual void view(const ColorLotElement& colorLotElement, int id);
 
+    virtual void showLot(bool visible);
 protected:
     virtual void calcViewSize();
-    virtual void showLot(bool visible);
 
 private:
     Ui::ColorAndNumberView_Border *ui;

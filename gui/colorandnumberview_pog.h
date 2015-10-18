@@ -36,9 +36,9 @@ public:
     virtual void view(const ColorLotElement& colorLotElement, int id);
 
     void updateView(bool updateColorView = true);
+    virtual void showLot(bool visible);
 protected:
     virtual void calcViewSize();
-    virtual void showLot(bool visible);
 
 private:
     Ui::ColorAndNumberView_POG *ui;

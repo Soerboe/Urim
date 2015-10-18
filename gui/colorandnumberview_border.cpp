@@ -38,12 +38,7 @@ void ColorAndNumberView_Border::view(const NumberLotElement& numberLotElement, i
 {
     ignore_unused(id);
 
-    QString text;
-//    if (numberLotElement.name().size() > 0) {
-//        text.append(numberLotElement.name().c_str()).append(": ");
-//    }
-    text.append(QString::number(numberLotElement.number()));
-    ui->numberView->setText(text);
+    ui->numberView->setText(QString::number(numberLotElement.number()));
     calcViewSize();
     _drawn = true;
 }
@@ -53,13 +48,7 @@ void ColorAndNumberView_Border::view(const ColorLotElement& colorLotElement, int
     ignore_unused(id);
 
     _borderColor = colorLotElement.color();
-
-    QString text;
-//    if (colorLotElement.name().size() > 0) {
-//        text.append(colorLotElement.name().c_str()).append(": ");
-//    }
-    text.append(_borderColor.name);
-    ui->colorNameView->setText(text);
+    ui->colorNameView->setText(_borderColor.name);
     ui->mainView->setStyleSheet(buildStyleSheet());
     calcViewSize();
     _drawn = true;
@@ -67,7 +56,7 @@ void ColorAndNumberView_Border::view(const ColorLotElement& colorLotElement, int
 
 void ColorAndNumberView_Border::calcViewSize()
 {
-    _borderThickness = ui->mainView->width() * ui->mainView->height() * 0.00005;
+    _borderThickness = qMax(5.0, ui->mainView->width() * ui->mainView->height() * 0.00005);
     if (_drawn) {
         ui->mainView->setStyleSheet(buildStyleSheet());
     }
@@ -92,6 +81,7 @@ void ColorAndNumberView_Border::calcViewSize()
 void ColorAndNumberView_Border::showLot(bool visible)
 {
     ui->mainView->setVisible(visible);
+    calcViewSize();
 }
 
 QString ColorAndNumberView_Border::buildStyleSheet()

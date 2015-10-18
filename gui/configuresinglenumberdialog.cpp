@@ -16,12 +16,20 @@
 
 #include "configuresinglenumberdialog.h"
 #include "ui_configuredrawingdialog.h"
+#include "lotviewselector.h"
+#include "singlenumberview.h"
+#include "numberlotelement.h"
 
 ConfigureSingleNumberDialog::ConfigureSingleNumberDialog(const QString name)
     : ConfigureDrawingDialog(name),
       _configureNumberWidget(new ConfigureNumberWidget)
 {
-    ui->mainLayout->insertWidget(0, _configureNumberWidget);
+    ui->setupLayout->insertWidget(0, _configureNumberWidget);
+    _lotViewSelector = new LotViewSelector();
+    SingleNumberView* snv = new SingleNumberView("1000");
+    snv->view(NumberLotElement(712), 0);
+    _lotViewSelector->addView(snv);
+    ui->viewsLayout->insertWidget(0, _lotViewSelector);
     adjustSize();
 }
 

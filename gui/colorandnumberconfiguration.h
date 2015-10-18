@@ -45,6 +45,7 @@ private:
     QString _numberLabel;
     QString _colorLabel;
     std::vector<Color> _colors;
+    int _viewIndex;
 
     void initColors();
     QString colorsToString();

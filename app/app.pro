@@ -26,5 +26,6 @@ TEMPLATE = app
 
 CONFIG += c++11
 
+HEADERS += $$PWD/*.h
 SOURCES += main.cpp
 

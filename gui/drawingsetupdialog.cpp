@@ -17,7 +17,6 @@
 #include "drawingsetupdialog.h"
 #include "ui_drawingsetupdialog.h"
 #include <QMessageBox>
-#include "urimthummim.h"
 #include <QSvgWidget>
 
 using namespace std;

@@ -17,7 +17,6 @@
 #include "aboutbox.h"
 #include "ui_aboutbox.h"
 #include <QSvgWidget>
-#include "urimthummim.h"
 
 AboutBox::AboutBox(QWidget *parent) :
     QDialog(parent),
@@ -32,8 +31,8 @@ AboutBox::AboutBox(QWidget *parent) :
 
     QString mainInfo;
     mainInfo.append("<html><head/><body>")
-            .append("<p><span style=\"font-size:20pt;\">").append(APPLICATION_NAME).append("</span></p>")
-            .append("<p><span style=\"font-size:14pt;\">").append(tr("Version")).append(" ").append(APPLICATION_VERSION).append("</span></p>")
+            .append("<p><span style=\"font-size:20pt;\">").append(qApp->applicationName()).append("</span></p>")
+            .append("<p><span style=\"font-size:14pt;\">").append(tr("Version")).append(" ").append(qApp->applicationVersion()).append("</span></p>")
             .append("</body></html>");
     ui->mainInfo->setText(mainInfo);
 
@@ -46,7 +45,7 @@ AboutBox::AboutBox(QWidget *parent) :
              .append("</span></body></html>");
     ui->extraInfo->setText(extraInfo);
 
-    setWindowTitle(tr("About %1").arg(APPLICATION_NAME));
+    setWindowTitle(tr("About %1").arg(qApp->applicationName()));
     adjustSize();
     layout()->setSizeConstraint(QLayout::SetFixedSize);
 }

@@ -17,7 +17,6 @@
 #include "loadingwidget.h"
 #include "ui_loadingwidget.h"
 #include <QLabel>
-#include "urimthummim.h"
 #include <QResizeEvent>
 
 LoadingWidget::LoadingWidget(QWidget *parent) :

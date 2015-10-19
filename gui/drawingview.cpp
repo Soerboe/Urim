@@ -22,7 +22,6 @@
 #include "lotview.h"
 #include "nomoreuniqueresultsexception.h"
 #include <QMessageBox>
-#include "urimthummim.h"
 #include <QScreen>
 #include "aboutbox.h"
 #include <QDesktopWidget>

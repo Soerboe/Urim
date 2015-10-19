@@ -35,9 +35,13 @@ public:
     Color darkBlue() { return Color(0, 0, 90,      tr("Dark blue"));}
     Color darkGreen() {return Color(0, 80, 0,      tr("Dark green"));}
     Color pink() {     return Color(255, 62, 150,  tr("Pink"));}
-    Color purple() {   return Color(155, 48, 255,  tr("Purple"));}
+    Color purple() {   return Color(128, 0, 128,   tr("Purple"));}
     Color orange() {   return Color(255, 97, 3,    tr("Orange"));}
     Color brown() {    return Color(138, 54, 15,   tr("Brown"));}
+    Color violet() {   return Color(238,130,238,   tr("Violet"));}
+    Color turquoise() {return Color(64,224,208,    tr("Turquiose"));}
+    Color olive() {    return Color(128,128,0,     tr("Olive"));}
+    Color lightBrown(){return Color(210,105,30,    tr("Light brown"));}
 };
 
 #endif // COLORS

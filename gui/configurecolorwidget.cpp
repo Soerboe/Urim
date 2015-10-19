@@ -139,6 +139,10 @@ void ConfigureColorWidget::initAvailableColors()
     _availableColors.push_back(colors.purple());
     _availableColors.push_back(colors.orange());
     _availableColors.push_back(colors.brown());
+    _availableColors.push_back(colors.violet());
+    _availableColors.push_back(colors.turquoise());
+    _availableColors.push_back(colors.olive());
+    _availableColors.push_back(colors.lightBrown());
 
     foreach (Color c, _availableColors) {
         ui->availableColorsWidget->addTopLevelItem(new ColorItem(c));

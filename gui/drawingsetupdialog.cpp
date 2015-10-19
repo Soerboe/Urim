@@ -29,10 +29,6 @@ DrawingSetupDialog::DrawingSetupDialog(DrawingSetupController* controller, QWidg
 {
     ui->setupUi(this);
     setWindowTitle(tr("Setup drawing"));
-    QString style("#ID {border: 1px solid ");
-    style.append(IDENTITY_COLOR).append(";}");
-
-    ui->summary->setStyleSheet(QString(style).replace("ID", "summary"));
 
     QSvgWidget* svg = new QSvgWidget(":/gui/icons/lots.svg");
     svg->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);

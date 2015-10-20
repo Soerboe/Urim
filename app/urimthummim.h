@@ -18,7 +18,7 @@
 #define URIMTHUMMIM
 
 #define APPLICATION_NAME "Urim Thummim"
-#define APPLICATION_VERSION "0.0.3"
+#define APPLICATION_VERSION "0.0.4"
 
 #endif // URIMTHUMMIM
 

@@ -87,10 +87,15 @@ void ColorAndNumberView_Border::showLot(bool visible)
 QString ColorAndNumberView_Border::buildStyleSheet()
 {
     QString s("#mainView {border:");
-    s.append(QString::number(_borderThickness)).append("px ");
-    s.append("solid rgb(");
-    s.append(QString::number(_borderColor.red)).append(",");
-    s.append(QString::number(_borderColor.green)).append(",");
-    s.append(QString::number(_borderColor.blue)).append(");}");
+    // if color is white
+    if (_borderColor.red == 255 && _borderColor.green == 255 && _borderColor.blue == 255) {
+        s.append("1px solid black;}");
+    } else {
+        s.append(QString::number(_borderThickness)).append("px ");
+        s.append("solid rgb(");
+        s.append(QString::number(_borderColor.red)).append(",");
+        s.append(QString::number(_borderColor.green)).append(",");
+        s.append(QString::number(_borderColor.blue)).append(");}");
+    }
     return s;
 }

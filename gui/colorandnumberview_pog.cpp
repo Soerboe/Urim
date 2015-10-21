@@ -40,9 +40,15 @@ void ColorAndNumberView_POG::updateView(bool updateColorView)
     ui->numberView->setText(QString::number(_number));
 
     if (updateColorView) {
-        QPalette palette = ui->colorView->palette();
-        palette.setColor(backgroundRole(), QColor(_color.red, _color.green, _color.blue));
-        ui->colorView->setPalette(palette);
+        // if color is white
+        if (_color.red == 255 && _color.green == 255 && _color.blue == 255) {
+            ui->colorView->setStyleSheet("border: 1px solid black");
+        } else {
+            ui->colorView->setStyleSheet("");
+            QPalette palette = ui->colorView->palette();
+            palette.setColor(backgroundRole(), QColor(_color.red, _color.green, _color.blue));
+            ui->colorView->setPalette(palette);
+        }
     }
     ui->colorNameView->setText(_color.name);
 
@@ -90,6 +96,7 @@ void ColorAndNumberView_POG::showLot(bool visible)
     QPalette textPalette = ui->numberView->palette();
 
     if (!visible) {
+        ui->colorView->setStyleSheet("");
         QPalette colorPalette = ui->colorView->palette();
         colorPalette.setColor(backgroundRole(), backgroundColor());
         ui->colorView->setPalette(colorPalette);

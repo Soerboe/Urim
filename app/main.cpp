@@ -32,6 +32,8 @@ int main(int argc, char *argv[])
     app.setApplicationName(APPLICATION_NAME);
     app.setApplicationDisplayName(APPLICATION_NAME);
     app.setApplicationVersion(APPLICATION_VERSION);
+    QIcon icon(":/gui/icons/lots.svg");
+    app.setWindowIcon(icon);
 
     QTranslator translator;
     translator.load("gui_no.qm", ":/gui/translations");

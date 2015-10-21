@@ -29,3 +29,4 @@ CONFIG += c++11
 HEADERS += $$PWD/*.h
 SOURCES += main.cpp
 
+RC_FILE = app.rc

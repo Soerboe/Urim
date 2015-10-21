@@ -16,7 +16,7 @@
 
 #include "testrunner.h"
 #include <QtTest>
-#include "configuredrawingdialog.h"
+#include "configurenumberwidget.h"
 #include <QSpinBox>
 
 class ConfigureNumberWidgetTest : public QObject

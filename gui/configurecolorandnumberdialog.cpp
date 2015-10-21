@@ -28,23 +28,13 @@
 
 ConfigureColorAndNumberDialog::ConfigureColorAndNumberDialog(const QString name)
     : ConfigureDrawingDialog(name),
-      _configureColorWidget(new ConfigureColorWidget),
-      _configureNumberWidget(new ConfigureNumberWidget)
+      _configureColorWidget(new ConfigureColorWidget(false)),
+      _configureNumberWidget(new ConfigureNumberWidget(false))
 {
-    QGroupBox* colorGroup = new QGroupBox(tr("Color"));
-    QVBoxLayout* colorLayout = new QVBoxLayout();
-    colorLayout->addWidget(_configureColorWidget);
-    colorGroup->setLayout(colorLayout);
-    ui->setupLayout->insertWidget(0, colorGroup);
-
-    QGroupBox* numberGroup = new QGroupBox(tr("Number"));
-    QVBoxLayout* numberLayout = new QVBoxLayout();
-    numberLayout->addWidget(_configureNumberWidget);
-    numberGroup->setLayout(numberLayout);
-    ui->setupLayout->insertWidget(1, numberGroup);
+    ui->setupLayout->insertWidget(0, _configureColorWidget);
+    ui->setupLayout->insertWidget(1, _configureNumberWidget);
 
     setupViewsTab();
-
     adjustSize();
 }
 

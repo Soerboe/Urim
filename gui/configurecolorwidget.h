@@ -31,7 +31,7 @@ class ConfigureColorWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit ConfigureColorWidget(QWidget *parent = 0);
+    explicit ConfigureColorWidget(bool enableLabel = true, QWidget *parent = 0);
     ~ConfigureColorWidget();
 
     void init(const std::vector<Color>& colors, QString& label);

@@ -22,7 +22,7 @@
 
 ConfigureSingleNumberDialog::ConfigureSingleNumberDialog(const QString name)
     : ConfigureDrawingDialog(name),
-      _configureNumberWidget(new ConfigureNumberWidget)
+      _configureNumberWidget(new ConfigureNumberWidget(false))
 {
     ui->setupLayout->insertWidget(0, _configureNumberWidget);
     _lotViewSelector = new LotViewSelector();

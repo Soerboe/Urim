@@ -18,12 +18,14 @@
 #include "ui_singlenumberview.h"
 #include "numberlotelement.h"
 
-SingleNumberView::SingleNumberView(const QString& longestText, QWidget *parent) :
+SingleNumberView::SingleNumberView(const QString& longestText, bool showLabel, QWidget *parent) :
     LotViewTextAsMain(longestText, parent),
     ui(new Ui::SingleNumberView),
+    _showLabel(showLabel),
     _init(false)
 {
     ui->setupUi(this);
+    ui->label->setVisible(_showLabel);
 }
 
 SingleNumberView::~SingleNumberView()
@@ -60,7 +62,9 @@ void SingleNumberView::calcViewSize()
 
 void SingleNumberView::showLot(bool visible)
 {
-    ui->label->setVisible(visible);
+    if (_showLabel) {
+        ui->label->setVisible(visible);
+    }
     ui->numberView->setVisible(visible);
     updateView();
 }

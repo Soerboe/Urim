@@ -37,7 +37,7 @@ private:
     Color _color;
 };
 
-ConfigureColorWidget::ConfigureColorWidget(QWidget *parent) :
+ConfigureColorWidget::ConfigureColorWidget(bool enableLabel, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ConfigureColorWidget)
 {
@@ -50,6 +50,11 @@ ConfigureColorWidget::ConfigureColorWidget(QWidget *parent) :
     ui->availableColorsWidget->sortByColumn(1, Qt::AscendingOrder);
     ui->selectedColorsWidget->setSortingEnabled(true);
     ui->selectedColorsWidget->sortByColumn(1, Qt::AscendingOrder);
+
+    if (!enableLabel) {
+        ui->useLabel->hide();
+        ui->colorLabel->hide();
+    }
 
     connect(ui->selectColorButton, SIGNAL(clicked()), SLOT(selectClicked()));
     connect(ui->deselectColorButton, SIGNAL(clicked()), SLOT(deselectClicked()));

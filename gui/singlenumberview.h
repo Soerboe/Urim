@@ -28,7 +28,7 @@ class SingleNumberView : public LotViewTextAsMain
     Q_OBJECT
 
 public:
-    explicit SingleNumberView(const QString& longestText, QWidget *parent = 0);
+    explicit SingleNumberView(const QString& longestText, bool showLabel = false, QWidget *parent = 0);
     ~SingleNumberView();
 
     void view(const NumberLotElement& numberLotElement, int id);
@@ -39,6 +39,7 @@ protected:
 
 private:
     Ui::SingleNumberView *ui;
+    bool _showLabel;
     bool _init;
     int _number;
     QString _label;

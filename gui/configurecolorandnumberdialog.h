@@ -18,6 +18,7 @@
 #define CONFIGURECOLORANDNUMBERDIALOG_H
 
 #include "configuredrawingdialog.h"
+#include "configurenumberwidget.h"
 #include "color.h"
 #include "lotviewselector.h"
 

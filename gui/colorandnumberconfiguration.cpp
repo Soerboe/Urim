@@ -29,9 +29,7 @@ using namespace std;
 ColorAndNumberConfiguration::ColorAndNumberConfiguration(QObject* parent)
     : DrawingConfiguration(tr("Color and number"), parent),
       _min(DEFAULT_MIN),
-      _max(DEFAULT_MAX),
-      _numberLabel(tr("Number")),
-      _colorLabel(tr("Color"))
+      _max(DEFAULT_MAX)
 {
     initColors();
 }
@@ -98,13 +96,17 @@ QString ColorAndNumberConfiguration::detailedSummary()
     s.append("<div>");
     s.append(tr("Colors") + ": " + colorsToString());
     s.append("</div><div>");
-    s.append(tr("Color label") + ": " + _colorLabel);
-    s.append("</div><div>");
+    if (!_colorLabel.isEmpty()) {
+        s.append(tr("Color label") + ": " + _colorLabel);
+        s.append("</div><div>");
+    }
     s.append(tr("Minimum number") + ": " + QString::number(_min));
     s.append("</div><div>");
     s.append(tr("Maximum number") + ": " + QString::number(_max));
-    s.append("</div><div>");
-    s.append(tr("Number label") + ": " + _numberLabel);
+    if (!_numberLabel.isEmpty()) {
+        s.append("</div><div>");
+        s.append(tr("Number label") + ": " + _numberLabel);
+    }
     s.append("</div>");
     return s;
 }

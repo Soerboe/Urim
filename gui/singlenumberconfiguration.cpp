@@ -26,8 +26,7 @@ using namespace std;
 SingleNumberConfiguration::SingleNumberConfiguration(QObject* parent)
     : DrawingConfiguration(tr("Single number"), parent),
       _min(DEFAULT_MIN),
-      _max(DEFAULT_MAX),
-      _label(tr("Number"))
+      _max(DEFAULT_MAX)
 {
 }
 
@@ -80,8 +79,10 @@ QString SingleNumberConfiguration::detailedSummary()
     s.append(tr("Minimum number") + ": " + QString::number(_min));
     s.append("</div><div>");
     s.append(tr("Maximum number") + ": " + QString::number(_max));
-    s.append("</div><div>");
-    s.append(tr("Label") + ": " + _label);
+    if (!_label.isEmpty()) {
+        s.append("</div><div>");
+        s.append(tr("Label") + ": " + _label);
+    }
     s.append("</div>");
     return s;
 }

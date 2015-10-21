@@ -18,6 +18,7 @@
 #define CONFIGURESINGLENUMBERDIALOG_H
 
 #include "configuredrawingdialog.h"
+#include "configurenumberwidget.h"
 
 class LotViewSelector;
 

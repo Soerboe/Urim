@@ -49,25 +49,4 @@ private:
     bool _uniqueResults;
 };
 
-
-class ConfigureNumberWidget : public QWidget
-{
-    Q_OBJECT
-
-public:
-    explicit ConfigureNumberWidget(QWidget* parent = 0);
-
-    void init(int min, int max, QString label);
-    bool validate();
-    QString validationError();
-    int min();
-    int max();
-    QString label();
-
-private:
-    QSpinBox* _minSpin;
-    QSpinBox* _maxSpin;
-    QLineEdit* _label;
-};
-
 #endif // CONFIGUREDRAWINGDIALOG_H

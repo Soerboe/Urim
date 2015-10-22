@@ -15,9 +15,9 @@
 */
 
 #include "randomgenerator.h"
-#include <time.h>
 #include "lotelement.h"
 #include <qdebug.h>
+#include <chrono>
 
 using namespace std;
 
@@ -40,14 +40,15 @@ shared_ptr<LotElement> RandomGenerator::operator ()()
 
 void RandomGenerator::init()
 {
-    int seed;
 //    random_device on under gcc on Windows is not working
 //    try {
 //        random_device rnd;
 //        seed = rnd();
 //    } catch (exception& e) {
-        seed = time(NULL);
 //    }
+
+    auto now = chrono::high_resolution_clock::now();
+    auto seed = chrono::time_point_cast<chrono::nanoseconds>(now).time_since_epoch().count();
 
     qDebug() << "Seed for RNG:" << seed << "\n";
 

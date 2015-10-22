@@ -4,17 +4,17 @@
 <context>
     <name>AboutBox</name>
     <message>
-        <location filename="../aboutbox.cpp" line="36"/>
+        <location filename="../aboutbox.cpp" line="35"/>
         <source>Version</source>
         <translation>Versjon</translation>
     </message>
     <message>
-        <location filename="../aboutbox.cpp" line="43"/>
+        <location filename="../aboutbox.cpp" line="42"/>
         <source>&lt;p&gt;This program is free software: you can redistribute it and/or modify&lt;br/&gt;                        it under the terms of the GNU General Public License version 2 as&lt;br/&gt;                        published by the Free Software Foundation. See http://www.gnu.org/licenses/.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Dette programmet er fri programvare: du kan redistribuere det og/eller endre&lt;br/&gt;det ut fra betingelsene gitt i GNU General Public License versjon 2,&lt;br/&gt;publisert av Free Software Foundation. Se http://www.gnu.org/licenses/.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../aboutbox.cpp" line="49"/>
+        <location filename="../aboutbox.cpp" line="48"/>
         <source>About %1</source>
         <translation>Om %1</translation>
     </message>
@@ -27,42 +27,32 @@
         <translation>Farge og tall</translation>
     </message>
     <message>
-        <location filename="../colorandnumberconfiguration.cpp" line="34"/>
-        <source>Color</source>
-        <translation>Farge</translation>
-    </message>
-    <message>
-        <location filename="../colorandnumberconfiguration.cpp" line="33"/>
-        <source>Number</source>
-        <translation>Tall</translation>
-    </message>
-    <message>
-        <location filename="../colorandnumberconfiguration.cpp" line="88"/>
+        <location filename="../colorandnumberconfiguration.cpp" line="94"/>
         <source>Draw a color and a number</source>
         <translation>Trekk farge og tall</translation>
     </message>
     <message>
-        <location filename="../colorandnumberconfiguration.cpp" line="91"/>
+        <location filename="../colorandnumberconfiguration.cpp" line="97"/>
         <source>Colors</source>
         <translation>Farger</translation>
     </message>
     <message>
-        <location filename="../colorandnumberconfiguration.cpp" line="93"/>
+        <location filename="../colorandnumberconfiguration.cpp" line="100"/>
         <source>Color label</source>
         <translation>Fargeetikett</translation>
     </message>
     <message>
-        <location filename="../colorandnumberconfiguration.cpp" line="95"/>
+        <location filename="../colorandnumberconfiguration.cpp" line="103"/>
         <source>Minimum number</source>
         <translation>Laveste tall</translation>
     </message>
     <message>
-        <location filename="../colorandnumberconfiguration.cpp" line="97"/>
+        <location filename="../colorandnumberconfiguration.cpp" line="105"/>
         <source>Maximum number</source>
         <translation>Høyeste tall</translation>
     </message>
     <message>
-        <location filename="../colorandnumberconfiguration.cpp" line="99"/>
+        <location filename="../colorandnumberconfiguration.cpp" line="108"/>
         <source>Number label</source>
         <translation>Talletikett</translation>
     </message>
@@ -139,49 +129,66 @@
         <source>Brown</source>
         <translation>Brun</translation>
     </message>
-</context>
-<context>
-    <name>ConfigureColorAndNumberDialog</name>
     <message>
-        <location filename="../configurecolorandnumberdialog.cpp" line="27"/>
-        <source>Color</source>
-        <translation>Farge</translation>
+        <location filename="../../core/colors.h" line="41"/>
+        <source>Violet</source>
+        <translation>Fiolett</translation>
     </message>
     <message>
-        <location filename="../configurecolorandnumberdialog.cpp" line="33"/>
-        <source>Number</source>
-        <translation>Tall</translation>
+        <location filename="../../core/colors.h" line="42"/>
+        <source>Turquiose</source>
+        <translation>Turkis</translation>
+    </message>
+    <message>
+        <location filename="../../core/colors.h" line="43"/>
+        <source>Olive</source>
+        <translation>Oliven</translation>
+    </message>
+    <message>
+        <location filename="../../core/colors.h" line="44"/>
+        <source>Light brown</source>
+        <translation>Lysebrun</translation>
     </message>
 </context>
 <context>
     <name>ConfigureColorWidget</name>
     <message>
-        <location filename="../configurecolorwidget.ui" line="24"/>
+        <location filename="../configurecolorwidget.ui" line="32"/>
+        <source>Color</source>
+        <translation>Farge</translation>
+    </message>
+    <message>
+        <location filename="../configurecolorwidget.ui" line="42"/>
         <source>Available colors:</source>
         <translation>Tilgjengelige farger:</translation>
     </message>
     <message>
-        <location filename="../configurecolorwidget.ui" line="64"/>
+        <location filename="../configurecolorwidget.ui" line="82"/>
         <source>→</source>
         <translation>→</translation>
     </message>
     <message>
-        <location filename="../configurecolorwidget.ui" line="76"/>
+        <location filename="../configurecolorwidget.ui" line="94"/>
         <source>←</source>
         <translation>←</translation>
     </message>
     <message>
-        <location filename="../configurecolorwidget.ui" line="87"/>
+        <location filename="../configurecolorwidget.ui" line="105"/>
         <source>Selected colors:</source>
         <translation>Valgte farger:</translation>
     </message>
     <message>
-        <location filename="../configurecolorwidget.ui" line="124"/>
-        <source>Label:</source>
-        <translation>Etikett:</translation>
+        <location filename="../configurecolorwidget.ui" line="142"/>
+        <source>Show label</source>
+        <translation>Vis etikett</translation>
     </message>
     <message>
-        <location filename="../configurecolorwidget.cpp" line="87"/>
+        <location filename="../configurecolorwidget.ui" line="149"/>
+        <source>Label</source>
+        <translation>Etikett</translation>
+    </message>
+    <message>
+        <location filename="../configurecolorwidget.cpp" line="92"/>
         <source>No colors selected.</source>
         <translation>Ingen farger er valgt.</translation>
     </message>
@@ -194,17 +201,27 @@
         <translation>Tilpass loddtrekning</translation>
     </message>
     <message>
-        <location filename="../configuredrawingdialog.ui" line="22"/>
+        <location filename="../configuredrawingdialog.ui" line="26"/>
+        <source>Setup</source>
+        <translation>Oppsett</translation>
+    </message>
+    <message>
+        <location filename="../configuredrawingdialog.ui" line="34"/>
         <source>Draw unique lots per drawing session</source>
         <translation>Trekk unike lodd per trekkerunde</translation>
     </message>
     <message>
         <location filename="../configuredrawingdialog.ui" line="44"/>
+        <source>Views</source>
+        <translation>Visning</translation>
+    </message>
+    <message>
+        <location filename="../configuredrawingdialog.ui" line="72"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../configuredrawingdialog.ui" line="51"/>
+        <location filename="../configuredrawingdialog.ui" line="79"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
@@ -227,22 +244,32 @@
 <context>
     <name>ConfigureNumberWidget</name>
     <message>
-        <location filename="../configuredrawingdialog.cpp" line="71"/>
-        <source>Label:</source>
-        <translation>Etikett:</translation>
+        <location filename="../configurenumberwidget.ui" line="32"/>
+        <source>Number</source>
+        <translation>Tall</translation>
     </message>
     <message>
-        <location filename="../configuredrawingdialog.cpp" line="76"/>
+        <location filename="../configurenumberwidget.ui" line="42"/>
         <source>Minimum number:</source>
         <translation>Laveste tall:</translation>
     </message>
     <message>
-        <location filename="../configuredrawingdialog.cpp" line="77"/>
+        <location filename="../configurenumberwidget.ui" line="52"/>
         <source>Maximum number:</source>
         <translation>Høyeste tall:</translation>
     </message>
     <message>
-        <location filename="../configuredrawingdialog.cpp" line="114"/>
+        <location filename="../configurenumberwidget.ui" line="79"/>
+        <source>Show label</source>
+        <translation>Vis etikett</translation>
+    </message>
+    <message>
+        <location filename="../configurenumberwidget.ui" line="86"/>
+        <source>Label</source>
+        <translation>Etikett</translation>
+    </message>
+    <message>
+        <location filename="../configurenumberwidget.cpp" line="45"/>
         <source>Minimum value is larger than maximum value.</source>
         <translation>Laveste tall er større enn høyeste tall.</translation>
     </message>
@@ -303,22 +330,22 @@
         <translation>Avslutt</translation>
     </message>
     <message>
-        <location filename="../drawingsetupdialog.cpp" line="31"/>
+        <location filename="../drawingsetupdialog.cpp" line="30"/>
         <source>Setup drawing</source>
         <translation>Oppsett av loddtrekning</translation>
     </message>
     <message>
-        <location filename="../drawingsetupdialog.cpp" line="77"/>
+        <location filename="../drawingsetupdialog.cpp" line="72"/>
         <source>No type of drawing chosen</source>
         <translation>Ingen loddtrekning er valgt</translation>
     </message>
     <message>
-        <location filename="../drawingsetupdialog.cpp" line="77"/>
+        <location filename="../drawingsetupdialog.cpp" line="72"/>
         <source>Please choose a type of drawing.</source>
         <translation>Vennligst velg en type loddtrekning.</translation>
     </message>
     <message>
-        <location filename="../drawingsetupdialog.cpp" line="111"/>
+        <location filename="../drawingsetupdialog.cpp" line="106"/>
         <source>Choose a type of drawing:</source>
         <translation>Velg en type loddtrekning:</translation>
     </message>
@@ -406,96 +433,92 @@
         <translation>Lagre logg</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="131"/>
+        <location filename="../drawingview.cpp" line="128"/>
         <source>No.</source>
         <translation>Nr.</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="131"/>
+        <location filename="../drawingview.cpp" line="128"/>
         <source>Time</source>
         <translation>Tidspunkt</translation>
     </message>
     <message>
-        <source>Lot</source>
-        <translation type="vanished">Lodd</translation>
-    </message>
-    <message>
-        <location filename="../drawingview.cpp" line="124"/>
+        <location filename="../drawingview.cpp" line="121"/>
         <source>Session %1</source>
         <translation>Trekkerunde %1</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="131"/>
+        <location filename="../drawingview.cpp" line="128"/>
         <source>Event</source>
         <translation>Hendelse</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="147"/>
+        <location filename="../drawingview.cpp" line="144"/>
         <source>In this window</source>
         <translation>I dette vinduet</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="156"/>
+        <location filename="../drawingview.cpp" line="153"/>
         <source>Fullscreen on screen %1</source>
         <translation>Fullskjerm på skjerm %1</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="220"/>
+        <location filename="../drawingview.cpp" line="217"/>
         <source>Save log to file</source>
         <translation>Lagre logg til fil</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="220"/>
+        <location filename="../drawingview.cpp" line="217"/>
         <source>Log files (*.log)</source>
         <translation>Logg-filer (*.log)</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="233"/>
+        <location filename="../drawingview.cpp" line="230"/>
         <source>Error</source>
         <translation>Feil</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="233"/>
+        <location filename="../drawingview.cpp" line="230"/>
         <source>Could not save log to file</source>
         <translation>En feil oppstod ved lagring av logg til fil</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="241"/>
+        <location filename="../drawingview.cpp" line="238"/>
         <source>Drawing a lot...</source>
         <translation>Trekker et lodd...</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="246"/>
+        <location filename="../drawingview.cpp" line="243"/>
         <source>No more unique results</source>
         <translation>Ingen flere unike lodd</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="247"/>
+        <location filename="../drawingview.cpp" line="244"/>
         <source>All unique lots have been drawn.</source>
         <translation>Alle unike lodd har blitt trukket.</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="260"/>
+        <location filename="../drawingview.cpp" line="257"/>
         <source>Session %1 started</source>
         <translation>Trekkerunde %1 startet</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="273"/>
+        <location filename="../drawingview.cpp" line="270"/>
         <source>Quit session</source>
         <translation>Avbryt trekkerunde</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="274"/>
+        <location filename="../drawingview.cpp" line="271"/>
         <source>Quit current drawing session and create a new drawing?</source>
         <translation>Avbryt nåværende trekkerunde og opprett ny loddtrekning?</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="277"/>
+        <location filename="../drawingview.cpp" line="274"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../drawingview.cpp" line="278"/>
+        <location filename="../drawingview.cpp" line="275"/>
         <source>No</source>
         <translation>Nei</translation>
     </message>
@@ -524,22 +547,17 @@
         <translation>Tall</translation>
     </message>
     <message>
-        <location filename="../singlenumberconfiguration.cpp" line="30"/>
-        <source>Number</source>
-        <translation>Tall</translation>
-    </message>
-    <message>
-        <location filename="../singlenumberconfiguration.cpp" line="77"/>
+        <location filename="../singlenumberconfiguration.cpp" line="76"/>
         <source>Draw a singel number</source>
         <translation>Trekk tall</translation>
     </message>
     <message>
-        <location filename="../singlenumberconfiguration.cpp" line="80"/>
+        <location filename="../singlenumberconfiguration.cpp" line="79"/>
         <source>Minimum number</source>
         <translation>Laveste tall</translation>
     </message>
     <message>
-        <location filename="../singlenumberconfiguration.cpp" line="82"/>
+        <location filename="../singlenumberconfiguration.cpp" line="81"/>
         <source>Maximum number</source>
         <translation>Høyeste tall</translation>
     </message>

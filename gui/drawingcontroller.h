@@ -48,6 +48,8 @@ public:
     void setLotLogger(const std::shared_ptr<LotLogger> lotLogger) {_lotLogger = lotLogger;}
     std::shared_ptr<LotLogger> lotLogger() const {return _lotLogger;}
 
+    int currentLotWindowIndex() {return _currLotWindowIndex;}
+
 private slots:
     void doDraw();
 

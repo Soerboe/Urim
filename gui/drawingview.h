@@ -57,7 +57,6 @@ private:
 
     void updateSessionIdView(const std::shared_ptr<DrawingSession> session);
     void setupLogger();
-    void setupShowLotViewMenu();
     void clear();
 
     void setupComponentVisibility(bool inThisWindow);
@@ -65,6 +64,7 @@ private:
     void doMoveLotView(int screenIndex);
 
 private slots:
+    void setupShowLotViewMenu();
     void moveLotView(QAction*);
     void showDrawingSetup();
     void saveLogToFile();
@@ -75,6 +75,7 @@ private slots:
     void createNewDrawingClicked();
     void showAbout();
     void showAboutQt();
+    void screensChanged();
 };
 
 #endif // DRAWINGVIEW_H

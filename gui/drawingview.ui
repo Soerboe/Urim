@@ -151,24 +151,19 @@
     <addaction name="saveLogAction"/>
     <addaction name="quitAction"/>
    </widget>
-   <widget class="QMenu" name="viewMenu">
+   <widget class="QMenu" name="presentationViewMenu">
     <property name="title">
-     <string>&amp;View</string>
+     <string>&amp;Presentation view</string>
     </property>
-    <widget class="QMenu" name="showLotViewMenu">
-     <property name="title">
-      <string>Show lot</string>
-     </property>
-    </widget>
-    <addaction name="showLogAction"/>
-    <addaction name="showLotViewMenu"/>
    </widget>
    <widget class="QMenu" name="sessionMenu">
     <property name="title">
      <string>&amp;Session</string>
     </property>
     <addaction name="drawAction"/>
+    <addaction name="separator"/>
     <addaction name="startNewSessionAction"/>
+    <addaction name="showLogAction"/>
    </widget>
    <widget class="QMenu" name="helpMenu">
     <property name="title">
@@ -179,7 +174,7 @@
    </widget>
    <addaction name="drawingMenu"/>
    <addaction name="sessionMenu"/>
-   <addaction name="viewMenu"/>
+   <addaction name="presentationViewMenu"/>
    <addaction name="helpMenu"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">

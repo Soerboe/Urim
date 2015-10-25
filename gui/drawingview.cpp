@@ -34,7 +34,8 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     ui(new Ui::DrawingView),
     _drawingController(controller),
     _setupDialog(setupDialog),
-    _lotView(0)
+    _lotView(0),
+    _showLotViewActions(0)
 {
     ui->setupUi(this);
     setupLogger();
@@ -58,6 +59,9 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     connect(ui->quitAction, SIGNAL(triggered()), SLOT(close()));
     connect(ui->aboutAction, SIGNAL(triggered()), SLOT(showAbout()));
     connect(ui->aboutQtAction, SIGNAL(triggered()), SLOT(showAboutQt()));
+    connect(ui->presentationViewMenu, SIGNAL(aboutToShow()), SLOT(setupShowLotViewMenu()));
+    connect(qApp, SIGNAL(screenAdded(QScreen*)), SLOT(screensChanged()));
+    connect(qApp, SIGNAL(screenRemoved(QScreen*)), SLOT(screensChanged()));
 
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     QTimer::singleShot(0, this, SLOT(showDrawingSetup()));
@@ -141,27 +145,33 @@ void DrawingView::setupLogger()
 
 void DrawingView::setupShowLotViewMenu()
 {
+    if (_showLotViewActions) {
+        delete _showLotViewActions;
+        ui->presentationViewMenu->clear();
+    }
+
     _showLotViewActions = new QActionGroup(this);
-    QAction* thisWindowAction = new QAction(tr("In this window"), this);
+
+    QAction* thisWindowAction = new QAction(tr("In this window"), ui->presentationViewMenu);
     thisWindowAction->setCheckable(true);
     thisWindowAction->setData(-1);
     _showLotViewActions->addAction(thisWindowAction);
-    ui->showLotViewMenu->addAction(thisWindowAction);
+    ui->presentationViewMenu->addAction(thisWindowAction);
 
     QList<QScreen*> screens = qApp->screens();
     if (screens.size() > 0) {
         for (int screenIndex = 0; screenIndex < screens.size(); ++screenIndex) {
-            QAction* monitorAction = new QAction(tr("Fullscreen on screen %1").arg(screenIndex + 1), this);
+            QAction* monitorAction = new QAction(tr("Fullscreen on screen %1").arg(screenIndex + 1), ui->presentationViewMenu);
             monitorAction->setCheckable(true);
             monitorAction->setData(screenIndex);
             _showLotViewActions->addAction(monitorAction);
-            ui->showLotViewMenu->addAction(monitorAction);
+            ui->presentationViewMenu->addAction(monitorAction);
         }
     }
 
     connect(_showLotViewActions, SIGNAL(triggered(QAction*)), SLOT(moveLotView(QAction*)));
 
-    thisWindowAction->setChecked(true);
+    _showLotViewActions->actions().at(_drawingController->currentLotWindowIndex() + 1)->setChecked(true);
 }
 
 void DrawingView::clear()
@@ -169,7 +179,7 @@ void DrawingView::clear()
     ui->logWidget->clear();
     setDrawingName("");
     enableDrawing(true);
-    ui->showLotViewMenu->actions()[0]->setChecked(true);
+    ui->presentationViewMenu->actions()[0]->setChecked(true);
 
     ui->drawingNameView->hide();
     setupComponentVisibility(false);
@@ -181,6 +191,7 @@ void DrawingView::setupComponentVisibility(bool showLotInWindow)
     ui->showLogAction->setChecked(showLotInWindow);
     ui->logWidget->setVisible(showLotInWindow);
     ui->drawButton->setVisible(showLotInWindow);
+    ui->tooglePresentationViewAction->setChecked(showLotInWindow);
 }
 
 void DrawingView::doMoveLotView(int screenIndex)
@@ -279,7 +290,7 @@ void DrawingView::tooglePresentationView(bool checked)
         QMessageBox box(QMessageBox::Information,
                     tr("Setup presentation view"),
                     tr("To enable presentiation view you need to connect to an external display or projector.<br><br> \
-                       Display setting must be set to <strong>Extended</strong>. For Windows use shortcut <strong>Windows Key + P</strong>."),
+                       Display settings must be set to <strong>Extended</strong>. In Windows use shortcut <strong>Windows Key + P</strong>."),
                     QMessageBox::Ok,
                     this);
         box.exec();
@@ -319,4 +330,9 @@ void DrawingView::showAbout()
 void DrawingView::showAboutQt()
 {
     QMessageBox::aboutQt(this);
+}
+
+void DrawingView::screensChanged()
+{
+    doMoveLotView(-1);
 }

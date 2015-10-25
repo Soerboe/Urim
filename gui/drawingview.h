@@ -24,6 +24,7 @@
 
 class LotView;
 class QLabel;
+class QActionGroup;
 
 namespace Ui {
 class DrawingView;
@@ -52,6 +53,7 @@ private:
     DrawingSetupDialog* _setupDialog;
     LotView* _lotView;
     QLabel* _sessionIdView;
+    QActionGroup* _showLotViewActions;
 
     void updateSessionIdView(const std::shared_ptr<DrawingSession> session);
     void setupLogger();
@@ -60,6 +62,8 @@ private:
 
     void setupComponentVisibility(bool inThisWindow);
 
+    void doMoveLotView(int screenIndex);
+
 private slots:
     void moveLotView(QAction*);
     void showDrawingSetup();
@@ -67,6 +71,7 @@ private slots:
     void drawClicked();
     void startNewDrawingSession(bool newDrawing = false);
     void showLogChecked(bool checked);
+    void tooglePresentationView(bool checked);
     void createNewDrawingClicked();
     void showAbout();
     void showAboutQt();

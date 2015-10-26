@@ -23,7 +23,7 @@
 #include <vector>
 
 class LotView;
-class LotLogger;
+class Logger;
 class DrawingView;
 
 class DrawingController : public QObject
@@ -45,8 +45,8 @@ public:
 
     void setDrawingView(DrawingView* view) {_drawingView = view;}
     void setDrawingSession(const std::shared_ptr<DrawingSession> drawingSession) {_drawingSession = drawingSession;}
-    void setLotLogger(const std::shared_ptr<LotLogger> lotLogger) {_lotLogger = lotLogger;}
-    std::shared_ptr<LotLogger> lotLogger() const {return _lotLogger;}
+    void setLogger(const std::shared_ptr<Logger> logger) {_logger = logger;}
+    std::shared_ptr<Logger> logger() const {return _logger;}
 
     int currentLotWindowIndex() {return _currLotWindowIndex;}
 
@@ -59,7 +59,7 @@ private:
     int _currLotWindowIndex;
     LotView* _lotView;
     std::shared_ptr<DrawingSession> _drawingSession;
-    std::shared_ptr<LotLogger> _lotLogger;
+    std::shared_ptr<Logger> _logger;
     void delay(int n);
     LotWindow* currLotWindow();
 };

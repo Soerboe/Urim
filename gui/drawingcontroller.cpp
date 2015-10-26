@@ -17,7 +17,7 @@
 #include "drawingcontroller.h"
 #include "drawingview.h"
 #include "lotview.h"
-#include "lotlogger.h"
+#include "logger.h"
 #include "nomoreuniqueresultsexception.h"
 #include <QTimer>
 #include <QScreen>
@@ -51,8 +51,8 @@ void DrawingController::doDraw()
         lot.view(*_lotView);
     }
 
-    if (_lotLogger) {
-        _lotLogger->log(lot, _drawingSession);
+    if (_logger) {
+        _logger->log(lot, _drawingSession);
     }
 
 }

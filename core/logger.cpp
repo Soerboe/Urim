@@ -14,14 +14,13 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "lotlogger.h"
+#include "logger.h"
+#include "utils.h"
 #include "lot.h"
 #include "lotelement.h"
 #include "lotelementviewer.h"
-#include <QTreeWidgetItem>
 #include "numberlotelement.h"
 #include "colorlotelement.h"
-#include "utils.h"
 #include "drawingsession.h"
 #include <QFile>
 #include <QTextStream>
@@ -85,13 +84,12 @@ private:
     QString _eventPrefix;
 };
 
-
-LotLogger::LotLogger(QTreeWidget* view)
-    : _view(view)
+Logger::Logger()
+    : QObject(0)
 {
 }
 
-void LotLogger::log(const Lot& lot, const shared_ptr<DrawingSession> session)
+void Logger::log(const Lot& lot, const shared_ptr<DrawingSession> session)
 {
     LogItemBuilder builder(tr("Lot drawn: "));
     builder.setIndex(session->lotsCount());
@@ -100,23 +98,24 @@ void LotLogger::log(const Lot& lot, const shared_ptr<DrawingSession> session)
     }
 
     _log.push_back(builder.create());
-    updateView();
+    emit logUpdated();
 }
 
-void LotLogger::logMessage(const QString message)
+void Logger::logMessage(const QString message)
 {
     LogItemBuilder builder;
     builder.addText(message);
     _log.push_back(builder.create());
-    updateView();
+    emit logUpdated();
 }
 
-void LotLogger::clear()
+void Logger::clear()
 {
     _log.clear();
+    emit logUpdated();
 }
 
-bool LotLogger::saveToFile(QString filename)
+bool Logger::saveToFile(QString filename)
 {
     QFile file(filename);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
@@ -141,19 +140,4 @@ bool LotLogger::saveToFile(QString filename)
     }
 
     return true;
-}
-
-void LotLogger::updateView()
-{
-    _view->clear();
-
-    for(vector<LogItem>::reverse_iterator rit = _log.rbegin();
-        rit != _log.rend();
-        ++rit) {
-        QTreeWidgetItem* item = new QTreeWidgetItem();
-        item->setText(0, (*rit).index());
-        item->setText(1, (*rit).time());
-        item->setText(2, (*rit).text());
-        _view->addTopLevelItem(item);
-    }
 }

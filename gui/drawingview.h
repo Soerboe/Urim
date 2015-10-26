@@ -25,6 +25,7 @@
 class LotView;
 class QLabel;
 class QActionGroup;
+class LoggerView;
 
 namespace Ui {
 class DrawingView;
@@ -54,6 +55,7 @@ private:
     LotView* _lotView;
     QLabel* _sessionIdView;
     QActionGroup* _showLotViewActions;
+    std::shared_ptr<LoggerView> _loggerView;
 
     void updateSessionIdView(const std::shared_ptr<DrawingSession> session);
     void setupLogger();

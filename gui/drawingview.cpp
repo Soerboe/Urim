@@ -18,7 +18,8 @@
 #include "ui_drawingview.h"
 #include <QTimer>
 #include "drawingsetupdialog.h"
-#include "lotlogger.h"
+#include "logger.h"
+#include "loggerview.h"
 #include "lotview.h"
 #include "nomoreuniqueresultsexception.h"
 #include <QMessageBox>
@@ -129,16 +130,10 @@ void DrawingView::updateSessionIdView(const std::shared_ptr<DrawingSession> sess
 void DrawingView::setupLogger()
 {
     ui->logWidget->setVisible(false);
-    QStringList headerLabels;
-    headerLabels << tr("No.") << tr("Time") << tr("Event");
-    ui->logWidget->setColumnCount(headerLabels.size());
-    ui->logWidget->setHeaderLabels(headerLabels);
-    ui->logWidget->resizeColumnToContents(0);
-    ui->logWidget->sortByColumn(1, Qt::DescendingOrder);
 
-    shared_ptr<LotLogger> logger(new LotLogger(ui->logWidget));
-    _drawingController->setLotLogger(logger);
-    logger->setHeaderLabels(headerLabels);
+    shared_ptr<Logger> logger(new Logger());
+    _drawingController->setLogger(logger);
+    _loggerView = shared_ptr<LoggerView>(new LoggerView(ui->logWidget, logger));
 
     connect(ui->showLogAction, SIGNAL(triggered(bool)), SLOT(showLogChecked(bool)));
 }
@@ -221,7 +216,7 @@ void DrawingView::showDrawingSetup()
     if (status == QDialog::Accepted) {
         _drawingController->setLotView(_setupDialog->getView());
         _drawingController->setDrawingName(_setupDialog->getDrawingName());
-        _drawingController->lotLogger()->clear();
+        _drawingController->logger()->clear();
         startNewDrawingSession(true);
         this->show();
     } else {
@@ -241,7 +236,7 @@ void DrawingView::saveLogToFile()
         filename.append(".log");
     }
 
-    bool saved = _drawingController->lotLogger()->saveToFile(filename);
+    bool saved = _drawingController->logger()->saveToFile(filename);
 
     if (!saved) {
         QMessageBox::warning(this, tr("Error"), tr("Could not save log to file"));
@@ -271,7 +266,7 @@ void DrawingView::startNewDrawingSession(bool newDrawing)
     }
     _drawingController->setDrawingSession(session);
     updateSessionIdView(session);
-    _drawingController->lotLogger()->logMessage(tr("Session %1 started").arg(session->id()));
+    _drawingController->logger()->logMessage(tr("Session %1 started").arg(session->id()));
     _drawingController->showLot(false);
     enableDrawing(true);
 }

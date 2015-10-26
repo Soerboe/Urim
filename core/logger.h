@@ -14,17 +14,15 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LOTLOGGER_H
-#define LOTLOGGER_H
+#ifndef LOGGER_H
+#define LOGGER_H
 
-#include <memory>
+#include <QObject>
 #include <vector>
-#include <QString>
+#include <memory>
 #include <QDateTime>
-#include <QCoreApplication>
 
 class Lot;
-class QTreeWidget;
 class DrawingSession;
 
 class LogItem {
@@ -43,27 +41,30 @@ private:
     QString _text;
 };
 
-class LotLogger
+class Logger : public QObject
 {
-    Q_DECLARE_TR_FUNCTIONS(LotLogger)
-
+    Q_OBJECT
 public:
-    LotLogger(QTreeWidget* view);
+    explicit Logger();
 
     void log(const Lot& lot, const std::shared_ptr<DrawingSession> session);
     void logMessage(const QString message);
     void clear();
     void setHeaderLabels(QStringList list) {_headerLabels = list;}
 
+    std::vector<LogItem>::iterator begin() {return _log.begin();}
+    std::vector<LogItem>::iterator end() {return _log.end();}
+    std::vector<LogItem>::reverse_iterator rbegin() {return _log.rbegin();}
+    std::vector<LogItem>::reverse_iterator rend() {return _log.rend();}
+
     bool saveToFile(QString filename);
 
+signals:
+    void logUpdated();
+
 private:
-    // The view is managed by Qt
-    QTreeWidget* _view;
     std::vector<LogItem> _log;
     QStringList _headerLabels;
-
-    void updateView();
 };
 
-#endif // LOTLOGGER_H
+#endif // LOGGER_H

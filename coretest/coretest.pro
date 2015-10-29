@@ -17,7 +17,7 @@
 lessThan(QT_VERSION, 5.4): error("Requires Qt >= 5.4")
 
 include(../testutils/testutils.pri)
-include(../../core/core.pri)
+include(../core/core.pri)
 
 QT += testlib
 QT -= gui
@@ -30,5 +30,6 @@ CONFIG += c++11
 TEMPLATE = app
 
 SOURCES += *.cpp
+
 
 

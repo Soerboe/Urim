@@ -19,9 +19,12 @@ TEMPLATE = subdirs
 SUBDIRS += \
     core \
     gui \
-    test \
+    testutils \
+    coretest \
+    guitest \
     app
 
 gui.depends = core
-test.depends = core
+coretest.depends = core testutils
+guitest.depends = core gui testutils
 app.depends = core gui

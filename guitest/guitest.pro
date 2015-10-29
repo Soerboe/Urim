@@ -14,13 +14,19 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-TEMPLATE = subdirs
+lessThan(QT_VERSION, 5.4): error("Requires Qt >= 5.4")
 
-SUBDIRS += \
-    testutils \
-    coretest \
-    guitest
+include(../testutils/testutils.pri)
+include(../core/core.pri)
+include(../gui/gui.pri)
 
-coretest.depends = testutils
-guitest.depends = testutils
- 
+QT += testlib core gui widgets svg
+
+TARGET = guitester
+CONFIG += console
+CONFIG -= app_bundle
+TEMPLATE = app
+
+CONFIG += c++11
+
+SOURCES += *.cpp

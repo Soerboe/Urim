@@ -169,9 +169,7 @@
     </widget>
    </item>
   </layout>
-  <zorder></zorder>
   <zorder>groupBox</zorder>
-  <zorder>label_3</zorder>
  </widget>
  <resources/>
  <connections/>

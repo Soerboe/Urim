@@ -15,7 +15,7 @@
 #
 
 TEMPLATE = subdirs
-
+OTHER_FILES += common.pri
 SUBDIRS += \
     core \
     gui \

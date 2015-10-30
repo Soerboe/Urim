@@ -16,8 +16,11 @@
 
 lessThan(QT_VERSION, 5.4): error("Requires Qt >= 5.4")
 
-include(../testutils/testutils.pri)
-include(../core/core.pri)
+DEPENDENCY_PROJECT += testutils core
+
+!include( ../common.pri ) {
+    error( "$${TARGET} Couldn't find 'common.pri'!" )
+}
 
 QT += testlib
 QT -= gui
@@ -25,7 +28,6 @@ QT -= gui
 TARGET = coretester
 CONFIG += console
 CONFIG -= app_bundle
-CONFIG += c++11
 
 TEMPLATE = app
 

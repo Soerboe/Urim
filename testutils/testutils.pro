@@ -16,11 +16,14 @@
 
 lessThan(QT_VERSION, 5.4): error("Requires Qt >= 5.4")
 
+!include( ../common.pri ) {
+    error( "$${TARGET} Couldn't find 'common.pri'!" )
+}
+
 QT += core
 QT -= gui
 
+TARGET = testutils
 TEMPLATE = lib
-
-CONFIG += c++11
 
 HEADERS += $$PWD/*.h

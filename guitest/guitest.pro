@@ -16,9 +16,11 @@
 
 lessThan(QT_VERSION, 5.4): error("Requires Qt >= 5.4")
 
-include(../testutils/testutils.pri)
-include(../core/core.pri)
-include(../gui/gui.pri)
+DEPENDENCY_PROJECT += testutils core gui
+
+!include( ../common.pri ) {
+    error( "$${TARGET} Couldn't find 'common.pri'!" )
+}
 
 QT += testlib core gui widgets svg
 
@@ -26,7 +28,5 @@ TARGET = guitester
 CONFIG += console
 CONFIG -= app_bundle
 TEMPLATE = app
-
-CONFIG += c++11
 
 SOURCES += *.cpp

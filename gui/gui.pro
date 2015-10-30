@@ -16,13 +16,16 @@
 
 lessThan(QT_VERSION, 5.4): error("Requires Qt >= 5.4")
 
-include(../core/core.pri)
+DEPENDENCY_PROJECT += core
+
+!include( ../common.pri ) {
+    error( "$${TARGET} Couldn't find 'common.pri'!" )
+}
 
 QT += core gui widgets svg
 
+TARGET = gui
 TEMPLATE = lib
-
-CONFIG += c++11
 
 HEADERS += $$PWD/*.h
 SOURCES += $$PWD/*.cpp

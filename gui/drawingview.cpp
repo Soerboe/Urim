@@ -154,7 +154,7 @@ void DrawingView::setupShowLotViewMenu()
     ui->presentationViewMenu->addAction(thisWindowAction);
 
     QList<QScreen*> screens = qApp->screens();
-    if (screens.size() > 0) {
+    if (screens.size() > 1) {
         for (int screenIndex = 0; screenIndex < screens.size(); ++screenIndex) {
             QAction* monitorAction = new QAction(tr("Fullscreen on screen %1").arg(screenIndex + 1), ui->presentationViewMenu);
             monitorAction->setCheckable(true);

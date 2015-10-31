@@ -14,21 +14,11 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-lessThan(QT_VERSION, 5.4): error("Requires Qt >= 5.4")
-
-DEPENDENCY_PROJECT += core
-
-!include( ../common.pri ) {
-    error( "$${TARGET} Couldn't find 'common.pri'!" )
-}
-
-QT += core gui widgets svg
-
-TARGET = gui
-TEMPLATE = lib
+INCLUDEPATH += $$PWD
+DEPENDPATH += $$PWD
 
 HEADERS += $$PWD/*.h
 SOURCES += $$PWD/*.cpp
 FORMS += $$PWD/*.ui
 
-RESOURCES += $$PWD/*.qrc
+

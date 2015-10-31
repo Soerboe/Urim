@@ -31,3 +31,5 @@ HEADERS += $$PWD/*.h
 SOURCES += main.cpp
 
 RC_FILE = app.rc
+
+RESOURCES += app.qrc

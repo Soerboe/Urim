@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     app.setWindowIcon(icon);
 
     QTranslator translator;
-    translator.load("gui_no.qm", ":/gui/translations");
+    translator.load("urimthummim_no.qm", ":/app/translations");
     app.installTranslator(&translator);
 
     DrawingSetupController setupController;

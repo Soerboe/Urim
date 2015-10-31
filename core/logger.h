@@ -21,6 +21,10 @@
 #include <vector>
 #include <memory>
 #include <QDateTime>
+#include <QFileInfo>
+
+#define LOG_SUFFIX "log"
+#define EXCEL_SUFFIX "xlsx"
 
 class Lot;
 class DrawingSession;
@@ -57,7 +61,7 @@ public:
     std::vector<LogItem>::reverse_iterator rbegin() {return _log.rbegin();}
     std::vector<LogItem>::reverse_iterator rend() {return _log.rend();}
 
-    bool saveToFile(QString filename);
+    bool saveToFile(QFileInfo fileInfo);
 
 signals:
     void logUpdated();
@@ -65,6 +69,9 @@ signals:
 private:
     std::vector<LogItem> _log;
     QStringList _headerLabels;
+
+    bool saveToLogFile(QFile &file);
+    bool saveToExcelFile(QFile &file);
 };
 
 #endif // LOGGER_H

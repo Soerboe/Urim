@@ -226,17 +226,30 @@ void DrawingView::showDrawingSetup()
 
 void DrawingView::saveLogToFile()
 {
-    QString filename = QFileDialog::getSaveFileName(this, tr("Save log to file"), QString(), tr("Log files (*.log)"));
+    QString suffices;
+    QString selectedSuffix;
+    suffices.append(tr("Excel file (*.xlsx)")).append(";;");
+    suffices.append(tr("Log files (*.log)"));
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save log to file"), QDir::homePath(), suffices, &selectedSuffix);
 
     if (filename.isNull()) {
         return;
     }
 
-    if (!filename.endsWith(".log")) {
-        filename.append(".log");
+    QFileInfo fileInfo(filename);
+    QString suffix;
+    if (selectedSuffix.contains(LOG_SUFFIX)) {
+        suffix = LOG_SUFFIX;
+    } else {
+        suffix = EXCEL_SUFFIX; // default suffix
     }
 
-    bool saved = _drawingController->logger()->saveToFile(filename);
+    if (fileInfo.suffix().isEmpty() ||
+            (fileInfo.suffix() != LOG_SUFFIX && fileInfo.suffix() != EXCEL_SUFFIX)) {
+        fileInfo.setFile(filename.append(suffix));
+    }
+
+    bool saved = _drawingController->logger()->saveToFile(fileInfo);
 
     if (!saved) {
         QMessageBox::warning(this, tr("Error"), tr("Could not save log to file"));

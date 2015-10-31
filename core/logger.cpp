@@ -24,6 +24,9 @@
 #include "drawingsession.h"
 #include <QFile>
 #include <QTextStream>
+#include <QFileInfo>
+#include <QDebug>
+#include "xlsxdocument.h"
 
 using namespace std;
 
@@ -115,9 +118,21 @@ void Logger::clear()
     emit logUpdated();
 }
 
-bool Logger::saveToFile(QString filename)
+bool Logger::saveToFile(QFileInfo fileInfo)
 {
-    QFile file(filename);
+    QFile file(fileInfo.absoluteFilePath());
+    if (fileInfo.suffix() == LOG_SUFFIX) {
+        return saveToLogFile(file);
+    } else if (fileInfo.suffix() == EXCEL_SUFFIX) {
+        return saveToExcelFile(file);
+    } else {
+        qDebug() << "Unknown file suffix: " << fileInfo.suffix();
+        return false;
+    }
+}
+
+bool Logger::saveToLogFile(QFile &file)
+{
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         return false;
     }
@@ -140,4 +155,32 @@ bool Logger::saveToFile(QString filename)
     }
 
     return true;
+}
+
+bool Logger::saveToExcelFile(QFile &file)
+{
+    if (!file.open(QIODevice::WriteOnly)) {
+        return false;
+    }
+
+    QXlsx::Document doc;
+
+    if (_headerLabels.size() > 0) {
+        int col = 1;
+        for (QString s : _headerLabels) {
+            doc.write(1, col++, s);
+        }
+    }
+
+    int row = 2;
+    for(vector<LogItem>::reverse_iterator rit = _log.rbegin();
+        rit != _log.rend();
+        ++rit) {
+        doc.write(row, 1, (*rit).index());
+        doc.write(row, 2, (*rit).time());
+        doc.write(row, 3, (*rit).text());
+        ++row;
+    }
+
+    return doc.saveAs(&file);
 }

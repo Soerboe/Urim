@@ -20,6 +20,8 @@ lessThan(QT_VERSION, 5.4): error("Requires Qt >= 5.4")
     error( "$${TARGET} Couldn't find 'common.pri'!" )
 }
 
+include(../thirdparty/QtXlsxWriter/src/xlsx/qtxlsx.pri)
+
 QT += core
 QT -= gui
 

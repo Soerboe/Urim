@@ -30,6 +30,7 @@
 #include "settingsdialog.h"
 #include <QDesktopServices>
 #include "settingshandler.h"
+#include <QCheckBox>
 
 using namespace std;
 
@@ -54,6 +55,11 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     ui->drawingNameView->hide();
     ui->drawButton->hide();
 
+    QWidget* toolbarSpacer = new QWidget(this);
+    toolbarSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    toolbarSpacer->setVisible(true);
+    ui->mainToolBar->insertWidget(ui->finishDrawingAction, toolbarSpacer);
+
     connect(ui->drawButton, SIGNAL(clicked()), SLOT(drawClicked()));
     connect(ui->drawAction, SIGNAL(triggered()), SLOT(drawClicked()));
     connect(ui->startNewSessionAction, SIGNAL(triggered()), SLOT(startNewDrawingSession()));
@@ -70,6 +76,7 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     connect(ui->settingsAction, SIGNAL(triggered()), SLOT(showSettingsDialog()));
     connect(ui->checkForUpdateAction, SIGNAL(triggered()), SLOT(checkForUpdate()));
     connect(ui->goToWebsiteAction, SIGNAL(triggered()), SLOT(goToWebsite()));
+    connect(ui->finishDrawingAction, SIGNAL(triggered()), SLOT(finishDrawingClicked()));
 
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     QTimer::singleShot(0, this, SLOT(showDrawingSetup()));
@@ -411,4 +418,43 @@ void DrawingView::checkForUpdate()
 void DrawingView::goToWebsite()
 {
     QDesktopServices::openUrl(QUrl(QString("https://lioddensorbo.com/urim/").append(SettingsHandler::language())));
+}
+
+void DrawingView::finishDrawingClicked()
+{
+    QMessageBox finishBox(
+                QMessageBox::Question,
+                tr("Finish lottery drawing"),
+                tr("Are you sure you want to finish current lottery drawing?"),
+                QMessageBox::Yes | QMessageBox::No,
+                this);
+    QCheckBox* saveLogBox = new QCheckBox(tr("Save log"));
+    saveLogBox->setChecked(true);
+    finishBox.setCheckBox(saveLogBox);
+
+    finishBox.setButtonText(QMessageBox::Yes, tr("Yes"));
+    finishBox.setButtonText(QMessageBox::No, tr("No"));
+    if (finishBox.exec() == QMessageBox::No) {
+        return;
+    }
+
+    if (saveLogBox->isChecked()) {
+        saveLogToFile();
+    }
+
+    QMessageBox exitBox(
+                QMessageBox::Question,
+                tr("Create new lottery drawing"),
+                tr("Would you like to create a new lottery drawing?"),
+                QMessageBox::Yes | QMessageBox::No,
+                this);
+    exitBox.setButtonText(QMessageBox::Yes, tr("Yes"));
+    exitBox.setButtonText(QMessageBox::No, tr("No, exit application"));
+
+    if (exitBox.exec() == QMessageBox::Yes) {
+        this->hide();
+        showDrawingSetup();
+    } else {
+        qApp->exit(0);
+    }
 }

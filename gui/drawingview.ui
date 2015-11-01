@@ -194,6 +194,7 @@
    <addaction name="drawAction"/>
    <addaction name="showLogAction"/>
    <addaction name="tooglePresentationViewAction"/>
+   <addaction name="finishDrawingAction"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="createNewDrawingAction">
@@ -292,6 +293,18 @@
   <action name="goToWebsiteAction">
    <property name="text">
     <string>Go to website</string>
+   </property>
+  </action>
+  <action name="finishDrawingAction">
+   <property name="icon">
+    <iconset resource="gui.qrc">
+     <normaloff>:/gui/icons/exit.svg</normaloff>:/gui/icons/exit.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Finish drawing</string>
+   </property>
+   <property name="toolTip">
+    <string>Finish current drawing</string>
    </property>
   </action>
  </widget>

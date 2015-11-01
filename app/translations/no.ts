@@ -608,6 +608,38 @@
         <source>Go to website</source>
         <translation>Gå til nettside</translation>
     </message>
+    <message>
+        <source>Finish drawing</source>
+        <translation>Avslutt loddtrekning</translation>
+    </message>
+    <message>
+        <source>Finish current drawing</source>
+        <translation>Avslutt nåværende loddtrekning</translation>
+    </message>
+    <message>
+        <source>Zoom</source>
+        <translation>Zoom</translation>
+    </message>
+    <message>
+        <source>Finish lottery drawing</source>
+        <translation>Avslutt loddtrekning</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to finish current lottery drawing?</source>
+        <translation>Er du sikker på at du vil avslutte nåværende loddtrekning?</translation>
+    </message>
+    <message>
+        <source>Create new lottery drawing</source>
+        <translation>Opprett ny loddtrekning</translation>
+    </message>
+    <message>
+        <source>Would you like to create a new lottery drawing?</source>
+        <translation>Vil du opprette en ny loddtrekning?</translation>
+    </message>
+    <message>
+        <source>No, exit application</source>
+        <translation>Nei, avslutt programmet</translation>
+    </message>
 </context>
 <context>
     <name>HistoryWidget</name>
@@ -696,7 +728,7 @@
     </message>
     <message>
         <source>Changing language requires a restart of the application to take effect.</source>
-        <translation>Endring av språk krever omstart av applikasjonen.</translation>
+        <translation>Endring av språk krever omstart av programmet.</translation>
     </message>
     <message>
         <source>Updates</source>
@@ -742,7 +774,7 @@
     <name>UpdateView</name>
     <message>
         <source>Update application</source>
-        <translation>Oppdater applikasjon</translation>
+        <translation>Oppdater programmet</translation>
     </message>
     <message>
         <source>A new update is available!</source>
@@ -758,7 +790,7 @@
     </message>
     <message>
         <source>Version &lt;strong&gt;%1&lt;/strong&gt; has been released. You are using version &lt;strong&gt;%2&lt;/strong&gt;. Click the update button below to download the new version from the application website.</source>
-        <translation>Versjon &lt;strong&gt;%1&lt;/strong&gt; er nå tilgjengelig. Du bruker versjon &lt;strong&gt;%2&lt;/strong&gt;. Klikk på &quot;Oppdater&quot; under for å laste ned den nye versjonen fra  nettsiden.</translation>
+        <translation>Versjon &lt;strong&gt;%1&lt;/strong&gt; er nå tilgjengelig. Du bruker versjon &lt;strong&gt;%2&lt;/strong&gt;. Klikk på &quot;Oppdater&quot; under for å laste ned den nye versjonen fra programmets nettside.</translation>
     </message>
     <message>
         <source>Update error</source>
@@ -782,7 +814,7 @@
     </message>
     <message>
         <source>Could not open download page in your default browser. Please enter the following URL into your browser to update the application: &lt;strong&gt;%1&lt;/strong&gt;</source>
-        <translation>Kunne ikke åpne nedlastingssiden i nettleseren. Gå til følgende URL i din nettleser for å oppdatere applikasjonen: &lt;strong&gt;%1&lt;/strong&gt;</translation>
+        <translation>Kunne ikke åpne nedlastingssiden i nettleseren. Gå til følgende URL i din nettleser for å oppdatere programmet: &lt;strong&gt;%1&lt;/strong&gt;</translation>
     </message>
 </context>
 </TS>

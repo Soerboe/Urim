@@ -8,5 +8,6 @@
         <file>icons/loader32.gif</file>
         <file>icons/lots.svg</file>
         <file>icons/monitor.svg</file>
+        <file>icons/exit.svg</file>
     </qresource>
 </RCC>

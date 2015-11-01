@@ -44,7 +44,6 @@ public:
     void setViewContainer(ViewContainer* viewContainer);
     ViewContainer* takeViewContainer();
     bool hasViewContainer();
-    void enableDrawing(bool enabled);
     void setDrawingName(QString drawingName);
 
 protected:
@@ -62,6 +61,7 @@ private:
     QSlider* _zoomSlider;
     QLabel* _zoomView;
 
+    void enableDrawing(bool enabled);
     void updateSessionIdView(const std::shared_ptr<DrawingSession> session);
     void setupLogger();
     void clear();
@@ -86,6 +86,7 @@ private slots:
     void showSettingsDialog();
     void checkForUpdate();
     void goToWebsite();
+    void finishDrawingClicked();
 };
 
 #endif // DRAWINGVIEW_H

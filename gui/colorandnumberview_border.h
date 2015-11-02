@@ -17,36 +17,18 @@
 #ifndef COLORANDNUMBERVIEW_BORDER_H
 #define COLORANDNUMBERVIEW_BORDER_H
 
-#include "lotview.h"
-#include "color.h"
+#include "twotextsview.h"
 
-namespace Ui {
-class ColorAndNumberView_Border;
-}
-
-class ColorAndNumberView_Border : public LotView
+class ColorAndNumberView_Border : public TwoTextsView
 {
     Q_OBJECT
 
 public:
     explicit ColorAndNumberView_Border(QWidget *parent = 0);
-    ~ColorAndNumberView_Border();
 
     virtual void view(const NumberLotElement& numberLotElement, int id);
     virtual void view(const ColorLotElement& colorLotElement, int id);
 
-    virtual void showLot(bool visible);
-protected:
-    virtual void calcViewSize();
-
-private:
-    Ui::ColorAndNumberView_Border *ui;
-
-    bool _drawn;
-    Color _borderColor;
-    int _borderThickness;
-
-    QString buildStyleSheet();
 };
 
 #endif // COLORANDNUMBERVIEW_BORDER_H

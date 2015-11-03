@@ -189,8 +189,16 @@ void DrawingView::setupComponentVisibility(bool showLotInWindow)
     ui->tooglePresentationViewAction->setChecked(showLotInWindow);
 }
 
+/*
+ * A screenIndex of -1 refers to the drawing window
+ * A screenIndex > 0 refers to screen index in qApp->screens()
+ */
 void DrawingView::doMoveLotView(int screenIndex)
 {
+    if (screenIndex < -1) {
+        return;
+    }
+
     QScreen* screen = 0;
     if (screenIndex >= 0) {
         screen = qApp->screens().at(screenIndex);
@@ -201,6 +209,7 @@ void DrawingView::doMoveLotView(int screenIndex)
     setupComponentVisibility(screen != 0);
     bool lotsDrawn = _drawingController->drawingSession()->lotsCount() > 0;
     _drawingController->showLot(lotsDrawn);
+    _showLotViewActions->actions().at(screenIndex + 1)->setChecked(true);
 }
 
 void DrawingView::moveLotView(QAction* action)
@@ -305,7 +314,6 @@ void DrawingView::tooglePresentationView(bool checked)
         ui->tooglePresentationViewAction->setChecked(false);
     } else {
         doMoveLotView(screenIndex);
-        _showLotViewActions->actions().at(screenIndex + 1)->setChecked(true);
     }
 
 }

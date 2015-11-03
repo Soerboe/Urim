@@ -16,12 +16,12 @@
 
 #include "lotwindow.h"
 #include "ui_lotwindow.h"
-#include "lotview.h"
+#include "viewcontainer.h"
 
 LotWindow::LotWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::LotWindow),
-    _lotView(0)
+    _viewContainer(0)
 {
     ui->setupUi(this);
     QString style("#LotWindow {background-color: #ffffff;}");
@@ -37,36 +37,34 @@ LotWindow::~LotWindow()
     delete ui;
 }
 
-void LotWindow::setView(LotView* view)
-{
-    QLayoutItem* oldView = ui->layout->takeAt(0);
-    if (oldView) {
-        delete oldView->widget();
-        delete oldView;
-    }
-
-    view->setMinimumSize(200, 100);
-    ui->layout->addWidget(view);
-    _lotView = view;
-
-    ui->drawingNameView->setText(_drawingName);
-    ui->drawingNameView->setVisible(!_drawingName.isEmpty());
-}
-
-LotView* LotWindow::takeView()
+void LotWindow::setViewContainer(ViewContainer *viewContainer)
 {
     QLayoutItem* oldView = ui->layout->takeAt(0);
     if (oldView) {
         delete oldView;
     }
 
-    LotView* view = _lotView;
-    _lotView = 0;
-    return view;
+    ui->layout->addWidget(viewContainer);
+    _viewContainer = viewContainer;
+
+//    ui->drawingNameView->setText(_drawingName);
+//    ui->drawingNameView->setVisible(!_drawingName.isEmpty());
 }
 
-bool LotWindow::hasView()
+ViewContainer *LotWindow::takeViewContainer()
 {
-    return _lotView != 0;
+    QLayoutItem* oldView = ui->layout->takeAt(0);
+    if (oldView) {
+        delete oldView;
+    }
+
+    ViewContainer* viewContainer = _viewContainer;
+    _viewContainer = 0;
+    return viewContainer;
+}
+
+bool LotWindow::hasViewContainer()
+{
+    return _viewContainer != 0;
 }
 

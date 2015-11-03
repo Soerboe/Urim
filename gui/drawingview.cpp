@@ -20,13 +20,13 @@
 #include "drawingsetupdialog.h"
 #include "logger.h"
 #include "loggerview.h"
-#include "lotview.h"
 #include "nomoreuniqueresultsexception.h"
 #include <QMessageBox>
 #include <QScreen>
 #include "aboutbox.h"
 #include <QDesktopWidget>
 #include <QFileDialog>
+#include <viewcontainer.h>
 
 using namespace std;
 
@@ -35,15 +35,15 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     ui(new Ui::DrawingView),
     _drawingController(controller),
     _setupDialog(setupDialog),
-    _lotView(0),
-    _showLotViewActions(0)
+    _viewContainer(0),
+    _presentationViewActions(0)
 {
     ui->setupUi(this);
     setupLogger();
-    setupShowLotViewMenu();
+    setupPresentationViewMenu();
 
-    QString style("#lotContainer {background-color: #ffffff;}");
-    ui->lotContainer->setStyleSheet(style);
+    QString style("#container {background-color: #ffffff;}");
+    ui->container->setStyleSheet(style);
 
     _sessionIdView = new QLabel;
     statusBar()->addPermanentWidget(_sessionIdView);
@@ -60,7 +60,7 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     connect(ui->quitAction, SIGNAL(triggered()), SLOT(close()));
     connect(ui->aboutAction, SIGNAL(triggered()), SLOT(showAbout()));
     connect(ui->aboutQtAction, SIGNAL(triggered()), SLOT(showAboutQt()));
-    connect(ui->presentationViewMenu, SIGNAL(aboutToShow()), SLOT(setupShowLotViewMenu()));
+    connect(ui->presentationViewMenu, SIGNAL(aboutToShow()), SLOT(setupPresentationViewMenu()));
     connect(qApp, SIGNAL(screenAdded(QScreen*)), SLOT(screensChanged()));
     connect(qApp, SIGNAL(screenRemoved(QScreen*)), SLOT(screensChanged()));
 
@@ -73,33 +73,32 @@ DrawingView::~DrawingView()
     delete ui;
 }
 
-void DrawingView::setLotView(LotView* lotView)
+void DrawingView::setViewContainer(ViewContainer *viewContainer)
 {
-    QLayoutItem* oldView = ui->lotContainer->layout()->takeAt(0);
-    if (oldView) {
-        delete oldView->widget();
-        delete oldView;
-    }
-
-    ui->lotContainer->layout()->addWidget(lotView);
-    _lotView = lotView;
-}
-
-LotView* DrawingView::takeLotView()
-{
-    QLayoutItem* oldView = ui->lotContainer->layout()->takeAt(0);
+    QLayoutItem* oldView = ui->container->layout()->takeAt(0);
     if (oldView) {
         delete oldView;
     }
 
-    LotView* view = _lotView;
-    _lotView = 0;
-    return view;
+    ui->container->layout()->addWidget(viewContainer);
+    _viewContainer = viewContainer;
 }
 
-bool DrawingView::hasLotView()
+ViewContainer *DrawingView::takeViewContainer()
 {
-    return _lotView != 0;
+    QLayoutItem* oldView = ui->container->layout()->takeAt(0);
+    if (oldView) {
+        delete oldView;
+    }
+
+    ViewContainer* viewContainer = _viewContainer;
+    _viewContainer = 0;
+    return viewContainer;
+}
+
+bool DrawingView::hasViewContainer()
+{
+    return _viewContainer != 0;
 }
 
 void DrawingView::enableDrawing(bool enabled)
@@ -138,19 +137,19 @@ void DrawingView::setupLogger()
     connect(ui->showLogAction, SIGNAL(triggered(bool)), SLOT(showLogChecked(bool)));
 }
 
-void DrawingView::setupShowLotViewMenu()
+void DrawingView::setupPresentationViewMenu()
 {
-    if (_showLotViewActions) {
-        delete _showLotViewActions;
+    if (_presentationViewActions) {
+        delete _presentationViewActions;
         ui->presentationViewMenu->clear();
     }
 
-    _showLotViewActions = new QActionGroup(this);
+    _presentationViewActions = new QActionGroup(this);
 
     QAction* thisWindowAction = new QAction(tr("In this window"), ui->presentationViewMenu);
     thisWindowAction->setCheckable(true);
     thisWindowAction->setData(-1);
-    _showLotViewActions->addAction(thisWindowAction);
+    _presentationViewActions->addAction(thisWindowAction);
     ui->presentationViewMenu->addAction(thisWindowAction);
 
     QList<QScreen*> screens = qApp->screens();
@@ -159,14 +158,14 @@ void DrawingView::setupShowLotViewMenu()
             QAction* monitorAction = new QAction(tr("Fullscreen on screen %1").arg(screenIndex + 1), ui->presentationViewMenu);
             monitorAction->setCheckable(true);
             monitorAction->setData(screenIndex);
-            _showLotViewActions->addAction(monitorAction);
+            _presentationViewActions->addAction(monitorAction);
             ui->presentationViewMenu->addAction(monitorAction);
         }
     }
 
-    connect(_showLotViewActions, SIGNAL(triggered(QAction*)), SLOT(moveLotView(QAction*)));
+    connect(_presentationViewActions, SIGNAL(triggered(QAction*)), SLOT(moveViewContainer(QAction*)));
 
-    _showLotViewActions->actions().at(_drawingController->currentLotWindowIndex() + 1)->setChecked(true);
+    _presentationViewActions->actions().at(_drawingController->currentLotWindowIndex() + 1)->setChecked(true);
 }
 
 void DrawingView::clear()
@@ -180,20 +179,20 @@ void DrawingView::clear()
     setupComponentVisibility(false);
 }
 
-void DrawingView::setupComponentVisibility(bool showLotInWindow)
+void DrawingView::setupComponentVisibility(bool showViewContainerInWindow)
 {
-    ui->lotContainer->setVisible(!showLotInWindow);
-    ui->showLogAction->setChecked(showLotInWindow);
-    ui->logWidget->setVisible(showLotInWindow);
-    ui->drawButton->setVisible(showLotInWindow);
-    ui->tooglePresentationViewAction->setChecked(showLotInWindow);
+    ui->container->setVisible(!showViewContainerInWindow);
+    ui->showLogAction->setChecked(showViewContainerInWindow);
+    ui->logWidget->setVisible(showViewContainerInWindow);
+    ui->drawButton->setVisible(showViewContainerInWindow);
+    ui->tooglePresentationViewAction->setChecked(showViewContainerInWindow);
 }
 
 /*
  * A screenIndex of -1 refers to the drawing window
  * A screenIndex > 0 refers to screen index in qApp->screens()
  */
-void DrawingView::doMoveLotView(int screenIndex)
+void DrawingView::moveViewContainer(int screenIndex)
 {
     if (screenIndex < -1) {
         return;
@@ -204,18 +203,18 @@ void DrawingView::doMoveLotView(int screenIndex)
         screen = qApp->screens().at(screenIndex);
     }
 
-    _drawingController->moveLotView(screenIndex, screen);
+    _drawingController->moveViewContainer(screenIndex, screen);
     _drawingController->showLotWindow(screen != 0);
     setupComponentVisibility(screen != 0);
     bool lotsDrawn = _drawingController->drawingSession()->lotsCount() > 0;
     _drawingController->showLot(lotsDrawn);
-    _showLotViewActions->actions().at(screenIndex + 1)->setChecked(true);
+    _presentationViewActions->actions().at(screenIndex + 1)->setChecked(true);
 }
 
-void DrawingView::moveLotView(QAction* action)
+void DrawingView::moveViewContainer(QAction* action)
 {
     int screenIndex = action->data().toInt();
-    doMoveLotView(screenIndex);
+    moveViewContainer(screenIndex);
 }
 
 void DrawingView::showDrawingSetup()
@@ -223,7 +222,7 @@ void DrawingView::showDrawingSetup()
     int status = _setupDialog->exec();
 
     if (status == QDialog::Accepted) {
-        _drawingController->setLotView(_setupDialog->getView());
+        _drawingController->initViewContainer(_setupDialog->getView());
         _drawingController->setDrawingName(_setupDialog->getDrawingName());
         _drawingController->logger()->clear();
         startNewDrawingSession(true);
@@ -313,7 +312,7 @@ void DrawingView::tooglePresentationView(bool checked)
         box.exec();
         ui->tooglePresentationViewAction->setChecked(false);
     } else {
-        doMoveLotView(screenIndex);
+        moveViewContainer(screenIndex);
     }
 
 }
@@ -350,5 +349,5 @@ void DrawingView::showAboutQt()
 
 void DrawingView::screensChanged()
 {
-    doMoveLotView(-1);
+    moveViewContainer(-1);
 }

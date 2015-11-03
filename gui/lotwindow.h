@@ -19,7 +19,7 @@
 
 #include <QWidget>
 
-class LotView;
+class ViewContainer;
 
 namespace Ui {
 class LotWindow;
@@ -33,16 +33,16 @@ public:
     explicit LotWindow(QWidget *parent = 0);
     ~LotWindow();
 
-    void setView(LotView* view);
-    LotView* takeView();
-    bool hasView();
+    void setViewContainer(ViewContainer* viewContainer);
+    ViewContainer* takeViewContainer();
+    bool hasViewContainer();
 
     void setDrawingName(QString name) {_drawingName = name;}
 
 private:
     Ui::LotWindow *ui;
 
-    LotView* _lotView;
+    ViewContainer* _viewContainer;
     QString _drawingName;
 };
 

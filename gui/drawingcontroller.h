@@ -25,6 +25,7 @@
 class LotView;
 class Logger;
 class DrawingView;
+class ViewContainer;
 
 class DrawingController : public QObject
 {
@@ -37,8 +38,8 @@ public:
     void draw();
     void showLotWindow(bool visible);
     void showLot(bool visible);
-    void setLotView(LotView* view, const QScreen* screen = 0);
-    void moveLotView(int screenIndex, const QScreen* screen = 0);
+    void initViewContainer(LotView* view, const QScreen* screen = 0);
+    void moveViewContainer(int screenIndex, const QScreen* screen = 0);
     void setDrawingName(QString drawingName);
 
     std::shared_ptr<DrawingSession> drawingSession() const {return _drawingSession;}
@@ -60,8 +61,11 @@ private:
     LotView* _lotView;
     std::shared_ptr<DrawingSession> _drawingSession;
     std::shared_ptr<Logger> _logger;
+    ViewContainer* _viewContainer;
+
     void delay(int n);
     LotWindow* currLotWindow();
+    void placeViewContainer(const QScreen* screen = 0);
 };
 
 #endif // DRAWINGCONTROLLER_H

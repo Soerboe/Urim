@@ -23,13 +23,16 @@
 #include <QScreen>
 #include <QTime>
 #include <QCoreApplication>
+#include "viewcontainer.h"
+#include <assert.h>
 
 #define MAX_SCREENS 8
 
 DrawingController::DrawingController()
     : _lotWindows(MAX_SCREENS),
       _currLotWindowIndex(-1),
-      _lotView(0)
+      _lotView(0),
+      _viewContainer()
 {
     for (int i = 0; i < MAX_SCREENS; ++i) {
         _lotWindows[i] = 0;
@@ -105,25 +108,35 @@ void DrawingController::showLot(bool visible)
     _lotView->showLot(visible);
 }
 
-void DrawingController::moveLotView(int screenIndex, const QScreen* screen)
+void DrawingController::placeViewContainer(const QScreen* screen)
+{
+    if (screen) {
+        if (currLotWindow()) {
+            currLotWindow()->setViewContainer(_viewContainer);
+        }
+    } else {
+        _drawingView->setViewContainer(_viewContainer);
+        _currLotWindowIndex = -1;
+    }
+}
+
+void DrawingController::moveViewContainer(int screenIndex, const QScreen* screen)
 {
     if (screenIndex >= MAX_SCREENS) {
         return;
     }
 
-    LotView* view = 0;
+    ViewContainer* viewContainer = 0;
     LotWindow* currentLotWindow = currLotWindow();
 
-    if (currentLotWindow && currentLotWindow->hasView()) {
-        view = currentLotWindow->takeView();
+    if (currentLotWindow && currentLotWindow->hasViewContainer()) {
+        viewContainer = currentLotWindow->takeViewContainer();
         currentLotWindow->setVisible(false);
-    } else if (_drawingView->hasLotView()) {
-        view = _drawingView->takeLotView();
+    } else if (_drawingView->hasViewContainer()) {
+        viewContainer = _drawingView->takeViewContainer();
     }
 
-    if (!view) {
-        return;
-    }
+    assert(viewContainer != 0);
 
     if (screenIndex >= 0 && screen) {
         if (!_lotWindows[screenIndex]) {
@@ -134,7 +147,7 @@ void DrawingController::moveLotView(int screenIndex, const QScreen* screen)
         _lotWindows[screenIndex]->move(screen->geometry().x(), screen->geometry().y());
     }
 
-    setLotView(view, screen);
+    placeViewContainer(screen);
 }
 
 void DrawingController::setDrawingName(QString drawingName)
@@ -145,21 +158,18 @@ void DrawingController::setDrawingName(QString drawingName)
     _drawingView->setDrawingName(drawingName);
 }
 
-void DrawingController::setLotView(LotView* view, const QScreen* screen)
+void DrawingController::initViewContainer(LotView* view, const QScreen* screen)
 {
     if (!view) {
         return;
     }
-
     _lotView = view;
 
-    if (screen) {
-        if (currLotWindow()) {
-            currLotWindow()->setView(view);
-        }
-    } else {
-        _drawingView->setLotView(view);
-        _currLotWindowIndex = -1;
+    if (!_viewContainer) {
+        _viewContainer = new ViewContainer();
     }
+
+    _viewContainer->setLotView(view);
+    placeViewContainer(screen);
 }
 

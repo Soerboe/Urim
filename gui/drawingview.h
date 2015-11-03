@@ -22,7 +22,7 @@
 #include "drawingsetupdialog.h"
 #include <QCloseEvent>
 
-class LotView;
+class ViewContainer;
 class QLabel;
 class QActionGroup;
 class LoggerView;
@@ -39,9 +39,9 @@ public:
     explicit DrawingView(DrawingController* controller, DrawingSetupDialog* setupDialog, QWidget* parent = 0);
     ~DrawingView();
 
-    void setLotView(LotView* lotView);
-    LotView* takeLotView();
-    bool hasLotView();
+    void setViewContainer(ViewContainer* viewContainer);
+    ViewContainer* takeViewContainer();
+    bool hasViewContainer();
     void enableDrawing(bool enabled);
     void setDrawingName(QString drawingName);
 
@@ -52,22 +52,22 @@ private:
     Ui::DrawingView *ui;
     DrawingController* _drawingController;
     DrawingSetupDialog* _setupDialog;
-    LotView* _lotView;
+    ViewContainer* _viewContainer;
     QLabel* _sessionIdView;
-    QActionGroup* _showLotViewActions;
+    QActionGroup* _presentationViewActions;
     std::shared_ptr<LoggerView> _loggerView;
 
     void updateSessionIdView(const std::shared_ptr<DrawingSession> session);
     void setupLogger();
     void clear();
 
-    void setupComponentVisibility(bool inThisWindow);
+    void setupComponentVisibility(bool showViewContainerInWindow);
 
-    void doMoveLotView(int screenIndex);
+    void moveViewContainer(int screenIndex);
 
 private slots:
-    void setupShowLotViewMenu();
-    void moveLotView(QAction*);
+    void setupPresentationViewMenu();
+    void moveViewContainer(QAction*);
     void showDrawingSetup();
     void saveLogToFile();
     void drawClicked();

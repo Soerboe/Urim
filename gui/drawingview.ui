@@ -48,7 +48,7 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout" stretch="7,3">
       <item>
-       <widget class="QWidget" name="lotContainer" native="true">
+       <widget class="QWidget" name="container" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -267,8 +267,6 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="gui.qrc"/>
-  <include location="gui.qrc"/>
   <include location="gui.qrc"/>
  </resources>
  <connections/>

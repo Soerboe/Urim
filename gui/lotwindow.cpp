@@ -41,6 +41,7 @@ void LotWindow::setView(LotView* view)
 {
     QLayoutItem* oldView = ui->layout->takeAt(0);
     if (oldView) {
+        delete oldView->widget();
         delete oldView;
     }
 

@@ -1,5 +1,6 @@
 #include "twotextsview.h"
 #include "ui_twonumbersview.h"
+#include "guiutils.h"
 
 TwoTextsView::TwoTextsView(QWidget *parent) :
     LotView(parent),

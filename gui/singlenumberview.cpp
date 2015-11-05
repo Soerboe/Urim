@@ -17,6 +17,7 @@
 #include "singlenumberview.h"
 #include "ui_singlenumberview.h"
 #include "numberlotelement.h"
+#include "guiutils.h"
 
 SingleNumberView::SingleNumberView(const QString& longestText, bool showLabel, QWidget *parent) :
     LotViewTextAsMain(longestText, parent),

@@ -52,38 +52,3 @@ void LotView::resizeEvent(QResizeEvent* event)
     _loadingWidget->resize(event->size());
     event->accept();
 }
-
-int LotView::calcMaxFontSize(const QFont& originalFont, const QString& text, const QRect& boundingBox) const
-{
-    QFontMetrics originalMetrics(originalFont);
-    bool fontTooLarge = originalMetrics.width(text) >= boundingBox.width() || originalMetrics.height() >= boundingBox.height();
-
-    int inc = 2;
-    int size = originalFont.pointSize();
-    QFont f = originalFont;
-
-    if (!fontTooLarge) {
-        // try to increase font size
-        for (int i = 1; i <= MAX_FONT_SIZE; i += inc) {
-            f.setPointSize(size + i);
-            QFontMetrics fm(f);
-            if (fm.width(text) >= boundingBox.width() || fm.height() >= boundingBox.height()) {
-                return size + i - inc;
-            }
-        }
-    }
-
-    if (fontTooLarge) {
-        for (int i = 1; i <= MAX_FONT_SIZE && size - i > 1; i += inc) {
-            // try to decrease font size
-            f.setPointSize(size - i);
-            QFontMetrics fm(f);
-            if (fm.width(text) < boundingBox.width() && fm.height() < boundingBox.height()) {
-                return size - i;
-            }
-        }
-    }
-
-    return size; // should never get this far
-}
-

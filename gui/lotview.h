@@ -21,8 +21,6 @@
 #include "lotelementviewer.h"
 #include "utils.h"
 
-#define MAX_FONT_SIZE 1000
-
 class DrawingController;
 class LoadingWidget;
 
@@ -50,7 +48,6 @@ public:
 protected:
     virtual void calcViewSize() = 0;
 
-    int calcMaxFontSize(const QFont& originalFont, const QString& text, const QRect& boundingBox) const;
     QColor backgroundColor() const {return QColor(Qt::white);}
     QColor foregroundColor() const {return QColor(Qt::black);}
 

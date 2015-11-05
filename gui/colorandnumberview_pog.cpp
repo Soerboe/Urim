@@ -20,6 +20,7 @@
 #include "color.h"
 #include "numberlotelement.h"
 #include "colorlotelement.h"
+#include "guiutils.h"
 
 ColorAndNumberView_POG::ColorAndNumberView_POG(const QString& longestText, QWidget *parent) :
     LotViewTextAsMain(longestText, parent),

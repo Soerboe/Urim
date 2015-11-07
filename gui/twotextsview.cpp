@@ -83,3 +83,14 @@ void TwoTextsView::showLot(bool visible)
     ui->mainView->setVisible(visible);
     calcViewSize();
 }
+
+LotView *TwoTextsView::clone() const
+{
+    TwoTextsView* copy = new TwoTextsView;
+    copy->_borderColor = this->_borderColor;
+    copy->_initialized = this->_initialized;
+    copy->_showBorder = this->_showBorder;
+    copy->ui->topView->setText(this->ui->topView->text());
+    copy->ui->bottomView->setText(this->ui->bottomView->text());
+    return copy;
+}

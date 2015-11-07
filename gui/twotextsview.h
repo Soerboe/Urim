@@ -17,6 +17,7 @@ public:
     ~TwoTextsView();
 
     virtual void showLot(bool visible);
+    virtual LotView* clone() const;
 
 protected:
     Ui::TwoTextsView *ui;

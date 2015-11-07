@@ -25,6 +25,7 @@
 #include <QCoreApplication>
 #include "viewcontainer.h"
 #include <assert.h>
+#include "historywidget.h"
 
 #define MAX_SCREENS 8
 
@@ -57,7 +58,6 @@ void DrawingController::doDraw()
     if (_logger) {
         _logger->log(lot, _drawingSession);
     }
-
 }
 
 void DrawingController::delay(int n = 1000)
@@ -77,6 +77,10 @@ void DrawingController::draw()
 {
     _lotView->showLoading(true);
     _lotView->showLot(false);
+
+    if (_historyWidget && _lotView && _drawingSession->lotsCount() > 0) {
+        _historyWidget->addItem(_lotView->clone());
+    }
 
     delay(1500);
     try {
@@ -101,6 +105,11 @@ void DrawingController::showLotWindow(bool visible)
     } else {
         currLotWindow()->setVisible(false);
     }
+}
+
+void DrawingController::showHistoryWidget(bool visible)
+{
+    _historyWidget->setVisible(visible);
 }
 
 void DrawingController::showLot(bool visible)
@@ -167,6 +176,8 @@ void DrawingController::initViewContainer(LotView* view, const QScreen* screen)
 
     if (!_viewContainer) {
         _viewContainer = new ViewContainer();
+        _historyWidget = new HistoryWidget();
+        _viewContainer->addHistoryWidget(_historyWidget);
     }
 
     _viewContainer->setLotView(view);

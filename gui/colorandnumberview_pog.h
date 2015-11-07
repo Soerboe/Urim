@@ -37,6 +37,8 @@ public:
 
     void updateView(bool updateColorView = true);
     virtual void showLot(bool visible);
+    virtual LotView* clone() const;
+
 protected:
     virtual void calcViewSize();
 

@@ -164,6 +164,7 @@
     <addaction name="separator"/>
     <addaction name="startNewSessionAction"/>
     <addaction name="showLogAction"/>
+    <addaction name="showLotsDrawnAction"/>
    </widget>
    <widget class="QMenu" name="helpMenu">
     <property name="title">
@@ -262,6 +263,17 @@
    </property>
    <property name="text">
     <string>Presentation view</string>
+   </property>
+  </action>
+  <action name="showLotsDrawnAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show lots drawn</string>
    </property>
   </action>
  </widget>

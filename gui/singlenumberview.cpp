@@ -70,6 +70,16 @@ void SingleNumberView::showLot(bool visible)
     updateView();
 }
 
+LotView *SingleNumberView::clone() const
+{
+    SingleNumberView* copy = new SingleNumberView(this->_longestText, this->_showLabel);
+    copy->_init = this->_init;
+    copy->_number = this->_number;
+    copy->_label = this->_label;
+    copy->updateView();
+    return copy;
+}
+
 void SingleNumberView::updateView()
 {
     if (!_init) {

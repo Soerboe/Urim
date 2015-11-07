@@ -110,7 +110,16 @@ void ColorAndNumberView_POG::showLot(bool visible)
     ui->colorNameView->setPalette(textPalette);
     ui->numberView->setPalette(textPalette);
 
-   updateView(visible);
+    updateView(visible);
+}
+
+LotView *ColorAndNumberView_POG::clone() const
+{
+    ColorAndNumberView_POG* copy = new ColorAndNumberView_POG(this->_longestText);
+    copy->_color = this->_color;
+    copy->_number = this->_number;
+    copy->updateView();
+    return copy;
 }
 
 void ColorAndNumberView_POG::calcLocalFontSize(const QFont& font)

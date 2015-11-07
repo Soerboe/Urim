@@ -44,6 +44,7 @@ public:
 
     void showLoading(bool visible);
     virtual void showLot(bool visible) = 0;
+    virtual LotView* clone() const = 0;
 
 protected:
     virtual void calcViewSize() = 0;

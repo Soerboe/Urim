@@ -63,6 +63,7 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     connect(ui->presentationViewMenu, SIGNAL(aboutToShow()), SLOT(setupPresentationViewMenu()));
     connect(qApp, SIGNAL(screenAdded(QScreen*)), SLOT(screensChanged()));
     connect(qApp, SIGNAL(screenRemoved(QScreen*)), SLOT(screensChanged()));
+    connect(ui->showLotsDrawnAction, SIGNAL(toggled(bool)), SLOT(showLotsDrawnClicked(bool)));
 
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     QTimer::singleShot(0, this, SLOT(showDrawingSetup()));
@@ -350,4 +351,9 @@ void DrawingView::showAboutQt()
 void DrawingView::screensChanged()
 {
     moveViewContainer(-1);
+}
+
+void DrawingView::showLotsDrawnClicked(bool checked)
+{
+    _drawingController->showHistoryWidget(checked);
 }

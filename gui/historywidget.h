@@ -14,40 +14,36 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SINGLENUMBERVIEW_H
-#define SINGLENUMBERVIEW_H
+#ifndef HISTORYWIDGET_H
+#define HISTORYWIDGET_H
 
-#include "lotviewtextasmain.h"
+#include <QWidget>
+
+class LotView;
 
 namespace Ui {
-class SingleNumberView;
+class HistoryWidget;
 }
 
-class SingleNumberView : public LotViewTextAsMain
+class HistoryWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit SingleNumberView(const QString& longestText, bool showLabel = false, QWidget *parent = 0);
-    ~SingleNumberView();
+    explicit HistoryWidget(QWidget *parent = 0);
+    ~HistoryWidget();
 
-    void view(const NumberLotElement& numberLotElement, int id);
-
-    virtual void showLot(bool visible);
-    virtual LotView* clone() const;
-
-protected:
-    virtual void calcViewSize();
+    void addItem(LotView* lotView);
 
 private:
-    Ui::SingleNumberView *ui;
-    bool _showLabel;
-    bool _init;
-    int _number;
-    QString _label;
+    Ui::HistoryWidget* ui;
 
-    void updateView();
-    void calcLocalFontSize(const QFont& font);
+    void updateLotViews();
+    void showEvent(QShowEvent*);
+    void resizeEvent(QResizeEvent*event);
+
+    int lotViewHeight();
+
 };
 
-#endif // SINGLENUMBERVIEW_H
+#endif // HISTORYWIDGET_H

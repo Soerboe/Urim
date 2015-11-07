@@ -415,6 +415,10 @@
         <source>No</source>
         <translation>Nei</translation>
     </message>
+    <message>
+        <source>Show lots drawn</source>
+        <translation>Vis trukne lodd</translation>
+    </message>
 </context>
 <context>
     <name>Logger</name>

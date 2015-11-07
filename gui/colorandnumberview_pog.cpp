@@ -76,7 +76,7 @@ void ColorAndNumberView_POG::calcViewSize()
 {
     QFont f = ui->numberView->font();
 
-    int fontSize = calcMaxFontSize(f, _longestText, ui->numberView->rect());
+    int fontSize = GuiUtils::calcMaxFontSize(f, _longestText, ui->numberView->rect());
     if (fontSize <= 0) {
         return;
     }
@@ -99,12 +99,12 @@ void ColorAndNumberView_POG::showLot(bool visible)
     if (!visible) {
         ui->colorView->setStyleSheet("");
         QPalette colorPalette = ui->colorView->palette();
-        colorPalette.setColor(backgroundRole(), backgroundColor());
+        colorPalette.setColor(backgroundRole(), GuiUtils::backgroundColor());
         ui->colorView->setPalette(colorPalette);
 
-        textPalette.setColor(foregroundRole(), backgroundColor());
+        textPalette.setColor(foregroundRole(), GuiUtils::backgroundColor());
     } else {
-        textPalette.setColor(foregroundRole(), foregroundColor());
+        textPalette.setColor(foregroundRole(), GuiUtils::foregroundColor());
     }
 
     ui->colorNameView->setPalette(textPalette);

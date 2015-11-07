@@ -50,7 +50,7 @@ void SingleNumberView::calcViewSize()
     QRect rect = ui->mainView->rect();
     rect.setHeight(rect.height() - ui->label->height());
 
-    int fontSize = calcMaxFontSize(f, _longestText, rect);
+    int fontSize = GuiUtils::calcMaxFontSize(f, _longestText, rect);
     if (fontSize <= 0) {
         return;
     }

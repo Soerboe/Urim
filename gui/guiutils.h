@@ -21,39 +21,46 @@
 
 #define MAX_FONT_SIZE 1000
 
-static int calcMaxFontSize(const QFont& originalFont, const QString& text, const QRect& boundingBox)
-{
-    QFontMetrics originalMetrics(originalFont);
-    bool fontTooLarge = originalMetrics.width(text) >= boundingBox.width() || originalMetrics.height() >= boundingBox.height();
+class GuiUtils {
+public:
+    static QColor backgroundColor() {return QColor(Qt::white);}
+    static QColor foregroundColor() {return QColor(Qt::black);}
 
-    int inc = 2;
-    int size = originalFont.pointSize();
-    QFont f = originalFont;
+    static int calcMaxFontSize(const QFont& originalFont, const QString& text, const QRect& boundingBox)
+    {
+        QFontMetrics originalMetrics(originalFont);
+        bool fontTooLarge = originalMetrics.width(text) >= boundingBox.width() || originalMetrics.height() >= boundingBox.height();
 
-    if (!fontTooLarge) {
-        // try to increase font size
-        for (int i = 1; i <= MAX_FONT_SIZE; i += inc) {
-            f.setPointSize(size + i);
-            QFontMetrics fm(f);
-            if (fm.width(text) >= boundingBox.width() || fm.height() >= boundingBox.height()) {
-                return size + i - inc;
+        int inc = 2;
+        int size = originalFont.pointSize();
+        QFont f = originalFont;
+
+        if (!fontTooLarge) {
+            // try to increase font size
+            for (int i = 1; i <= MAX_FONT_SIZE; i += inc) {
+                f.setPointSize(size + i);
+                QFontMetrics fm(f);
+                if (fm.width(text) >= boundingBox.width() || fm.height() >= boundingBox.height()) {
+                    return size + i - inc;
+                }
             }
         }
-    }
 
-    if (fontTooLarge) {
-        for (int i = 1; i <= MAX_FONT_SIZE && size - i > 1; i += inc) {
-            // try to decrease font size
-            f.setPointSize(size - i);
-            QFontMetrics fm(f);
-            if (fm.width(text) < boundingBox.width() && fm.height() < boundingBox.height()) {
-                return size - i;
+        if (fontTooLarge) {
+            for (int i = 1; i <= MAX_FONT_SIZE && size - i > 1; i += inc) {
+                // try to decrease font size
+                f.setPointSize(size - i);
+                QFontMetrics fm(f);
+                if (fm.width(text) < boundingBox.width() && fm.height() < boundingBox.height()) {
+                    return size - i;
+                }
             }
         }
-    }
 
-    return size; // should never get this far
-}
+        return size; // should never get this far
+    }
+};
+
 
 #endif // GUIUTILS_H
 

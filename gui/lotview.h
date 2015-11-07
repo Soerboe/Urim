@@ -48,9 +48,6 @@ public:
 protected:
     virtual void calcViewSize() = 0;
 
-    QColor backgroundColor() const {return QColor(Qt::white);}
-    QColor foregroundColor() const {return QColor(Qt::black);}
-
 private:
     void showEvent(QShowEvent*);
     void resizeEvent(QResizeEvent*event);

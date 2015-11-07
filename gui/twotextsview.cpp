@@ -40,11 +40,11 @@ void TwoTextsView::calcViewSize()
 
     QRect bottomRect = ui->bottomView->rect();
     bottomRect.adjust(0, 0, -(_borderWidth * 2), -_borderWidth);
-    int bottomSize = calcMaxFontSize(ui->bottomView->font(), ui->bottomView->text(), bottomRect);
+    int bottomSize = GuiUtils::calcMaxFontSize(ui->bottomView->font(), ui->bottomView->text(), bottomRect);
 
     QRect topRect = ui->topView->rect();
     topRect.adjust(0, 0, -(_borderWidth * 2), -_borderWidth);
-    int topSize = calcMaxFontSize(ui->topView->font(), ui->topView->text(), topRect);
+    int topSize = GuiUtils::calcMaxFontSize(ui->topView->font(), ui->topView->text(), topRect);
 
     int fontSize = qMin(bottomSize, topSize);
     if (fontSize > 0) {

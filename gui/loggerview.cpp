@@ -17,7 +17,6 @@
 #include "loggerview.h"
 #include "logger.h"
 #include <QTreeWidgetItem>
-//#include <vector>
 
 LoggerView::LoggerView(QTreeWidget *view, std::shared_ptr<Logger> logger)
     : _view(view),

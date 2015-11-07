@@ -1,5 +1,5 @@
 #include "twotextsview.h"
-#include "ui_twonumbersview.h"
+#include "ui_twotextsview.h"
 #include "guiutils.h"
 
 TwoTextsView::TwoTextsView(QWidget *parent) :

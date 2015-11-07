@@ -21,7 +21,7 @@
 ColorAndNumberView_Border::ColorAndNumberView_Border(QWidget *parent) :
     TwoTextsView(parent)
 {
-    showBorder();
+    showBorder(true);
 }
 
 void ColorAndNumberView_Border::view(const NumberLotElement& numberLotElement, int id)

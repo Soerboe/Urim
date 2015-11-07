@@ -26,7 +26,7 @@ protected:
 
     void setBorderColor(Color color);
     void initialize() {_initialized = true;}
-    void showBorder() {_showBorder = true;}
+    void showBorder(bool show) {_showBorder = show;}
 
 private:
     bool _initialized;

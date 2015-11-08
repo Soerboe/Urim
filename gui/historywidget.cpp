@@ -60,6 +60,11 @@ void HistoryWidget::addItem(LotView *lotView)
     ui->scrollArea->verticalScrollBar()->setValue(0);
 }
 
+void HistoryWidget::clear()
+{
+    GuiUtils::clearLayout(ui->viewsLayout);
+}
+
 void HistoryWidget::updateLotViews()
 {
     int height = lotViewHeight();

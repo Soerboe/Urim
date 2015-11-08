@@ -34,6 +34,7 @@ public:
     ~HistoryWidget();
 
     void addItem(LotView* lotView);
+    void clear();
 
 private:
     Ui::HistoryWidget* ui;
@@ -43,7 +44,6 @@ private:
     void resizeEvent(QResizeEvent*event);
 
     int lotViewHeight();
-
 };
 
 #endif // HISTORYWIDGET_H

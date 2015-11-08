@@ -18,6 +18,7 @@
 #define GUIUTILS_H
 
 #include <QFont>
+#include <QLayout>
 
 #define MAX_FONT_SIZE 1000
 
@@ -58,6 +59,21 @@ public:
         }
 
         return size; // should never get this far
+    }
+
+    static void clearLayout(QLayout* layout) {
+        QLayoutItem* item;
+        while ((item = layout->takeAt(0)) != 0) {
+            if (item->layout()) {
+                clearLayout(item->layout());
+            } else if (item->widget()) {
+                delete item->widget();
+            } else if (item->spacerItem()) {
+                delete item->spacerItem();
+            }
+
+            delete item;
+        }
     }
 };
 

@@ -112,6 +112,11 @@ void DrawingController::showHistoryWidget(bool visible)
     _historyWidget->setVisible(visible);
 }
 
+void DrawingController::clearHistory()
+{
+    _historyWidget->clear();
+}
+
 void DrawingController::showLot(bool visible)
 {
     _lotView->showLot(visible);

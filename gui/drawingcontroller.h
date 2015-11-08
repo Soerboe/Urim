@@ -39,6 +39,7 @@ public:
     void draw();
     void showLotWindow(bool visible);
     void showHistoryWidget(bool visible);
+    void clearHistory();
     void showLot(bool visible);
     void initViewContainer(LotView* view, const QScreen* screen = 0);
     void moveViewContainer(int screenIndex, const QScreen* screen = 0);

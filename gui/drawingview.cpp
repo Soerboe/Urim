@@ -172,6 +172,7 @@ void DrawingView::setupPresentationViewMenu()
 void DrawingView::clear()
 {
     ui->logWidget->clear();
+    _drawingController->clearHistory();
     setDrawingName("");
     enableDrawing(true);
     ui->presentationViewMenu->actions()[0]->setChecked(true);

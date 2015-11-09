@@ -19,6 +19,7 @@
 
 #include <QWidget>
 
+class QSplitter;
 class LotView;
 
 namespace Ui {
@@ -35,11 +36,11 @@ public:
 
     void setLotView(LotView* view);
     void addHistoryWidget(QWidget* widget);
-    void clear();
 
 private:
     Ui::ViewContainer *ui;
     LotView* _lotView;
+    QSplitter* _splitter;
 };
 
 #endif // VIEWCONTAINER_H

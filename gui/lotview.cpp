@@ -26,6 +26,7 @@ LotView::LotView(QWidget* parent) :
 {
     _loadingWidget = new LoadingWidget(this);
     _loadingWidget->setVisible(false);
+    setMinimumWidth(150);
 }
 
 LotView::~LotView()

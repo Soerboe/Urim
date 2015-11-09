@@ -18,12 +18,19 @@
 #include "ui_viewcontainer.h"
 #include <QLayoutItem>
 #include "lotview.h"
+#include <QSplitter>
 
 ViewContainer::ViewContainer(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ViewContainer)
+    ui(new Ui::ViewContainer),
+    _lotView(0)
 {
     ui->setupUi(this);
+    _splitter = new QSplitter();
+    ui->horizontalLayout->addWidget(_splitter);
+
+    QString splitterStyle("QSplitter::handle { border-left: 2px dotted #C0C0C0; background-color: #F0F0F0;}");
+    _splitter->setStyleSheet(splitterStyle);
 }
 
 ViewContainer::~ViewContainer()
@@ -33,22 +40,18 @@ ViewContainer::~ViewContainer()
 
 void ViewContainer::setLotView(LotView *view)
 {
-    clear();
-    ui->lotViewLayout->insertWidget(1,view);
+    if (_lotView) {
+        delete _lotView;
+    }
+
+    _splitter->insertWidget(0, view);
+    _splitter->setStretchFactor(0, 75);
     _lotView = view;
 }
 
 void ViewContainer::addHistoryWidget(QWidget *widget)
 {
-    ui->horizontalLayout->insertWidget(1, widget, 25);
-    ui->horizontalLayout->setStretch(0, 75);
+    _splitter->insertWidget(1, widget);
+    _splitter->setStretchFactor(1, 25);
 }
 
-void ViewContainer::clear()
-{
-    QLayoutItem* oldView = ui->lotViewLayout->takeAt(0);
-    if (oldView) {
-        delete oldView->widget();
-        delete oldView;
-    }
-}

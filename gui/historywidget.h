@@ -40,6 +40,7 @@ private:
     Ui::HistoryWidget* ui;
 
     void updateLotViews();
+    void updateHeaderFont();
     void showEvent(QShowEvent*);
     void resizeEvent(QResizeEvent*event);
 

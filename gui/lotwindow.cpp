@@ -27,7 +27,6 @@ LotWindow::LotWindow(QWidget *parent) :
     QString style("#LotWindow {background-color: #ffffff;}");
     setStyleSheet(style);
     setAttribute(Qt::WA_ShowWithoutActivating);
-    setFocusPolicy(Qt::NoFocus);
 
     ui->drawingNameView->hide();
 }

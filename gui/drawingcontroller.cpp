@@ -102,6 +102,7 @@ void DrawingController::showLotWindow(bool visible)
 
     if (visible) {
         currLotWindow()->showFullScreen();
+        _drawingView->activateWindow();
     } else {
         currLotWindow()->setVisible(false);
     }

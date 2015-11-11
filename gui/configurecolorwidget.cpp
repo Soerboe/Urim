@@ -18,6 +18,10 @@
 #include "ui_configurecolorwidget.h"
 #include <QTreeWidgetItem>
 #include "colors.h"
+#include <QColorDialog>
+#include <QInputDialog>
+#include <QMessageBox>
+#include <settingshandler.h>
 
 using namespace std;
 
@@ -25,16 +29,39 @@ class ColorItem : public QTreeWidgetItem
 {
 public:
     ColorItem(const Color& color)
-        : _color(color)
+        : _color(color),
+          _selected(false)
     {
-        setBackgroundColor(0, QColor(color.red, color.green, color.blue));
-        setText(1, color.name);
+        update();
     }
 
-    Color color() {return _color;}
+    Color color() {
+        return _color;
+    }
+
+    void setColor(Color c) {
+        _color = c;
+        update();
+    }
+
+    void toggleSelection() {
+        _selected = !_selected;
+
+        setText(0, (_selected) ? "✔" : "");
+    }
+
+    bool selected() {
+        return _selected;
+    }
 
 private:
     Color _color;
+    bool _selected;
+
+    void update() {
+        setBackgroundColor(1, QColor(_color.red, _color.green, _color.blue));
+        setText(2, _color.name);
+    }
 };
 
 ConfigureColorWidget::ConfigureColorWidget(bool enableLabel, QWidget *parent) :
@@ -42,22 +69,24 @@ ConfigureColorWidget::ConfigureColorWidget(bool enableLabel, QWidget *parent) :
     ui(new Ui::ConfigureColorWidget)
 {
     ui->setupUi(this);
-    ui->availableColorsWidget->setColumnCount(2);
-    ui->selectedColorsWidget->setColumnCount(2);
-    initAvailableColors();
+    ui->colorsWidget->setColumnCount(3);
+    ui->colorsWidget->setColumnWidth(0, 20);
+    ui->colorsWidget->setColumnWidth(1, 50);
+    ui->colorsWidget->sortByColumn(2, Qt::AscendingOrder);
 
-    ui->availableColorsWidget->setSortingEnabled(true);
-    ui->availableColorsWidget->sortByColumn(1, Qt::AscendingOrder);
-    ui->selectedColorsWidget->setSortingEnabled(true);
-    ui->selectedColorsWidget->sortByColumn(1, Qt::AscendingOrder);
+    defaultColors();
+    initColorsView();
 
     if (!enableLabel) {
         ui->useLabel->hide();
         ui->colorLabel->hide();
     }
 
-    connect(ui->selectColorButton, SIGNAL(clicked()), SLOT(selectClicked()));
-    connect(ui->deselectColorButton, SIGNAL(clicked()), SLOT(deselectClicked()));
+    connect(ui->addColorButton, SIGNAL(clicked()), SLOT(addColorClicked()));
+    connect(ui->colorsWidget, SIGNAL(clicked(QModelIndex)), SLOT(selectColor(QModelIndex)));
+    connect(ui->editColorButton, SIGNAL(clicked()), SLOT(editColorClicked()));
+    connect(ui->removeColorButton, SIGNAL(clicked()), SLOT(removeColorClicked()));
+    connect(ui->resetColorsButton, SIGNAL(clicked()), SLOT(resetColorsClicked()));
 }
 
 ConfigureColorWidget::~ConfigureColorWidget()
@@ -70,25 +99,25 @@ void ConfigureColorWidget::init(const vector<Color>& colors, QString& label)
     ui->colorLabel->setText(label);
 
     for (size_t i = 0 ; i < colors.size(); ++i) {
-        for (int j = 0; j < ui->availableColorsWidget->topLevelItemCount(); ++j) {
-            ColorItem* item = dynamic_cast<ColorItem*> (ui->availableColorsWidget->topLevelItem(j));
-            if (item && item->color().name == colors[i].name) {
-                delete item;
+        for (int j = 0; j < ui->colorsWidget->topLevelItemCount(); ++j) {
+            ColorItem* item = dynamic_cast<ColorItem*> (ui->colorsWidget->topLevelItem(j));
+            if (item && item->color() == colors[i]) {
+                item->toggleSelection();
             }
         }
-
-        ui->selectedColorsWidget->addTopLevelItem(new ColorItem(colors[i]));
     }
+
+    updateSelectedColorsView();
 }
 
 bool ConfigureColorWidget::validate()
 {
-    return ui->selectedColorsWidget->topLevelItemCount() > 0;
+    return !selectedColors().empty();
 }
 
 QString ConfigureColorWidget::validationError()
 {
-    if (ui->selectedColorsWidget->topLevelItemCount() <= 0) {
+    if (selectedColors().empty()) {
         return tr("No colors selected.");
     } else {
         return QString();
@@ -100,56 +129,190 @@ QString ConfigureColorWidget::colorLabel()
     return ui->colorLabel->text();
 }
 
-vector<Color> ConfigureColorWidget::colors()
+vector<Color> ConfigureColorWidget::selectedColors()
 {
     vector<Color> c;
-    for(int i = 0; i < ui->selectedColorsWidget->topLevelItemCount(); ++i) {
-        ColorItem* item = dynamic_cast<ColorItem*> (ui->selectedColorsWidget->topLevelItem(i));
-        c.push_back(item->color());
+    for(int i = 0; i < ui->colorsWidget->topLevelItemCount(); ++i) {
+        ColorItem* item = dynamic_cast<ColorItem*> (ui->colorsWidget->topLevelItem(i));
+        if (item->selected()) {
+            c.push_back(item->color());
+        }
     }
 
     return c;
 }
 
-void ConfigureColorWidget::selectClicked()
+void ConfigureColorWidget::addColorClicked()
 {
-    foreach(QTreeWidgetItem* item, ui->availableColorsWidget->selectedItems()) {
-        ui->availableColorsWidget->takeTopLevelItem(ui->availableColorsWidget->indexOfTopLevelItem(item));
-        ui->selectedColorsWidget->addTopLevelItem(item);
+    QColor color = QColorDialog::getColor(Qt::white, 0, tr("Choose color"));
+    if (!color.isValid()) {
+        return;
     }
+
+    bool okClicked;
+    QString colorName;
+    while (true) {
+        colorName = QInputDialog::getText(this, tr("Choose color name"), tr("Color name:"), QLineEdit::Normal, QString(), &okClicked);
+        if (!okClicked) {
+            return;
+        } else if (colorName.isEmpty()) {
+            QMessageBox::information(this, tr("No color name"), tr("No color name given"));
+        } else {
+            break;
+        }
+    }
+
+    Color newColor(color.red(), color.green(), color.blue(), colorName);
+    ui->colorsWidget->addTopLevelItem(new ColorItem(newColor));
 }
 
-void ConfigureColorWidget::deselectClicked()
+void ConfigureColorWidget::editColorClicked()
 {
-    foreach(QTreeWidgetItem* item, ui->selectedColorsWidget->selectedItems()) {
-        ui->selectedColorsWidget->takeTopLevelItem(ui->selectedColorsWidget->indexOfTopLevelItem(item));
-        ui->availableColorsWidget->addTopLevelItem(item);
+    for (QTreeWidgetItem* item : ui->colorsWidget->selectedItems()) {
+        ColorItem* colorItem = dynamic_cast<ColorItem*> (item);
+        Color color = colorItem->color();
+
+        QColor newColor = QColorDialog::getColor(QColor(color.red, color.green, color.blue), 0, tr("Choose new color"));
+        if (!newColor.isValid()) {
+            continue;
+        }
+
+        bool okClicked;
+        QString colorName = color.name;
+        while (true) {
+            colorName = QInputDialog::getText(this, tr("Choose new color name"), tr("New color name:"), QLineEdit::Normal, colorName, &okClicked);
+            if (!okClicked) {
+                return;
+            } else if (colorName.isEmpty()) {
+                QMessageBox::information(this, tr("No color name"), tr("No color name given"));
+            } else {
+                break;
+            }
+        }
+
+        colorItem->setColor(Color(newColor.red(), newColor.green(), newColor.blue(), colorName));
     }
+
+    updateSelectedColorsView();
 }
 
-void ConfigureColorWidget::initAvailableColors()
+void ConfigureColorWidget::removeColorClicked()
+{
+    for (QTreeWidgetItem* item : ui->colorsWidget->selectedItems()) {
+        ui->colorsWidget->takeTopLevelItem(ui->colorsWidget->indexOfTopLevelItem(item));
+        delete item;
+    }
+
+    updateSelectedColorsView();
+}
+
+void ConfigureColorWidget::resetColorsClicked()
+{
+    QMessageBox box(QMessageBox::Question,
+                    tr("Reset colors to default"),
+                    tr("Are you sure you would like to reset colors to default?<br>This will remove all custom changes."),
+                    QMessageBox::Yes | QMessageBox::No,
+                    this);
+    box.setButtonText(QMessageBox::Yes, tr("Yes"));
+    box.setButtonText(QMessageBox::No, tr("No"));
+    if (box.exec() == QMessageBox::No) {
+        return;
+    }
+
+    SettingsHandler::removeValue(SETTING_COLORS);
+    initColorsView();
+
+    updateSelectedColorsView();
+    saveColorsToSettings();
+}
+
+void ConfigureColorWidget::saveColorsToSettings()
+{
+    QList<QVariant> colors;
+
+    for (int i = 0; i < ui->colorsWidget->topLevelItemCount(); ++i) {
+        ColorItem* item = dynamic_cast<ColorItem*> (ui->colorsWidget->topLevelItem(i));
+        addColorToList(colors, item->color());
+    }
+
+    SettingsHandler::setValue(SETTING_COLORS, colors);
+}
+
+void ConfigureColorWidget::selectColor(QModelIndex index)
+{
+    ColorItem* item = dynamic_cast<ColorItem*> (ui->colorsWidget->topLevelItem(index.row()));
+
+    if (!item || index.column() > 0) {
+        return;
+    }
+
+    item->toggleSelection();
+    updateSelectedColorsView();
+}
+
+QList<QVariant> ConfigureColorWidget::defaultColors()
 {
     Colors colors;
-    _availableColors.push_back(colors.red());
-    _availableColors.push_back(colors.green());
-    _availableColors.push_back(colors.blue());
-    _availableColors.push_back(colors.yellow());
-    _availableColors.push_back(colors.white());
-    _availableColors.push_back(colors.black());
-    _availableColors.push_back(colors.grey());
-    _availableColors.push_back(colors.darkRed());
-    _availableColors.push_back(colors.darkBlue());
-    _availableColors.push_back(colors.darkGreen());
-    _availableColors.push_back(colors.pink());
-    _availableColors.push_back(colors.purple());
-    _availableColors.push_back(colors.orange());
-    _availableColors.push_back(colors.brown());
-    _availableColors.push_back(colors.violet());
-    _availableColors.push_back(colors.turquoise());
-    _availableColors.push_back(colors.olive());
-    _availableColors.push_back(colors.lightBrown());
 
-    foreach (Color c, _availableColors) {
-        ui->availableColorsWidget->addTopLevelItem(new ColorItem(c));
+    QList<QVariant> defaultColors;
+    addColorToList(defaultColors, colors.red());
+    addColorToList(defaultColors, colors.green());
+    addColorToList(defaultColors, colors.blue());
+    addColorToList(defaultColors, colors.yellow());
+    addColorToList(defaultColors, colors.white());
+    addColorToList(defaultColors, colors.black());
+    addColorToList(defaultColors, colors.grey());
+    addColorToList(defaultColors, colors.darkRed());
+    addColorToList(defaultColors, colors.darkBlue());
+    addColorToList(defaultColors, colors.darkGreen());
+    addColorToList(defaultColors, colors.pink());
+    addColorToList(defaultColors, colors.purple());
+    addColorToList(defaultColors, colors.orange());
+    addColorToList(defaultColors, colors.brown());
+    addColorToList(defaultColors, colors.violet());
+    addColorToList(defaultColors, colors.turquoise());
+    addColorToList(defaultColors, colors.olive());
+    addColorToList(defaultColors, colors.lightBrown());
+    return defaultColors;
+}
+
+void ConfigureColorWidget::initColorsView()
+{
+    QList<QVariant> colors;
+
+    if (SettingsHandler::has(SETTING_COLORS)) {
+        colors = SettingsHandler::value(SETTING_COLORS).toList();
+    } else {
+        colors = defaultColors();
     }
+
+    ui->colorsWidget->clear();
+
+    for (QVariant color : colors) {
+        ui->colorsWidget->addTopLevelItem(new ColorItem(color.value<Color>()));
+    }
+}
+
+void ConfigureColorWidget::updateSelectedColorsView()
+{
+    ui->selectedColorsLabel->clear();
+    QString text(tr("<strong>Selected colors:</strong> "));
+    int i = 0;
+
+    for(Color color : selectedColors()) {
+        if (i++ != 0) {
+            text.append(", ");
+        }
+
+        text.append(color.name);
+    }
+
+    ui->selectedColorsLabel->setText(text);
+}
+
+void ConfigureColorWidget::addColorToList(QList<QVariant> &list, Color c)
+{
+    QVariant v;
+    v.setValue(c);
+    list.append(v);
 }

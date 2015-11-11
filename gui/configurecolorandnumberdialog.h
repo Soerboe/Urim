@@ -49,6 +49,9 @@ private:
     LotViewSelector* _lotViewSelector;
 
     void setupViewsTab();
+
+private slots:
+    void saveColorsToSettings();
 };
 
 #endif // CONFIGURECOLORANDNUMBERDIALOG_H

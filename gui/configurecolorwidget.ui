@@ -33,106 +33,87 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Click in front of the color to select</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="bottomMargin">
+         <number>9</number>
+        </property>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Available colors:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QTreeWidget" name="availableColorsWidget">
-            <property name="editTriggers">
-             <set>QAbstractItemView::NoEditTriggers</set>
-            </property>
-            <property name="selectionMode">
-             <enum>QAbstractItemView::ExtendedSelection</enum>
-            </property>
-            <property name="indentation">
-             <number>0</number>
-            </property>
-            <property name="rootIsDecorated">
-             <bool>false</bool>
-            </property>
-            <attribute name="headerVisible">
-             <bool>false</bool>
-            </attribute>
-            <column>
-             <property name="text">
-              <string notr="true">1</string>
-             </property>
-            </column>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QTreeWidget" name="colorsWidget">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="indentation">
+           <number>0</number>
+          </property>
+          <property name="rootIsDecorated">
+           <bool>false</bool>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <attribute name="headerVisible">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string notr="true">1</string>
+           </property>
+          </column>
+         </widget>
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QToolButton" name="selectColorButton">
-            <property name="font">
-             <font>
-              <pointsize>16</pointsize>
-             </font>
-            </property>
+           <widget class="QPushButton" name="addColorButton">
             <property name="text">
-             <string notr="true">→</string>
+             <string>Add</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="deselectColorButton">
-            <property name="font">
-             <font>
-              <pointsize>16</pointsize>
-             </font>
-            </property>
+           <widget class="QPushButton" name="editColorButton">
             <property name="text">
-             <string notr="true">←</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>Selected colors:</string>
+             <string>Edit</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QTreeWidget" name="selectedColorsWidget">
-            <property name="editTriggers">
-             <set>QAbstractItemView::NoEditTriggers</set>
+           <widget class="QPushButton" name="removeColorButton">
+            <property name="text">
+             <string>Remove</string>
             </property>
-            <property name="selectionMode">
-             <enum>QAbstractItemView::ExtendedSelection</enum>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="resetColorsButton">
+            <property name="text">
+             <string>Reset colors</string>
             </property>
-            <property name="indentation">
-             <number>0</number>
-            </property>
-            <property name="rootIsDecorated">
-             <bool>false</bool>
-            </property>
-            <attribute name="headerVisible">
-             <bool>false</bool>
-            </attribute>
-            <column>
-             <property name="text">
-              <string notr="true">1</string>
-             </property>
-            </column>
            </widget>
           </item>
          </layout>
         </item>
        </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="selectedColorsLabel">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">

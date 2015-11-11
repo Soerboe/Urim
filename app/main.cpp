@@ -23,17 +23,25 @@
 #include "urimthummim.h"
 #include <QLibraryInfo>
 #include <QTranslator>
+#include "color.h"
+#include "settingshandler.h"
 
 int main(int argc, char *argv[])
 {
     RandomGenerator::init();
 
+    qRegisterMetaTypeStreamOperators<Color>("Color");
+
     QApplication app(argc, argv);
     app.setApplicationName(APPLICATION_NAME);
     app.setApplicationDisplayName(APPLICATION_NAME);
     app.setApplicationVersion(APPLICATION_VERSION);
+    app.setOrganizationName(ORG_NAME);
+    app.setOrganizationDomain(ORG_DOMAIN);
     QIcon icon(":/gui/icons/lots.svg");
     app.setWindowIcon(icon);
+
+    SettingsHandler::initialize(ORG_NAME, APPLICATION_NAME);
 
     QTranslator translator;
     translator.load("urimthummim_no.qm", ":/app/translations");

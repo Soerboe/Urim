@@ -129,14 +129,6 @@
         <translation>Farge</translation>
     </message>
     <message>
-        <source>Available colors:</source>
-        <translation>Tilgjengelige farger:</translation>
-    </message>
-    <message>
-        <source>Selected colors:</source>
-        <translation>Valgte farger:</translation>
-    </message>
-    <message>
         <source>Show label</source>
         <translation>Vis etikett</translation>
     </message>
@@ -147,6 +139,78 @@
     <message>
         <source>No colors selected.</source>
         <translation>Ingen farger er valgt.</translation>
+    </message>
+    <message>
+        <source>Click in front of the color to select</source>
+        <translation>Klikk foran fargen for å velge</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>Legg til</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Endre</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Fjern</translation>
+    </message>
+    <message>
+        <source>Reset colors</source>
+        <translation>Tilbakestill farger</translation>
+    </message>
+    <message>
+        <source>Choose color</source>
+        <translation>Velg farge</translation>
+    </message>
+    <message>
+        <source>Choose color name</source>
+        <translation>Velg fargenavn</translation>
+    </message>
+    <message>
+        <source>Color name:</source>
+        <translation>Fargenavn:</translation>
+    </message>
+    <message>
+        <source>No color name</source>
+        <translation>Intet fargenavn</translation>
+    </message>
+    <message>
+        <source>No color name given</source>
+        <translation>Fargenavn ble ikke angitt</translation>
+    </message>
+    <message>
+        <source>Choose new color</source>
+        <translation>Velg ny farge</translation>
+    </message>
+    <message>
+        <source>Choose new color name</source>
+        <translation>Velg nytt fargenavn</translation>
+    </message>
+    <message>
+        <source>New color name:</source>
+        <translation>Nytt fargenavn:</translation>
+    </message>
+    <message>
+        <source>Reset colors to default</source>
+        <translation>Tilbakestill til standardfarger</translation>
+    </message>
+    <message>
+        <source>Are you sure you would like to reset colors to default?&lt;br&gt;This will remove all custom changes.</source>
+        <translation>Er du sikker på at du vil tilbakestille til standardfarger?&lt;br&gt;Dette vil fjerne alle endringer du har gjort.</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Ja</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>Nei</translation>
+    </message>
+    <message>
+        <source>&lt;strong&gt;Selected colors:&lt;/strong&gt; </source>
+        <translation>&lt;strong&gt;Valgte farger:&lt;/strong&gt; </translation>
     </message>
 </context>
 <context>
@@ -418,6 +482,13 @@
     <message>
         <source>Show lots drawn</source>
         <translation>Vis trukne lodd</translation>
+    </message>
+</context>
+<context>
+    <name>HistoryWidget</name>
+    <message>
+        <source>Previous lots</source>
+        <translation>Tidligere lodd</translation>
     </message>
 </context>
 <context>

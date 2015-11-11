@@ -19,18 +19,14 @@
 
 #include <QString>
 #include "utils.h"
+#include <QMetaType>
 
 struct Color {
+    Color ();
 
-    Color ()
-        : red(0), green(0), blue(0), name("Default color"){}
+    Color(const Color& color);
 
-    Color(const int red, const int green, const int blue, const QString name)
-        : red(red),
-          green(green),
-          blue(blue),
-          name(name)
-    {}
+    Color(const int red, const int green, const int blue, const QString name);
 
     bool operator==(const Color& that) {
         return
@@ -40,17 +36,15 @@ struct Color {
                 this->green == that.green;
     }
 
-    size_t hash () const {
-        size_t seed = 0x297d5cb0;
-        hash_combine_std(seed, red);
-        hash_combine_std(seed, green);
-        hash_combine_std(seed, blue);
-        hash_combine_std(seed, name.toStdString());
-        return seed;
-    }
+    size_t hash () const;
 
     int red, green, blue;
     QString name;
 };
+
+Q_DECLARE_METATYPE(Color)
+
+QDataStream& operator<<(QDataStream& out, const Color& c);
+QDataStream& operator>>(QDataStream& in, Color& c);
 
 #endif // COLOR_H

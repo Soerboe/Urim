@@ -21,6 +21,10 @@
 #include "color.h"
 #include <vector>
 #include <QLabel>
+#include <QModelIndex>
+#include <QList>
+
+class QTreeWidgetItem;
 
 namespace Ui {
 class ConfigureColorWidget;
@@ -39,18 +43,26 @@ public:
     QString validationError();
 
     QString colorLabel();
-    std::vector<Color> colors();
+    std::vector<Color> selectedColors();
+
+    void saveColorsToSettings();
 
 private slots:
-    void selectClicked();
-    void deselectClicked();
+    void addColorClicked();
+    void editColorClicked();
+    void removeColorClicked();
+    void resetColorsClicked();
+
+    void selectColor(QModelIndex index);
 
 private:
-    std::vector<Color> _availableColors;
-
     Ui::ConfigureColorWidget *ui;
 
-    void initAvailableColors();
+    QList<QVariant> defaultColors();
+    void initColorsView();
+    void updateSelectedColorsView();
+
+    void addColorToList(QList<QVariant>& list, Color c);
 };
 
 #endif // CONFIGURECOLORWIDGET_H

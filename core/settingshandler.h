@@ -14,13 +14,29 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef URIMTHUMMIM
-#define URIMTHUMMIM
+#ifndef SETTINGSHANDLER_H
+#define SETTINGSHANDLER_H
 
-#define APPLICATION_NAME "Urim Thummim"
-#define ORG_NAME "Dag Henning Liodden Sorbo"
-#define ORG_DOMAIN "lioddensorbo.com"
-#define APPLICATION_VERSION "0.1.1"
+#include <QString>
+#include <QVariant>
 
-#endif // URIMTHUMMIM
+class QSettings;
+
+#define SETTING_COLORS "colors"
+
+class SettingsHandler
+{
+public:
+    static void initialize(QString orgname, QString appname);
+
+    static void setValue(const QString& key, const QVariant& value);
+    static QVariant value(const QString& key);
+    static void removeValue(const QString& key);
+    static bool has(const QString& key);
+
+private:
+    static QSettings* _settings;
+};
+
+#endif // SETTINGSHANDLER_H
 

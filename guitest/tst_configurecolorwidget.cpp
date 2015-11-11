@@ -32,42 +32,27 @@ void shouldInitializeColors()
 {
     ConfigureColorWidget widget;
     std::vector<Color> defaultColors;
-    defaultColors.push_back(Color(0,0,0, "Red"));
-    defaultColors.push_back(Color(0,0,0, "Green"));
+    defaultColors.push_back(Color(220,0,0, "Red"));
+    defaultColors.push_back(Color(0,200,0, "Green"));
     QString label("ColorLabel");
     widget.init(defaultColors, label);
-    std::vector<Color> colors = widget.colors();
+    std::vector<Color> colors = widget.selectedColors();
 
     QVERIFY(std::any_of(colors.begin(), colors.end(), [](Color c) {return c.name == "Red";}));
     QVERIFY(std::any_of(colors.begin(), colors.end(), [](Color c) {return c.name == "Green";}));
 }
 
-void shouldSelectColors() {
-    ConfigureColorWidget widget;
-    QTreeWidget* availableColors = widget.findChild<QTreeWidget*>("availableColorsWidget");
-    availableColors->selectAll();
-    QToolButton* select = widget.findChild<QToolButton*>("selectColorButton");
-    select->click();
-    std::vector<Color> colors = widget.colors();
-
-    QVERIFY(colors.size() > 0);
-}
-
 void shouldValidateFalseWhenNoSelectedColors() {
     ConfigureColorWidget widget;
-    QTreeWidget* selectedColors = widget.findChild<QTreeWidget*>("selectedColorsWidget");
-    selectedColors->selectAll();
-    QToolButton* deselect = widget.findChild<QToolButton*>("deselectColorButton");
-    deselect->click();
     QVERIFY(widget.validate() == false);
 }
 
 void shouldValidateTrueWhenColorSelected() {
     ConfigureColorWidget widget;
-    QTreeWidget* availableColors = widget.findChild<QTreeWidget*>("availableColorsWidget");
-    availableColors->setCurrentItem(availableColors->topLevelItem(0));
-    QToolButton* select = widget.findChild<QToolButton*>("selectColorButton");
-    select->click();
+    std::vector<Color> defaultColors;
+    defaultColors.push_back(Color(220,0,0, "Red"));
+    QString label("ColorLabel");
+    widget.init(defaultColors, label);
     QVERIFY(widget.validate() == true);
 }
 

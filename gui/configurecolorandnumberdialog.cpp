@@ -36,6 +36,8 @@ ConfigureColorAndNumberDialog::ConfigureColorAndNumberDialog(const QString name)
 
     setupViewsTab();
     adjustSize();
+
+    connect(this, SIGNAL(accepted()), SLOT(saveColorsToSettings()));
 }
 
 void ConfigureColorAndNumberDialog::setupViewsTab()
@@ -53,6 +55,11 @@ void ConfigureColorAndNumberDialog::setupViewsTab()
     _lotViewSelector->addView(borderView);
 
     ui->viewsLayout->insertWidget(0, _lotViewSelector);
+}
+
+void ConfigureColorAndNumberDialog::saveColorsToSettings()
+{
+    _configureColorWidget->saveColorsToSettings();
 }
 
 void ConfigureColorAndNumberDialog::init(
@@ -88,7 +95,7 @@ QString ConfigureColorAndNumberDialog::validationError()
 
 std::vector<Color> ConfigureColorAndNumberDialog::colors()
 {
-    return _configureColorWidget->colors();
+    return _configureColorWidget->selectedColors();
 }
 
 QString ConfigureColorAndNumberDialog::colorLabel()

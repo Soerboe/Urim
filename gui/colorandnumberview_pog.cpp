@@ -36,21 +36,20 @@ ColorAndNumberView_POG::~ColorAndNumberView_POG()
     delete ui;
 }
 
-void ColorAndNumberView_POG::updateView(bool updateColorView)
+void ColorAndNumberView_POG::updateView()
 {
     ui->numberView->setText(QString::number(_number));
 
-    if (updateColorView) {
-        // if color is white
-        if (_color.red == 255 && _color.green == 255 && _color.blue == 255) {
-            ui->colorView->setStyleSheet("border: 1px solid black");
-        } else {
-            ui->colorView->setStyleSheet("");
-            QPalette palette = ui->colorView->palette();
-            palette.setColor(backgroundRole(), QColor(_color.red, _color.green, _color.blue));
-            ui->colorView->setPalette(palette);
-        }
+    // if color is white
+    if (_color.red == 255 && _color.green == 255 && _color.blue == 255) {
+        ui->colorView->setStyleSheet("border: 1px solid black");
+    } else {
+        ui->colorView->setStyleSheet("");
+        QPalette palette = ui->colorView->palette();
+        palette.setColor(backgroundRole(), QColor(_color.red, _color.green, _color.blue));
+        ui->colorView->setPalette(palette);
     }
+
     ui->colorNameView->setText(_color.name);
 
     calcViewSize();
@@ -84,33 +83,13 @@ void ColorAndNumberView_POG::calcViewSize()
     f.setPointSize(fontSize);
     ui->numberView->setFont(f);
 
-    ui->colorView->setFixedWidth(ui->mainView->width() * 0.15);
-    ui->colorView->setFixedHeight(ui->colorNameView->height() + ui->numberView->height());
-
     calcLocalFontSize(f);
 }
 
-/* Hackish way of hiding/showing lot.
- * Done so font size is correctly calculated first time */
 void ColorAndNumberView_POG::showLot(bool visible)
 {
-    QPalette textPalette = ui->numberView->palette();
-
-    if (!visible) {
-        ui->colorView->setStyleSheet("");
-        QPalette colorPalette = ui->colorView->palette();
-        colorPalette.setColor(backgroundRole(), GuiUtils::backgroundColor());
-        ui->colorView->setPalette(colorPalette);
-
-        textPalette.setColor(foregroundRole(), GuiUtils::backgroundColor());
-    } else {
-        textPalette.setColor(foregroundRole(), GuiUtils::foregroundColor());
-    }
-
-    ui->colorNameView->setPalette(textPalette);
-    ui->numberView->setPalette(textPalette);
-
-    updateView(visible);
+    ui->mainView->setVisible(visible);
+    updateView();
 }
 
 LotView *ColorAndNumberView_POG::clone() const

@@ -35,7 +35,7 @@ public:
     virtual void view(const NumberLotElement& numberLotElement, int id);
     virtual void view(const ColorLotElement& colorLotElement, int id);
 
-    void updateView(bool updateColorView = true);
+    void updateView();
     virtual void showLot(bool visible);
     virtual LotView* clone() const;
 

@@ -17,6 +17,7 @@
 #include "drawingsetupcontroller.h"
 #include "singlenumberconfiguration.h"
 #include "colorandnumberconfiguration.h"
+#include "lotteryticketbookconfiguration.h"
 
 using namespace std;
 
@@ -33,4 +34,5 @@ void DrawingSetupController::initDefaultDrawingConfigurations()
 {
     _drawingConfigurations.append(shared_ptr<DrawingConfiguration> (new SingleNumberConfiguration()));
     _drawingConfigurations.append(shared_ptr<DrawingConfiguration> (new ColorAndNumberConfiguration()));
+    _drawingConfigurations.append(shared_ptr<DrawingConfiguration> (new LotteryTicketBookConfiguration()));
 }

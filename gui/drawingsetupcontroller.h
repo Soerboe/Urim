@@ -25,7 +25,6 @@ class DrawingSetupController
 {
 public:
     DrawingSetupController();
-    ~DrawingSetupController();
 
     std::shared_ptr<DrawingConfiguration> at(int index) const {return _drawingConfigurations.at(index);}
     int countConfigurations() {return _drawingConfigurations.count();}

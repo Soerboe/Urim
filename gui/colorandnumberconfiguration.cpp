@@ -34,10 +34,6 @@ ColorAndNumberConfiguration::ColorAndNumberConfiguration(QObject* parent)
     initColors();
 }
 
-ColorAndNumberConfiguration::~ColorAndNumberConfiguration()
-{
-}
-
 shared_ptr<DrawingSession> ColorAndNumberConfiguration::createDrawingSession()
 {
     shared_ptr<DrawingSession> session(new DrawingSession(_uniqueResults));

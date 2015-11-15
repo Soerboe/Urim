@@ -26,10 +26,6 @@ DrawingSetupController::DrawingSetupController()
     initDefaultDrawingConfigurations();
 }
 
-DrawingSetupController::~DrawingSetupController()
-{
-}
-
 void DrawingSetupController::initDefaultDrawingConfigurations()
 {
     _drawingConfigurations.append(shared_ptr<DrawingConfiguration> (new SingleNumberConfiguration()));

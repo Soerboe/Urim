@@ -29,7 +29,8 @@
 ConfigureColorAndNumberDialog::ConfigureColorAndNumberDialog(const QString name)
     : ConfigureDrawingDialog(name),
       _configureColorWidget(new ConfigureColorWidget(false)),
-      _configureNumberWidget(new ConfigureNumberWidget(false))
+      _configureNumberWidget(new ConfigureNumberWidget(false)),
+      _lotViewSelector(new LotViewSelector())
 {
     ui->setupLayout->insertWidget(0, _configureColorWidget);
     ui->setupLayout->insertWidget(1, _configureNumberWidget);
@@ -42,7 +43,6 @@ ConfigureColorAndNumberDialog::ConfigureColorAndNumberDialog(const QString name)
 
 void ConfigureColorAndNumberDialog::setupViewsTab()
 {
-    _lotViewSelector = new LotViewSelector();
     ColorAndNumberView_POG* pogView = new ColorAndNumberView_POG("1000");
     Colors colors;
     pogView->view(ColorLotElement(colors.red()), 0);

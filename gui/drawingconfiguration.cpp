@@ -18,7 +18,7 @@
 
 DrawingConfiguration::DrawingConfiguration(const QString& name, QObject* parent)
     : QObject(parent),
-      _uniqueResults(false),
+      _uniqueResults(true),
       _name(name)
 {
 }

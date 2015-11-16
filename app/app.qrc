@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/app">
-        <file>translations/urimthummim_no.qm</file>
+        <file>translations/no.qm</file>
     </qresource>
 </RCC>

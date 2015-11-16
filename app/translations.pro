@@ -19,4 +19,4 @@ include(../gui/gui.pri)
 
 TEMPLATE = app
 
-TRANSLATIONS = translations/urimthummim_no.ts
+TRANSLATIONS = translations/no.ts

@@ -1,9 +1,9 @@
 #/bin/bash
 
 project_folder=( `pwd` )
-build_folder=${project_folder}/../build-UrimThummim-Release
+build_folder=${project_folder}/../build-Urim-Release
 dll_folder=${project_folder}/../urim-dlls
-app_name=UrimThummim
+app_name=Urim
 
 #echo $project_folder
 #echo $build_folder

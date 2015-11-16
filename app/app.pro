@@ -24,7 +24,7 @@ DEPENDENCY_PROJECT += core gui
 
 QT += core gui widgets svg
 
-TARGET = UrimThummim
+TARGET = Urim
 TEMPLATE = app
 
 HEADERS += $$PWD/*.h

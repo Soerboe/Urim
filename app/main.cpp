@@ -20,7 +20,7 @@
 #include "drawingcontroller.h"
 #include "drawingsetupcontroller.h"
 #include "lotwindow.h"
-#include "urimthummim.h"
+#include "app.h"
 #include <QLibraryInfo>
 #include <QTranslator>
 #include "color.h"
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
     SettingsHandler::initialize(ORG_NAME, APPLICATION_NAME);
 
     QTranslator translator;
-    translator.load("urimthummim_no.qm", ":/app/translations");
+    translator.load("no.qm", ":/app/translations");
     app.installTranslator(&translator);
 
     DrawingSetupController setupController;

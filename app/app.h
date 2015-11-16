@@ -14,13 +14,13 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef URIMTHUMMIM
-#define URIMTHUMMIM
+#ifndef APP_H
+#define APP_H
 
-#define APPLICATION_NAME "Urim Thummim"
+#define APPLICATION_NAME "Urim"
 #define ORG_NAME "Dag Henning Liodden Sorbo"
 #define ORG_DOMAIN "lioddensorbo.com"
 #define APPLICATION_VERSION "0.2.0"
 
-#endif // URIMTHUMMIM
+#endif // APP_H
 

@@ -20,7 +20,7 @@
 #define APPLICATION_NAME "Urim"
 #define ORG_NAME "Dag Henning Liodden Sorbo"
 #define ORG_DOMAIN "lioddensorbo.com"
-#define APPLICATION_VERSION "0.2.0"
+#define APPLICATION_VERSION "0.3.0"
 
 #endif // APP_H
 

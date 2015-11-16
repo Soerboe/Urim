@@ -123,6 +123,13 @@
     </message>
 </context>
 <context>
+    <name>ConfigureAmountWidget</name>
+    <message>
+        <source>Label</source>
+        <translation>Etikett</translation>
+    </message>
+</context>
+<context>
     <name>ConfigureColorWidget</name>
     <message>
         <source>Color</source>
@@ -250,6 +257,37 @@
     <message>
         <source>Error</source>
         <translation>Feil</translation>
+    </message>
+</context>
+<context>
+    <name>ConfigureLotteryTicketBookDialog</name>
+    <message>
+        <source>Lottery ticket books</source>
+        <translation>Loddbøker</translation>
+    </message>
+    <message>
+        <source>Number of books:</source>
+        <translation>Antall bøker:</translation>
+    </message>
+    <message>
+        <source>Book label:</source>
+        <translation>Boketikett:</translation>
+    </message>
+    <message>
+        <source>Book</source>
+        <translation>Bok</translation>
+    </message>
+    <message>
+        <source>Number of lots per book:</source>
+        <translation>Antall lodd per bok:</translation>
+    </message>
+    <message>
+        <source>Lot label:</source>
+        <translation>Loddetikett:</translation>
+    </message>
+    <message>
+        <source>Lot</source>
+        <translation>Lodd</translation>
     </message>
 </context>
 <context>
@@ -518,6 +556,41 @@
     <message>
         <source>Lotview</source>
         <translation>Loddvisning</translation>
+    </message>
+</context>
+<context>
+    <name>LotteryTicketBookConfiguration</name>
+    <message>
+        <source>Lottery ticket book</source>
+        <translation>Loddbok</translation>
+    </message>
+    <message>
+        <source>Book</source>
+        <translation>Bok</translation>
+    </message>
+    <message>
+        <source>Lot</source>
+        <translation>Lodd</translation>
+    </message>
+    <message>
+        <source>Draw lots from lottery ticket books</source>
+        <translation>Trekk lodd fra loddbøker</translation>
+    </message>
+    <message>
+        <source>Number of books</source>
+        <translation>Antall bøker</translation>
+    </message>
+    <message>
+        <source>Book label</source>
+        <translation>Boketikett</translation>
+    </message>
+    <message>
+        <source>Number of lots per book</source>
+        <translation>Antall lodd per bok</translation>
+    </message>
+    <message>
+        <source>Lots label</source>
+        <translation>Loddetikett</translation>
     </message>
 </context>
 <context>

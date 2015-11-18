@@ -39,11 +39,9 @@ void TwoTextsView::calcViewSize()
     }
 
     QRect bottomRect = ui->bottomView->rect();
-    bottomRect.adjust(0, 0, -(_borderWidth * 2), -_borderWidth);
     int bottomSize = GuiUtils::calcMaxFontSize(ui->bottomView->font(), ui->bottomView->text(), bottomRect);
 
     QRect topRect = ui->topView->rect();
-    topRect.adjust(0, 0, -(_borderWidth * 2), -_borderWidth);
     int topSize = GuiUtils::calcMaxFontSize(ui->topView->font(), ui->topView->text(), topRect);
 
     int fontSize = qMin(bottomSize, topSize);
@@ -63,19 +61,30 @@ void TwoTextsView::setBorderColor(Color color)
 
 void TwoTextsView::updateBorder()
 {
-    QString style("#mainView {border:");
-    // if color is white
-    if (_borderColor.red == 255 && _borderColor.green == 255 && _borderColor.blue == 255) {
-        style.append("1px solid black;}");
-    } else {
-        style.append(QString::number(_borderWidth)).append("px ");
-        style.append("solid rgb(");
-        style.append(QString::number(_borderColor.red)).append(",");
-        style.append(QString::number(_borderColor.green)).append(",");
-        style.append(QString::number(_borderColor.blue)).append(");}");
+    if (!_showBorder || !_initialized) {
+        return;
     }
 
-    ui->mainView->setStyleSheet(style);
+    ui->innerView->setStyleSheet("");
+    ui->mainView->setStyleSheet("");
+    ui->borderLayout->setMargin(_borderWidth);
+    ui->mainLayout->setMargin(_borderColor.isWhite() ? 1 : 0);
+    QString borderStyle;
+
+    if (_borderColor.isWhite()) {
+        borderStyle.append("#ID {border: 1px solid black;}");
+        ui->innerView->setStyleSheet(QString(borderStyle).replace("ID", "innerView"));
+        ui->mainView->setStyleSheet(QString(borderStyle).replace("ID", "mainView"));
+    }
+
+    QString colorStyle;
+    colorStyle.append("#borderView {border:").append(QString::number(_borderWidth)).append("px ");
+    colorStyle.append("solid rgb(");
+    colorStyle.append(QString::number(_borderColor.red)).append(",");
+    colorStyle.append(QString::number(_borderColor.green)).append(",");
+    colorStyle.append(QString::number(_borderColor.blue)).append(");}");
+
+    ui->borderView->setStyleSheet(colorStyle);
 }
 
 void TwoTextsView::showLot(bool visible)

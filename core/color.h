@@ -28,14 +28,8 @@ struct Color {
 
     Color(const int red, const int green, const int blue, const QString name);
 
-    bool operator==(const Color& that) {
-        return
-                this->name == that.name &&
-                this->red == that.red &&
-                this->blue == that.blue &&
-                this->green == that.green;
-    }
-
+    bool isWhite();
+    bool operator==(const Color& that);
     size_t hash () const;
 
     int red, green, blue;

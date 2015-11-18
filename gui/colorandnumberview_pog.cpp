@@ -40,16 +40,17 @@ void ColorAndNumberView_POG::updateView()
 {
     ui->numberView->setText(QString::number(_number));
 
-    // if color is white
-    if (_color.red == 255 && _color.green == 255 && _color.blue == 255) {
-        ui->colorView->setStyleSheet("border: 1px solid black");
-    } else {
-        ui->colorView->setStyleSheet("");
-        QPalette palette = ui->colorView->palette();
-        palette.setColor(backgroundRole(), QColor(_color.red, _color.green, _color.blue));
-        ui->colorView->setPalette(palette);
+    QString style;
+    style.append("background-color: rgb(");
+    style.append(QString::number(_color.red)).append(",");
+    style.append(QString::number(_color.green)).append(",");
+    style.append(QString::number(_color.blue)).append(");");
+
+    if (_color.isWhite()) {
+        style.append("border: 1px solid black;");
     }
 
+    ui->colorView->setStyleSheet(style);
     ui->colorNameView->setText(_color.name);
 
     calcViewSize();

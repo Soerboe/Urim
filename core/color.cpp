@@ -38,6 +38,20 @@ Color::Color(const int red, const int green, const int blue, const QString name)
 {
 }
 
+bool Color::operator==(const Color &that)
+{
+    return
+            this->name == that.name &&
+            this->red == that.red &&
+            this->blue == that.blue &&
+            this->green == that.green;
+}
+
+bool Color::isWhite()
+{
+    return red == 255 && green == 255 && blue == 255;
+}
+
 size_t Color::hash() const
 {
     size_t seed = 0x297d5cb0;

@@ -1,0 +1,6 @@
+# Urim
+
+Urim is a lottery application for drawing lots. It currently supports lots
+consisting of a single number, a color and a number and lots from lottery books.
+It includes multi-monitor support, detailed log and history of previously drawn
+lots.

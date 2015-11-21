@@ -293,6 +293,7 @@ void DrawingView::startNewDrawingSession(bool newDrawing)
     updateSessionIdView(session);
     _drawingController->logger()->logMessage(tr("Session %1 started").arg(session->id()));
     _drawingController->showLot(false);
+    _drawingController->clearHistory();
     enableDrawing(true);
 }
 

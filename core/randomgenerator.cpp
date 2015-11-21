@@ -21,7 +21,7 @@
 
 using namespace std;
 
-default_random_engine RandomGenerator::_rng;
+mt19937 RandomGenerator::_rng;
 
 RandomGenerator::RandomGenerator()
 {
@@ -52,5 +52,5 @@ void RandomGenerator::init()
 
     qDebug() << "Seed for RNG:" << seed << "\n";
 
-    _rng = default_random_engine(seed);
+    _rng = mt19937(seed);
 }

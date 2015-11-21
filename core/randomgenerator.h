@@ -38,7 +38,7 @@ public:
     void setName(const std::string& name) {_name = name;}
 
 protected:
-    static std::default_random_engine _rng;
+    static std::mt19937 _rng;
 
 private:
     std::string _name;

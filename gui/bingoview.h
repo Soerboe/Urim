@@ -14,26 +14,21 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "lotteryticketbookview.h"
-#include "numberlotelement.h"
+#ifndef BINGOVIEW_H
+#define BINGOVIEW_H
 
-LotteryTicketBookView::LotteryTicketBookView(const QString& longestText)
-    : VerticalTextsView(2, longestText)
-{}
+#include "verticaltextsview.h"
 
-void LotteryTicketBookView::view(const NumberLotElement &numberLotElement, int id)
+class BingoView : public VerticalTextsView
 {
-    QString text;
-    text.append(numberLotElement.name().c_str()).append(": ");
-    text.append(createText(numberLotElement.number()));
+public:
+    BingoView(const QString& longestText);
 
-    setViewText(id, text);
-}
+    virtual void view(const NumberLotElement& numberLotElement, int id);
 
-QString LotteryTicketBookView::createText(int number)
-{
-    QString text;
-//    return text.append("<strong>").append(QString::number(number)).append("</strong>");
-    return text.append(QString::number(number));
-}
+private:
+    QString findLetter(int n);
+    bool in(int n, int low, int high);
+};
 
+#endif // BINGOVIEW_H

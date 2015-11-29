@@ -14,26 +14,23 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "lotteryticketbookview.h"
-#include "numberlotelement.h"
+#ifndef BINGOCONFIGURATION_H
+#define BINGOCONFIGURATION_H
 
-LotteryTicketBookView::LotteryTicketBookView(const QString& longestText)
-    : VerticalTextsView(2, longestText)
-{}
+#include "drawingconfiguration.h"
 
-void LotteryTicketBookView::view(const NumberLotElement &numberLotElement, int id)
+class BingoConfiguration : public Configuration
 {
-    QString text;
-    text.append(numberLotElement.name().c_str()).append(": ");
-    text.append(createText(numberLotElement.number()));
+    Q_OBJECT
 
-    setViewText(id, text);
-}
+public:
+    BingoConfiguration();
 
-QString LotteryTicketBookView::createText(int number)
-{
-    QString text;
-//    return text.append("<strong>").append(QString::number(number)).append("</strong>");
-    return text.append(QString::number(number));
-}
+    std::shared_ptr<DrawingSession> createDrawingSession();
+    LotView* createView();
+    void configure() {}
+    bool isValid();
+    QString summary();
+};
 
+#endif // BINGOCONFIGURATION_H

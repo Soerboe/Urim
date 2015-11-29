@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TwoTextsView</class>
- <widget class="QWidget" name="TwoTextsView">
+ <class>VerticalTextsView</class>
+ <widget class="QWidget" name="VerticalTextsView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -49,7 +49,7 @@
          </property>
          <item>
           <widget class="QWidget" name="innerView" native="true">
-           <layout class="QVBoxLayout" name="verticalLayout">
+           <layout class="QVBoxLayout" name="innerLayout">
             <property name="leftMargin">
              <number>0</number>
             </property>
@@ -62,26 +62,6 @@
             <property name="bottomMargin">
              <number>0</number>
             </property>
-            <item>
-             <widget class="QLabel" name="topView">
-              <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="bottomView">
-              <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
            </layout>
           </widget>
          </item>

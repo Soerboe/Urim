@@ -23,8 +23,8 @@
 
 using namespace std;
 
-LotteryTicketBookConfiguration::LotteryTicketBookConfiguration(QObject *parent)
-    : DrawingConfiguration(tr("Lottery ticket book"), parent),
+LotteryTicketBookConfiguration::LotteryTicketBookConfiguration()
+    : DrawingConfiguration(tr("Lottery ticket book"), true),
       _numBooks(1),
       _numLotsPerBook(1000),
       _booksLabel(tr("Book")),
@@ -48,7 +48,9 @@ std::shared_ptr<DrawingSession> LotteryTicketBookConfiguration::createDrawingSes
 
 LotView *LotteryTicketBookConfiguration::createView()
 {
-    return new LotteryTicketBookView;
+    QString bookView = QString(_booksLabel).append(": ").append(QString::number(_numBooks));
+    QString lotView = QString(_lotsLabel).append(": ").append(QString::number(_numLotsPerBook));
+    return new LotteryTicketBookView(bookView.size() > lotView.size() ? bookView : lotView);
 }
 
 void LotteryTicketBookConfiguration::configure()

@@ -17,15 +17,15 @@
 #ifndef LOTTERYTICKETBOOKVIEW_H
 #define LOTTERYTICKETBOOKVIEW_H
 
-#include "twotextsview.h"
+#include "verticaltextsview.h"
 
 #define BOOKS_INDEX 0
 #define LOTS_INDEX 1
 
-class LotteryTicketBookView : public TwoTextsView
+class LotteryTicketBookView : public VerticalTextsView
 {
 public:
-    LotteryTicketBookView();
+    LotteryTicketBookView(const QString &longestText);
 
     virtual void view(const NumberLotElement& numberLotElement, int id);
 

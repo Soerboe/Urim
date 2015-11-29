@@ -14,26 +14,32 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "lotteryticketbookview.h"
-#include "numberlotelement.h"
+#ifndef CONFIGURATION_H
+#define CONFIGURATION_H
 
-LotteryTicketBookView::LotteryTicketBookView(const QString& longestText)
-    : VerticalTextsView(2, longestText)
-{}
+#include <QObject>
+#include "memory"
 
-void LotteryTicketBookView::view(const NumberLotElement &numberLotElement, int id)
+class DrawingSession;
+class LotView;
+
+class Configuration : public QObject
 {
-    QString text;
-    text.append(numberLotElement.name().c_str()).append(": ");
-    text.append(createText(numberLotElement.number()));
+    Q_OBJECT
+public:
+    Configuration(const QString& name, bool configurable);
 
-    setViewText(id, text);
-}
+    virtual std::shared_ptr<DrawingSession> createDrawingSession() = 0;
+    virtual LotView* createView() = 0;
+    virtual void configure() = 0;
+    virtual bool isValid() = 0;
+    virtual QString summary() = 0;
 
-QString LotteryTicketBookView::createText(int number)
-{
-    QString text;
-//    return text.append("<strong>").append(QString::number(number)).append("</strong>");
-    return text.append(QString::number(number));
-}
+    QString name() {return _name;}
+    bool configurable() {return _configurable;}
+private:
+    QString _name;
+    bool _configurable;
+};
 
+#endif // CONFIGURATION_H

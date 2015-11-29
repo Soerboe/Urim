@@ -14,26 +14,11 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "lotteryticketbookview.h"
-#include "numberlotelement.h"
+#include "configuration.h"
 
-LotteryTicketBookView::LotteryTicketBookView(const QString& longestText)
-    : VerticalTextsView(2, longestText)
-{}
-
-void LotteryTicketBookView::view(const NumberLotElement &numberLotElement, int id)
+Configuration::Configuration(const QString &name, bool configurable)
+    : _name(name),
+      _configurable(configurable)
 {
-    QString text;
-    text.append(numberLotElement.name().c_str()).append(": ");
-    text.append(createText(numberLotElement.number()));
-
-    setViewText(id, text);
-}
-
-QString LotteryTicketBookView::createText(int number)
-{
-    QString text;
-//    return text.append("<strong>").append(QString::number(number)).append("</strong>");
-    return text.append(QString::number(number));
 }
 

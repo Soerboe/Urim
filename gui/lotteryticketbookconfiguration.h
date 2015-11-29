@@ -24,7 +24,7 @@ class LotteryTicketBookConfiguration : public DrawingConfiguration
 {
     Q_OBJECT
 public:
-    explicit LotteryTicketBookConfiguration(QObject *parent = 0);
+    explicit LotteryTicketBookConfiguration();
 
     std::shared_ptr<DrawingSession> createDrawingSession();
     LotView* createView();

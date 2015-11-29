@@ -23,14 +23,10 @@
 
 using namespace std;
 
-SingleNumberConfiguration::SingleNumberConfiguration(QObject* parent)
-    : DrawingConfiguration(tr("Single number"), parent),
+SingleNumberConfiguration::SingleNumberConfiguration()
+    : DrawingConfiguration(tr("Single number"), true),
       _min(DEFAULT_MIN),
       _max(DEFAULT_MAX)
-{
-}
-
-SingleNumberConfiguration::~SingleNumberConfiguration()
 {
 }
 

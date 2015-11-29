@@ -16,10 +16,9 @@
 
 #include "drawingconfiguration.h"
 
-DrawingConfiguration::DrawingConfiguration(const QString& name, QObject* parent)
-    : QObject(parent),
-      _uniqueResults(true),
-      _name(name)
+DrawingConfiguration::DrawingConfiguration(const QString& name, bool configurable)
+    : Configuration(name, configurable),
+      _uniqueResults(true)
 {
 }
 

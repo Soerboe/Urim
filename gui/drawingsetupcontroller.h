@@ -19,20 +19,20 @@
 
 #include <QList>
 #include <memory>
-#include "drawingconfiguration.h"
+#include "configuration.h"
 
 class DrawingSetupController
 {
 public:
     DrawingSetupController();
 
-    std::shared_ptr<DrawingConfiguration> at(int index) const {return _drawingConfigurations.at(index);}
-    int countConfigurations() {return _drawingConfigurations.count();}
+    std::shared_ptr<Configuration> at(int index) const {return _configurations.at(index);}
+    int configurationsCount() {return _configurations.count();}
 
 private:
-    QList<std::shared_ptr<DrawingConfiguration> > _drawingConfigurations;
+    QList<std::shared_ptr<Configuration> > _configurations;
 
-    void initDefaultDrawingConfigurations();
+    void initDefaultConfigurations();
 };
 
 #endif // DRAWINGSETUPCONTROLLER_H

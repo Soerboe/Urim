@@ -29,7 +29,7 @@ class ColorAndNumberConfiguration : public DrawingConfiguration
     Q_OBJECT
 
 public:
-    ColorAndNumberConfiguration(QObject* parent = 0);
+    ColorAndNumberConfiguration();
 
     std::shared_ptr<DrawingSession> createDrawingSession();
     LotView* createView();

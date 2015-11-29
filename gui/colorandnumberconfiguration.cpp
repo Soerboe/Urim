@@ -26,8 +26,8 @@
 
 using namespace std;
 
-ColorAndNumberConfiguration::ColorAndNumberConfiguration(QObject* parent)
-    : DrawingConfiguration(tr("Color and number"), parent),
+ColorAndNumberConfiguration::ColorAndNumberConfiguration()
+    : DrawingConfiguration(tr("Color and number"), true),
       _min(DEFAULT_MIN),
       _max(DEFAULT_MAX)
 {
@@ -50,12 +50,13 @@ LotView* ColorAndNumberConfiguration::createView()
 {
     QString minText = QString::number(_min);
     QString maxText = QString::number(_max);
+    QString longestText = minText.length() > maxText.length() ? minText : maxText;
     switch (_viewIndex) {
     case 1:
-        return new ColorAndNumberView_Border();
+        return new ColorAndNumberView_Border(longestText);
     case 0:
     default:
-        return new ColorAndNumberView_POG(minText.length() > maxText.length() ? minText : maxText);
+        return new ColorAndNumberView_POG(longestText);
 
     }
 

@@ -71,7 +71,7 @@ void DrawingSetupDialog::createClicked()
     if (selectedConfiguration == -1) {
         QMessageBox::warning(this, tr("No type of drawing chosen"), tr("Please choose a type of drawing."));
     } else {
-        shared_ptr<DrawingConfiguration> configuration = _controller->at(selectedConfiguration);
+        shared_ptr<Configuration> configuration = _controller->at(selectedConfiguration);
         if (configuration->isValid()) {
             accept();
         }
@@ -81,21 +81,24 @@ void DrawingSetupDialog::createClicked()
 void DrawingSetupDialog::configurationChanged(int index)
 {
     bool configurationChoosen = index > 0;
-    ui->configureButton->setEnabled(configurationChoosen);
+    bool configurable = false;
     ui->createButton->setEnabled(configurationChoosen);
-    if (index > 0) {
-        shared_ptr<DrawingConfiguration> configuration = _controller->at(index - 1);
+    if (configurationChoosen) {
+        shared_ptr<Configuration> configuration = _controller->at(index - 1);
+        configurable = configuration->configurable();
         ui->summary->setHtml(configuration->summary());
     } else {
         ui->summary->clear();
     }
+
+    ui->configureButton->setEnabled(configurable);
 }
 
 void DrawingSetupDialog::configureClicked()
 {
     int selectedConfiguration = ui->drawingTypeSelector->currentIndex() - 1;
     if (selectedConfiguration >= 0) {
-        shared_ptr<DrawingConfiguration> configuration = _controller->at(selectedConfiguration);
+        shared_ptr<Configuration> configuration = _controller->at(selectedConfiguration);
         configuration->configure();
         ui->summary->setHtml(configuration->summary());
     }
@@ -105,7 +108,7 @@ void DrawingSetupDialog::setupConfigurations()
 {
     ui->drawingTypeSelector->addItem(tr("Choose a type of drawing:"));
 
-    for(int i = 0; i < _controller->countConfigurations(); ++i) {
+    for(int i = 0; i < _controller->configurationsCount(); ++i) {
         ui->drawingTypeSelector->addItem(_controller->at(i)->name());
     }
 }

@@ -49,7 +49,7 @@ void ConfigureColorAndNumberDialog::setupViewsTab()
     pogView->view(NumberLotElement(712), 0);
     _lotViewSelector->addView(pogView);
 
-    ColorAndNumberView_Border* borderView = new ColorAndNumberView_Border();
+    ColorAndNumberView_Border* borderView = new ColorAndNumberView_Border(colors.red().name.length() > 3 ? colors.red().name : "712");
     borderView->view(ColorLotElement(colors.red()), 0);
     borderView->view(NumberLotElement(712), 0);
     _lotViewSelector->addView(borderView);

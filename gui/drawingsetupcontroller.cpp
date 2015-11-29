@@ -18,17 +18,19 @@
 #include "singlenumberconfiguration.h"
 #include "colorandnumberconfiguration.h"
 #include "lotteryticketbookconfiguration.h"
+#include "bingoconfiguration.h"
 
 using namespace std;
 
 DrawingSetupController::DrawingSetupController()
 {
-    initDefaultDrawingConfigurations();
+    initDefaultConfigurations();
 }
 
-void DrawingSetupController::initDefaultDrawingConfigurations()
+void DrawingSetupController::initDefaultConfigurations()
 {
-    _drawingConfigurations.append(shared_ptr<DrawingConfiguration> (new SingleNumberConfiguration()));
-    _drawingConfigurations.append(shared_ptr<DrawingConfiguration> (new ColorAndNumberConfiguration()));
-    _drawingConfigurations.append(shared_ptr<DrawingConfiguration> (new LotteryTicketBookConfiguration()));
+    _configurations.append(shared_ptr<Configuration> (new SingleNumberConfiguration()));
+    _configurations.append(shared_ptr<Configuration> (new ColorAndNumberConfiguration()));
+    _configurations.append(shared_ptr<Configuration> (new LotteryTicketBookConfiguration()));
+    _configurations.append(shared_ptr<Configuration> (new BingoConfiguration()));
 }

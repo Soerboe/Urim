@@ -42,13 +42,18 @@ void ConfigureLotteryTicketBookDialog::init(int numBooks, QString booksLabel, in
 
 void ConfigureLotteryTicketBookDialog::setupViewsTab()
 {
-    LotteryTicketBookView* view = new LotteryTicketBookView();
+    QString book(tr("Book"));
+    QString lot(tr("Lot"));
+
+    QString bookView = QString(book).append(": ").append(QString::number(3));
+    QString lotView = QString(lot).append(": ").append(QString::number(712));
+    LotteryTicketBookView* view = new LotteryTicketBookView(bookView.size() > lotView.size() ? bookView : lotView);
     NumberLotElement bookElement(3);
-    bookElement.setName(tr("Book").toStdString());
+    bookElement.setName(book.toStdString());
     view->view(bookElement, BOOKS_INDEX);
 
     NumberLotElement lotsElement(712);
-    lotsElement.setName(tr("Lot").toStdString());
+    lotsElement.setName(lot.toStdString());
     view->view(lotsElement, LOTS_INDEX);
     _lotViewSelector->addView(view);
     ui->viewsLayout->insertWidget(0, _lotViewSelector);

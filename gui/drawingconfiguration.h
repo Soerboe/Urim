@@ -20,34 +20,23 @@
 #include <QObject>
 #include <QString>
 #include <memory>
+#include "configuration.h"
 
-class DrawingSession;
-class LotView;
-
-class DrawingConfiguration : public QObject
+class DrawingConfiguration : public Configuration
 {
     Q_OBJECT
 
 public:
-    DrawingConfiguration(const QString& name, QObject* parent = 0);
+    DrawingConfiguration(const QString& name, bool configurable);
     virtual ~DrawingConfiguration();
 
-    virtual std::shared_ptr<DrawingSession> createDrawingSession() = 0;
-    virtual LotView* createView() = 0;
-    virtual void configure() = 0;
-    virtual bool isValid() = 0;
-
     QString summary();
-    QString name() {return _name;}
     bool uniqueResults() {return _uniqueResults;}
 
 protected:
     bool _uniqueResults;
 
     virtual QString detailedSummary() = 0;
-
-private:
-    QString _name;
 };
 
 #endif // DRAWINGCONFIGURATION_H

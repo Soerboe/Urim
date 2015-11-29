@@ -17,14 +17,14 @@
 #ifndef COLORANDNUMBERVIEW_BORDER_H
 #define COLORANDNUMBERVIEW_BORDER_H
 
-#include "twotextsview.h"
+#include "verticaltextsview.h"
 
-class ColorAndNumberView_Border : public TwoTextsView
+class ColorAndNumberView_Border : public VerticalTextsView
 {
     Q_OBJECT
 
 public:
-    explicit ColorAndNumberView_Border(QWidget *parent = 0);
+    explicit ColorAndNumberView_Border(const QString& longestText, QWidget *parent = 0);
 
     virtual void view(const NumberLotElement& numberLotElement, int id);
     virtual void view(const ColorLotElement& colorLotElement, int id);

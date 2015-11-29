@@ -18,8 +18,8 @@
 #include "numberlotelement.h"
 #include "colorlotelement.h"
 
-ColorAndNumberView_Border::ColorAndNumberView_Border(QWidget *parent) :
-    TwoTextsView(parent)
+ColorAndNumberView_Border::ColorAndNumberView_Border(const QString &longestText, QWidget *parent) :
+    VerticalTextsView(2, longestText, parent)
 {
     showBorder(true);
 }
@@ -28,7 +28,7 @@ void ColorAndNumberView_Border::view(const NumberLotElement& numberLotElement, i
 {
     ignore_unused(id);
 
-    setBottomText(QString::number(numberLotElement.number()));
+    setViewText(1, QString::number(numberLotElement.number()));
 }
 
 void ColorAndNumberView_Border::view(const ColorLotElement& colorLotElement, int id)
@@ -36,5 +36,5 @@ void ColorAndNumberView_Border::view(const ColorLotElement& colorLotElement, int
     ignore_unused(id);
 
     setBorderColor(colorLotElement.color());
-    setTopText(colorLotElement.color().name);
+    setViewText(0, colorLotElement.color().name);
 }

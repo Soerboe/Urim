@@ -1,65 +1,71 @@
-#include "twotextsview.h"
-#include "ui_twotextsview.h"
+#include "verticaltextsview.h"
+#include "ui_verticaltextsview.h"
 #include "guiutils.h"
+#include <QLabel>
 
-TwoTextsView::TwoTextsView(QWidget *parent) :
-    LotView(parent),
-    ui(new Ui::TwoTextsView),
-    _initialized(false),
-    _showBorder(false),
-    _borderWidth(0)
+VerticalTextsView::VerticalTextsView(int numViews, QString longestText, QWidget *parent)
+    : LotViewTextAsMain(longestText, parent),
+      ui(new Ui::VerticalTextsView),
+      _initialized(false),
+      _showBorder(false),
+      _borderWidth(0)
 {
     ui->setupUi(this);
+
+    for (int i = 0; i < numViews; ++i) {
+        QLabel* l = new QLabel("");
+        _views.push_back(l);
+        l->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+        ui->innerLayout->addWidget(l);
+    }
 }
 
-TwoTextsView::~TwoTextsView()
+VerticalTextsView::~VerticalTextsView()
 {
     delete ui;
 }
 
-void TwoTextsView::setTopText(QString text)
+void VerticalTextsView::setViewText(size_t index, QString text)
 {
-    ui->topView->setText(text);
+    if (index >= _views.size()) {
+        return;
+    }
+
+    _views.at(index)->setText(text);
     initialize();
     calcViewSize();
 }
 
-void TwoTextsView::setBottomText(QString text)
+void VerticalTextsView::calcViewSize()
 {
-    ui->bottomView->setText(text);
-    initialize();
-    calcViewSize();
-}
+    if (_views.size() == 0) {
+        return;
+    }
 
-void TwoTextsView::calcViewSize()
-{
     if (_showBorder && _initialized) {
         _borderWidth = qMax(5.0, ui->mainView->width() * ui->mainView->height() * 0.00005);
         updateBorder();
     }
 
-    QRect bottomRect = ui->bottomView->rect();
-    int bottomSize = GuiUtils::calcMaxFontSize(ui->bottomView->font(), ui->bottomView->text(), bottomRect);
+    QRect rect = _views[0]->rect();
+    int fontSize = GuiUtils::calcMaxFontSize(_views[0]->font(), _longestText, rect);
 
-    QRect topRect = ui->topView->rect();
-    int topSize = GuiUtils::calcMaxFontSize(ui->topView->font(), ui->topView->text(), topRect);
-
-    int fontSize = qMin(bottomSize, topSize);
     if (fontSize > 0) {
         QFont f = font();
         f.setPointSize(fontSize);
-        ui->topView->setFont(f);
-        ui->bottomView->setFont(f);
+        for (size_t i = 0; i < _views.size(); ++i) {
+            _views[i]->setFont(f);
+        }
     }
 }
 
-void TwoTextsView::setBorderColor(Color color)
+void VerticalTextsView::setBorderColor(Color color)
 {
     _borderColor = color;
     updateBorder();
 }
 
-void TwoTextsView::updateBorder()
+void VerticalTextsView::updateBorder()
 {
     if (!_showBorder || !_initialized) {
         return;
@@ -87,19 +93,20 @@ void TwoTextsView::updateBorder()
     ui->borderView->setStyleSheet(colorStyle);
 }
 
-void TwoTextsView::showLot(bool visible)
+void VerticalTextsView::showLot(bool visible)
 {
     ui->mainView->setVisible(visible);
     calcViewSize();
 }
 
-LotView *TwoTextsView::clone() const
+LotView *VerticalTextsView::clone() const
 {
-    TwoTextsView* copy = new TwoTextsView;
+    VerticalTextsView* copy = new VerticalTextsView(this->_views.size(), _longestText);
     copy->_borderColor = this->_borderColor;
     copy->_initialized = this->_initialized;
     copy->_showBorder = this->_showBorder;
-    copy->ui->topView->setText(this->ui->topView->text());
-    copy->ui->bottomView->setText(this->ui->bottomView->text());
+    for (size_t i = 0; i < this->_views.size(); ++i) {
+        copy->setViewText(i, this->_views[i]->text());
+    }
     return copy;
 }

@@ -17,37 +17,14 @@
 #ifndef SINGLENUMBERVIEW_H
 #define SINGLENUMBERVIEW_H
 
-#include "lotviewtextasmain.h"
+#include "verticaltextsview.h"
 
-namespace Ui {
-class SingleNumberView;
-}
-
-class SingleNumberView : public LotViewTextAsMain
+class SingleNumberView : public VerticalTextsView
 {
-    Q_OBJECT
-
 public:
-    explicit SingleNumberView(const QString& longestText, bool showLabel = false, QWidget *parent = 0);
-    ~SingleNumberView();
+    SingleNumberView(const QString& longestText);
 
     void view(const NumberLotElement& numberLotElement, int id);
-
-    virtual void showLot(bool visible);
-    virtual LotView* clone() const;
-
-protected:
-    virtual void calcViewSize();
-
-private:
-    Ui::SingleNumberView *ui;
-    bool _showLabel;
-    bool _init;
-    int _number;
-    QString _label;
-
-    void updateView();
-    void calcLocalFontSize(const QFont& font);
 };
 
 #endif // SINGLENUMBERVIEW_H

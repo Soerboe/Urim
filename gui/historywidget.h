@@ -45,6 +45,7 @@ private:
     void resizeEvent(QResizeEvent*event);
 
     int lotViewHeight();
+    QWidget *createSeparator();
 };
 
 #endif // HISTORYWIDGET_H

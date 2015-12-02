@@ -46,6 +46,11 @@ HistoryWidget::~HistoryWidget()
 
 void HistoryWidget::addItem(LotView *lotView)
 {
+    if (ui->viewsLayout->count() > 0) {
+        ui->viewsLayout->insertWidget(0, createSeparator());
+    }
+
+    lotView->setObjectName("LotView");
     lotView->setFixedHeight(lotViewHeight());
     ui->viewsLayout->insertWidget(0, lotView);
     ui->scrollArea->verticalScrollBar()->setValue(0);
@@ -63,7 +68,9 @@ void HistoryWidget::updateLotViews()
 
     for (int i = 0; i < ui->viewsLayout->count(); ++i) {
         QWidget* w = ui->viewsLayout->itemAt(i)->widget();
-        w->setFixedHeight(height);
+        if (w->objectName() == "LotView") {
+            w->setFixedHeight(height);
+        }
     }
 }
 
@@ -92,4 +99,15 @@ int HistoryWidget::lotViewHeight()
 {
     int w = this->width() - 20;  // width minus margins (mas o menos)
     return w * ASPECT_RATIO;
+}
+
+QWidget *HistoryWidget::createSeparator()
+{
+    QString style("background-color: #d0d0d0; margin-left: 50px; margin-right: 50px");
+
+    QWidget* line = new QWidget();
+    line->setStyleSheet(style);
+    line->setObjectName("LotViewSeparator");
+    line->setFixedHeight(1);
+    return line;
 }

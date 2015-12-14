@@ -26,6 +26,15 @@
 		<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'urim' ); ?></a>
 
 		<header id="masthead" class="site-header" role="banner">
+			<nav id="top-navigation" class="top-navigation" role="navigation">
+				<div class="urim-container">
+					<div class="urim-navigation">
+						<button class="menu-toggle" aria-controls="secondary-menu" aria-expanded="false"><?php esc_html_e( 'Secondary Menu', 'urim' ); ?></button>
+						<?php wp_nav_menu( array( 'theme_location' => 'secondary', 'menu_id' => 'secondary-menu' ) ); ?>
+					</div>
+				</div>
+			</nav>
+
 			<div class="site-branding urim-container">
 				<div class="urim-logo">
 					<img height="128" width="128" src="<?php bloginfo('template_url')?>/img/lots.png">

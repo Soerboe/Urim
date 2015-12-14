@@ -910,6 +910,10 @@ object {
 	float: right;
 }
 
+.top-navigation ul {
+	list-style: outside none none;
+}
+
 .site-description {
 	margin: 0.4em 0;
 }
@@ -945,11 +949,16 @@ object {
 	border-bottom: 2px dotted #C0C0C0;
 }
 
-.nav-menu .menu-item {
-	padding-right: 1.5em;
+.menu {
+	margin: 0;
 }
 
-.nav-menu .menu-item:last-child {
+.menu-item {
+	padding-right: 1.5em;
+	float: left;
+}
+
+.menu-item:last-child {
 	padding-right: 0;
 }
 

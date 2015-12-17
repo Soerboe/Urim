@@ -146,6 +146,9 @@
     </property>
     <addaction name="createNewDrawingAction"/>
     <addaction name="saveLogAction"/>
+    <addaction name="separator"/>
+    <addaction name="settingsAction"/>
+    <addaction name="separator"/>
     <addaction name="quitAction"/>
    </widget>
    <widget class="QMenu" name="presentationViewMenu">
@@ -271,6 +274,11 @@
    </property>
    <property name="text">
     <string>Show lots drawn</string>
+   </property>
+  </action>
+  <action name="settingsAction">
+   <property name="text">
+    <string>Settings</string>
    </property>
   </action>
  </widget>

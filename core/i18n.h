@@ -14,30 +14,15 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SETTINGSHANDLER_H
-#define SETTINGSHANDLER_H
+#ifndef I18N_H
+#define I18N_H
 
-#include <QString>
-#include <QVariant>
+#define NUM_LANGUAGES 2
 
-class QSettings;
-
-#define SETTING_COLORS "colors"
-#define SETTING_LANGUAGE "language"
-
-class SettingsHandler
-{
-public:
-    static void initialize(QString orgname, QString appname);
-
-    static void setValue(const QString& key, const QVariant& value);
-    static QVariant value(const QString& key);
-    static void removeValue(const QString& key);
-    static bool has(const QString& key);
-
-private:
-    static QSettings* _settings;
+static const char* LANGUAGES[NUM_LANGUAGES][3] = {
+    {"English", "en", "Set language to English"},
+    {"Norsk (Norwegian)", "no", "Sett språk til norsk"}
 };
 
-#endif // SETTINGSHANDLER_H
+#endif // I18N_H
 

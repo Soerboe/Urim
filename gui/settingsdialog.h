@@ -14,30 +14,30 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SETTINGSHANDLER_H
-#define SETTINGSHANDLER_H
+#ifndef SETTINGSDIALOG_H
+#define SETTINGSDIALOG_H
 
-#include <QString>
-#include <QVariant>
+#include <QDialog>
 
-class QSettings;
+namespace Ui {
+class SettingsDialog;
+}
 
-#define SETTING_COLORS "colors"
-#define SETTING_LANGUAGE "language"
-
-class SettingsHandler
+class SettingsDialog : public QDialog
 {
-public:
-    static void initialize(QString orgname, QString appname);
+    Q_OBJECT
 
-    static void setValue(const QString& key, const QVariant& value);
-    static QVariant value(const QString& key);
-    static void removeValue(const QString& key);
-    static bool has(const QString& key);
+public:
+    explicit SettingsDialog(QWidget *parent = 0);
+    ~SettingsDialog();
+
+private slots:
+    void saveClicked();
 
 private:
-    static QSettings* _settings;
+    Ui::SettingsDialog *ui;
+
+    void initialize();
 };
 
-#endif // SETTINGSHANDLER_H
-
+#endif // SETTINGSDIALOG_H

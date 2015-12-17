@@ -25,6 +25,8 @@
 #include <QTranslator>
 #include "color.h"
 #include "settingshandler.h"
+#include "selectlanguagedialog.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -43,9 +45,20 @@ int main(int argc, char *argv[])
 
     SettingsHandler::initialize(ORG_NAME, APPLICATION_NAME);
 
+    if (!SettingsHandler::has(SETTING_LANGUAGE)) {
+        SelectLanguageDialog dialog;
+        if (dialog.exec() == QDialog::Rejected) {
+            return -1;
+        }
+    }
+
+    QString language = SettingsHandler::value(SETTING_LANGUAGE).toString();
     QTranslator translator;
-    translator.load("no.qm", ":/app/translations");
-    app.installTranslator(&translator);
+    if (language != "en") {
+        QString filename = QString(language).append(".qm");
+        translator.load(filename, ":/app/translations");
+        app.installTranslator(&translator);
+    }
 
     DrawingSetupController setupController;
     DrawingSetupDialog setupDialog(&setupController);

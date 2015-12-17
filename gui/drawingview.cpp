@@ -26,7 +26,8 @@
 #include "aboutbox.h"
 #include <QDesktopWidget>
 #include <QFileDialog>
-#include <viewcontainer.h>
+#include "viewcontainer.h"
+#include "settingsdialog.h"
 
 using namespace std;
 
@@ -66,6 +67,7 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     connect(qApp, SIGNAL(screenAdded(QScreen*)), SLOT(screensChanged()));
     connect(qApp, SIGNAL(screenRemoved(QScreen*)), SLOT(screensChanged()));
     connect(ui->showLotsDrawnAction, SIGNAL(toggled(bool)), SLOT(showLotsDrawnClicked(bool)));
+    connect(ui->settingsAction, SIGNAL(triggered()), SLOT(showSettingsDialog()));
 
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     QTimer::singleShot(0, this, SLOT(showDrawingSetup()));
@@ -360,4 +362,10 @@ void DrawingView::screensChanged()
 void DrawingView::showLotsDrawnClicked(bool checked)
 {
     _drawingController->showHistoryWidget(checked);
+}
+
+void DrawingView::showSettingsDialog()
+{
+    SettingsDialog dialog(this);
+    dialog.exec();
 }

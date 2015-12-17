@@ -14,30 +14,27 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SETTINGSHANDLER_H
-#define SETTINGSHANDLER_H
+#ifndef SELECTLANGUAGEDIALOG_H
+#define SELECTLANGUAGEDIALOG_H
 
-#include <QString>
-#include <QVariant>
+#include <QDialog>
 
-class QSettings;
+namespace Ui {
+class SelectLanguageDialog;
+}
 
-#define SETTING_COLORS "colors"
-#define SETTING_LANGUAGE "language"
-
-class SettingsHandler
+class SelectLanguageDialog : public QDialog
 {
+    Q_OBJECT
+
 public:
-    static void initialize(QString orgname, QString appname);
+    explicit SelectLanguageDialog(QWidget *parent = 0);
+    ~SelectLanguageDialog();
 
-    static void setValue(const QString& key, const QVariant& value);
-    static QVariant value(const QString& key);
-    static void removeValue(const QString& key);
-    static bool has(const QString& key);
-
+private slots:
+    void selectLanguageClicked();
 private:
-    static QSettings* _settings;
+    Ui::SelectLanguageDialog *ui;
 };
 
-#endif // SETTINGSHANDLER_H
-
+#endif // SELECTLANGUAGEDIALOG_H

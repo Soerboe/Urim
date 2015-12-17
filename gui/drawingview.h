@@ -79,6 +79,7 @@ private slots:
     void showAboutQt();
     void screensChanged();
     void showLotsDrawnClicked(bool checked);
+    void showSettingsDialog();
 };
 
 #endif // DRAWINGVIEW_H

@@ -17,6 +17,21 @@
     </message>
 </context>
 <context>
+    <name>BingoConfiguration</name>
+    <message>
+        <source>Bingo</source>
+        <translation>Bingo</translation>
+    </message>
+    <message>
+        <source>Draw bingo numbers</source>
+        <translation>Trekk bingolodd</translation>
+    </message>
+    <message>
+        <source>Standard 5x5 bingo cards</source>
+        <translation>Standard 5x5 bingolodd</translation>
+    </message>
+</context>
+<context>
     <name>ColorAndNumberConfiguration</name>
     <message>
         <source>Color and number</source>
@@ -335,10 +350,6 @@
 <context>
     <name>DrawingSetupDialog</name>
     <message>
-        <source>Create Lottery</source>
-        <translation>Opprett loddtrekning</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select a type of lottery and configure the lots.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Velg en type loddtrekning og tilpass loddene.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -377,6 +388,10 @@
     <message>
         <source>Choose a type of drawing:</source>
         <translation>Velg en type loddtrekning:</translation>
+    </message>
+    <message>
+        <source>Create Lottery Drawing</source>
+        <translation>Opprett loddtrekning</translation>
     </message>
 </context>
 <context>
@@ -521,6 +536,18 @@
         <source>Show lots drawn</source>
         <translation>Vis trukne lodd</translation>
     </message>
+    <message>
+        <source>Settings</source>
+        <translation>Innstillinger</translation>
+    </message>
+    <message>
+        <source>Check for update</source>
+        <translation>Sjekk etter oppdateringer</translation>
+    </message>
+    <message>
+        <source>Go to website</source>
+        <translation>Gå til nettside</translation>
+    </message>
 </context>
 <context>
     <name>HistoryWidget</name>
@@ -594,6 +621,41 @@
     </message>
 </context>
 <context>
+    <name>SettingsDialog</name>
+    <message>
+        <source>Settings</source>
+        <translation>Innstillinger</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation>Språk</translation>
+    </message>
+    <message>
+        <source>Set language:</source>
+        <translation>Sett språk til:</translation>
+    </message>
+    <message>
+        <source>Changing language requires a restart of the application to take effect.</source>
+        <translation>Endring av språk krever omstart av applikasjonen.</translation>
+    </message>
+    <message>
+        <source>Updates</source>
+        <translation>Oppdateringer</translation>
+    </message>
+    <message>
+        <source>Disable automatic update reminders (not recommended)</source>
+        <translation>Skru av automatiske oppdateringer (ikke anbefalt)</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Lagre</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Avbryt</translation>
+    </message>
+</context>
+<context>
     <name>SingleNumberConfiguration</name>
     <message>
         <source>Single number</source>
@@ -614,6 +676,53 @@
     <message>
         <source>Label</source>
         <translation>Etikett</translation>
+    </message>
+</context>
+<context>
+    <name>UpdateView</name>
+    <message>
+        <source>Update application</source>
+        <translation>Oppdater applikasjon</translation>
+    </message>
+    <message>
+        <source>A new update is available!</source>
+        <translation>En ny oppdatering er tilgjengelig!</translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation>Oppdater</translation>
+    </message>
+    <message>
+        <source>Ignore</source>
+        <translation>Ignorer</translation>
+    </message>
+    <message>
+        <source>Version &lt;strong&gt;%1&lt;/strong&gt; has been released. You are using version &lt;strong&gt;%2&lt;/strong&gt;. Click the update button below to download the new version from the application website.</source>
+        <translation>Versjon &lt;strong&gt;%1&lt;/strong&gt; er nå tilgjengelig. Du bruker versjon &lt;strong&gt;%2&lt;/strong&gt;. Klikk på oppdateringsknappen under for å laste ned den nye versjonen fra applikasjonens nettsiden.</translation>
+    </message>
+    <message>
+        <source>Update error</source>
+        <translation>Oppdateringsfeil</translation>
+    </message>
+    <message>
+        <source>An error occured while checking for a new version. Please try again later.</source>
+        <translation>En feil oppstod under sjekking etter oppdateringer. Vennligst prøv igjen senere.</translation>
+    </message>
+    <message>
+        <source>No update</source>
+        <translation>Ingen oppdatering</translation>
+    </message>
+    <message>
+        <source>There are currently no updates available.</source>
+        <translation>Det finnes ingen oppdateringer tilgjengelig.</translation>
+    </message>
+    <message>
+        <source>Failed to open download page</source>
+        <translation>Åpning av nedlastingsside feilet</translation>
+    </message>
+    <message>
+        <source>Could not open download page in your default browser. Please enter the following URL into your browser to update the application: &lt;strong&gt;%1&lt;/strong&gt;</source>
+        <translation>Kunne ikke åpne nedlastingssiden i nettleseren. Gå til følgende URL i din nettleser for å oppdatere applikasjonen: &lt;strong&gt;%1&lt;/strong&gt;</translation>
     </message>
 </context>
 </TS>

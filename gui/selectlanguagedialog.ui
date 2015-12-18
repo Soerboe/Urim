@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Set language</string>
+   <string notr="true">Set language</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>

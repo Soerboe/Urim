@@ -28,7 +28,7 @@ Template Name: Urim updates
       <name>Urim</name>';
 
   $xml .= '<has-update>';
-  $xml .= (version_compare($currentVersion, $latestVersion) <= 0) ? 'false' : 'true';
+  $xml .= (version_compare($currentVersion, $latestVersion) >= 0) ? 'false' : 'true';
   $xml .= '</has-update>';
 
   $downloadPage = get_page_by_title($downloadPageTitle);

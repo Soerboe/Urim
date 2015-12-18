@@ -30,7 +30,7 @@ class LotWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit LotWindow(QWidget *parent = 0);
+    explicit LotWindow(QWidget *drawingView);
     ~LotWindow();
 
     void setViewContainer(ViewContainer* viewContainer);
@@ -39,11 +39,14 @@ public:
 
     void setDrawingName(QString name) {_drawingName = name;}
 
+    virtual void focusInEvent(QFocusEvent *);
+
 private:
     Ui::LotWindow *ui;
 
     ViewContainer* _viewContainer;
     QString _drawingName;
+    QWidget* _drawingView;
 };
 
 #endif // LOTWINDOW_H

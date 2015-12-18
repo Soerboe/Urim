@@ -18,16 +18,18 @@
 #include "ui_lotwindow.h"
 #include "viewcontainer.h"
 
-LotWindow::LotWindow(QWidget *parent) :
-    QWidget(parent),
+LotWindow::LotWindow(QWidget *drawingView) :
+    QWidget(0),
     ui(new Ui::LotWindow),
-    _viewContainer(0)
+    _viewContainer(0),
+    _drawingView(drawingView)
 {
     ui->setupUi(this);
     QString style("#LotWindow {background-color: #ffffff;}");
     setStyleSheet(style);
     setAttribute(Qt::WA_ShowWithoutActivating);
 
+    setFocusPolicy(Qt::StrongFocus);
     ui->drawingNameView->hide();
 }
 
@@ -67,3 +69,7 @@ bool LotWindow::hasViewContainer()
     return _viewContainer != 0;
 }
 
+void LotWindow::focusInEvent(QFocusEvent *)
+{
+    _drawingView->activateWindow();
+}

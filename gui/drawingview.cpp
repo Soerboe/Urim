@@ -43,7 +43,6 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     _updateView(this)
 {
     ui->setupUi(this);
-    setWindowFlags(Qt::WindowStaysOnTopHint);
 
     setupLogger();
     setupPresentationViewMenu();

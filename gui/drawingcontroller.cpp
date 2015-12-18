@@ -155,7 +155,7 @@ void DrawingController::moveViewContainer(int screenIndex, const QScreen* screen
 
     if (screenIndex >= 0 && screen) {
         if (!_lotWindows[screenIndex]) {
-            _lotWindows[screenIndex] = new LotWindow();
+            _lotWindows[screenIndex] = new LotWindow(_drawingView);
         }
 
         _currLotWindowIndex = screenIndex;

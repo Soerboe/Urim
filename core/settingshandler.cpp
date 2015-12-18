@@ -55,7 +55,5 @@ void SettingsHandler::removeValue(const QString &key)
 
 bool SettingsHandler::has(const QString &key)
 {
-    QString s = _settings->applicationName();
-    QString d = _settings->organizationName();
     return _settings->contains(key);
 }

@@ -21,6 +21,7 @@
 #include "drawingcontroller.h"
 #include "drawingsetupdialog.h"
 #include <QCloseEvent>
+#include "updateview.h"
 
 class ViewContainer;
 class QLabel;
@@ -56,6 +57,7 @@ private:
     QLabel* _sessionIdView;
     QActionGroup* _presentationViewActions;
     std::shared_ptr<LoggerView> _loggerView;
+    UpdateView _updateView;
 
     void updateSessionIdView(const std::shared_ptr<DrawingSession> session);
     void setupLogger();
@@ -80,6 +82,8 @@ private slots:
     void screensChanged();
     void showLotsDrawnClicked(bool checked);
     void showSettingsDialog();
+    void checkForUpdate();
+    void goToWebsite();
 };
 
 #endif // DRAWINGVIEW_H

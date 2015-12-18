@@ -14,32 +14,38 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SETTINGSHANDLER_H
-#define SETTINGSHANDLER_H
+#ifndef UPDATEVIEW_H
+#define UPDATEVIEW_H
 
-#include <QString>
-#include <QVariant>
+#include <QDialog>
+#include "updateinfo.h"
+#include "updatereminder.h"
 
-class QSettings;
 
-#define SETTING_COLORS "colors"
-#define SETTING_LANGUAGE "language"
-#define SETTING_DISABLE_AUTO_UPDATES "disable_auto_updates"
+namespace Ui {
+class UpdateView;
+}
 
-class SettingsHandler
+class UpdateView : public QDialog
 {
-public:
-    static void initialize(QString orgname, QString appname);
+    Q_OBJECT
 
-    static void setValue(const QString& key, const QVariant& value);
-    static QVariant value(const QString& key);
-    static QVariant getValueSetIfNot(const QString& key, const QVariant& newValueIfNot);
-    static void removeValue(const QString& key);
-    static bool has(const QString& key);
+public:
+    explicit UpdateView(QWidget *parent = 0);
+    ~UpdateView();
+
+    void setUpdateInfo(UpdateInfo info);
+    void checkForUpdate();
+
+private slots:
+    void updateClicked();
 
 private:
-    static QSettings* _settings;
+    Ui::UpdateView *ui;
+
+    QString _downloadPage;
+    UpdateReminder _reminder;
+    bool _isUpdating;
 };
 
-#endif // SETTINGSHANDLER_H
-
+#endif // UPDATEVIEW_H

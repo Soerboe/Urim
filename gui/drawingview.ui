@@ -170,6 +170,9 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
+    <addaction name="checkForUpdateAction"/>
+    <addaction name="goToWebsiteAction"/>
+    <addaction name="separator"/>
     <addaction name="aboutAction"/>
     <addaction name="aboutQtAction"/>
    </widget>
@@ -279,6 +282,16 @@
   <action name="settingsAction">
    <property name="text">
     <string>Settings</string>
+   </property>
+  </action>
+  <action name="checkForUpdateAction">
+   <property name="text">
+    <string>Check for update</string>
+   </property>
+  </action>
+  <action name="goToWebsiteAction">
+   <property name="text">
+    <string>Go to website</string>
    </property>
   </action>
  </widget>

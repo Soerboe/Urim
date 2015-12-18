@@ -22,7 +22,7 @@ DEPENDENCY_PROJECT += core
     error( "$${TARGET} Couldn't find 'common.pri'!" )
 }
 
-QT += core gui widgets svg
+QT += core gui widgets svg network
 
 TARGET = gui
 TEMPLATE = lib

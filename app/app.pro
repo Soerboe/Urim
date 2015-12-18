@@ -22,7 +22,7 @@ DEPENDENCY_PROJECT += core gui
     error( "$${TARGET} Couldn't find 'common.pri'!" )
 }
 
-QT += core gui widgets svg
+QT += core gui widgets svg network
 
 TARGET = Urim
 TEMPLATE = app

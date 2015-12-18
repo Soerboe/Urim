@@ -22,7 +22,7 @@ lessThan(QT_VERSION, 5.4): error("Requires Qt >= 5.4")
 
 include(../thirdparty/QtXlsxWriter/src/xlsx/qtxlsx.pri)
 
-QT += core
+QT += core network
 QT -= gui
 
 TARGET = core

@@ -28,6 +28,8 @@
 #include <QFileDialog>
 #include "viewcontainer.h"
 #include "settingsdialog.h"
+#include <QDesktopServices>
+#include "settingshandler.h"
 
 using namespace std;
 
@@ -37,7 +39,8 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     _drawingController(controller),
     _setupDialog(setupDialog),
     _viewContainer(0),
-    _presentationViewActions(0)
+    _presentationViewActions(0),
+    _updateView(this)
 {
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);
@@ -68,6 +71,8 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     connect(qApp, SIGNAL(screenRemoved(QScreen*)), SLOT(screensChanged()));
     connect(ui->showLotsDrawnAction, SIGNAL(toggled(bool)), SLOT(showLotsDrawnClicked(bool)));
     connect(ui->settingsAction, SIGNAL(triggered()), SLOT(showSettingsDialog()));
+    connect(ui->checkForUpdateAction, SIGNAL(triggered()), SLOT(checkForUpdate()));
+    connect(ui->goToWebsiteAction, SIGNAL(triggered()), SLOT(goToWebsite()));
 
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     QTimer::singleShot(0, this, SLOT(showDrawingSetup()));
@@ -225,17 +230,19 @@ void DrawingView::moveViewContainer(QAction* action)
 
 void DrawingView::showDrawingSetup()
 {
-    int status = _setupDialog->exec();
+    _setupDialog->show();
 
-    if (status == QDialog::Accepted) {
-        _drawingController->initViewContainer(_setupDialog->getView());
-        _drawingController->setDrawingName(_setupDialog->getDrawingName());
-        _drawingController->logger()->clear();
-        startNewDrawingSession(true);
-        this->show();
-    } else {
-        qApp->exit(0);
-    }
+    connect(_setupDialog, &DrawingSetupDialog::finished, [&](int result) {
+        if (result == QDialog::Accepted) {
+            _drawingController->initViewContainer(_setupDialog->getView());
+            _drawingController->setDrawingName(_setupDialog->getDrawingName());
+            _drawingController->logger()->clear();
+            startNewDrawingSession(true);
+            this->show();
+        } else {
+            qApp->exit(0);
+        }
+    });
 }
 
 void DrawingView::saveLogToFile()
@@ -368,4 +375,15 @@ void DrawingView::showSettingsDialog()
 {
     SettingsDialog dialog(this);
     dialog.exec();
+}
+
+void DrawingView::checkForUpdate()
+{
+    _updateView.checkForUpdate();
+}
+
+void DrawingView::goToWebsite()
+{
+    QString language = SettingsHandler::value(SETTING_LANGUAGE).toString();
+    QDesktopServices::openUrl(QUrl(QString("https://lioddensorbo.com/urim/").append(language)));
 }

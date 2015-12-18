@@ -39,6 +39,15 @@ QVariant SettingsHandler::value(const QString &key)
     return _settings->value(key);
 }
 
+QVariant SettingsHandler::getValueSetIfNot(const QString &key, const QVariant &newValueIfNot)
+{
+    if (!has(key)) {
+        setValue(key, newValueIfNot);
+    }
+
+    return value(key);
+}
+
 void SettingsHandler::removeValue(const QString &key)
 {
     _settings->remove(key);

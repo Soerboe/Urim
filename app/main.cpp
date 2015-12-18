@@ -26,6 +26,8 @@
 #include "color.h"
 #include "settingshandler.h"
 #include "selectlanguagedialog.h"
+#include "updatereminder.h"
+#include "updateview.h"
 
 
 int main(int argc, char *argv[])
@@ -58,6 +60,18 @@ int main(int argc, char *argv[])
         QString filename = QString(language).append(".qm");
         translator.load(filename, ":/app/translations");
         app.installTranslator(&translator);
+    }
+
+    UpdateView updateView;
+    UpdateReminder reminder([&](UpdateInfo info) {
+        if (!info.hasError && info.hasUpdate) {
+            updateView.setUpdateInfo(info);
+            updateView.show();
+        }
+    });
+    bool disableAutoUpdates = SettingsHandler::getValueSetIfNot(SETTING_DISABLE_AUTO_UPDATES, false).toBool();
+    if (!disableAutoUpdates) {
+        reminder.checkForUpdate();
     }
 
     DrawingSetupController setupController;

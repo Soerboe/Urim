@@ -28,6 +28,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     connect(ui->saveButton, SIGNAL(clicked()), SLOT(saveClicked()));
     connect(ui->cancelButton, SIGNAL(clicked()), SLOT(reject()));
 
+    ui->tabWidget->setCurrentIndex(0);
     initialize();
 }
 
@@ -38,16 +39,20 @@ SettingsDialog::~SettingsDialog()
 
 void SettingsDialog::saveClicked()
 {
+    /* LANGUAGE */
     QString lang = ui->languageSelector->currentData().toString();
     SettingsHandler::setValue(SETTING_LANGUAGE, lang);
+
+    /* UPDATES */
+    SettingsHandler::setValue(SETTING_DISABLE_AUTO_UPDATES, ui->disableAutoUpdates->isChecked());
 
     accept();
 }
 
 void SettingsDialog::initialize()
 {
+    /* LANGUAGE */
     QString currentLang = SettingsHandler::value(SETTING_LANGUAGE).toString();
-
     for (int i = 0; i < NUM_LANGUAGES; ++i) {
         const char** language = LANGUAGES[i];
         QString langCode(language[1]);
@@ -56,4 +61,8 @@ void SettingsDialog::initialize()
             ui->languageSelector->setCurrentIndex(i);
         }
     }
+
+    /* UPDATES */
+    bool disableAutoUpdates = SettingsHandler::value(SETTING_DISABLE_AUTO_UPDATES).toBool();
+    ui->disableAutoUpdates->setChecked(disableAutoUpdates);
 }

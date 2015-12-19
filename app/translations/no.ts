@@ -698,7 +698,7 @@
     </message>
     <message>
         <source>Version &lt;strong&gt;%1&lt;/strong&gt; has been released. You are using version &lt;strong&gt;%2&lt;/strong&gt;. Click the update button below to download the new version from the application website.</source>
-        <translation>Versjon &lt;strong&gt;%1&lt;/strong&gt; er nå tilgjengelig. Du bruker versjon &lt;strong&gt;%2&lt;/strong&gt;. Klikk på oppdateringsknappen under for å laste ned den nye versjonen fra applikasjonens nettsiden.</translation>
+        <translation>Versjon &lt;strong&gt;%1&lt;/strong&gt; er nå tilgjengelig. Du bruker versjon &lt;strong&gt;%2&lt;/strong&gt;. Klikk på &quot;Oppdater&quot; under for å laste ned den nye versjonen fra  nettsiden.</translation>
     </message>
     <message>
         <source>Update error</source>

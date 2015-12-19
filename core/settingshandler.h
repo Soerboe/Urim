@@ -24,7 +24,7 @@ class QSettings;
 
 #define SETTING_COLORS "colors"
 #define SETTING_LANGUAGE "language"
-#define SETTING_DISABLE_AUTO_UPDATES "disable_auto_updates"
+#define SETTING_DISABLE_AUTO_UPDATES "updates/disable_auto"
 
 class SettingsHandler
 {

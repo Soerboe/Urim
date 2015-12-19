@@ -28,7 +28,52 @@
 #include "selectlanguagedialog.h"
 #include "updatereminder.h"
 #include "updateview.h"
+#include "i18n.h"
 
+bool setLanguageToSystemLanguage() {
+    QString langCountry = QLocale().system().name();
+    QString lang = langCountry.left(2);
+
+    if (lang == "nb" || lang == "nn") {
+        lang = "no";
+    }
+
+    bool langIsSupported = false;
+    for (int i = 0; i < NUM_LANGUAGES; ++i) {
+        if (LANGUAGES[i][1] == lang) {
+            langIsSupported = true;
+        }
+    }
+
+    if (langIsSupported) {
+        SettingsHandler::setValue(SETTING_LANGUAGE, lang);
+    }
+
+    return langIsSupported;
+}
+
+int setupLanguage(QApplication& app) {
+    if (!SettingsHandler::has(SETTING_LANGUAGE)) {
+        bool ok = setLanguageToSystemLanguage();
+
+        if (!ok) {
+            SelectLanguageDialog dialog;
+            if (dialog.exec() == QDialog::Rejected) {
+                return -1;
+            }
+        }
+    }
+
+    QString language = SettingsHandler::value(SETTING_LANGUAGE).toString();
+    if (language != "en") {
+        QTranslator* translator = new QTranslator();
+        QString filename = QString(language).append(".qm");
+        translator->load(filename, ":/app/translations");
+        app.installTranslator(translator);
+    }
+
+    return 0;
+}
 
 int main(int argc, char *argv[])
 {
@@ -47,19 +92,8 @@ int main(int argc, char *argv[])
 
     SettingsHandler::initialize(ORG_NAME, APPLICATION_NAME);
 
-    if (!SettingsHandler::has(SETTING_LANGUAGE)) {
-        SelectLanguageDialog dialog;
-        if (dialog.exec() == QDialog::Rejected) {
-            return -1;
-        }
-    }
-
-    QString language = SettingsHandler::value(SETTING_LANGUAGE).toString();
-    QTranslator translator;
-    if (language != "en") {
-        QString filename = QString(language).append(".qm");
-        translator.load(filename, ":/app/translations");
-        app.installTranslator(&translator);
+    if (int res = setupLanguage(app) != 0) {
+        return res;
     }
 
     UpdateView updateView;

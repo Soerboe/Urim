@@ -18,6 +18,7 @@
 #include "ui_settingsdialog.h"
 #include "settingshandler.h"
 #include "i18n.h"
+#include <QDesktopWidget>
 
 SettingsDialog::SettingsDialog(QWidget *parent) :
     QDialog(parent),
@@ -29,6 +30,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     connect(ui->cancelButton, SIGNAL(clicked()), SLOT(reject()));
 
     ui->tabWidget->setCurrentIndex(0);
+    this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     initialize();
 }
 

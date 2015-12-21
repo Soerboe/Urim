@@ -52,6 +52,6 @@ size_t ColorLotElement::hash() const
 
 void ColorLotElement::print(ostream& output) const
 {
-    output << "Color: " << _color.name.toStdString() << "(" <<
-              _color.red << ", " << _color.green << ", " << _color.blue << ")";
+    output << "Color: " << _color.name().toStdString() << "(" <<
+              _color.red() << ", " << _color.green() << ", " << _color.blue() << ")";
 }

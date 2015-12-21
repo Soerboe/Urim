@@ -45,8 +45,7 @@ signals:
 
 private:
     static QSettings* _settings;
-
-    static void setDefaultValues();
+    static bool has(const QString& key);
 };
 
 #endif // SETTINGSHANDLER_H

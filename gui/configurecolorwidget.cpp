@@ -17,7 +17,6 @@
 #include "configurecolorwidget.h"
 #include "ui_configurecolorwidget.h"
 #include <QTreeWidgetItem>
-#include "colors.h"
 #include <QColorDialog>
 #include <QInputDialog>
 #include <QMessageBox>
@@ -59,8 +58,8 @@ private:
     bool _selected;
 
     void update() {
-        setBackgroundColor(1, QColor(_color.red, _color.green, _color.blue));
-        setText(2, _color.name);
+        setBackgroundColor(1, QColor(_color.red(), _color.green(), _color.blue()));
+        setText(2, _color.name());
     }
 };
 
@@ -171,13 +170,13 @@ void ConfigureColorWidget::editColorClicked()
         ColorItem* colorItem = dynamic_cast<ColorItem*> (item);
         Color color = colorItem->color();
 
-        QColor newColor = QColorDialog::getColor(QColor(color.red, color.green, color.blue), 0, tr("Choose new color"));
+        QColor newColor = QColorDialog::getColor(QColor(color.red(), color.green(), color.blue()), 0, tr("Choose new color"));
         if (!newColor.isValid()) {
             continue;
         }
 
         bool okClicked;
-        QString colorName = color.name;
+        QString colorName = color.name();
         while (true) {
             colorName = QInputDialog::getText(this, tr("Choose new color name"), tr("New color name:"), QLineEdit::Normal, colorName, &okClicked);
             if (!okClicked) {
@@ -268,7 +267,7 @@ void ConfigureColorWidget::updateSelectedColorsView()
             text.append(", ");
         }
 
-        text.append(color.name);
+        text.append(color.name());
     }
 
     ui->selectedColorsLabel->setText(text);

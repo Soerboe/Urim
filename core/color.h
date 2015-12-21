@@ -20,20 +20,75 @@
 #include <QString>
 #include "utils.h"
 #include <QMetaType>
+#include <QCoreApplication>
 
-struct Color {
+class Color {
+    Q_DECLARE_TR_FUNCTIONS(Color)
+
+public:
+    enum DefaultColor {
+        WHITE,
+        BLACK,
+        GRAY,
+        LIGHT_GRAY,
+        DARK_GRAY,
+        RED,
+        LIGHT_RED,
+        DARK_RED,
+        GREEN,
+        LIGHT_GREEN,
+        DARK_GREEN,
+        BLUE,
+        LIGHT_BLUE,
+        DARK_BLUE,
+        YELLOW,
+        LIGHT_YELLOW,
+        DARK_YELLOW,
+        PINK,
+        LIGHT_PINK,
+        DARK_PINK,
+        PURPLE,
+        LIGHT_PURPLE,
+        DARK_PURPLE,
+        ORANGE,
+        LIGHT_ORANGE,
+        DARK_ORANGE,
+        BROWN,
+        LIGHT_BROWN,
+        DARK_BROWN,
+        VIOLET,
+        LIGHT_VIOLET,
+        DARK_VIOLET,
+        TURQUOISE,
+    };
+
     Color ();
+
+    Color (const DefaultColor color);
 
     Color(const Color& color);
 
     Color(const int red, const int green, const int blue, const QString name);
 
+    int red() const;
+    int green() const;
+    int blue() const;
+    QString name() const;
+
     bool isWhite();
     bool operator==(const Color& that);
     size_t hash () const;
 
-    int red, green, blue;
-    QString name;
+    friend QDataStream& operator<<(QDataStream& out, const Color& c);
+    friend QDataStream& operator>>(QDataStream& in, Color& c);
+
+private:
+    int _red, _green, _blue;
+    QString _name;
+
+    bool _isDefaultColor;
+    DefaultColor _defaultColor;
+    Color convertDefaultColor() const;
 };
 
 Q_DECLARE_METATYPE(Color)

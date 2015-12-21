@@ -86,9 +86,9 @@ void VerticalTextsView::updateBorder()
     QString colorStyle;
     colorStyle.append("#borderView {border:").append(QString::number(_borderWidth)).append("px ");
     colorStyle.append("solid rgb(");
-    colorStyle.append(QString::number(_borderColor.red)).append(",");
-    colorStyle.append(QString::number(_borderColor.green)).append(",");
-    colorStyle.append(QString::number(_borderColor.blue)).append(");}");
+    colorStyle.append(QString::number(_borderColor.red())).append(",");
+    colorStyle.append(QString::number(_borderColor.green())).append(",");
+    colorStyle.append(QString::number(_borderColor.blue())).append(");}");
 
     ui->borderView->setStyleSheet(colorStyle);
 }

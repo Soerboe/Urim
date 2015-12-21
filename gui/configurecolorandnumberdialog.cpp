@@ -21,7 +21,6 @@
 #include <QRadioButton>
 #include "colorandnumberview_pog.h"
 #include "colorandnumberview_border.h"
-#include "colors.h"
 #include "colorlotelement.h"
 #include "numberlotelement.h"
 #include "lotviewselector.h"
@@ -44,13 +43,13 @@ ConfigureColorAndNumberDialog::ConfigureColorAndNumberDialog(const QString name)
 void ConfigureColorAndNumberDialog::setupViewsTab()
 {
     ColorAndNumberView_POG* pogView = new ColorAndNumberView_POG("1000");
-    Colors colors;
-    pogView->view(ColorLotElement(colors.red()), 0);
+    Color red = Color(Color::RED);
+    pogView->view(ColorLotElement(red), 0);
     pogView->view(NumberLotElement(712), 0);
     _lotViewSelector->addView(pogView);
 
-    ColorAndNumberView_Border* borderView = new ColorAndNumberView_Border(colors.red().name.length() > 3 ? colors.red().name : "712");
-    borderView->view(ColorLotElement(colors.red()), 0);
+    ColorAndNumberView_Border* borderView = new ColorAndNumberView_Border(red.name().length() > 3 ? red.name() : "712");
+    borderView->view(ColorLotElement(red), 0);
     borderView->view(NumberLotElement(712), 0);
     _lotViewSelector->addView(borderView);
 

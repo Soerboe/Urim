@@ -36,5 +36,5 @@ void ColorAndNumberView_Border::view(const ColorLotElement& colorLotElement, int
     ignore_unused(id);
 
     setBorderColor(colorLotElement.color());
-    setViewText(0, colorLotElement.color().name);
+    setViewText(0, colorLotElement.color().name());
 }

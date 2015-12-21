@@ -79,7 +79,7 @@ public:
         if (!label.isEmpty()) {
             label.append(": ");
         }
-        addText(label + QString(colorLotElement.color().name));
+        addText(label + QString(colorLotElement.color().name()));
     }
 
 private:

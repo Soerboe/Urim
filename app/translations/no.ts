@@ -32,6 +32,141 @@
     </message>
 </context>
 <context>
+    <name>Color</name>
+    <message>
+        <source>Red</source>
+        <translation>Rød</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Grønn</translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <translation>Blå</translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation>Gul</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation>Hvit</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation>Svart</translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation>Grå</translation>
+    </message>
+    <message>
+        <source>Light gray</source>
+        <translation>Lysegrå</translation>
+    </message>
+    <message>
+        <source>Dark gray</source>
+        <translation>Mørkegrå</translation>
+    </message>
+    <message>
+        <source>Light red</source>
+        <translation>Lyserød</translation>
+    </message>
+    <message>
+        <source>Dark red</source>
+        <translation>Mørkerød</translation>
+    </message>
+    <message>
+        <source>Light green</source>
+        <translation>Lysegrønn</translation>
+    </message>
+    <message>
+        <source>Dark green</source>
+        <translation>Mørkegrønn</translation>
+    </message>
+    <message>
+        <source>Light blue</source>
+        <translation>Lyseblå</translation>
+    </message>
+    <message>
+        <source>Dark blue</source>
+        <translation>Mørkeblå</translation>
+    </message>
+    <message>
+        <source>Light yellow</source>
+        <translation>Lysegul</translation>
+    </message>
+    <message>
+        <source>Dark yellow</source>
+        <translation>Mørkegul</translation>
+    </message>
+    <message>
+        <source>Pink</source>
+        <translation>Rosa</translation>
+    </message>
+    <message>
+        <source>Light pink</source>
+        <translation>Lyserosa</translation>
+    </message>
+    <message>
+        <source>Dark pink</source>
+        <translation>Mørkerosa</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Lilla</translation>
+    </message>
+    <message>
+        <source>Light purple</source>
+        <translation>Lys lilla</translation>
+    </message>
+    <message>
+        <source>Dark purple</source>
+        <translation>Mørk lilla</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Oransje</translation>
+    </message>
+    <message>
+        <source>Light orange</source>
+        <translation>Lys oransje</translation>
+    </message>
+    <message>
+        <source>Dark orange</source>
+        <translation>Mørk oransje</translation>
+    </message>
+    <message>
+        <source>Brown</source>
+        <translation>Brun</translation>
+    </message>
+    <message>
+        <source>Light brown</source>
+        <translation>Lysebrun</translation>
+    </message>
+    <message>
+        <source>Dark brown</source>
+        <translation>Mørkebrun</translation>
+    </message>
+    <message>
+        <source>Violet</source>
+        <translation>Fiolett</translation>
+    </message>
+    <message>
+        <source>Light violet</source>
+        <translation>Lys fiolett</translation>
+    </message>
+    <message>
+        <source>Dark violet</source>
+        <translation>Mørk fiolett</translation>
+    </message>
+    <message>
+        <source>Turquiose</source>
+        <translation>Turkis</translation>
+    </message>
+</context>
+<context>
     <name>ColorAndNumberConfiguration</name>
     <message>
         <source>Color and number</source>
@@ -60,81 +195,6 @@
     <message>
         <source>Number label</source>
         <translation>Talletikett</translation>
-    </message>
-</context>
-<context>
-    <name>Colors</name>
-    <message>
-        <source>Red</source>
-        <translation>Rød</translation>
-    </message>
-    <message>
-        <source>Green</source>
-        <translation>Grønn</translation>
-    </message>
-    <message>
-        <source>Blue</source>
-        <translation>Blå</translation>
-    </message>
-    <message>
-        <source>Yellow</source>
-        <translation>Gul</translation>
-    </message>
-    <message>
-        <source>White</source>
-        <translation>Hvit</translation>
-    </message>
-    <message>
-        <source>Black</source>
-        <translation>Svart</translation>
-    </message>
-    <message>
-        <source>Grey</source>
-        <translation>Grå</translation>
-    </message>
-    <message>
-        <source>Dark red</source>
-        <translation>Mørk rød</translation>
-    </message>
-    <message>
-        <source>Dark blue</source>
-        <translation>Mørk blå</translation>
-    </message>
-    <message>
-        <source>Dark green</source>
-        <translation>Mørk grønn</translation>
-    </message>
-    <message>
-        <source>Pink</source>
-        <translation>Rosa</translation>
-    </message>
-    <message>
-        <source>Purple</source>
-        <translation>Lilla</translation>
-    </message>
-    <message>
-        <source>Orange</source>
-        <translation>Oransje</translation>
-    </message>
-    <message>
-        <source>Brown</source>
-        <translation>Brun</translation>
-    </message>
-    <message>
-        <source>Violet</source>
-        <translation>Fiolett</translation>
-    </message>
-    <message>
-        <source>Turquiose</source>
-        <translation>Turkis</translation>
-    </message>
-    <message>
-        <source>Olive</source>
-        <translation>Oliven</translation>
-    </message>
-    <message>
-        <source>Light brown</source>
-        <translation>Lys brun</translation>
     </message>
 </context>
 <context>

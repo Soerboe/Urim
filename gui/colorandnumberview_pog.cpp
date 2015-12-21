@@ -42,16 +42,16 @@ void ColorAndNumberView_POG::updateView()
 
     QString style;
     style.append("background-color: rgb(");
-    style.append(QString::number(_color.red)).append(",");
-    style.append(QString::number(_color.green)).append(",");
-    style.append(QString::number(_color.blue)).append(");");
+    style.append(QString::number(_color.red())).append(",");
+    style.append(QString::number(_color.green())).append(",");
+    style.append(QString::number(_color.blue())).append(");");
 
     if (_color.isWhite()) {
         style.append("border: 1px solid black;");
     }
 
     ui->colorView->setStyleSheet(style);
-    ui->colorNameView->setText(_color.name);
+    ui->colorNameView->setText(_color.name());
 
     calcViewSize();
 }

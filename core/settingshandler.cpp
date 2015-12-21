@@ -17,10 +17,8 @@
 #include "settingshandler.h"
 #include <QSettings>
 #include <QCoreApplication>
-#include "colors.h"
 
-#define INITIALIZED "initialized"
-#define SETTING_COLORS "colors"
+#define SETTING_COLORS "colors/lot_colors"
 #define SETTING_LANGUAGE "language"
 #define SETTING_AUTO_UPDATES_DISABLED "updates/disable_auto_updates"
 
@@ -34,8 +32,12 @@ void SettingsHandler::initialize(QString orgname, QString appname)
 
     _settings = new QSettings(orgname, appname);
 
-    if (!_settings->contains(INITIALIZED) || _settings->value(INITIALIZED).toBool() == false) {
-        setDefaultValues();
+    if (!has(SETTING_COLORS)) {
+        resetToDefaultColors();
+    }
+
+    if (!has(SETTING_AUTO_UPDATES_DISABLED)) {
+        setAutoUpdatesDisabled(false);
     }
 }
 
@@ -70,27 +72,41 @@ void SettingsHandler::setColors(QList<Color> colorList)
 
 void SettingsHandler::resetToDefaultColors()
 {
-    Colors colors;
-
     QList<Color> defaultColors;
-    defaultColors.append(colors.red());
-    defaultColors.append(colors.green());
-    defaultColors.append(colors.blue());
-    defaultColors.append(colors.yellow());
-    defaultColors.append(colors.white());
-    defaultColors.append(colors.black());
-    defaultColors.append(colors.grey());
-    defaultColors.append(colors.darkRed());
-    defaultColors.append(colors.darkBlue());
-    defaultColors.append(colors.darkGreen());
-    defaultColors.append(colors.pink());
-    defaultColors.append(colors.purple());
-    defaultColors.append(colors.orange());
-    defaultColors.append(colors.brown());
-    defaultColors.append(colors.violet());
-    defaultColors.append(colors.turquoise());
-    defaultColors.append(colors.olive());
-    defaultColors.append(colors.lightBrown());
+
+    defaultColors.append(Color(Color::WHITE));
+    defaultColors.append(Color(Color::BLACK));
+    defaultColors.append(Color(Color::GRAY));
+    defaultColors.append(Color(Color::LIGHT_GRAY));
+    defaultColors.append(Color(Color::DARK_GRAY));
+    defaultColors.append(Color(Color::RED));
+    defaultColors.append(Color(Color::LIGHT_RED));
+    defaultColors.append(Color(Color::DARK_RED));
+    defaultColors.append(Color(Color::GREEN));
+    defaultColors.append(Color(Color::LIGHT_GREEN));
+    defaultColors.append(Color(Color::DARK_GREEN));
+    defaultColors.append(Color(Color::BLUE));
+    defaultColors.append(Color(Color::LIGHT_BLUE));
+    defaultColors.append(Color(Color::DARK_BLUE));
+    defaultColors.append(Color(Color::YELLOW));
+    defaultColors.append(Color(Color::LIGHT_YELLOW));
+    defaultColors.append(Color(Color::DARK_YELLOW));
+    defaultColors.append(Color(Color::PINK));
+    defaultColors.append(Color(Color::LIGHT_PINK));
+    defaultColors.append(Color(Color::DARK_PINK));
+    defaultColors.append(Color(Color::PURPLE));
+    defaultColors.append(Color(Color::LIGHT_PURPLE));
+    defaultColors.append(Color(Color::DARK_PURPLE));
+    defaultColors.append(Color(Color::ORANGE));
+    defaultColors.append(Color(Color::LIGHT_ORANGE));
+    defaultColors.append(Color(Color::DARK_ORANGE));
+    defaultColors.append(Color(Color::BROWN));
+    defaultColors.append(Color(Color::LIGHT_BROWN));
+    defaultColors.append(Color(Color::DARK_BROWN));
+    defaultColors.append(Color(Color::VIOLET));
+    defaultColors.append(Color(Color::LIGHT_VIOLET));
+    defaultColors.append(Color(Color::DARK_VIOLET));
+    defaultColors.append(Color(Color::TURQUOISE));
 
     setColors(defaultColors);
 }
@@ -120,11 +136,7 @@ void SettingsHandler::setAutoUpdatesDisabled(bool a)
     _settings->setValue(SETTING_AUTO_UPDATES_DISABLED, a);
 }
 
-void SettingsHandler::setDefaultValues()
+bool SettingsHandler::has(const QString &key)
 {
-    _settings->setValue(INITIALIZED, true);
-
-    resetToDefaultColors();
-    _settings->remove(SETTING_LANGUAGE);
-    setAutoUpdatesDisabled(false);
+    return _settings->contains(key);
 }

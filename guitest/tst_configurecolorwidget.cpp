@@ -38,8 +38,8 @@ void shouldInitializeColors()
     widget.init(defaultColors, label);
     std::vector<Color> colors = widget.selectedColors();
 
-    QVERIFY(std::any_of(colors.begin(), colors.end(), [](Color c) {return c.name == "Red";}));
-    QVERIFY(std::any_of(colors.begin(), colors.end(), [](Color c) {return c.name == "Green";}));
+    QVERIFY(std::any_of(colors.begin(), colors.end(), [](Color c) {return c.name() == "Red";}));
+    QVERIFY(std::any_of(colors.begin(), colors.end(), [](Color c) {return c.name() == "Green";}));
 }
 
 void shouldValidateFalseWhenNoSelectedColors() {

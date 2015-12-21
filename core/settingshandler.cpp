@@ -17,6 +17,12 @@
 #include "settingshandler.h"
 #include <QSettings>
 #include <QCoreApplication>
+#include "colors.h"
+
+#define INITIALIZED "initialized"
+#define SETTING_COLORS "colors"
+#define SETTING_LANGUAGE "language"
+#define SETTING_AUTO_UPDATES_DISABLED "updates/disable_auto_updates"
 
 QSettings* SettingsHandler::_settings = new QSettings;
 
@@ -27,33 +33,98 @@ void SettingsHandler::initialize(QString orgname, QString appname)
     }
 
     _settings = new QSettings(orgname, appname);
+
+    if (!_settings->contains(INITIALIZED) || _settings->value(INITIALIZED).toBool() == false) {
+        setDefaultValues();
+    }
 }
 
-void SettingsHandler::setValue(const QString &key, const QVariant &value)
+void SettingsHandler::clear()
 {
-    _settings->setValue(key, value);
+    _settings->clear();
 }
 
-QVariant SettingsHandler::value(const QString &key)
+QList<Color> SettingsHandler::colors()
 {
-    return _settings->value(key);
-}
+    QList<Color> colors;
 
-QVariant SettingsHandler::getValueSetIfNot(const QString &key, const QVariant &newValueIfNot)
-{
-    if (!has(key)) {
-        setValue(key, newValueIfNot);
+    foreach(QVariant v, _settings->value(SETTING_COLORS).toList()) {
+        colors.append(v.value<Color>());
     }
 
-    return value(key);
+    return colors;
 }
 
-void SettingsHandler::removeValue(const QString &key)
+void SettingsHandler::setColors(QList<Color> colorList)
 {
-    _settings->remove(key);
+    QList<QVariant> list;
+
+    foreach(Color c, colorList) {
+        QVariant v;
+        v.setValue(c);
+        list.append(v);
+    }
+
+    _settings->setValue(SETTING_COLORS, list);
 }
 
-bool SettingsHandler::has(const QString &key)
+void SettingsHandler::resetToDefaultColors()
 {
-    return _settings->contains(key);
+    Colors colors;
+
+    QList<Color> defaultColors;
+    defaultColors.append(colors.red());
+    defaultColors.append(colors.green());
+    defaultColors.append(colors.blue());
+    defaultColors.append(colors.yellow());
+    defaultColors.append(colors.white());
+    defaultColors.append(colors.black());
+    defaultColors.append(colors.grey());
+    defaultColors.append(colors.darkRed());
+    defaultColors.append(colors.darkBlue());
+    defaultColors.append(colors.darkGreen());
+    defaultColors.append(colors.pink());
+    defaultColors.append(colors.purple());
+    defaultColors.append(colors.orange());
+    defaultColors.append(colors.brown());
+    defaultColors.append(colors.violet());
+    defaultColors.append(colors.turquoise());
+    defaultColors.append(colors.olive());
+    defaultColors.append(colors.lightBrown());
+
+    setColors(defaultColors);
+}
+
+QString SettingsHandler::language()
+{
+    return _settings->value(SETTING_LANGUAGE).toString();
+}
+
+bool SettingsHandler::hasLanguage()
+{
+    return _settings->contains(SETTING_LANGUAGE);
+}
+
+void SettingsHandler::setLanguage(const QString &l)
+{
+    _settings->setValue(SETTING_LANGUAGE, l);
+}
+
+bool SettingsHandler::autoUpdatesDisabled()
+{
+    return _settings->value(SETTING_AUTO_UPDATES_DISABLED).toBool();
+}
+
+void SettingsHandler::setAutoUpdatesDisabled(bool a)
+{
+    _settings->setValue(SETTING_AUTO_UPDATES_DISABLED, a);
+}
+
+void SettingsHandler::setDefaultValues()
+{
+    _settings->setValue(INITIALIZED, true);
+
+    resetToDefaultColors();
+    _settings->remove(SETTING_LANGUAGE);
+    setAutoUpdatesDisabled(false);
 }

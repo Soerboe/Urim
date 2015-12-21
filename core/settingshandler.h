@@ -19,26 +19,34 @@
 
 #include <QString>
 #include <QVariant>
+#include <color.h>
 
 class QSettings;
-
-#define SETTING_COLORS "colors"
-#define SETTING_LANGUAGE "language"
-#define SETTING_DISABLE_AUTO_UPDATES "updates/disable_auto"
 
 class SettingsHandler
 {
 public:
     static void initialize(QString orgname, QString appname);
+    static void clear();
 
-    static void setValue(const QString& key, const QVariant& value);
-    static QVariant value(const QString& key);
-    static QVariant getValueSetIfNot(const QString& key, const QVariant& newValueIfNot);
-    static void removeValue(const QString& key);
-    static bool has(const QString& key);
+    static QList<Color> colors();
+    static void setColors(QList<Color> colorList);
+    static void resetToDefaultColors();
+
+    static QString language();
+    static bool hasLanguage();
+    static void setLanguage(const QString& l);
+
+    static bool autoUpdatesDisabled();
+    static void setAutoUpdatesDisabled(bool a);
+
+signals:
+    //
 
 private:
     static QSettings* _settings;
+
+    static void setDefaultValues();
 };
 
 #endif // SETTINGSHANDLER_H

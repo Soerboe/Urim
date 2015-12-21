@@ -46,14 +46,14 @@ bool setLanguageToSystemLanguage() {
     }
 
     if (langIsSupported) {
-        SettingsHandler::setValue(SETTING_LANGUAGE, lang);
+        SettingsHandler::setLanguage(lang);
     }
 
     return langIsSupported;
 }
 
 int setupLanguage(QApplication& app) {
-    if (!SettingsHandler::has(SETTING_LANGUAGE)) {
+    if (!SettingsHandler::hasLanguage()) {
         bool ok = setLanguageToSystemLanguage();
 
         if (!ok) {
@@ -64,7 +64,7 @@ int setupLanguage(QApplication& app) {
         }
     }
 
-    QString language = SettingsHandler::value(SETTING_LANGUAGE).toString();
+    QString language = SettingsHandler::language();
     if (language != "en") {
         QTranslator* translator = new QTranslator();
         QString filename = QString(language).append(".qm");
@@ -103,8 +103,7 @@ int main(int argc, char *argv[])
             updateView.show();
         }
     });
-    bool disableAutoUpdates = SettingsHandler::getValueSetIfNot(SETTING_DISABLE_AUTO_UPDATES, false).toBool();
-    if (!disableAutoUpdates) {
+    if (!SettingsHandler::autoUpdatesDisabled()) {
         reminder.checkForUpdate();
     }
 

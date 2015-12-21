@@ -383,6 +383,5 @@ void DrawingView::checkForUpdate()
 
 void DrawingView::goToWebsite()
 {
-    QString language = SettingsHandler::value(SETTING_LANGUAGE).toString();
-    QDesktopServices::openUrl(QUrl(QString("https://lioddensorbo.com/urim/").append(language)));
+    QDesktopServices::openUrl(QUrl(QString("https://lioddensorbo.com/urim/").append(SettingsHandler::language())));
 }

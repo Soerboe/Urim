@@ -70,6 +70,6 @@ void SelectLanguageDialog::selectLanguageClicked()
         return;
     }
 
-    SettingsHandler::setValue(SETTING_LANGUAGE, button->langCode());
+    SettingsHandler::setLanguage(button->langCode());
     accept();
 }

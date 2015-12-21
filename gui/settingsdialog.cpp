@@ -43,10 +43,10 @@ void SettingsDialog::saveClicked()
 {
     /* LANGUAGE */
     QString lang = ui->languageSelector->currentData().toString();
-    SettingsHandler::setValue(SETTING_LANGUAGE, lang);
+    SettingsHandler::setLanguage(lang);
 
     /* UPDATES */
-    SettingsHandler::setValue(SETTING_DISABLE_AUTO_UPDATES, ui->disableAutoUpdates->isChecked());
+    SettingsHandler::setAutoUpdatesDisabled(ui->disableAutoUpdates->isChecked());
 
     accept();
 }
@@ -54,7 +54,7 @@ void SettingsDialog::saveClicked()
 void SettingsDialog::initialize()
 {
     /* LANGUAGE */
-    QString currentLang = SettingsHandler::value(SETTING_LANGUAGE).toString();
+    QString currentLang = SettingsHandler::language();
     for (int i = 0; i < NUM_LANGUAGES; ++i) {
         const char** language = LANGUAGES[i];
         QString langCode(language[1]);
@@ -65,6 +65,6 @@ void SettingsDialog::initialize()
     }
 
     /* UPDATES */
-    bool disableAutoUpdates = SettingsHandler::value(SETTING_DISABLE_AUTO_UPDATES).toBool();
-    ui->disableAutoUpdates->setChecked(disableAutoUpdates);
+    bool autoUpdatesDisabled = SettingsHandler::autoUpdatesDisabled();
+    ui->disableAutoUpdates->setChecked(autoUpdatesDisabled);
 }

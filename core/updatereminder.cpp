@@ -39,10 +39,9 @@ UpdateReminder::UpdateReminder(std::function<void (UpdateInfo)> callback)
 
 void UpdateReminder::checkForUpdate()
 {
-    QString language = SettingsHandler::value(SETTING_LANGUAGE).toString();
     QString url = QString(UPDATE_URL)
             .append("?v=").append(QCoreApplication::applicationVersion())
-            .append("&lang=").append(language);
+            .append("&lang=").append(SettingsHandler::language());
     _reply = _manager.get(QNetworkRequest(url));
     _timeoutTimer.start();
     connect(_reply, SIGNAL(finished()), this, SLOT(httpFinished()));

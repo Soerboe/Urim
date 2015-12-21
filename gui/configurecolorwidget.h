@@ -58,11 +58,8 @@ private slots:
 private:
     Ui::ConfigureColorWidget *ui;
 
-    QList<QVariant> defaultColors();
     void initColorsView();
     void updateSelectedColorsView();
-
-    void addColorToList(QList<QVariant>& list, Color c);
 };
 
 #endif // CONFIGURECOLORWIDGET_H

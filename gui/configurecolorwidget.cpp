@@ -74,7 +74,6 @@ ConfigureColorWidget::ConfigureColorWidget(bool enableLabel, QWidget *parent) :
     ui->colorsWidget->setColumnWidth(1, 50);
     ui->colorsWidget->sortByColumn(2, Qt::AscendingOrder);
 
-    defaultColors();
     initColorsView();
 
     if (!enableLabel) {
@@ -219,23 +218,21 @@ void ConfigureColorWidget::resetColorsClicked()
         return;
     }
 
-    SettingsHandler::removeValue(SETTING_COLORS);
+    SettingsHandler::resetToDefaultColors();
     initColorsView();
-
     updateSelectedColorsView();
-    saveColorsToSettings();
 }
 
 void ConfigureColorWidget::saveColorsToSettings()
 {
-    QList<QVariant> colors;
+    QList<Color> colors;
 
     for (int i = 0; i < ui->colorsWidget->topLevelItemCount(); ++i) {
         ColorItem* item = dynamic_cast<ColorItem*> (ui->colorsWidget->topLevelItem(i));
-        addColorToList(colors, item->color());
+        colors.append(item->color());
     }
 
-    SettingsHandler::setValue(SETTING_COLORS, colors);
+    SettingsHandler::setColors(colors);
 }
 
 void ConfigureColorWidget::selectColor(QModelIndex index)
@@ -250,46 +247,13 @@ void ConfigureColorWidget::selectColor(QModelIndex index)
     updateSelectedColorsView();
 }
 
-QList<QVariant> ConfigureColorWidget::defaultColors()
-{
-    Colors colors;
-
-    QList<QVariant> defaultColors;
-    addColorToList(defaultColors, colors.red());
-    addColorToList(defaultColors, colors.green());
-    addColorToList(defaultColors, colors.blue());
-    addColorToList(defaultColors, colors.yellow());
-    addColorToList(defaultColors, colors.white());
-    addColorToList(defaultColors, colors.black());
-    addColorToList(defaultColors, colors.grey());
-    addColorToList(defaultColors, colors.darkRed());
-    addColorToList(defaultColors, colors.darkBlue());
-    addColorToList(defaultColors, colors.darkGreen());
-    addColorToList(defaultColors, colors.pink());
-    addColorToList(defaultColors, colors.purple());
-    addColorToList(defaultColors, colors.orange());
-    addColorToList(defaultColors, colors.brown());
-    addColorToList(defaultColors, colors.violet());
-    addColorToList(defaultColors, colors.turquoise());
-    addColorToList(defaultColors, colors.olive());
-    addColorToList(defaultColors, colors.lightBrown());
-    return defaultColors;
-}
-
 void ConfigureColorWidget::initColorsView()
 {
-    QList<QVariant> colors;
-
-    if (SettingsHandler::has(SETTING_COLORS)) {
-        colors = SettingsHandler::value(SETTING_COLORS).toList();
-    } else {
-        colors = defaultColors();
-    }
-
+    QList<Color> colors = SettingsHandler::colors();
     ui->colorsWidget->clear();
 
-    for (QVariant color : colors) {
-        ui->colorsWidget->addTopLevelItem(new ColorItem(color.value<Color>()));
+    for (Color color : colors) {
+        ui->colorsWidget->addTopLevelItem(new ColorItem(color));
     }
 }
 
@@ -308,11 +272,4 @@ void ConfigureColorWidget::updateSelectedColorsView()
     }
 
     ui->selectedColorsLabel->setText(text);
-}
-
-void ConfigureColorWidget::addColorToList(QList<QVariant> &list, Color c)
-{
-    QVariant v;
-    v.setValue(c);
-    list.append(v);
 }

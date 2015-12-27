@@ -32,6 +32,11 @@ void SettingsHandler::initialize(QString orgname, QString appname)
 
     _settings = new QSettings(orgname, appname);
 
+    setDefaultValues();
+}
+
+void SettingsHandler::setDefaultValues()
+{
     if (!has(SETTING_COLORS)) {
         resetToDefaultColors();
     }

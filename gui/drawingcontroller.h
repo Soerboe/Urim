@@ -54,6 +54,8 @@ public:
 
     int currentLotWindowIndex() {return _currLotWindowIndex;}
 
+    ViewContainer* viewContainer() {return _viewContainer;}
+
 private slots:
     void doDraw();
 

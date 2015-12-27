@@ -21,6 +21,8 @@
 #include "lotelementviewer.h"
 #include "utils.h"
 
+#define LOTVIEW_ASPECT_RATIO (16.0/10.0)
+
 class DrawingController;
 class LoadingWidget;
 

@@ -21,6 +21,7 @@
 
 class QSplitter;
 class LotView;
+class LotViewContainer;
 
 namespace Ui {
 class ViewContainer;
@@ -35,12 +36,18 @@ public:
     ~ViewContainer();
 
     void setLotView(LotView* view);
+    void zoomLotView(int percent);
     void addHistoryWidget(QWidget* widget);
 
 private:
     Ui::ViewContainer *ui;
     LotView* _lotView;
+    LotViewContainer* _lotViewContainer;
     QSplitter* _splitter;
+    int _lotViewZoom;
+
+    void resizeEvent(QResizeEvent *);
+    void updateLotViewSize();
 };
 
 #endif // VIEWCONTAINER_H

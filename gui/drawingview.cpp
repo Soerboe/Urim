@@ -46,12 +46,10 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
 
     setupLogger();
     setupPresentationViewMenu();
+    setupStatusbar();
 
     QString style("#container {background-color: #ffffff;}");
     ui->container->setStyleSheet(style);
-
-    _sessionIdView = new QLabel;
-    statusBar()->addPermanentWidget(_sessionIdView);
 
     ui->drawingNameView->hide();
     ui->drawButton->hide();
@@ -80,6 +78,35 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
 DrawingView::~DrawingView()
 {
     delete ui;
+}
+
+void DrawingView::setupStatusbar()
+{
+    _zoomSlider = new QSlider(Qt::Horizontal);
+    _zoomSlider->setRange(10, 100);
+    _zoomSlider->setFixedWidth(100);
+    _zoomSlider->setValue(90);
+
+    auto setZoomText = [&](int percent) -> QString {
+        return tr("Zoom").append(QString::number(percent).rightJustified(4, ' ')).append("% ");
+    };
+
+    _zoomView = new QLabel();
+    _zoomView->setText(setZoomText(_zoomSlider->value()));
+
+    auto zoom = [&](int position) {
+        _drawingController->viewContainer()->zoomLotView(position);
+        _zoomView->setText(setZoomText(position));
+    };
+
+    connect(_zoomSlider, &QSlider::sliderMoved, zoom);
+    connect(_zoomSlider, &QSlider::valueChanged, zoom);
+
+    _sessionIdView = new QLabel;
+
+    statusBar()->addPermanentWidget(_zoomView);
+    statusBar()->addPermanentWidget(_zoomSlider);
+    statusBar()->addPermanentWidget(_sessionIdView);
 }
 
 void DrawingView::setViewContainer(ViewContainer *viewContainer)

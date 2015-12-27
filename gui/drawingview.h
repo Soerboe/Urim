@@ -27,6 +27,7 @@ class ViewContainer;
 class QLabel;
 class QActionGroup;
 class LoggerView;
+class QSlider;
 
 namespace Ui {
 class DrawingView;
@@ -58,14 +59,15 @@ private:
     QActionGroup* _presentationViewActions;
     std::shared_ptr<LoggerView> _loggerView;
     UpdateView _updateView;
+    QSlider* _zoomSlider;
+    QLabel* _zoomView;
 
     void updateSessionIdView(const std::shared_ptr<DrawingSession> session);
     void setupLogger();
     void clear();
-
     void setupComponentVisibility(bool showViewContainerInWindow);
-
     void moveViewContainer(int screenIndex);
+    void setupStatusbar();
 
 private slots:
     void setupPresentationViewMenu();

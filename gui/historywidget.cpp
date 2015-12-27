@@ -23,8 +23,6 @@
 #include <QScrollBar>
 #include <QLabel>
 
-#define ASPECT_RATIO (10.0 / 16.0)
-
 HistoryWidget::HistoryWidget(QWidget *parent)
     : QWidget(parent),
       ui(new Ui::HistoryWidget)
@@ -98,7 +96,7 @@ void HistoryWidget::resizeEvent(QResizeEvent *event)
 int HistoryWidget::lotViewHeight()
 {
     int w = this->width() - 20;  // width minus margins (mas o menos)
-    return w * ASPECT_RATIO;
+    return w / LOTVIEW_ASPECT_RATIO;
 }
 
 QWidget *HistoryWidget::createSeparator()

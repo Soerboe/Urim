@@ -20,17 +20,53 @@
 #include "lotview.h"
 #include <QSplitter>
 
+class LotViewContainer : public QFrame
+{
+    Q_OBJECT
+
+public:
+    LotViewContainer()
+        : QFrame(0)
+    {
+        setLayout(new QVBoxLayout);
+        setFrameStyle(QFrame::NoFrame);
+    }
+
+    void setLotView(LotView* view)
+    {
+        if (layout()->itemAt(0)) {
+            QLayoutItem* item = layout()->takeAt(0);
+            delete item->widget();
+            delete item;
+        }
+
+        layout()->addWidget(view);
+    }
+};
+
+#include "viewcontainer.moc"
+
 ViewContainer::ViewContainer(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ViewContainer),
-    _lotView(0)
+    _lotView(0),
+    _lotViewZoom(90)
 {
     ui->setupUi(this);
     _splitter = new QSplitter();
+    _splitter->setChildrenCollapsible(false);
     ui->horizontalLayout->addWidget(_splitter);
 
     QString splitterStyle("QSplitter::handle { border-left: 2px dotted #C0C0C0; background-color: #F0F0F0;}");
     _splitter->setStyleSheet(splitterStyle);
+
+    _lotViewContainer = new LotViewContainer();
+    _splitter->insertWidget(0, _lotViewContainer);
+    _splitter->setStretchFactor(0, 75);
+
+    connect(_splitter, &QSplitter::splitterMoved, [&](int, int) {
+        this->updateLotViewSize();
+    });
 }
 
 ViewContainer::~ViewContainer()
@@ -40,13 +76,9 @@ ViewContainer::~ViewContainer()
 
 void ViewContainer::setLotView(LotView *view)
 {
-    if (_lotView) {
-        delete _lotView;
-    }
-
-    _splitter->insertWidget(0, view);
-    _splitter->setStretchFactor(0, 75);
+    _lotViewContainer->setLotView(view);
     _lotView = view;
+    updateLotViewSize();
 }
 
 void ViewContainer::addHistoryWidget(QWidget *widget)
@@ -55,3 +87,46 @@ void ViewContainer::addHistoryWidget(QWidget *widget)
     _splitter->setStretchFactor(1, 25);
 }
 
+void ViewContainer::zoomLotView(int percent)
+{
+    if (percent < 10 || percent > 100) {
+        return;
+    }
+
+    _lotViewZoom = percent;
+    updateLotViewSize();
+}
+
+void ViewContainer::resizeEvent(QResizeEvent *)
+{
+    updateLotViewSize();
+}
+
+void ViewContainer::updateLotViewSize()
+{
+    int w = _lotViewContainer->width(), h = _lotViewContainer->height();
+    double internalZoomFactor = (20 + _lotViewZoom / 1.25) / 100.0;
+
+    // tries to set height and adjust width
+    // else set width and adjust height
+    int viewHeight = w / LOTVIEW_ASPECT_RATIO;
+    int viewWidth;
+    if (viewHeight <= h) {
+        viewWidth = viewHeight * LOTVIEW_ASPECT_RATIO;
+    } else {
+        viewWidth = h * LOTVIEW_ASPECT_RATIO;
+        viewHeight = viewWidth / LOTVIEW_ASPECT_RATIO;
+    }
+
+    viewHeight *= internalZoomFactor;
+    viewWidth *= internalZoomFactor;
+
+    if (_lotView && viewWidth < _lotView->minimumWidth()) {
+        viewWidth = _lotView->minimumWidth();
+        viewHeight = viewWidth / LOTVIEW_ASPECT_RATIO;
+    }
+
+    int mh = (h - viewHeight) / 2;
+    int mw = (w - viewWidth) / 2;
+    _lotViewContainer->layout()->setContentsMargins(mw, mh, mw, mh);
+}

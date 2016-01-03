@@ -17,7 +17,10 @@ Template Name: Urim updates
   $downloadPageTitle = get_post_meta($postid, 'download-page-' . $lang, true);
 
   if (!$latestVersion || !$downloadPageTitle || empty($currentVersion)) {
-    http_response_code(500);
+    // http_response_code available in PHP >= 5.4
+    //http_response_code(500);
+    $error_code = empty($currentVersion) ? 400 : 500;
+    header('X-PHP-Response-Code: ' . $error_code, true, $error_code);
     exit(-1);
   }
 

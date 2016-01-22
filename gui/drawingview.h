@@ -44,7 +44,6 @@ public:
     void setViewContainer(ViewContainer* viewContainer);
     ViewContainer* takeViewContainer();
     bool hasViewContainer();
-    void setDrawingName(QString drawingName);
 
 protected:
     void closeEvent(QCloseEvent *);

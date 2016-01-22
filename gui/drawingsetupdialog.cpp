@@ -59,11 +59,6 @@ LotView* DrawingSetupDialog::getView()
     return _controller->at(selectedConfiguration)->createView();
 }
 
-QString DrawingSetupDialog::getDrawingName()
-{
-    return ui->nameEdit->text();
-}
-
 void DrawingSetupDialog::createClicked()
 {
     int selectedConfiguration = ui->drawingTypeSelector->currentIndex() - 1;

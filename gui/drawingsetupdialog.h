@@ -36,7 +36,6 @@ public:
 
     std::shared_ptr<DrawingSession> getDrawingSession();
     LotView* getView();
-    QString getDrawingName();
 
 private slots:
     void createClicked();

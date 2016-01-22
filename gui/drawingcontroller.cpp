@@ -165,14 +165,6 @@ void DrawingController::moveViewContainer(int screenIndex, const QScreen* screen
     placeViewContainer(screen);
 }
 
-void DrawingController::setDrawingName(QString drawingName)
-{
-    if (currLotWindow()) {
-        currLotWindow()->setDrawingName(drawingName);
-    }
-    _drawingView->setDrawingName(drawingName);
-}
-
 void DrawingController::initViewContainer(LotView* view, const QScreen* screen)
 {
     if (!view) {

@@ -43,7 +43,6 @@ public:
     void showLot(bool visible);
     void initViewContainer(LotView* view, const QScreen* screen = 0);
     void moveViewContainer(int screenIndex, const QScreen* screen = 0);
-    void setDrawingName(QString drawingName);
 
     std::shared_ptr<DrawingSession> drawingSession() const {return _drawingSession;}
 

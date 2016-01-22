@@ -30,7 +30,6 @@ LotWindow::LotWindow(QWidget *drawingView) :
     setAttribute(Qt::WA_ShowWithoutActivating);
 
     setFocusPolicy(Qt::StrongFocus);
-    ui->drawingNameView->hide();
 }
 
 LotWindow::~LotWindow()
@@ -47,9 +46,6 @@ void LotWindow::setViewContainer(ViewContainer *viewContainer)
 
     ui->layout->addWidget(viewContainer);
     _viewContainer = viewContainer;
-
-//    ui->drawingNameView->setText(_drawingName);
-//    ui->drawingNameView->setVisible(!_drawingName.isEmpty());
 }
 
 ViewContainer *LotWindow::takeViewContainer()

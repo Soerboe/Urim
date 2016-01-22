@@ -31,6 +31,7 @@
 #include <QDesktopServices>
 #include "settingshandler.h"
 #include <QCheckBox>
+#include <QLabel>
 
 using namespace std;
 
@@ -52,7 +53,6 @@ DrawingView::DrawingView(DrawingController* controller, DrawingSetupDialog* setu
     QString style("#container {background-color: #ffffff;}");
     ui->container->setStyleSheet(style);
 
-    ui->drawingNameView->hide();
     ui->drawButton->hide();
 
     QWidget* toolbarSpacer = new QWidget(this);
@@ -150,12 +150,6 @@ void DrawingView::enableDrawing(bool enabled)
     ui->drawButton->setEnabled(enabled);
 }
 
-void DrawingView::setDrawingName(QString drawingName)
-{
-    ui->drawingNameView->setText(drawingName);
-    ui->drawingNameView->setVisible(!drawingName.isEmpty());
-}
-
 void DrawingView::closeEvent(QCloseEvent* event)
 {
     event->accept();
@@ -215,11 +209,9 @@ void DrawingView::clear()
 {
     ui->logWidget->clear();
     _drawingController->clearHistory();
-    setDrawingName("");
     enableDrawing(true);
     ui->presentationViewMenu->actions()[0]->setChecked(true);
 
-    ui->drawingNameView->hide();
     setupComponentVisibility(false);
 }
 
@@ -268,7 +260,6 @@ void DrawingView::showDrawingSetup()
     connect(_setupDialog, &DrawingSetupDialog::finished, [&](int result) {
         if (result == QDialog::Accepted) {
             _drawingController->initViewContainer(_setupDialog->getView());
-            _drawingController->setDrawingName(_setupDialog->getDrawingName());
             _drawingController->logger()->clear();
             startNewDrawingSession(true);
             this->show();

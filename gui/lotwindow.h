@@ -37,15 +37,12 @@ public:
     ViewContainer* takeViewContainer();
     bool hasViewContainer();
 
-    void setDrawingName(QString name) {_drawingName = name;}
-
     virtual void focusInEvent(QFocusEvent *);
 
 private:
     Ui::LotWindow *ui;
 
     ViewContainer* _viewContainer;
-    QString _drawingName;
     QWidget* _drawingView;
 };
 

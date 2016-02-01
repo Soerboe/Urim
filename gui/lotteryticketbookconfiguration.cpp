@@ -18,13 +18,13 @@
 #include <memory>
 #include "randomnumbergenerator.h"
 #include "lotteryticketbookview.h"
-#include "configurelotteryticketbookdialog.h"
 #include "drawingsession.h"
+#include "lotteryticketbookwizard.h"
 
 using namespace std;
 
 LotteryTicketBookConfiguration::LotteryTicketBookConfiguration()
-    : DrawingConfiguration(tr("Lottery ticket book"), true),
+    : DrawingConfiguration(tr("Lottery ticket book"), tr("Draw lots from lottery ticket books"), QIcon(":/gui/icons/lotterybookdrawing.svg"), true),
       _numBooks(1),
       _numLotsPerBook(1000),
       _booksLabel(tr("Book")),
@@ -53,41 +53,31 @@ LotView *LotteryTicketBookConfiguration::createView()
     return new LotteryTicketBookView(bookView.size() > lotView.size() ? bookView : lotView);
 }
 
-void LotteryTicketBookConfiguration::configure()
-{
-    ConfigureLotteryTicketBookDialog dialog(name());
-    dialog.init(_numBooks, _booksLabel, _numLotsPerBook, _lotsLabel, _uniqueResults, _viewIndex);
-    int retval = dialog.exec();
 
-    if (retval == QDialog::Accepted) {
-        _numBooks = dialog.numBooks();
-        _booksLabel = dialog.booksLabel();
-        _numLotsPerBook = dialog.numLotsPerBook();
-        _lotsLabel = dialog.lotsLabel();
-        _uniqueResults = dialog.uniqueResults();
-        _viewIndex = dialog.viewIndex();
-    }
+WizardBase *LotteryTicketBookConfiguration::wizard()
+{
+    return new LotteryTicketBookWizard(dynamic_pointer_cast<LotteryTicketBookConfiguration> (shared_from_this()));
 }
 
-QString LotteryTicketBookConfiguration::detailedSummary()
+QString LotteryTicketBookConfiguration::summary()
 {
     QString s;
-    s.append("<h3>");
-    s.append(tr("Draw lots from lottery ticket books"));
-    s.append("</h3>");
     s.append("<div>");
     s.append(tr("Number of books") + ": " + QString::number(_numBooks));
     s.append("</div><div>");
-    if (!_booksLabel.isEmpty()) {
-        s.append(tr("Book label") + ": " + _booksLabel);
-        s.append("</div><div>");
-    }
     s.append(tr("Number of lots per book") + ": " + QString::number(_numLotsPerBook));
-    if (!_lotsLabel.isEmpty()) {
-        s.append("</div><div>");
-        s.append(tr("Lots label") + ": " + _lotsLabel);
-    }
     s.append("</div>");
+    if (!_booksLabel.isEmpty()) {
+        s.append("<div>");
+        s.append(tr("Book label") + ": " + _booksLabel);
+        s.append("</div>");
+    }
+    if (!_lotsLabel.isEmpty()) {
+        s.append("<div>");
+        s.append(tr("Lots label") + ": " + _lotsLabel);
+        s.append("</div>");
+    }
+    s.append(uniqueResultsSummary());
     return s;
 }
 

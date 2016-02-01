@@ -17,6 +17,52 @@
     </message>
 </context>
 <context>
+    <name>AdvancedConfigurationOptions</name>
+    <message>
+        <source>Setup</source>
+        <translation>Oppsett</translation>
+    </message>
+    <message>
+        <source>Views</source>
+        <translation>Visning</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Avbryt</translation>
+    </message>
+    <message>
+        <source>Advanced options</source>
+        <translation>Avanserte valg</translation>
+    </message>
+    <message>
+        <source>All fields must be filled out correctly</source>
+        <translation>Alle felter må være korrekt fylt ut</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Feil</translation>
+    </message>
+</context>
+<context>
+    <name>AdvancedLotteryTicketBookOptions</name>
+    <message>
+        <source>Label</source>
+        <translation>Etikett</translation>
+    </message>
+    <message>
+        <source>Book label:</source>
+        <translation>Boketikett:</translation>
+    </message>
+    <message>
+        <source>Lot label:</source>
+        <translation>Loddetikett:</translation>
+    </message>
+</context>
+<context>
     <name>BingoConfiguration</name>
     <message>
         <source>Bingo</source>
@@ -29,6 +75,29 @@
     <message>
         <source>Standard 5x5 bingo cards</source>
         <translation>Standard 5x5 bingolodd</translation>
+    </message>
+    <message>
+        <source>Draws standard 5x5 bingo card lots</source>
+        <translation>Trekker standard 5x5 bingolodd</translation>
+    </message>
+</context>
+<context>
+    <name>BookConfigPage</name>
+    <message>
+        <source>Number of books</source>
+        <translation>Antall bøker</translation>
+    </message>
+    <message>
+        <source>Choose the total number of lottery ticket books</source>
+        <translation>Velg antall loddbøker det skal trekkes fra</translation>
+    </message>
+    <message>
+        <source>Number of lots per book</source>
+        <translation>Antall lodd per bok</translation>
+    </message>
+    <message>
+        <source>Choose the number of lots per lottery ticket book</source>
+        <translation>Velg antall lodd som loddbøkene inneholder</translation>
     </message>
 </context>
 <context>
@@ -173,10 +242,6 @@
         <translation>Farge og tall</translation>
     </message>
     <message>
-        <source>Draw a color and a number</source>
-        <translation>Trekk farge og tall</translation>
-    </message>
-    <message>
         <source>Colors</source>
         <translation>Farger</translation>
     </message>
@@ -196,189 +261,40 @@
         <source>Number label</source>
         <translation>Talletikett</translation>
     </message>
-</context>
-<context>
-    <name>ConfigureAmountWidget</name>
     <message>
-        <source>Label</source>
-        <translation>Etikett</translation>
+        <source>Draw lots containing a color and a number</source>
+        <translation>Trekk lodd som har både farge og tall</translation>
     </message>
 </context>
 <context>
     <name>ConfigureColorWidget</name>
     <message>
-        <source>Color</source>
-        <translation>Farge</translation>
-    </message>
-    <message>
-        <source>Show label</source>
-        <translation>Vis etikett</translation>
-    </message>
-    <message>
-        <source>Label</source>
-        <translation>Etikett</translation>
-    </message>
-    <message>
         <source>No colors selected.</source>
         <translation>Ingen farger er valgt.</translation>
-    </message>
-    <message>
-        <source>Click in front of the color to select</source>
-        <translation>Klikk foran fargen for å velge</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Legg til</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>Endre</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Fjern</translation>
-    </message>
-    <message>
-        <source>Reset colors</source>
-        <translation>Tilbakestill farger</translation>
-    </message>
-    <message>
-        <source>Choose color</source>
-        <translation>Velg farge</translation>
-    </message>
-    <message>
-        <source>Choose color name</source>
-        <translation>Velg fargenavn</translation>
-    </message>
-    <message>
-        <source>Color name:</source>
-        <translation>Fargenavn:</translation>
-    </message>
-    <message>
-        <source>No color name</source>
-        <translation>Intet fargenavn</translation>
-    </message>
-    <message>
-        <source>No color name given</source>
-        <translation>Fargenavn ble ikke angitt</translation>
-    </message>
-    <message>
-        <source>Choose new color</source>
-        <translation>Velg ny farge</translation>
-    </message>
-    <message>
-        <source>Choose new color name</source>
-        <translation>Velg nytt fargenavn</translation>
-    </message>
-    <message>
-        <source>New color name:</source>
-        <translation>Nytt fargenavn:</translation>
-    </message>
-    <message>
-        <source>Reset colors to default</source>
-        <translation>Tilbakestill til standardfarger</translation>
-    </message>
-    <message>
-        <source>Are you sure you would like to reset colors to default?&lt;br&gt;This will remove all custom changes.</source>
-        <translation>Er du sikker på at du vil tilbakestille til standardfarger?&lt;br&gt;Dette vil fjerne alle endringer du har gjort.</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation>Ja</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>Nei</translation>
     </message>
     <message>
         <source>&lt;strong&gt;Selected colors:&lt;/strong&gt; </source>
         <translation>&lt;strong&gt;Valgte farger:&lt;/strong&gt; </translation>
     </message>
-</context>
-<context>
-    <name>ConfigureDrawingDialog</name>
     <message>
-        <source>Configure drawing</source>
-        <translation>Tilpass loddtrekning</translation>
+        <source>Select color</source>
+        <translation>Velg farge</translation>
     </message>
     <message>
-        <source>Setup</source>
-        <translation>Oppsett</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on a color to select/deselect. Hover over the color to see color name. Click on &lt;span style=&quot; font-weight:600;&quot;&gt;Edit colors&lt;/span&gt; to edit, add and remove colors.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klikk på en farge for å velge/velge bort. Hold musepekeren over en farge for å se fargenavnet. Klikk på &lt;span style=&quot; font-weight:600;&quot;&gt;Endre farger&lt;/span&gt; for å endre, legge til eller fjerne farger.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Draw unique lots per drawing session</source>
-        <translation>Trekk unike lodd per trekkerunde</translation>
+        <source>Edit colors</source>
+        <translation>Endre farger</translation>
     </message>
     <message>
-        <source>Views</source>
-        <translation>Visning</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Avbryt</translation>
-    </message>
-    <message>
-        <source>Configure drawing:</source>
-        <translation>Tilpass loddtrekning:</translation>
-    </message>
-    <message>
-        <source>All fields must be filled out correctly</source>
-        <translation>Alle felter må være korrekt fylt ut</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Feil</translation>
-    </message>
-</context>
-<context>
-    <name>ConfigureLotteryTicketBookDialog</name>
-    <message>
-        <source>Lottery ticket books</source>
-        <translation>Loddbøker</translation>
-    </message>
-    <message>
-        <source>Number of books:</source>
-        <translation>Antall bøker:</translation>
-    </message>
-    <message>
-        <source>Book label:</source>
-        <translation>Boketikett:</translation>
-    </message>
-    <message>
-        <source>Book</source>
-        <translation>Bok</translation>
-    </message>
-    <message>
-        <source>Number of lots per book:</source>
-        <translation>Antall lodd per bok:</translation>
-    </message>
-    <message>
-        <source>Lot label:</source>
-        <translation>Loddetikett:</translation>
-    </message>
-    <message>
-        <source>Lot</source>
-        <translation>Lodd</translation>
+        <source>Unselect all</source>
+        <translation>Velg bort alle</translation>
     </message>
 </context>
 <context>
     <name>ConfigureNumberWidget</name>
-    <message>
-        <source>Number</source>
-        <translation>Tall</translation>
-    </message>
-    <message>
-        <source>Minimum number:</source>
-        <translation>Laveste tall:</translation>
-    </message>
-    <message>
-        <source>Maximum number:</source>
-        <translation>Høyeste tall:</translation>
-    </message>
     <message>
         <source>Show label</source>
         <translation>Vis etikett</translation>
@@ -391,12 +307,32 @@
         <source>Minimum value is larger than maximum value.</source>
         <translation>Laveste tall er større enn høyeste tall.</translation>
     </message>
+    <message>
+        <source>Minimum number</source>
+        <translation>Laveste tall</translation>
+    </message>
+    <message>
+        <source>Choose the lowest number to be drawn</source>
+        <translation>Velg det laveste talles som skal kunne trekkes</translation>
+    </message>
+    <message>
+        <source>Maximum number</source>
+        <translation>Høyeste tall</translation>
+    </message>
+    <message>
+        <source>Choose the highest number to be drawn</source>
+        <translation>Velg det høyeste talles som skal kunne trekkes</translation>
+    </message>
 </context>
 <context>
-    <name>DrawingConfiguration</name>
+    <name>ConfigureUniqueResultsWidget</name>
     <message>
-        <source>Unique results</source>
-        <translation>Trekk unike lodd</translation>
+        <source>Same lot multiple times</source>
+        <translation>Samme lodd flere ganger</translation>
+    </message>
+    <message>
+        <source>Should it be possible to draw the same lot multiple times?</source>
+        <translation>Skal det være mulig at samme lodd kan trekkes flere ganger?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -406,52 +342,35 @@
         <source>No</source>
         <translation>Nei</translation>
     </message>
+    <message>
+        <source>The list of drawn lots are cleared when a new drawing session is started. If you select &quot;No&quot; to the above, a lot can only be drawn once per drawing session.</source>
+        <translation>Listen over trukne lodd tilbakestilles når en ny trekkerunde startes. Hvis du velger &quot;Nei&quot; ovenfor kan et lodd bare trekkes én gang per trekkerunde.</translation>
+    </message>
+</context>
+<context>
+    <name>DrawingConfiguration</name>
+    <message>
+        <source>Yes</source>
+        <translation>Ja</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>Nei</translation>
+    </message>
+    <message>
+        <source>Same lot multiple times</source>
+        <translation>Samme lodd flere ganger</translation>
+    </message>
 </context>
 <context>
     <name>DrawingSetupDialog</name>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select a type of lottery and configure the lots.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Velg en type loddtrekning og tilpass loddene.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Lottery name (optional)</source>
-        <translation>Navn på loddtrekning (valgfritt)</translation>
-    </message>
-    <message>
-        <source>Configure</source>
-        <translation>Tilpass</translation>
-    </message>
-    <message>
-        <source>Summary:</source>
-        <translation>Oppsummering:</translation>
-    </message>
-    <message>
-        <source>Create</source>
-        <translation>Opprett</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation>Avslutt</translation>
-    </message>
     <message>
         <source>Setup drawing</source>
         <translation>Oppsett av loddtrekning</translation>
     </message>
     <message>
-        <source>No type of drawing chosen</source>
-        <translation>Ingen loddtrekning er valgt</translation>
-    </message>
-    <message>
-        <source>Please choose a type of drawing.</source>
-        <translation>Vennligst velg en type loddtrekning.</translation>
-    </message>
-    <message>
-        <source>Choose a type of drawing:</source>
-        <translation>Velg en type loddtrekning:</translation>
-    </message>
-    <message>
-        <source>Create Lottery Drawing</source>
-        <translation>Opprett loddtrekning</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please select type of lottery:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vennligst velg type loddtrekning:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -642,6 +561,88 @@
     </message>
 </context>
 <context>
+    <name>EditColorsDialog</name>
+    <message>
+        <source>Edit colors</source>
+        <translation>Endre farger</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Lagre</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Avbryt</translation>
+    </message>
+</context>
+<context>
+    <name>EditColorsWidget</name>
+    <message>
+        <source>Add color</source>
+        <translation>Legg til farge</translation>
+    </message>
+    <message>
+        <source>Edit color</source>
+        <translation>Endre farge</translation>
+    </message>
+    <message>
+        <source>Remove color</source>
+        <translation>Fjern farge</translation>
+    </message>
+    <message>
+        <source>Reset colors</source>
+        <translation>Tilbakestill farger</translation>
+    </message>
+    <message>
+        <source>Choose color</source>
+        <translation>Velg farge</translation>
+    </message>
+    <message>
+        <source>Choose color name</source>
+        <translation>Velg fargenavn</translation>
+    </message>
+    <message>
+        <source>Color name:</source>
+        <translation>Fargenavn:</translation>
+    </message>
+    <message>
+        <source>No color name</source>
+        <translation>Intet fargenavn</translation>
+    </message>
+    <message>
+        <source>No color name given</source>
+        <translation>Fargenavn ble ikke angitt</translation>
+    </message>
+    <message>
+        <source>Choose new color</source>
+        <translation>Velg ny farge</translation>
+    </message>
+    <message>
+        <source>Choose new color name</source>
+        <translation>Velg nytt fargenavn</translation>
+    </message>
+    <message>
+        <source>New color name:</source>
+        <translation>Nytt fargenavn:</translation>
+    </message>
+    <message>
+        <source>Reset colors to default</source>
+        <translation>Tilbakestill til standardfarger</translation>
+    </message>
+    <message>
+        <source>Are you sure you would like to reset colors to default?&lt;br&gt;This will remove all custom changes to the colors.</source>
+        <translation>Er du sikker på at du vil tilbakestille til standardfarger?&lt;br&gt;Dette vil fjerne alle endringer du har gjort.</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Ja</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>Nei</translation>
+    </message>
+</context>
+<context>
     <name>HistoryWidget</name>
     <message>
         <source>Previous lots</source>
@@ -668,6 +669,13 @@
     <message>
         <source>Event</source>
         <translation>Hendelse</translation>
+    </message>
+</context>
+<context>
+    <name>LotViewSelector</name>
+    <message>
+        <source>Select view:</source>
+        <translation>Velg visning:</translation>
     </message>
 </context>
 <context>
@@ -750,14 +758,6 @@
 <context>
     <name>SingleNumberConfiguration</name>
     <message>
-        <source>Single number</source>
-        <translation>Tall</translation>
-    </message>
-    <message>
-        <source>Draw a singel number</source>
-        <translation>Trekk tall</translation>
-    </message>
-    <message>
         <source>Minimum number</source>
         <translation>Laveste tall</translation>
     </message>
@@ -768,6 +768,21 @@
     <message>
         <source>Label</source>
         <translation>Etikett</translation>
+    </message>
+    <message>
+        <source>Simple drawing</source>
+        <translation>Enkel loddtrekning</translation>
+    </message>
+    <message>
+        <source>Draws a random number in the chosen number range</source>
+        <translation>Trekker et tilfeldig tall fra valgte intervall</translation>
+    </message>
+</context>
+<context>
+    <name>SummaryPage</name>
+    <message>
+        <source>Summary of you choices</source>
+        <translation>Oppsummering av dine valg</translation>
     </message>
 </context>
 <context>
@@ -815,6 +830,33 @@
     <message>
         <source>Could not open download page in your default browser. Please enter the following URL into your browser to update the application: &lt;strong&gt;%1&lt;/strong&gt;</source>
         <translation>Kunne ikke åpne nedlastingssiden i nettleseren. Gå til følgende URL i din nettleser for å oppdatere programmet: &lt;strong&gt;%1&lt;/strong&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>WizardBase</name>
+    <message>
+        <source>Options</source>
+        <translation>Avanserte valg</translation>
+    </message>
+    <message>
+        <source>&lt; Back</source>
+        <translation>&lt; Tilbake</translation>
+    </message>
+    <message>
+        <source>Next &gt;</source>
+        <translation>Neste &gt;</translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation>Opprett</translation>
+    </message>
+    <message>
+        <source>Invalid configuration</source>
+        <translation>Ugyldig oppsett</translation>
+    </message>
+    <message>
+        <source>The drawing configuration is invalid. Please go back to correct the error.</source>
+        <translation>Oppsettet er ugyldig. Vennligst gå tilbake og rett opp feilen.</translation>
     </message>
 </context>
 </TS>

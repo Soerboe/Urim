@@ -14,44 +14,33 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CONFIGURECOLORWIDGET_H
-#define CONFIGURECOLORWIDGET_H
+#ifndef ADVANCEDLOTTERYTICKETBOOKOPTIONS_H
+#define ADVANCEDLOTTERYTICKETBOOKOPTIONS_H
 
-#include <QWidget>
-#include "color.h"
+#include <QObject>
+#include "advancedconfigurationoptions.h"
+#include "lotviewselector.h"
 
-class ColorFrame;
+class QLineEdit;
 
-namespace Ui {
-class ConfigureColorWidget;
-}
-
-class ConfigureColorWidget : public QWidget
+class AdvancedLotteryTicketBookOptions : public AdvancedConfigurationOptions
 {
     Q_OBJECT
 
 public:
-    explicit ConfigureColorWidget(QWidget *parent = 0);
-    ~ConfigureColorWidget();
+    AdvancedLotteryTicketBookOptions(const QString name);
 
-    void init(const std::vector<Color>& colors);
-    bool validate();
-    QString validationError();
+    void init(const QString& booksLabel, const QString& lotsLabel);
+    QString booksLabel();
+    QString lotsLabel();
 
-    std::vector<Color> selectedColors();
-
-signals:
-    void changed();
+protected:
+    virtual bool validate() {return true;}
+    virtual QString validationError() {return "";}
 
 private:
-    Ui::ConfigureColorWidget *ui;
-    QList<ColorFrame*> _colorFrames;
-
-    void setupColorPicker();
-    void updateSelectedColorsView();
-
-    void editColorsClicked();
-    void unselectAllClicked();
+    QLineEdit* _booksLabelEdit;
+    QLineEdit* _lotsLabelEdit;
 };
 
-#endif // CONFIGURECOLORWIDGET_H
+#endif // ADVANCEDLOTTERYTICKETBOOKOPTIONS_H

@@ -14,42 +14,38 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "configuredrawingdialog.h"
-#include "ui_configuredrawingdialog.h"
+#include "advancedconfigurationoptions.h"
+#include "ui_advancedconfigurationoptions.h"
 #include <QMessageBox>
-#include <QSpinBox>
-#include <QLineEdit>
-#include <QLabel>
-#include <limits>
-#include <QSpacerItem>
 
-ConfigureDrawingDialog::ConfigureDrawingDialog(const QString name, QWidget* parent) :
-    QDialog(parent),
-    ui(new Ui::ConfigureDrawingDialog),
-    _uniqueResults(false)
+AdvancedConfigurationOptions::AdvancedConfigurationOptions(const QString &title, QWidget* parent)
+    : QDialog(parent),
+      ui(new Ui::AdvancedConfigurationOptions)
 {
     ui->setupUi(this);
-    setWindowTitle(tr("Configure drawing:").append(" ") + name);
+    setWindowTitle(QString(title).append(" - ").append(tr("Advanced options")));
     connect(ui->okButton, SIGNAL(clicked()), SLOT(okClicked()));
     connect(ui->cancelButton, SIGNAL(clicked()), SLOT(reject()));
 }
 
-ConfigureDrawingDialog::~ConfigureDrawingDialog()
+AdvancedConfigurationOptions::~AdvancedConfigurationOptions()
 {
     delete ui;
 }
 
-void ConfigureDrawingDialog::init(bool uniqueResults)
+void AdvancedConfigurationOptions::hideSetupTab()
 {
-    ui->uniqueResults->setChecked(uniqueResults);
+    int index = ui->tabWidget->indexOf(ui->setupTab);
+    ui->tabWidget->removeTab(index);
 }
 
-bool ConfigureDrawingDialog::uniqueResults()
+void AdvancedConfigurationOptions::hideViewsTab()
 {
-    return ui->uniqueResults->isChecked();
+    int index = ui->tabWidget->indexOf(ui->viewsTab);
+    ui->tabWidget->removeTab(index);
 }
 
-void ConfigureDrawingDialog::okClicked()
+void AdvancedConfigurationOptions::okClicked()
 {
     if (validate()) {
         accept();

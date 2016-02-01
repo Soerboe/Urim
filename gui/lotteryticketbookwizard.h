@@ -14,13 +14,26 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "configuration.h"
+#ifndef LOTTERYTICKETBOOKWIZARD_H
+#define LOTTERYTICKETBOOKWIZARD_H
 
-Configuration::Configuration(const QString &name, const QString &description, const QIcon &icon, bool configurable)
-    : _name(name),
-      _description(description),
-      _icon(icon),
-      _configurable(configurable)
+#include "wizardbase.h"
+
+class LotteryTicketBookConfiguration;
+class BookConfigPage;
+
+class LotteryTicketBookWizard : public WizardBase
 {
-}
+public:
+    LotteryTicketBookWizard(std::shared_ptr<LotteryTicketBookConfiguration> config);
 
+protected:
+    void advancedSetup();
+
+private:
+    std::shared_ptr<LotteryTicketBookConfiguration> _config;
+    BookConfigPage* _bookConfigPage;
+    UniqueResultsConfigPage* _uniqueResultsConfigPage;
+};
+
+#endif // LOTTERYTICKETBOOKWIZARD_H

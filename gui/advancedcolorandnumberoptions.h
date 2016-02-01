@@ -14,33 +14,30 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CONFIGURESINGLENUMBERDIALOG_H
-#define CONFIGURESINGLENUMBERDIALOG_H
+#ifndef ADVANCEDCOLORANDNUMBEROPTIONS_H
+#define ADVANCEDCOLORANDNUMBEROPTIONS_H
 
-#include "configuredrawingdialog.h"
-#include "configurenumberwidget.h"
+#include "advancedconfigurationoptions.h"
+#include "lotviewselector.h"
 
-class LotViewSelector;
-
-class ConfigureSingleNumberDialog : public ConfigureDrawingDialog
+class AdvancedColorAndNumberOptions : public AdvancedConfigurationOptions
 {
     Q_OBJECT
 
 public:
-    ConfigureSingleNumberDialog(const QString name);
+    AdvancedColorAndNumberOptions(const QString &title);
 
-    void init(int min, int max, QString label, bool uniqueResults);
+    void init(int viewIndex);
+    int viewIndex() {return _lotViewSelector->selectedViewIndex();}
+
+protected:
     virtual bool validate();
     virtual QString validationError();
 
-    int min() {return _configureNumberWidget->min();}
-    int max() {return _configureNumberWidget->max();}
-    QString label() {return _configureNumberWidget->label();}
-
 private:
-    ConfigureNumberWidget* _configureNumberWidget;
     LotViewSelector* _lotViewSelector;
 
+    void setupViewsTab();
 };
 
-#endif // CONFIGURESINGLENUMBERDIALOG_H
+#endif // ADVANCEDCOLORANDNUMBEROPTIONS_H

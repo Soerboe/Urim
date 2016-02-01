@@ -14,13 +14,29 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "configuration.h"
+#include "editcolorsdialog.h"
+#include "ui_editcolorsdialog.h"
+#include "editcolorswidget.h"
 
-Configuration::Configuration(const QString &name, const QString &description, const QIcon &icon, bool configurable)
-    : _name(name),
-      _description(description),
-      _icon(icon),
-      _configurable(configurable)
+EditColorsDialog::EditColorsDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::EditColorsDialog),
+    _editWidget(new EditColorsWidget)
 {
+    ui->setupUi(this);
+    ui->verticalLayout->insertWidget(0, _editWidget);
+
+    connect(ui->cancelButton, &QPushButton::clicked, this, reject);
+    connect(ui->saveButton, &QPushButton::clicked, this, saveClicked);
 }
 
+EditColorsDialog::~EditColorsDialog()
+{
+    delete ui;
+}
+
+void EditColorsDialog::saveClicked()
+{
+    _editWidget->saveColorsToSettings();
+    accept();
+}

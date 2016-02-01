@@ -14,44 +14,29 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CONFIGURECOLORWIDGET_H
-#define CONFIGURECOLORWIDGET_H
+#ifndef CONFIGUREUNIQUERESULTSWIDGET_H
+#define CONFIGUREUNIQUERESULTSWIDGET_H
 
 #include <QWidget>
-#include "color.h"
-
-class ColorFrame;
 
 namespace Ui {
-class ConfigureColorWidget;
+class ConfigureUniqueResultsWidget;
 }
 
-class ConfigureColorWidget : public QWidget
+class ConfigureUniqueResultsWidget : public QWidget
 {
     Q_OBJECT
-
 public:
-    explicit ConfigureColorWidget(QWidget *parent = 0);
-    ~ConfigureColorWidget();
-
-    void init(const std::vector<Color>& colors);
-    bool validate();
-    QString validationError();
-
-    std::vector<Color> selectedColors();
+    explicit ConfigureUniqueResultsWidget(QWidget *parent = 0);
+    void init(bool unique);
+    bool uniqueResults();
 
 signals:
     void changed();
 
 private:
-    Ui::ConfigureColorWidget *ui;
-    QList<ColorFrame*> _colorFrames;
-
-    void setupColorPicker();
-    void updateSelectedColorsView();
-
-    void editColorsClicked();
-    void unselectAllClicked();
+    Ui::ConfigureUniqueResultsWidget* ui;
+    void setChecked(bool unique);
 };
 
-#endif // CONFIGURECOLORWIDGET_H
+#endif // CONFIGUREUNIQUERESULTSWIDGET_H

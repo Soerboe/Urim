@@ -33,11 +33,23 @@ public:
 
     std::shared_ptr<DrawingSession> createDrawingSession();
     LotView* createView();
-    void configure();
     bool isValid();
+    WizardBase* wizard();
+    virtual QString summary();
 
-protected:
-    virtual QString detailedSummary();
+    int min() {return _min;}
+    int max() {return _max;}
+    QString numberLabel() {return _numberLabel;}
+    std::vector<Color> colors() {return _colors;}
+    QString colorLabel() {return _colorLabel;}
+    int viewIndex() {return _viewIndex;}
+
+    void setMin(int min) {_min = min;}
+    void setMax(int max) {_max = max;}
+    void setNumberLabel(const QString& l) {_numberLabel = l;}
+    void setColors(std::vector<Color> colors) {_colors = colors;}
+    void setColorLabel(const QString& l) {_colorLabel = l;}
+    void setViewIndex(int i) {_viewIndex = i;}
 
 private:
     int _min, _max;

@@ -14,13 +14,29 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "configuration.h"
+#ifndef COLORANDNUMBERWIZARD_H
+#define COLORANDNUMBERWIZARD_H
 
-Configuration::Configuration(const QString &name, const QString &description, const QIcon &icon, bool configurable)
-    : _name(name),
-      _description(description),
-      _icon(icon),
-      _configurable(configurable)
+#include "wizardbase.h"
+
+class ColorAndNumberConfiguration;
+class NumberRangeConfigPage;
+class ColorsConfigPage;
+class UniqueResultsConfigPage;
+
+class ColorAndNumberWizard : public WizardBase
 {
-}
+public:
+    ColorAndNumberWizard(std::shared_ptr<ColorAndNumberConfiguration> config);
 
+protected:
+    void advancedSetup();
+
+private:
+    std::shared_ptr<ColorAndNumberConfiguration> _config;
+    NumberRangeConfigPage* _numberConfigPage;
+    ColorsConfigPage* _colorConfigPage;
+    UniqueResultsConfigPage* _uniqueResultsConfigPage;
+};
+
+#endif // COLORANDNUMBERWIZARD_H

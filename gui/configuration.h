@@ -19,26 +19,33 @@
 
 #include <QObject>
 #include "memory"
+#include <QIcon>
 
 class DrawingSession;
 class LotView;
+class WizardBase;
 
-class Configuration : public QObject
+class Configuration : public QObject, public std::enable_shared_from_this<Configuration>
 {
     Q_OBJECT
 public:
-    Configuration(const QString& name, bool configurable);
+    Configuration(const QString& name, const QString& description, const QIcon& icon, bool configurable);
 
     virtual std::shared_ptr<DrawingSession> createDrawingSession() = 0;
     virtual LotView* createView() = 0;
-    virtual void configure() = 0;
     virtual bool isValid() = 0;
     virtual QString summary() = 0;
+    virtual WizardBase* wizard() = 0;
 
     QString name() {return _name;}
+    QString description() {return _description;}
+    QIcon icon() {return _icon;}
     bool configurable() {return _configurable;}
+
 private:
     QString _name;
+    QString _description;
+    QIcon _icon;
     bool _configurable;
 };
 

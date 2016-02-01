@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) Dag Henning Liodden Sørbø <daghenning@lioddensorbo.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
+
+
 #include "configurenumberwidget.h"
 #include "ui_configurenumberwidget.h"
 #include <limits>
@@ -20,6 +37,11 @@ ConfigureNumberWidget::ConfigureNumberWidget(bool enableLabel, QWidget *parent) 
         ui->useLabel->hide();
         ui->labelEdit->hide();
     }
+
+    connect(ui->minSpin, SIGNAL(valueChanged(int)), SLOT(handleFieldChanged()));
+    connect(ui->maxSpin, SIGNAL(valueChanged(int)), SLOT(handleFieldChanged()));
+    connect(ui->useLabel, SIGNAL(toggled(bool)), SLOT(handleFieldChanged()));
+    connect(ui->labelEdit, SIGNAL(textChanged(QString)), SLOT(handleFieldChanged()));
 }
 
 ConfigureNumberWidget::~ConfigureNumberWidget()
@@ -41,7 +63,7 @@ bool ConfigureNumberWidget::validate() const
 
 QString ConfigureNumberWidget::validationError() const
 {
-    if (min() > max()) {
+    if (!validate()) {
         return tr("Minimum value is larger than maximum value.");
     } else {
         return QString();
@@ -61,4 +83,9 @@ int ConfigureNumberWidget::max() const
 QString ConfigureNumberWidget::label() const
 {
     return ui->labelEdit->text();
+}
+
+void ConfigureNumberWidget::handleFieldChanged()
+{
+    emit changed(validate());
 }

@@ -20,15 +20,17 @@
 #include "drawingsession.h"
 #include "colorandnumberview_pog.h"
 #include "colorandnumberview_border.h"
-#include "configurecolorandnumberdialog.h"
-#include "configurecolorwidget.h"
+#include "editcolorswidget.h"
+#include "colorandnumberwizard.h"
+#include "advancedcolorandnumberoptions.h"
 
 using namespace std;
 
 ColorAndNumberConfiguration::ColorAndNumberConfiguration()
-    : DrawingConfiguration(tr("Color and number"), true),
+    : DrawingConfiguration(tr("Color and number"), tr("Draw lots containing a color and a number"), QIcon(":/gui/icons/colorandnumberdrawing.svg"), true),
       _min(DEFAULT_MIN),
-      _max(DEFAULT_MAX)
+      _max(DEFAULT_MAX),
+      _viewIndex(0)
 {
     initColors();
 }
@@ -56,25 +58,6 @@ LotView* ColorAndNumberConfiguration::createView()
     case 0:
     default:
         return new ColorAndNumberView_POG(longestText);
-
-    }
-
-}
-
-void ColorAndNumberConfiguration::configure()
-{
-    ConfigureColorAndNumberDialog dialog(name());
-    dialog.init(_colors, _colorLabel, _min, _max, _numberLabel, _uniqueResults, _viewIndex);
-    int retval = dialog.exec();
-
-    if (retval == QDialog::Accepted) {
-        _colors = dialog.colors();
-        _colorLabel = dialog.colorLabel();
-        _min = dialog.min();
-        _max = dialog.max();
-        _numberLabel = dialog.numberLabel();
-        _uniqueResults = dialog.uniqueResults();
-        _viewIndex = dialog.viewIndex();
     }
 }
 
@@ -83,12 +66,14 @@ bool ColorAndNumberConfiguration::isValid()
     return _min <= _max && _colors.size() > 0;
 }
 
-QString ColorAndNumberConfiguration::detailedSummary()
+WizardBase *ColorAndNumberConfiguration::wizard()
+{
+    return new ColorAndNumberWizard(dynamic_pointer_cast<ColorAndNumberConfiguration> (shared_from_this()));
+}
+
+QString ColorAndNumberConfiguration::summary()
 {
     QString s;
-    s.append("<h3>");
-    s.append(tr("Draw a color and a number"));
-    s.append("</h3>");
     s.append("<div>");
     s.append(tr("Colors") + ": " + colorsToString());
     s.append("</div><div>");
@@ -104,6 +89,7 @@ QString ColorAndNumberConfiguration::detailedSummary()
         s.append(tr("Number label") + ": " + _numberLabel);
     }
     s.append("</div>");
+    s.append(uniqueResultsSummary());
     return s;
 }
 

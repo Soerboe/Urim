@@ -16,8 +16,8 @@
 
 #include "drawingconfiguration.h"
 
-DrawingConfiguration::DrawingConfiguration(const QString& name, bool configurable)
-    : Configuration(name, configurable),
+DrawingConfiguration::DrawingConfiguration(const QString& name, const QString &description, const QIcon& icon, bool configurable)
+    : Configuration(name, description, icon, configurable),
       _uniqueResults(true)
 {
 }
@@ -26,14 +26,12 @@ DrawingConfiguration::~DrawingConfiguration()
 {
 }
 
-QString DrawingConfiguration::summary()
+QString DrawingConfiguration::uniqueResultsSummary()
 {
     QString s;
-    s.append(detailedSummary());
     s.append("<div>");
-    s.append(tr("Unique results") + ": ");
-    s.append(_uniqueResults ? tr("Yes") : tr("No"));
+    s.append(tr("Same lot multiple times") + ": ");
+    s.append(_uniqueResults ? tr("No") : tr("Yes"));
     s.append("</div>");
     return s;
 }
-

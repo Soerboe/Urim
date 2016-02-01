@@ -14,44 +14,30 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CONFIGURECOLORWIDGET_H
-#define CONFIGURECOLORWIDGET_H
+#ifndef EDITCOLORSDIALOG_H
+#define EDITCOLORSDIALOG_H
 
-#include <QWidget>
-#include "color.h"
+#include <QDialog>
 
-class ColorFrame;
+class EditColorsWidget;
 
 namespace Ui {
-class ConfigureColorWidget;
+class EditColorsDialog;
 }
 
-class ConfigureColorWidget : public QWidget
+class EditColorsDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit ConfigureColorWidget(QWidget *parent = 0);
-    ~ConfigureColorWidget();
-
-    void init(const std::vector<Color>& colors);
-    bool validate();
-    QString validationError();
-
-    std::vector<Color> selectedColors();
-
-signals:
-    void changed();
+    explicit EditColorsDialog(QWidget *parent = 0);
+    ~EditColorsDialog();
 
 private:
-    Ui::ConfigureColorWidget *ui;
-    QList<ColorFrame*> _colorFrames;
+    Ui::EditColorsDialog *ui;
+    EditColorsWidget* _editWidget;
 
-    void setupColorPicker();
-    void updateSelectedColorsView();
-
-    void editColorsClicked();
-    void unselectAllClicked();
+    void saveClicked();
 };
 
-#endif // CONFIGURECOLORWIDGET_H
+#endif // EDITCOLORSDIALOG_H

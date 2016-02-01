@@ -27,16 +27,16 @@ class DrawingConfiguration : public Configuration
     Q_OBJECT
 
 public:
-    DrawingConfiguration(const QString& name, bool configurable);
+    DrawingConfiguration(const QString& name, const QString& description, const QIcon &icon, bool configurable);
     virtual ~DrawingConfiguration();
 
-    QString summary();
+    virtual QString summary() = 0;
     bool uniqueResults() {return _uniqueResults;}
+    void setUniqueResults(bool uniqueResults) {_uniqueResults = uniqueResults;}
 
 protected:
     bool _uniqueResults;
-
-    virtual QString detailedSummary() = 0;
+    QString uniqueResultsSummary();
 };
 
 #endif // DRAWINGCONFIGURATION_H

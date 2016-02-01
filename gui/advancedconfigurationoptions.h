@@ -14,44 +14,33 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CONFIGURECOLORWIDGET_H
-#define CONFIGURECOLORWIDGET_H
+#ifndef ADVANCEDCONFIGURATIONOPTIONS_H
+#define ADVANCEDCONFIGURATIONOPTIONS_H
 
-#include <QWidget>
-#include "color.h"
-
-class ColorFrame;
+#include <QDialog>
 
 namespace Ui {
-class ConfigureColorWidget;
+class AdvancedConfigurationOptions;
 }
 
-class ConfigureColorWidget : public QWidget
+class AdvancedConfigurationOptions : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit ConfigureColorWidget(QWidget *parent = 0);
-    ~ConfigureColorWidget();
+    explicit AdvancedConfigurationOptions(const QString& title, QWidget* parent = 0);
+    ~AdvancedConfigurationOptions();
 
-    void init(const std::vector<Color>& colors);
-    bool validate();
-    QString validationError();
+protected:
+    virtual bool validate() = 0;
+    virtual QString validationError() = 0;
+    Ui::AdvancedConfigurationOptions* ui;
 
-    std::vector<Color> selectedColors();
+    void hideSetupTab();
+    void hideViewsTab();
 
-signals:
-    void changed();
-
-private:
-    Ui::ConfigureColorWidget *ui;
-    QList<ColorFrame*> _colorFrames;
-
-    void setupColorPicker();
-    void updateSelectedColorsView();
-
-    void editColorsClicked();
-    void unselectAllClicked();
+private slots:
+    void okClicked();
 };
 
-#endif // CONFIGURECOLORWIDGET_H
+#endif // ADVANCEDCONFIGURATIONOPTIONS_H

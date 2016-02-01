@@ -31,6 +31,7 @@ public:
     void configure() {}
     bool isValid();
     QString summary();
+    WizardBase* wizard();
 };
 
 #endif // BINGOCONFIGURATION_H

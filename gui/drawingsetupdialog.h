@@ -21,6 +21,7 @@
 #include "drawingsetupcontroller.h"
 
 class LotViewer;
+class WizardBase;
 
 namespace Ui {
 class DrawingSetupDialog;
@@ -38,15 +39,15 @@ public:
     LotView* getView();
 
 private slots:
-    void createClicked();
-    void configurationChanged(int index);
-    void configureClicked();
+    void resetWizards();
 
 private:
     Ui::DrawingSetupDialog* ui;
     DrawingSetupController* _controller;
+    std::shared_ptr<Configuration> _selectedConfiguration;
 
     void setupConfigurations();
+    void startWizard(WizardBase *wizard);
 };
 
 #endif // DRAWINGSETUPDIALOG_H

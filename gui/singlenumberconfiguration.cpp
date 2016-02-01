@@ -18,13 +18,13 @@
 #include "drawingsetupdialog.h"
 #include "randomnumbergenerator.h"
 #include "drawingsession.h"
-#include "configuresinglenumberdialog.h"
 #include "singlenumberview.h"
+#include "singlenumberwizard.h"
 
 using namespace std;
 
 SingleNumberConfiguration::SingleNumberConfiguration()
-    : DrawingConfiguration(tr("Single number"), true),
+    : DrawingConfiguration(tr("Simple drawing"), tr("Draws a random number in the chosen number range"), QIcon(":/gui/icons/simpledrawing.svg"), true),
       _min(DEFAULT_MIN),
       _max(DEFAULT_MAX)
 {
@@ -46,31 +46,19 @@ LotView* SingleNumberConfiguration::createView()
     return new SingleNumberView(minText.length() > maxText.length() ? minText : maxText);
 }
 
-void SingleNumberConfiguration::configure()
-{
-    ConfigureSingleNumberDialog dialog(name());
-    dialog.init(_min, _max, _label, _uniqueResults);
-    int retval = dialog.exec();
-
-    if (retval == QDialog::Accepted) {
-        _min = dialog.min();
-        _max = dialog.max();
-        _label = dialog.label();
-        _uniqueResults = dialog.uniqueResults();
-    }
-}
-
 bool SingleNumberConfiguration::isValid()
 {
     return _min <= _max;
 }
 
-QString SingleNumberConfiguration::detailedSummary()
+WizardBase *SingleNumberConfiguration::wizard()
+{
+    return new SingleNumberWizard(dynamic_pointer_cast<SingleNumberConfiguration> (shared_from_this()));
+}
+
+QString SingleNumberConfiguration::summary()
 {
     QString s;
-    s.append("<h3>");
-    s.append(tr("Draw a singel number"));
-    s.append("</h3>");
     s.append("<div>");
     s.append(tr("Minimum number") + ": " + QString::number(_min));
     s.append("</div><div>");
@@ -80,5 +68,6 @@ QString SingleNumberConfiguration::detailedSummary()
         s.append(tr("Label") + ": " + _label);
     }
     s.append("</div>");
+    s.append(uniqueResultsSummary());
     return s;
 }

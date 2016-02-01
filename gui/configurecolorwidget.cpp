@@ -16,75 +16,90 @@
 
 #include "configurecolorwidget.h"
 #include "ui_configurecolorwidget.h"
-#include <QTreeWidgetItem>
-#include <QColorDialog>
-#include <QInputDialog>
-#include <QMessageBox>
-#include <settingshandler.h>
+#include "settingshandler.h"
+#include <qpainter.h>
+#include "guiutils.h"
+#include <vector>
+#include "editcolorsdialog.h"
+
+#define COLS 7
 
 using namespace std;
 
-class ColorItem : public QTreeWidgetItem
+class ColorFrame : public QWidget
 {
+    Q_OBJECT
+
 public:
-    ColorItem(const Color& color)
-        : _color(color),
+    ColorFrame(Color c)
+        : _color(c),
           _selected(false)
     {
+        setFixedSize(30, 30);
+        setCursor(Qt::PointingHandCursor);
+        setToolTip(c.name());
+    }
+
+    void select(bool b)
+    {
+        _selected = b;
         update();
+        emit changed();
     }
 
-    Color color() {
-        return _color;
+    bool isSelected() {return _selected;}
+    Color color() {return _color;}
+
+protected:
+    void mouseReleaseEvent(QMouseEvent*)
+    {
+        toggleSelection();
     }
 
-    void setColor(Color c) {
-        _color = c;
-        update();
+    void paintEvent(QPaintEvent* event)
+    {
+        QWidget::paintEvent(event);
+        QPainter painter(this);
+        painter.setRenderHint(QPainter::Antialiasing, true);
+        painter.setPen(Qt::black);
+        painter.setBrush(QColor(_color.red(), _color.green(), _color.blue()));
+        painter.drawRect(0, 0, width(), height());
+
+        if (_selected) {
+            painter.setPen(Qt::NoPen);
+            painter.setBrush(QColor(255, 255, 255, 180));
+            painter.drawEllipse(QPointF(width()/2.0, height()/2.0), width() * 0.3, height() * 0.3);
+            painter.setPen(Qt::black);
+            painter.drawText(0, 0, width(), height(), Qt::AlignCenter | Qt::AlignHCenter, "✔");
+        }
     }
 
-    void toggleSelection() {
-        _selected = !_selected;
-
-        setText(0, (_selected) ? "✔" : "");
-    }
-
-    bool selected() {
-        return _selected;
-    }
+signals:
+    void changed();
 
 private:
     Color _color;
     bool _selected;
 
-    void update() {
-        setBackgroundColor(1, QColor(_color.red(), _color.green(), _color.blue()));
-        setText(2, _color.name());
+    void toggleSelection() {
+        select(!_selected);
     }
+
 };
 
-ConfigureColorWidget::ConfigureColorWidget(bool enableLabel, QWidget *parent) :
+#include "configurecolorwidget.moc"
+
+ConfigureColorWidget::ConfigureColorWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ConfigureColorWidget)
 {
     ui->setupUi(this);
-    ui->colorsWidget->setColumnCount(3);
-    ui->colorsWidget->setColumnWidth(0, 20);
-    ui->colorsWidget->setColumnWidth(1, 50);
-    ui->colorsWidget->sortByColumn(2, Qt::AscendingOrder);
+    ui->buttonLayout->setAlignment(Qt::AlignTop);
 
-    initColorsView();
-
-    if (!enableLabel) {
-        ui->useLabel->hide();
-        ui->colorLabel->hide();
-    }
-
-    connect(ui->addColorButton, SIGNAL(clicked()), SLOT(addColorClicked()));
-    connect(ui->colorsWidget, SIGNAL(clicked(QModelIndex)), SLOT(selectColor(QModelIndex)));
-    connect(ui->editColorButton, SIGNAL(clicked()), SLOT(editColorClicked()));
-    connect(ui->removeColorButton, SIGNAL(clicked()), SLOT(removeColorClicked()));
-    connect(ui->resetColorsButton, SIGNAL(clicked()), SLOT(resetColorsClicked()));
+    setupColorPicker();
+    connect(this, &ConfigureColorWidget::changed, this, updateSelectedColorsView);
+    connect(ui->editColorsButton, &QPushButton::clicked, this, editColorsClicked);
+    connect(ui->unselectAllButton, &QPushButton::clicked, this, unselectAllClicked);
 }
 
 ConfigureColorWidget::~ConfigureColorWidget()
@@ -92,20 +107,18 @@ ConfigureColorWidget::~ConfigureColorWidget()
     delete ui;
 }
 
-void ConfigureColorWidget::init(const vector<Color>& colors, QString& label)
+void ConfigureColorWidget::init(const std::vector<Color> &colors)
 {
-    ui->colorLabel->setText(label);
-
     for (size_t i = 0 ; i < colors.size(); ++i) {
-        for (int j = 0; j < ui->colorsWidget->topLevelItemCount(); ++j) {
-            ColorItem* item = dynamic_cast<ColorItem*> (ui->colorsWidget->topLevelItem(j));
+        for (int j = 0; j < ui->colorsLayout->count(); ++j) {
+            ColorFrame* item = dynamic_cast<ColorFrame*> (ui->colorsLayout->itemAt(j)->widget());
             if (item && item->color() == colors[i]) {
-                item->toggleSelection();
+                item->select(true);
             }
         }
     }
 
-    updateSelectedColorsView();
+    emit changed();
 }
 
 bool ConfigureColorWidget::validate()
@@ -122,17 +135,12 @@ QString ConfigureColorWidget::validationError()
     }
 }
 
-QString ConfigureColorWidget::colorLabel()
-{
-    return ui->colorLabel->text();
-}
-
-vector<Color> ConfigureColorWidget::selectedColors()
+std::vector<Color> ConfigureColorWidget::selectedColors()
 {
     vector<Color> c;
-    for(int i = 0; i < ui->colorsWidget->topLevelItemCount(); ++i) {
-        ColorItem* item = dynamic_cast<ColorItem*> (ui->colorsWidget->topLevelItem(i));
-        if (item->selected()) {
+    for(int i = 0; i < ui->colorsLayout->count(); ++i) {
+        ColorFrame* item = dynamic_cast<ColorFrame*> (ui->colorsLayout->itemAt(i)->widget());
+        if (item && item->isSelected()) {
             c.push_back(item->color());
         }
     }
@@ -140,119 +148,19 @@ vector<Color> ConfigureColorWidget::selectedColors()
     return c;
 }
 
-void ConfigureColorWidget::addColorClicked()
-{
-    QColor color = QColorDialog::getColor(Qt::white, 0, tr("Choose color"));
-    if (!color.isValid()) {
-        return;
-    }
-
-    bool okClicked;
-    QString colorName;
-    while (true) {
-        colorName = QInputDialog::getText(this, tr("Choose color name"), tr("Color name:"), QLineEdit::Normal, QString(), &okClicked);
-        if (!okClicked) {
-            return;
-        } else if (colorName.isEmpty()) {
-            QMessageBox::information(this, tr("No color name"), tr("No color name given"));
-        } else {
-            break;
-        }
-    }
-
-    Color newColor(color.red(), color.green(), color.blue(), colorName);
-    ui->colorsWidget->addTopLevelItem(new ColorItem(newColor));
-}
-
-void ConfigureColorWidget::editColorClicked()
-{
-    for (QTreeWidgetItem* item : ui->colorsWidget->selectedItems()) {
-        ColorItem* colorItem = dynamic_cast<ColorItem*> (item);
-        Color color = colorItem->color();
-
-        QColor newColor = QColorDialog::getColor(QColor(color.red(), color.green(), color.blue()), 0, tr("Choose new color"));
-        if (!newColor.isValid()) {
-            continue;
-        }
-
-        bool okClicked;
-        QString colorName = color.name();
-        while (true) {
-            colorName = QInputDialog::getText(this, tr("Choose new color name"), tr("New color name:"), QLineEdit::Normal, colorName, &okClicked);
-            if (!okClicked) {
-                return;
-            } else if (colorName.isEmpty()) {
-                QMessageBox::information(this, tr("No color name"), tr("No color name given"));
-            } else {
-                break;
-            }
-        }
-
-        colorItem->setColor(Color(newColor.red(), newColor.green(), newColor.blue(), colorName));
-    }
-
-    updateSelectedColorsView();
-}
-
-void ConfigureColorWidget::removeColorClicked()
-{
-    for (QTreeWidgetItem* item : ui->colorsWidget->selectedItems()) {
-        ui->colorsWidget->takeTopLevelItem(ui->colorsWidget->indexOfTopLevelItem(item));
-        delete item;
-    }
-
-    updateSelectedColorsView();
-}
-
-void ConfigureColorWidget::resetColorsClicked()
-{
-    QMessageBox box(QMessageBox::Question,
-                    tr("Reset colors to default"),
-                    tr("Are you sure you would like to reset colors to default?<br>This will remove all custom changes."),
-                    QMessageBox::Yes | QMessageBox::No,
-                    this);
-    box.setButtonText(QMessageBox::Yes, tr("Yes"));
-    box.setButtonText(QMessageBox::No, tr("No"));
-    if (box.exec() == QMessageBox::No) {
-        return;
-    }
-
-    SettingsHandler::resetToDefaultColors();
-    initColorsView();
-    updateSelectedColorsView();
-}
-
-void ConfigureColorWidget::saveColorsToSettings()
-{
-    QList<Color> colors;
-
-    for (int i = 0; i < ui->colorsWidget->topLevelItemCount(); ++i) {
-        ColorItem* item = dynamic_cast<ColorItem*> (ui->colorsWidget->topLevelItem(i));
-        colors.append(item->color());
-    }
-
-    SettingsHandler::setColors(colors);
-}
-
-void ConfigureColorWidget::selectColor(QModelIndex index)
-{
-    ColorItem* item = dynamic_cast<ColorItem*> (ui->colorsWidget->topLevelItem(index.row()));
-
-    if (!item || index.column() > 0) {
-        return;
-    }
-
-    item->toggleSelection();
-    updateSelectedColorsView();
-}
-
-void ConfigureColorWidget::initColorsView()
+void ConfigureColorWidget::setupColorPicker()
 {
     QList<Color> colors = SettingsHandler::colors();
-    ui->colorsWidget->clear();
 
-    for (Color color : colors) {
-        ui->colorsWidget->addTopLevelItem(new ColorItem(color));
+    GuiUtils::clearLayout(ui->colorsLayout);
+    _colorFrames.clear();
+
+    for(int i = 0; i < colors.size(); ++i) {
+        Color c = colors.at(i);
+        ColorFrame* cf = new ColorFrame(c);
+        connect(cf, &ColorFrame::changed, [&]() {emit changed();});
+        _colorFrames.append(cf);
+        ui->colorsLayout->addWidget(cf, i / COLS, i % COLS);
     }
 }
 
@@ -271,4 +179,26 @@ void ConfigureColorWidget::updateSelectedColorsView()
     }
 
     ui->selectedColorsLabel->setText(text);
+}
+
+void ConfigureColorWidget::editColorsClicked()
+{
+    vector<Color> colors = selectedColors();
+    EditColorsDialog dialog;
+
+    dialog.exec();
+    setupColorPicker();
+    init(colors);
+}
+
+void ConfigureColorWidget::unselectAllClicked()
+{
+    for (int i = 0; i < ui->colorsLayout->count(); ++i) {
+        ColorFrame* item = dynamic_cast<ColorFrame*> (ui->colorsLayout->itemAt(i)->widget());
+        if (item) {
+            item->select(false);
+        }
+    }
+
+    emit changed();
 }

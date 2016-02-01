@@ -31,11 +31,16 @@ public:
 
     std::shared_ptr<DrawingSession> createDrawingSession();
     LotView* createView();
-    void configure();
     bool isValid();
+    WizardBase* wizard();
+    virtual QString summary();
 
-protected:
-    virtual QString detailedSummary();
+    int min() {return _min;}
+    int max() {return _max;}
+    QString label() {return _label;}
+    void setMin(int min) {_min = min;}
+    void setMax(int max) {_max = max;}
+    void setLabel(const QString& label) {_label = label;}
 
 private:
     int _min, _max;

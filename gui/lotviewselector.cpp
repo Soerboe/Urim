@@ -7,17 +7,25 @@
 class LotViewContainer : public QFrame
 {
 public:
-    LotViewContainer(LotView* lotview)
+    LotViewContainer(LotView* lotview, QRadioButton* button)
+        : _radioButton(button)
     {
         _layout = new QVBoxLayout();
         setLayout(_layout);
         setFrameShape(QFrame::Box);
         setFixedSize(200, 150);
+        setCursor(Qt::PointingHandCursor);
         _layout->addWidget(lotview);
+    }
+
+    void mouseReleaseEvent(QMouseEvent *)
+    {
+        _radioButton->setChecked(true);
     }
 
 private:
     QVBoxLayout* _layout;
+    QRadioButton* _radioButton;
 };
 
 LotViewSelector::LotViewSelector(QWidget *parent) :
@@ -52,7 +60,7 @@ void LotViewSelector::addView(LotView *lotView)
     ui->viewsLayout->addWidget(button, count, 0);
 
     lotView->showLot(true);
-    ui->viewsLayout->addWidget(new LotViewContainer(lotView), count, 1);
+    ui->viewsLayout->addWidget(new LotViewContainer(lotView, button), count, 1);
 }
 
 int LotViewSelector::selectedViewIndex()

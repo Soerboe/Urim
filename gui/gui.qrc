@@ -9,5 +9,9 @@
         <file>icons/lots.svg</file>
         <file>icons/monitor.svg</file>
         <file>icons/exit.svg</file>
+        <file>icons/simpledrawing.svg</file>
+        <file>icons/bingodrawing.svg</file>
+        <file>icons/lotterybookdrawing.svg</file>
+        <file>icons/colorandnumberdrawing.svg</file>
     </qresource>
 </RCC>

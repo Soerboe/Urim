@@ -14,23 +14,22 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "testrunner.h"
-#include <QtTest>
-#include "configuredrawingdialog.h"
+#ifndef WIZARDPAGE
+#define WIZARDPAGE
 
-class ConfigureDrawingDialogTest : public QObject
+#include <QWidget>
+
+class WizardPage : public QWidget
 {
     Q_OBJECT
 
-private Q_SLOTS:
+signals:
+    void changed(bool valid);
 
-void shouldValidateResultsBeforeAccept()
-{
-
-}
-
+public:
+    virtual QString validationError() = 0;
+    virtual bool isValid() = 0;
 };
 
-REGISTER_TEST(ConfigureDrawingDialogTest)
+#endif // WIZARDPAGE
 
-#include "tst_configuredrawingdialog.moc"

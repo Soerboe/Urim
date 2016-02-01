@@ -28,17 +28,24 @@ public:
 
     std::shared_ptr<DrawingSession> createDrawingSession();
     LotView* createView();
-    void configure();
     bool isValid() {return true;}
+    WizardBase* wizard();
+    virtual QString summary();
 
-protected:
-    virtual QString detailedSummary();
+    int numBooks() {return _numBooks;}
+    QString booksLabel() {return _booksLabel;}
+    int numLotsPerBook() {return _numLotsPerBook;}
+    QString lotsLabel() {return _lotsLabel;}
+
+    void setNumBooks(int n) {_numBooks = n;}
+    void setBooksLabel(const QString& s) {_booksLabel = s;}
+    void setNumLotsPerBook(int n) {_numLotsPerBook = n;}
+    void setLotsLabel(const QString& s) {_lotsLabel = s;}
 
 private:
     int _numBooks, _numLotsPerBook;
     QString _booksLabel;
     QString _lotsLabel;
-    int _viewIndex;
 };
 
 #endif // LOTTERYTICKETBOOKCONFIGURATION_H

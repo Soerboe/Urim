@@ -18,6 +18,10 @@
 #include "ui_drawingsetupdialog.h"
 #include <QMessageBox>
 #include <QSvgWidget>
+#include "wizardbase.h"
+#include <QCommandLinkButton>
+#include <QDesktopWidget>
+#include "configurecolorwidget.h"
 
 using namespace std;
 
@@ -28,18 +32,17 @@ DrawingSetupDialog::DrawingSetupDialog(DrawingSetupController* controller, QWidg
 {
     ui->setupUi(this);
     setWindowTitle(tr("Setup drawing"));
+    ui->headingLabel->setText(qApp->applicationName());
 
     QSvgWidget* svg = new QSvgWidget(":/gui/icons/lots.svg");
     svg->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     svg->setFixedSize(64, 64);
     ui->headerLayout->insertWidget(0, svg);
 
+    QString style("border-bottom: 2px dotted #C0C0C0;");
+    ui->header->setStyleSheet(style);
+    ui->indexPageLayout->setAlignment(Qt::AlignTop);
     setupConfigurations();
-
-    connect(ui->createButton, SIGNAL(clicked()), SLOT(createClicked()));
-    connect(ui->quitButton, SIGNAL(clicked()), SLOT(reject()));
-    connect(ui->drawingTypeSelector, SIGNAL(currentIndexChanged(int)), SLOT(configurationChanged(int)));
-    connect(ui->configureButton, SIGNAL(clicked()), SLOT(configureClicked()));
 }
 
 DrawingSetupDialog::~DrawingSetupDialog()
@@ -49,61 +52,58 @@ DrawingSetupDialog::~DrawingSetupDialog()
 
 shared_ptr<DrawingSession> DrawingSetupDialog::getDrawingSession()
 {
-    int selectedConfiguration = ui->drawingTypeSelector->currentIndex() - 1;
-    return _controller->at(selectedConfiguration)->createDrawingSession();
+    return _selectedConfiguration->createDrawingSession();
 }
 
 LotView* DrawingSetupDialog::getView()
 {
-    int selectedConfiguration = ui->drawingTypeSelector->currentIndex() - 1;
-    return _controller->at(selectedConfiguration)->createView();
+    return _selectedConfiguration->createView();
 }
 
-void DrawingSetupDialog::createClicked()
+void DrawingSetupDialog::resetWizards()
 {
-    int selectedConfiguration = ui->drawingTypeSelector->currentIndex() - 1;
-
-    if (selectedConfiguration == -1) {
-        QMessageBox::warning(this, tr("No type of drawing chosen"), tr("Please choose a type of drawing."));
-    } else {
-        shared_ptr<Configuration> configuration = _controller->at(selectedConfiguration);
-        if (configuration->isValid()) {
-            accept();
-        }
-    }
-}
-
-void DrawingSetupDialog::configurationChanged(int index)
-{
-    bool configurationChoosen = index > 0;
-    bool configurable = false;
-    ui->createButton->setEnabled(configurationChoosen);
-    if (configurationChoosen) {
-        shared_ptr<Configuration> configuration = _controller->at(index - 1);
-        configurable = configuration->configurable();
-        ui->summary->setHtml(configuration->summary());
-    } else {
-        ui->summary->clear();
-    }
-
-    ui->configureButton->setEnabled(configurable);
-}
-
-void DrawingSetupDialog::configureClicked()
-{
-    int selectedConfiguration = ui->drawingTypeSelector->currentIndex() - 1;
-    if (selectedConfiguration >= 0) {
-        shared_ptr<Configuration> configuration = _controller->at(selectedConfiguration);
-        configuration->configure();
-        ui->summary->setHtml(configuration->summary());
-    }
+    ui->wizardWidget->setCurrentIndex(0);
 }
 
 void DrawingSetupDialog::setupConfigurations()
 {
-    ui->drawingTypeSelector->addItem(tr("Choose a type of drawing:"));
-
     for(int i = 0; i < _controller->configurationsCount(); ++i) {
-        ui->drawingTypeSelector->addItem(_controller->at(i)->name());
+        shared_ptr<Configuration> config = _controller->at(i);
+        QCommandLinkButton* btn = new QCommandLinkButton(config->name(), config->description());
+        btn->setStyleSheet("color: black;");
+        btn->setIcon(config->icon());
+        btn->setIconSize(QSize(35, 35));
+        QFont f = btn->font();
+        f.setPointSize(10);
+        btn->setFont(f);
+        btn->setCursor(Qt::PointingHandCursor);
+        connect(btn, &QCommandLinkButton::clicked, [i, this]() {
+            shared_ptr<Configuration> config = _controller->at(i);
+            if (config->configurable()) {
+                startWizard(config->wizard());
+            } else {
+                _selectedConfiguration = config;
+                accept();
+            }
+        });
+
+        ui->indexPageLayout->addWidget(btn);
     }
+}
+
+void DrawingSetupDialog::startWizard(WizardBase* wizard)
+{
+    connect(wizard, SIGNAL(canceled()), SLOT(resetWizards()));
+    connect(wizard, &WizardBase::done, [&](shared_ptr<Configuration> config) {
+        _selectedConfiguration = config;
+        resetWizards();
+        accept();
+    });
+
+    if (ui->wizardWidget->widget(1) != 0) {
+        delete ui->wizardWidget->widget(1);
+    }
+
+    ui->wizardWidget->insertWidget(1, wizard);
+    ui->wizardWidget->setCurrentIndex(1);
 }

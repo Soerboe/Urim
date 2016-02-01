@@ -24,9 +24,10 @@ LotteryTicketBookView::LotteryTicketBookView(const QString& longestText)
 void LotteryTicketBookView::view(const NumberLotElement &numberLotElement, int id)
 {
     QString text;
-    text.append(numberLotElement.name().c_str()).append(": ");
+    if (!numberLotElement.name().empty()) {
+        text.append(numberLotElement.name().c_str()).append(": ");
+    }
     text.append(createText(numberLotElement.number()));
-
     setViewText(id, text);
 }
 

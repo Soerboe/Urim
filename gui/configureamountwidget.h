@@ -22,28 +22,24 @@
 class QSpinBox;
 class QLineEdit;
 
-namespace Ui {
-class ConfigureAmountWidget;
-}
-
 class ConfigureAmountWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit ConfigureAmountWidget(QString title, QWidget *parent = 0);
-    ~ConfigureAmountWidget();
+    explicit ConfigureAmountWidget(QWidget *parent = 0);
 
-    void addAmountSelector(QString name, int initialValue, QString label, QString initialLabel);
-    void init(int index, int value, QString label);
+    void addAmountSelector(const QString &name, const QString& description, int initialValue);
     int amount(int index) const;
-    QString label(int index) const;
+
+signals:
+    void changed();
+
+private slots:
+    void handleChanges();
 
 private:
-    Ui::ConfigureAmountWidget *ui;
-
     QList<QSpinBox*> _spins;
-    QList<QLineEdit*> _edits;
 };
 
 #endif // CONFIGUREAMOUNTWIDGET_H

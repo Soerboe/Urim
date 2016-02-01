@@ -14,13 +14,25 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "configuration.h"
+#ifndef SINGLENUMBERWIZARD_H
+#define SINGLENUMBERWIZARD_H
 
-Configuration::Configuration(const QString &name, const QString &description, const QIcon &icon, bool configurable)
-    : _name(name),
-      _description(description),
-      _icon(icon),
-      _configurable(configurable)
+#include <QObject>
+#include "wizardbase.h"
+#include <memory>
+
+class SingleNumberConfiguration;
+class NumberConfigPage;
+
+class SingleNumberWizard : public WizardBase
 {
-}
+public:
+    SingleNumberWizard(std::shared_ptr<SingleNumberConfiguration> config);
 
+private:
+    std::shared_ptr<SingleNumberConfiguration> _config;
+    NumberConfigPage* _numberConfigPage;
+    UniqueResultsConfigPage* _uniqueResultsConfigPage;
+};
+
+#endif // SINGLENUMBERWIZARD_H

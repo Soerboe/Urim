@@ -15,54 +15,41 @@
 */
 
 #include "configureamountwidget.h"
-#include "ui_configureamountwidget.h"
 #include <limits>
 #include <QSpinBox>
 #include <QLabel>
-#include <QLineEdit>
+#include <QVBoxLayout>
 
-ConfigureAmountWidget::ConfigureAmountWidget(QString title, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::ConfigureAmountWidget)
+ConfigureAmountWidget::ConfigureAmountWidget(QWidget *parent) :
+    QWidget(parent)
 {
-    ui->setupUi(this);
-    ui->groupBox->setTitle(title);
+    QVBoxLayout* l = new QVBoxLayout;
+    l->setMargin(0);
+    setLayout(l);
 }
 
-ConfigureAmountWidget::~ConfigureAmountWidget()
-{
-    delete ui;
-}
-
-void ConfigureAmountWidget::addAmountSelector(QString name, int initialValue, QString label, QString initialLabel)
+void ConfigureAmountWidget::addAmountSelector(const QString& name, const QString& description, int initialValue)
 {
     QSpinBox* spin = new QSpinBox();
-    spin->setValue(initialValue);
     spin->setMinimum(1);
     spin->setMaximum(INT_MAX);
+    spin->setValue(initialValue);
     spin->setButtonSymbols(QSpinBox::PlusMinus);
-    ui->formLayout->addRow(name, spin);
+    spin->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    spin->setMinimumWidth(100);
     _spins.append(spin);
+    QLabel* n = new QLabel(name);
+    QFont f = n->font();
+    f.setPointSize(12);
+    n->setFont(f);
+    layout()->addWidget(n);
+    QLabel* d = new QLabel(description);
+    f.setPointSize(10);
+    d->setFont(f);
+    layout()->addWidget(d);
+    layout()->addWidget(spin);
 
-    QLineEdit* labelEdit = new QLineEdit(initialLabel);
-    labelEdit->setPlaceholderText(tr("Label"));
-    ui->formLayout->addRow(label, labelEdit);
-    _edits.append(labelEdit);
-}
-
-void ConfigureAmountWidget::init(int index, int value, QString label)
-{
-    if (index < 0) {
-        return;
-    }
-
-    if (index < _spins.size()) {
-        _spins.at(index)->setValue(value);
-    }
-
-    if (index < _edits.size()) {
-        _edits.at(index)->setText(label);
-    }
+    connect(spin, SIGNAL(valueChanged(int)), SLOT(handleChanges()));
 }
 
 int ConfigureAmountWidget::amount(int index) const
@@ -74,11 +61,7 @@ int ConfigureAmountWidget::amount(int index) const
     }
 }
 
-QString ConfigureAmountWidget::label(int index) const
+void ConfigureAmountWidget::handleChanges()
 {
-    if (index >= 0 && index < _edits.size()) {
-        return _edits.at(index)->text();
-    } else {
-        return 0;
-    }
+    emit changed();
 }

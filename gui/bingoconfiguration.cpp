@@ -23,7 +23,7 @@
 using namespace std;
 
 BingoConfiguration::BingoConfiguration()
-    : Configuration(tr("Bingo"), false)
+    : Configuration(tr("Bingo"), tr("Draws standard 5x5 bingo card lots"), QIcon(":/gui/icons/bingodrawing.svg"), false)
 {
 }
 
@@ -55,5 +55,10 @@ QString BingoConfiguration::summary()
     s.append(tr("Standard 5x5 bingo cards"));
     s.append("</div>");
     return s;
+}
+
+WizardBase *BingoConfiguration::wizard()
+{
+    return 0;
 }
 

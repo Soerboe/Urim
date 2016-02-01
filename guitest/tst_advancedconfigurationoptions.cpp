@@ -14,39 +14,23 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CONFIGUREDRAWINGDIALOG_H
-#define CONFIGUREDRAWINGDIALOG_H
+#include "testrunner.h"
+#include <QtTest>
+#include "advancedconfigurationoptions.h"
 
-#include <QDialog>
-
-class QSpinBox;
-class QLineEdit;
-
-namespace Ui {
-class ConfigureDrawingDialog;
-}
-
-class ConfigureDrawingDialog : public QDialog
+class AdvancedConfigurationOptionsTest : public QObject
 {
     Q_OBJECT
 
-public:
-    explicit ConfigureDrawingDialog(const QString name, QWidget* parent = 0);
-    ~ConfigureDrawingDialog();
+private Q_SLOTS:
 
-    void init(bool uniqueResults);
-    bool uniqueResults();
+void shouldValidateResultsBeforeAccept()
+{
 
-protected:
-    virtual bool validate() = 0;
-    virtual QString validationError() = 0;
-    Ui::ConfigureDrawingDialog* ui;
+}
 
-private slots:
-    void okClicked();
-
-private:
-    bool _uniqueResults;
 };
 
-#endif // CONFIGUREDRAWINGDIALOG_H
+REGISTER_TEST(AdvancedConfigurationOptionsTest)
+
+#include "tst_advancedconfigurationoptions.moc"

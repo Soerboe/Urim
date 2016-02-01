@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ConfigureDrawingDialog</class>
- <widget class="QDialog" name="ConfigureDrawingDialog">
+ <class>AdvancedConfigurationOptions</class>
+ <widget class="QDialog" name="AdvancedConfigurationOptions">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Configure drawing</string>
+   <string>Advanced options</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
@@ -25,29 +25,13 @@
         <attribute name="title">
          <string>Setup</string>
         </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <layout class="QVBoxLayout" name="setupLayout">
-           <item>
-            <widget class="QCheckBox" name="uniqueResults">
-             <property name="text">
-              <string>Draw unique lots per drawing session</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
+        <layout class="QVBoxLayout" name="setupLayout"/>
        </widget>
        <widget class="QWidget" name="viewsTab">
         <attribute name="title">
          <string>Views</string>
         </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <item>
-          <layout class="QVBoxLayout" name="viewsLayout"/>
-         </item>
-        </layout>
+        <layout class="QVBoxLayout" name="viewsLayout"/>
        </widget>
       </widget>
      </item>

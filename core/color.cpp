@@ -103,38 +103,38 @@ Color Color::convertDefaultColor() const
 {
     switch (_defaultColor) {
     default:
-    case WHITE:         return Color(255, 255, 255, tr("White"));
     case BLACK:         return Color(0, 0, 0,       tr("Black"));
+    case DARK_GRAY:     return Color(64, 64, 64,    tr("Dark gray"));
     case GRAY:          return Color(128, 128, 128, tr("Gray"));
     case LIGHT_GRAY:    return Color(208, 208, 208, tr("Light gray"));
-    case DARK_GRAY:     return Color(64, 64, 64,    tr("Dark gray"));
+    case WHITE:         return Color(255, 255, 255, tr("White"));
+    case DARK_RED:      return Color(110, 0, 0,     tr("Dark red"));
     case RED:           return Color(220, 0, 0,     tr("Red"));
     case LIGHT_RED:     return Color(255, 102, 102, tr("Light red"));
-    case DARK_RED:      return Color(110, 0, 0,     tr("Dark red"));
+    case DARK_GREEN:    return Color(0, 80, 0,      tr("Dark green"));
     case GREEN:         return Color(0, 200, 0,     tr("Green"));
     case LIGHT_GREEN:   return Color(128, 255, 128, tr("Light green"));
-    case DARK_GREEN:    return Color(0, 80, 0,      tr("Dark green"));
+    case DARK_BLUE:     return Color(0, 0, 90,      tr("Dark blue"));
     case BLUE:          return Color(0, 0, 255,     tr("Blue"));
     case LIGHT_BLUE:    return Color(153, 153, 255, tr("Light blue"));
-    case DARK_BLUE:     return Color(0, 0, 90,      tr("Dark blue"));
+    case DARK_YELLOW:   return Color(175, 179, 0,   tr("Dark yellow"));
     case YELLOW:        return Color(255, 255, 40,  tr("Yellow"));
     case LIGHT_YELLOW:  return Color(254, 255, 153, tr("Light yellow"));
-    case DARK_YELLOW:   return Color(175, 179, 0,   tr("Dark yellow"));
+    case DARK_PINK:     return Color(179, 0, 57,    tr("Dark pink"));
     case PINK:          return Color(255, 62, 150,  tr("Pink"));
     case LIGHT_PINK:    return Color(255, 179, 204, tr("Light pink"));
-    case DARK_PINK:     return Color(179, 0, 57,    tr("Dark pink"));
+    case DARK_PURPLE:   return Color(128, 0, 94,    tr("Dark purple"));
     case PURPLE:        return Color(128, 0, 128,   tr("Purple"));
     case LIGHT_PURPLE:  return Color(255, 128, 222, tr("Light purple"));
-    case DARK_PURPLE:   return Color(128, 0, 94,    tr("Dark purple"));
+    case DARK_ORANGE:   return Color(204, 80, 0,    tr("Dark orange"));
     case ORANGE:        return Color(255, 102, 0,   tr("Orange"));
     case LIGHT_ORANGE:  return Color(255, 179, 128, tr("Light orange"));
-    case DARK_ORANGE:   return Color(204, 80, 0,    tr("Dark orange"));
+    case DARK_BROWN:    return Color(102, 33, 0,    tr("Dark brown"));
     case BROWN:         return Color(138, 54, 15,   tr("Brown"));
     case LIGHT_BROWN:   return Color(210, 105, 30,  tr("Light brown"));
-    case DARK_BROWN:    return Color(102, 33, 0,    tr("Dark brown"));
+    case DARK_VIOLET:   return Color(179, 0, 130,   tr("Dark violet"));
     case VIOLET:        return Color(255, 26, 196,  tr("Violet"));
     case LIGHT_VIOLET:  return Color(255, 179, 235, tr("Light violet"));
-    case DARK_VIOLET:   return Color(179, 0, 130,   tr("Dark violet"));
     case TURQUOISE:     return Color(64, 224, 208,  tr("Turquiose"));
     }
 }

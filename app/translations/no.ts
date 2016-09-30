@@ -313,7 +313,7 @@
     </message>
     <message>
         <source>Choose the lowest number to be drawn</source>
-        <translation>Velg det laveste talles som skal kunne trekkes</translation>
+        <translation>Velg det laveste tallet som skal kunne trekkes</translation>
     </message>
     <message>
         <source>Maximum number</source>
@@ -321,7 +321,7 @@
     </message>
     <message>
         <source>Choose the highest number to be drawn</source>
-        <translation>Velg det høyeste talles som skal kunne trekkes</translation>
+        <translation>Velg det høyeste tallet som skal kunne trekkes</translation>
     </message>
 </context>
 <context>

@@ -30,8 +30,7 @@ class UpdateReminder : public QObject
     Q_OBJECT
 
 public:
-    UpdateReminder();
-    UpdateReminder(std::function<void (UpdateInfo)> callback);
+    UpdateReminder(std::function<void (UpdateInfo)> callback = 0);
     void checkForUpdate();
     void setCallback(std::function<void (UpdateInfo)> callback);
 

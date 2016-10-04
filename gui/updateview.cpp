@@ -57,9 +57,9 @@ void UpdateView::checkForUpdate()
     _isUpdating = true;
     _reminder.setCallback([&](UpdateInfo info) {
         if (info.hasError) {
-            QMessageBox::warning(this, tr("Update error"), tr("An error occured while checking for a new version. Please try again later."));
+            QMessageBox::warning(parentWidget(), tr("Update error"), tr("An error occured while checking for a new version. Please try again later."));
         } else if (!info.hasUpdate) {
-            QMessageBox::information(this, tr("No update"), tr("There are currently no updates available."));
+            QMessageBox::information(parentWidget(), tr("No update"), tr("There are currently no updates available."));
         } else { // has update
             this->setUpdateInfo(info);
             this->show();

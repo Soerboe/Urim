@@ -21,17 +21,13 @@
 #include "settingshandler.h"
 #include <QXmlStreamReader>
 
-#define UPDATE_URL "https://www.lioddensorbo.com/urim/updates"
-
-UpdateReminder::UpdateReminder()
-{
-}
+#define UPDATE_URL "http://lioddensorbo.com/urim/updates/"
 
 UpdateReminder::UpdateReminder(std::function<void (UpdateInfo)> callback)
     : _reply(0),
       _callback(callback)
 {
-    _timeoutTimer.setInterval(30000);
+    _timeoutTimer.setInterval(60000);
     _timeoutTimer.setSingleShot(true);
 
     connect(&_timeoutTimer, SIGNAL(timeout()), SLOT(timeout()));
@@ -42,7 +38,10 @@ void UpdateReminder::checkForUpdate()
     QString url = QString(UPDATE_URL)
             .append("?v=").append(QCoreApplication::applicationVersion())
             .append("&lang=").append(SettingsHandler::language());
-    _reply = _manager.get(QNetworkRequest(url));
+
+    QNetworkRequest req(url);
+    req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork);
+    _reply = _manager.get(req);
     _timeoutTimer.start();
     connect(_reply, SIGNAL(finished()), this, SLOT(httpFinished()));
 }
@@ -57,6 +56,11 @@ void UpdateReminder::httpFinished()
     _timeoutTimer.stop();
     QString reply(_reply->readAll());
     UpdateInfo info = parseReply(reply);
+
+    if (_reply->error() != QNetworkReply::NoError) {
+        info.hasError = true;
+    }
+
     _callback(info);
 }
 

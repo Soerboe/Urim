@@ -17,10 +17,12 @@
 #ifndef UPDATEINFO_H
 #define UPDATEINFO_H
 
+#include <QString>
+
 struct UpdateInfo {
     QString appName;
-    bool hasUpdate;
-    bool hasError;
+    bool hasUpdate = false;
+    bool hasError = false;
     QString latestVersion;
     QString downloadPageUrl;
 };

@@ -96,7 +96,14 @@ int main(int argc, char *argv[])
         return res;
     }
 
-    UpdateView updateView;
+
+    DrawingSetupController setupController;
+    DrawingSetupDialog setupDialog(&setupController);
+    DrawingController controller;
+    DrawingView drawingView(&controller, &setupDialog);
+    controller.setDrawingView(&drawingView);
+
+    UpdateView updateView(&setupDialog);
     UpdateReminder reminder([&](UpdateInfo info) {
         if (!info.hasError && info.hasUpdate) {
             updateView.setUpdateInfo(info);
@@ -107,10 +114,5 @@ int main(int argc, char *argv[])
         reminder.checkForUpdate();
     }
 
-    DrawingSetupController setupController;
-    DrawingSetupDialog setupDialog(&setupController);
-    DrawingController controller;
-    DrawingView drawingView(&controller, &setupDialog);
-    controller.setDrawingView(&drawingView);
     return app.exec();
 }

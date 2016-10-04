@@ -597,7 +597,7 @@ a:active {
 }
 
 /* Small menu. */
-.menu-toggle,
+/*.menu-toggle,
 .main-navigation.toggled ul {
 	display: block;
 }
@@ -609,7 +609,7 @@ a:active {
 	.main-navigation ul {
 		display: block;
 	}
-}
+}*/
 
 .site-main .comment-navigation,
 .site-main .posts-navigation,
@@ -930,7 +930,7 @@ object {
 .site-title {
 	font-size: 2.8em;
 	margin-bottom: 0;
-	margin-top: 0.4em;
+	margin-top: 0;
 	font-weight: bold;
 }
 
@@ -1007,4 +1007,19 @@ object {
 
 .entry-footer {
 	padding-bottom: 0.5em;
+}
+
+.menu-toggle {
+	display: none;
+}
+
+.main-navigation ul {
+	display: block;
+}
+
+@media (max-width:961px) {
+	.urim-container {
+		width: 100%;
+		padding: 0 20px;
+	}
 }

@@ -918,6 +918,11 @@ object {
 	margin: 0.4em 0;
 }
 
+.urim-logo img {
+	height: 128px;
+	width: 128px;
+}
+
 .urim-logo, .urim-branding {
 	padding-top: 1.0em;
 	float: left;
@@ -1017,9 +1022,28 @@ object {
 	display: block;
 }
 
+.top-navigation .urim-navigation {
+	float: none;
+	position: absolute;
+	right: 10px;
+}
+
 @media (max-width:961px) {
 	.urim-container {
 		width: 100%;
 		padding: 0 20px;
+	}
+
+	.urim-logo img {
+		height: 80px;
+		width: 80px;
+	}
+
+	.urim-branding {
+		font-size: 0.9em;
+	}
+
+	.main-navigation {
+		margin-top: 20px;
 	}
 }

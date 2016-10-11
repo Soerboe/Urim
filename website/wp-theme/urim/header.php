@@ -37,7 +37,7 @@
 
 			<div class="site-branding urim-container">
 				<div class="urim-logo">
-					<img height="128" width="128" src="<?php bloginfo('template_url')?>/img/lots.png">
+					<img src="<?php bloginfo('template_url')?>/img/lots.png">
 				</div>
 				<div class="urim-branding">
 

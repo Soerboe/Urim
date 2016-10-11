@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Urim"
-#define MyAppVersion "0.4.0"
+#define MyAppVersion "0.5.1"
 #define MyAppPublisher "LioddenSorbo"
 #define MyAppURL "https://www.lioddensorbo.com/urim"
 #define MyAppExeName "Urim.exe"
@@ -10,7 +10,7 @@
 ; paths
 #define MyAppSource "C:\Users\dsorbo\privat\Urim"
 #define MyAppOutputDir "C:\Users\dsorbo\privat"
-#define MyAppBuildFiles "C:\Users\dsorbo\privat\build-Urim-Release\Urim_v0.4.0"
+#define MyAppBuildFiles "C:\Users\dsorbo\privat\build-Urim-Release\Urim_v0.5.1"
 
 ;---------------------------------------------------------------------- 
 

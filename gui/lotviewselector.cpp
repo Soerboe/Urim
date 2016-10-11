@@ -1,13 +1,29 @@
+/*
+ * Copyright (C) Dag Henning Liodden Sørbø <daghenning@lioddensorbo.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "lotviewselector.h"
 #include "ui_lotviewselector.h"
 #include <QButtonGroup>
 #include <QRadioButton>
 #include "lotview.h"
 
-class LotViewContainer : public QFrame
+class LotViewSelectorContainer : public QFrame
 {
 public:
-    LotViewContainer(LotView* lotview, QRadioButton* button)
+    LotViewSelectorContainer(LotView* lotview, QRadioButton* button)
         : _radioButton(button)
     {
         _layout = new QVBoxLayout();
@@ -60,7 +76,7 @@ void LotViewSelector::addView(LotView *lotView)
     ui->viewsLayout->addWidget(button, count, 0);
 
     lotView->showLot(true);
-    ui->viewsLayout->addWidget(new LotViewContainer(lotView, button), count, 1);
+    ui->viewsLayout->addWidget(new LotViewSelectorContainer(lotView, button), count, 1);
 }
 
 int LotViewSelector::selectedViewIndex()

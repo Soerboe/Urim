@@ -18,6 +18,7 @@
 #include "lotelement.h"
 #include <qdebug.h>
 #include <chrono>
+#include <limits>
 
 using namespace std;
 
@@ -40,15 +41,21 @@ shared_ptr<LotElement> RandomGenerator::operator ()()
 
 void RandomGenerator::init()
 {
-//    random_device on under gcc on Windows is not working
-//    try {
-//        random_device rnd;
-//        seed = rnd();
-//    } catch (exception& e) {
-//    }
+    uint64_t seed = 0;
+
+#ifdef Q_OS_MAC
+    // random_device on under gcc on Windows is not working
+    try {
+        random_device rnd;
+        seed = rnd();
+        seed <<= 32;
+    } catch (exception& e) {
+    }
+#endif
 
     auto now = chrono::high_resolution_clock::now();
-    auto seed = chrono::time_point_cast<chrono::nanoseconds>(now).time_since_epoch().count();
+    auto time = chrono::time_point_cast<chrono::nanoseconds>(now).time_since_epoch().count();
+    seed |= time;
 
     qDebug() << "Seed for RNG:" << seed << "\n";
 

@@ -26,8 +26,8 @@ EditColorsDialog::EditColorsDialog(QWidget *parent) :
     ui->setupUi(this);
     ui->verticalLayout->insertWidget(0, _editWidget);
 
-    connect(ui->cancelButton, &QPushButton::clicked, this, reject);
-    connect(ui->saveButton, &QPushButton::clicked, this, saveClicked);
+    connect(ui->cancelButton, &QPushButton::clicked, this, &EditColorsDialog::reject);
+    connect(ui->saveButton, &QPushButton::clicked, this, &EditColorsDialog::saveClicked);
 }
 
 EditColorsDialog::~EditColorsDialog()

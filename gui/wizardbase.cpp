@@ -83,13 +83,13 @@ WizardBase::WizardBase(std::shared_ptr<Configuration> config, bool hasAdvancedSe
 
     ui->contentsWidget->addWidget(new SummaryPage(_config));
 
-    connect(ui->backButton, &QPushButton::clicked, this, backButtonClicked);
+    connect(ui->backButton, &QPushButton::clicked, this, &WizardBase::backButtonClicked);
     connect(ui->nextButton, &QPushButton::clicked, [&]() {
         ui->contentsWidget->setCurrentIndex(ui->contentsWidget->currentIndex() + 1);
     });
-    connect(ui->createButton, &QPushButton::clicked, this, createButtonClicked);
-    connect(ui->contentsWidget, &QStackedWidget::currentChanged, this, currentPageChanged);
-    connect(ui->advancedButton, &QPushButton::clicked, this, advancedSetup);
+    connect(ui->createButton, &QPushButton::clicked, this, &WizardBase::createButtonClicked);
+    connect(ui->contentsWidget, &QStackedWidget::currentChanged, this, &WizardBase::currentPageChanged);
+    connect(ui->advancedButton, &QPushButton::clicked, this, &WizardBase::advancedSetup);
 }
 
 WizardBase::~WizardBase()
@@ -166,7 +166,7 @@ UniqueResultsConfigPage::UniqueResultsConfigPage(std::shared_ptr<DrawingConfigur
     l->addSpacerItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
     setLayout(l);
     setFieldsFromConfig();
-    connect(_uniqueWidget, &ConfigureUniqueResultsWidget::changed, this, updateFields);
+    connect(_uniqueWidget, &ConfigureUniqueResultsWidget::changed, this, &UniqueResultsConfigPage::updateFields);
 }
 
 void UniqueResultsConfigPage::setFieldsFromConfig()

@@ -39,7 +39,7 @@ public:
         l->addWidget(_configureWidget);
         l->addSpacerItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
         setLayout(l);
-        connect(_configureWidget, &ConfigureAmountWidget::changed, this, updateFields);
+        connect(_configureWidget, &ConfigureAmountWidget::changed, this, &BookConfigPage::updateFields);
     }
 
     void updateFields() {

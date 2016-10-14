@@ -33,7 +33,7 @@ public:
         l->addSpacerItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
         setLayout(l);
         setFieldsFromConfig();
-        connect(_numberWidget, &ConfigureNumberWidget::changed, this, updateFields);
+        connect(_numberWidget, &ConfigureNumberWidget::changed, this, &NumberConfigPage::updateFields);
     }
 
     void setFieldsFromConfig() {

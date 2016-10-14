@@ -97,9 +97,9 @@ ConfigureColorWidget::ConfigureColorWidget(QWidget *parent) :
     ui->buttonLayout->setAlignment(Qt::AlignTop);
 
     setupColorPicker();
-    connect(this, &ConfigureColorWidget::changed, this, updateSelectedColorsView);
-    connect(ui->editColorsButton, &QPushButton::clicked, this, editColorsClicked);
-    connect(ui->unselectAllButton, &QPushButton::clicked, this, unselectAllClicked);
+    connect(this, &ConfigureColorWidget::changed, this, &ConfigureColorWidget::updateSelectedColorsView);
+    connect(ui->editColorsButton, &QPushButton::clicked, this, &ConfigureColorWidget::editColorsClicked);
+    connect(ui->unselectAllButton, &QPushButton::clicked, this, &ConfigureColorWidget::unselectAllClicked);
 }
 
 ConfigureColorWidget::~ConfigureColorWidget()

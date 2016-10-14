@@ -90,6 +90,10 @@ int main(int argc, char *argv[])
     QIcon icon(":/gui/icons/lots.svg");
     app.setWindowIcon(icon);
 
+#ifdef Q_OS_MAC
+    app.setAttribute(Qt::AA_DontShowIconsInMenus, true);
+#endif
+
     SettingsHandler::initialize(ORG_NAME, APPLICATION_NAME);
 
     if (int res = setupLanguage(app) != 0) {

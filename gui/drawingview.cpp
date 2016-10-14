@@ -344,7 +344,8 @@ void DrawingView::tooglePresentationView(bool checked)
         QMessageBox box(QMessageBox::Information,
                     tr("Setup presentation view"),
                     tr("To enable presentiation view you need to connect to an external display or projector.<br><br> \
-                       Display settings must be set to <strong>Extended</strong>. In Windows use shortcut <strong>Windows Key + P</strong>."),
+                       <h3>Windows</h3>Display settings must be set to <strong>Extended</strong>. Use shortcut <strong>Windows Key + P</strong>.<br><br> \
+                       <h3>macOS / OS X</h3>Mirror displays must be turned off. Go to System Preferences > Displays > Arrangement. Deselect Mirror Displays checkbox."),
                     QMessageBox::Ok,
                     this);
         box.exec();
